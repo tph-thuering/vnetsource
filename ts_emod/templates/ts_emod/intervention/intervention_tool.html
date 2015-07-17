@@ -1,0 +1,209 @@
+{% extends "ts_emod/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 05/02/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block extra_js %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}transmission_simulator/css/intervention_shopping_cart.css" />
+    <script src="{{ STATIC_URL }}ts_emod/js/ts_emod.js"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/intervention_shopping_cart.js"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/intervention_tool.js"></script>
+    <script>
+        {% comment %}
+                Provide validation for the fields - used in intervention_shopping_cart.js
+        {% endcomment %}
+        InterventionShoppingCart.start_day_max = "{{ start_day_max }}";
+
+        {% comment %}
+             These are used in function in intervention_shopping_cart.js which
+             loads the cart with previously selected interventions (from step storage - collected in view)
+        {% endcomment %}
+        InterventionShoppingCart.intervention_selected = '{{ intervention_selected }}';
+        InterventionShoppingCart.my_form_url = "{% url 'ts_emod_intervention_form' %}";
+        InterventionShoppingCart.my_campaign = {{ my_campaign|safe }};
+        InterventionShoppingCart.my_step = 'intervention_tool';
+        InterventionTool.newInterventionList = {{ new_intervention_list|safe }};
+        InterventionTool.interventionNamesList = {{ intervention_names_list|safe }};
+        InterventionTool.interventionFormUrl = "{% url 'ts_emod_intervention_form' %}";
+    </script>
+{% endblock %}
+
+{% block page_title %}
+    VecNet Transmission Simulator - EMOD Expert
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            {% include "ts_emod/left_menu.html" %}
+
+            <div class="span9">
+
+                <form id='interventionForm' action="" method="post" name="wizard_form">{% csrf_token %}
+                    <p>Drag or click on an Intervention in the lower box to add it to the Simulation. Drag Interventions within the Simulation
+                        (upper box) to reorder. If no appropriate Intervention exists,
+                        <a href="#" data-toggle="modal" data-target="#addNewModal">Create</a> a new one.
+                    </p>
+
+                    <div class="well page-well">
+                        <div class="row">
+                            <div class="span8">
+                                Intervention(s) selected for Simulation <strong>{{ scenario.id }}&nbsp;{{ scenario.name }}</strong>
+                            </div>
+
+                            {% include 'ts_emod/intervention/settings_table_widget.html' %}
+                        </div>
+
+                        <div class="box">
+                            <ul class="cart"></ul>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="pull-right">
+                                <button type="submit" class="btn">
+                                    <i class="icon-save"></i>&nbsp;&nbsp;Save
+                                </button>
+
+                                <button id="launch" class="btn">
+                                    Save and go to Launch Tool <i class="icon-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>  {# div for well #}
+                    <br>
+
+                    <div class="row">
+                        <div class="span4 header">&nbsp;Intervention(s) available for selection </div>
+
+                        <p class="pull-right">
+                            <a class="btn" href="#" data-toggle="modal" data-target="#uploadModal" id="upload_button">
+                                <i class="icon-file-text-alt"></i> Upload Campaign File
+                            </a>
+
+                            <a class="btn" href="#" data-toggle="modal" data-target="#addNewModal">
+                                <i class="icon-pencil"></i> Create New
+                            </a>
+                        </p>
+                    </div>
+
+                    <div id="intervention" class="box">
+                        <ul class="source">
+                            {% for camp in intervention_list %}
+                                <li data-id="{{ camp.id }}" data-name="{{ camp.name }}">
+                                    <div class="row">
+                                        <div class="span7">
+                                            <strong>{{ camp.name }}</strong>
+                                            <br>
+                                            <em style="font-size:0.9em;">{{ camp.description }}&nbsp;</em>
+                                        </div>
+
+                                        <div class="span1" style="padding-top: 8px;">
+                                            <span class="btn-group pull-right">
+                                                <a class="btn btn-small" href="http://idmod.org/emoddoc/Content/DTKv1_6/v1_6ParameterQRGuide/{{ camp.get_class }}.htm"
+                                                    title="Read about this intervention in the EMOD documentation (This will take you to IDM's web site)" target="_blank">
+                                                    <i class="icon-book"></i>&nbsp;&nbsp;Docs
+                                                </a>
+
+                                                <button type='button' class="btn btn-small btn-preview" onclick="return false;"
+                                                    data-content='<table class="table-striped table-species">{{ camp.json_as_table }}</table>'>
+                                                    <i class="icon-eye-open"></i>&nbsp;&nbsp;Details
+                                                </button>
+
+                                                <button id='add' type='button' class="btn btn-small add_button"  onclick="return false;"
+                                                    title="Add an instance of this Intervention to  Simulation">
+                                                    <i class="icon-plus"></i>&nbsp;&nbsp;Add to Simulation
+                                                </button>
+                                            </span>
+                                        </div>
+                                     </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>  {# div for interventions on bottom #}
+                </form>
+                <br>
+
+                <div>
+                    <!-- Modal -->
+                    <form action="{% url 'ts_emod_intervention_save' %}" method="post" id="save">{% csrf_token %}
+                        <input type="hidden" name="calling_page" value="ts_intervention_tool_step"/>
+                        <div id="addNewModal" class="modal hide fade scrollable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="myModalLabel">Create a new intervention</h3>
+                            </div>
+                            <div class="modal-body">
+                        <h4>1. Name and describe your intervention</h4>
+                        <input type="text" id="data-my_name" name="my_name" placeholder="Type in a short intervention name" required/>
+                        <div class="row">
+                            <div class="span1">
+                            <textarea class="description-box-mid" rows="10" placeholder="Type in a short description of the intervention"
+                                  id="id_start-description" name="my_description" cols="40" style="margin-bottom: 4px;"></textarea>
+                            <span class="helptext" style="position: relative; left: 320px; margin-top:-113px;">
+                                Characters remaining: <span id="count">1000</span></span>
+                            </div>
+                        </div>
+
+                        <h4>2. Select an intervention type</h4>
+                        <select id="type_select" name="type_select" required></select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-small" style="margin-bottom: 10px;"
+                           href="http://idmod.org/emoddoc/Content/DTKv1_6/v1_6ParameterQRGuide/Intervention%20Parameter%20Listing.htm"
+                           title="Docs: Read about this intervention in the EMOD documentation (This will take you to IDM's web site)" target="_blank">
+                           <i class="icon-book"></i>&nbsp;&nbsp;Read about intervention types (This will take you to IDM's web site)</a>
+                        <h4>3. Configure the new intervention</h4>
+                                <div id="json-field" style="display: none;">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn left" data-dismiss="modal" aria-hidden="true">Close</button>
+                                <button class="btn right" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form action="{% url 'ts_emod_upload' 'campaign' %}" method="post" id="upload"
+                        enctype="multipart/form-data">{% csrf_token %}
+                        <input type="hidden" name="calling_page" value="ts_intervention_tool_step"/>
+
+                        <div id="uploadModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="uploadModalLabel">Upload an interventions file (campaign.json)</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div id="upload-div" style="display: none;">
+                                    <div class="well">
+                                        <br>
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Click Browse to select a file<br/>or drag and drop a file onto the Browse button...</span>
+                                        <br/><br/>
+                                        <input id="file" type="file" name="file" required="required" class="fileinput-button"/>
+                                        <br/>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn left" data-dismiss="modal" aria-hidden="true">Close</button>
+                                <button class="btn right" type="submit">Upload</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

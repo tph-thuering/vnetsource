@@ -1,0 +1,450 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/10/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title_local %}Vector Selection{% endblock %}
+
+{% block extra_js %}
+    <script> var my_form_url = "{% url 'ts_emod_species_create_form' %}"; </script>
+    <script>
+        species_chosen_values = JSON.stringify({{ species_chosen_values|safe }});
+        species_chosen_values = JSON.parse(species_chosen_values);
+    </script>
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/species_shopping_cart.css"/>
+
+    <script src="{{ STATIC_URL }}ts_emod/js/species_shopping_cart.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block breadcrumb %}Vector Selection{% endblock %}
+{% block step_title %}Vector Selection{% endblock %}
+{% block page_content %}
+    <style>
+        .modal-body {
+            max-height: 600px;
+        }
+
+        .tooltip-inner {
+            white-space: pre-wrap;
+        }
+
+        #addNewModal {
+            width: 650px;
+            margin: 0 0 0 -325px;
+        }
+
+        div[class="tooltip-inner"] {
+            max-width: 300px;
+        }
+
+    </style>
+
+    <script>
+
+        // This is a handler to keep the button from actually following it's href location
+        //   and causing a form reload.
+        $(document).on("click", "#PreviewButton", function () {
+            return false;
+        });
+
+        function get_species_tooltip(display_name) {
+            /* Loop through all of the selected vectors for this run and populate the settings for each one: */
+            var settings = speciesChosenSettings[display_name];
+            var tooltipText = "";
+            // Loop through the list of settings and format the output.
+            for (var i in settings) {
+                var item = settings[i].replace("config.json/parameters/", '');
+                var k = item.split('=');
+                var v = k.pop();
+                tooltipText = tooltipText + k[0] + " : " + v + '\n';
+            }
+            return tooltipText;
+        }
+
+
+        /* Method to be executed when page has been loaded */
+        var templates = new Object;
+        var speciesChosenSettings = new Object;
+        $(document).ready(function () {
+
+
+            var select = document.getElementById("template_select");
+            select.options[select.options.length] = new Option('Default Species Settings', 'default_emod_vector');
+
+            /* loop through templates provided */
+            {% for template, values in species_templates.items %}
+                /* add template to options list */
+                select.options[select.options.length] = new Option('{{ template }}');
+
+                /* save settings to JS */
+                templates['{{ template }}'] = "{{ values|safe }}";
+
+            {% endfor %}
+
+            /* Enable tooltips */
+            $('.tooltip_link').tooltip({container: '#addNewModal', placement: 'top'}
+
+                    {% for key, value in species_chosen.iteritems %}
+                        {% ifequal key "species-species" %})
+                            var species_selected = {{ value|safe }};
+                        {% endifequal %}
+                    {% endfor %}
+
+            // This function loads the cart with previously selected species (from step storage - collected in view)
+            if (species_selected != "[]" && species_selected != "") {
+                for (var i = 0; i < species_selected.length; i++) {
+                    var obj = {};
+                    walk_species(obj, species_selected[i]);
+                    var my_name = String(species_selected[i]);
+                    li_append(my_name);
+                    {% comment %} #4786 - add form inputs for all the Species parameters {% endcomment %}
+                    add_form_values(my_name);
+                }
+            }
+
+            /* Ensure that all tooltips are enabled (for this page all <a class="btn-small"> elements) */
+            $('a.btn-small').tooltip({container: 'body'});
+            $('input').tooltip();
+
+            /* enable popovers */
+            $('.pop').popover({html: 'true', container: '.modal-body'});
+
+        });
+
+        function walk_species(obj, p) {
+            for (var key in p) {
+                if (!p.hasOwnProperty(key)) {
+                    continue;
+                }
+                if (typeof p[key] == "object") {
+                    walk_intervention(obj, p[key])
+                }
+                else {
+                    if (key in obj) {
+                        obj[key + '_' + p[key]] = 777; //p[key];
+                    } else {
+                        obj[key] = 77; //p[key];
+                    }
+                }
+            }
+        }
+    </script>
+
+    <form id='speciesForm' action="" method="post" name="wizard_form">{% csrf_token %}
+
+        <p>Drag or click on a species in the lower box to add it to the simulation. Drag species within the simulation
+            (upper box) to reorder. If no appropriate species exists,
+            <a href="#" data-toggle="modal" data-target="#addNewModal">create</a> a new one.</p>
+    <p align="justify">
+        Based on the geographic area selected in step 1, up to four vector species are displayed in the “Species in the
+        region” box.  You can select one or more species on which to base your simulation by dragging or clicking on the
+        species name to add to the “species selected for simulation” box.  If there is a species of interest not
+        displayed in the “Species in region” you can create a “Custom species” to add to the
+        “species selected for simulation”  After selection of species, you can review the default values for vector
+        parameters by clicking on the edit icon  and either accept the default values or replace with a value of your
+        choice.
+
+    </p>
+
+        <div class="well page-well">
+            {{ wizard.management_form }}
+            <div class="row">
+                <div class="span3point5">
+                    Species in region
+                    <div id="species" class="box">
+                        <ul id="shelf_list" class="source">
+                            {% for species in species_list %}
+                                {% if species.is_template %}
+                                <li data-name="{{ species.name }}"
+                                        {% for key, value in species_chosen.iteritems %}
+                                            {% comment %} #3562 - make unselectable when selected {% endcomment %}
+                                            {% ifequal key "species-species" %}
+                                                {% if species.name in value|safe %}
+                                    class="ui-draggable ui-draggable-disabled ui-state-disabled"
+                                                {% endif %}>
+                                            {% endifequal %}
+                                        {% endfor %}
+                                <div style="float: left" disabled="true">
+                                <span class="span3"><strong>{{ species.name }}</strong>
+                                <span class="btn-group pull-right">
+                                <button type='button' class="btn btn-small btn-preview" data-original-title="Preview"
+                                        data-content='<table class="table-striped table-species">{{ species.json_as_table }}</table>'>
+                                    <i class="icon-eye-open"></i></button>
+                                {% comment %}<button type='button' class="btn btn-small{% if species.is_public or species.is_template %} disabled" title="Editing disabled{% else %}"title="Edit this Species (not currently supported){% endif %}"><i class="icon-edit"></i></button>{% endcomment %}
+                                <button id='add' type='button' class="btn btn-small add_button" title="Add this species to the run"
+                                        {% for key, value in species_chosen.iteritems %}
+                                            {% comment %} #3562 - make unselectable when selected {% endcomment %}
+                                            {% ifequal key "species-species" %}
+                                                {% if species.name in value|safe %}
+                                                    disabled="true"
+                                                {% endif %}
+                                            {% endifequal %}
+                                        {% endfor %}
+                                        ><i class="icon-arrow-right"></i></button></span>
+                                </span></div>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <br/><br/>
+
+                    Custom species
+                    <div id="species" class="box">
+                        <ul id="shelf_list_custom" class="source">
+                            {% for species in species_list %}
+                                {% if not species.is_template %}
+                                <li data-name="{{ species.name }}"
+                                        {% for key, value in species_chosen.iteritems %}
+                                            {% comment %} #3562 - make unselectable when selected {% endcomment %}
+                                            {% ifequal key "species-species" %}
+                                                {% if species.name in value|safe %}
+                                    class="ui-draggable ui-draggable-disabled ui-state-disabled"
+                                                {% endif %}>
+                                            {% endifequal %}
+                                        {% endfor %}
+                                <div style="float: left" disabled="true">
+                                <span class="span3">
+                                <strong>{{ species.name }}</strong>{% if species.is_public %}<sup>*</sup>{% endif %}
+                                <span class="btn-group pull-right">
+                                <button type='button' class="btn btn-small btn-preview" data-original-title="Preview"
+                                        data-content='<table class="table-striped table-species">
+                                        {{ species.json_as_table }}</table>'>
+                                    <i class="icon-eye-open"></i></button>
+                                {% comment %}<button type='button' class="btn btn-small
+                                {% if species.is_public or species.is_template %} disabled"
+                                title="Editing disabled{% else %}"title="Edit this Species
+                                (not currently supported){% endif %}"><i class="icon-edit"></i></button>{% endcomment %}
+                                <button id='add' type='button' class="btn btn-small add_button" title="Add this species to the run"
+                                        {% for key, value in species_chosen.iteritems %}
+                                            {% comment %} #3562 - make unselectable when selected {% endcomment %}
+                                            {% ifequal key "species-species" %}
+                                                {% if species.name in value|safe %}
+                                        disabled="true"
+                                                {% endif %}
+                                            {% endifequal %}
+                                        {% endfor %}
+                                        ><i class="icon-arrow-right"></i></button></span>
+                                </span></div>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <p class="pull-right" style="margin-top: 10px;">
+                        <a class="btn" href="#" data-toggle="modal" data-target="#addNewModal">
+                        <i class="icon-pencil"></i> Create new species</a></p>
+
+                </div>
+                <div class="span1"><br/><br/><br/><br/><i class="icon-arrow-right icon-2x"></i>
+                    <br/><br/><br/><br/><br/><br/><br/><br/>
+                    <i class="icon-arrow-right icon-2x"></i>
+                </div>
+                <div class="span4">
+                    Species selected for simulation&nbsp;&nbsp;
+                    <span class="tooltip_link"
+                        data-original-title="Click on the edit icon to view the key vector parameter default values for your species of interest. Default values are based on the published values extracted from the VecNet digital library. As many vectors exhibit a wide range in behavioral plasticity, you can edit the default parameter values to better match the behavior of the vector in your geographic area of interest."
+                        data-toggle="tooltip"><i class="icon-info-sign"></i>
+                    </span>
+                    <div class="box">
+                        <ul class="cart"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="span1"></div>
+                <div class="span6 form-actions">
+                    {% if wizard.steps.prev %}
+                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn"><i
+                                class="icon-arrow-left"></i> Previous Step
+                        </button>
+                    {% endif %}
+                    <button type="submit" class="right btn">Next Step <i class="icon-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <br/><br/><br/>
+
+        <div class="row">
+
+        </div>
+
+
+    </form>
+    <!-- Modal -->
+    <form action="{% url 'ts_emod_species_save' %}" method="post" id="save">{% csrf_token %}
+        <input type="hidden" name="calling_page" value="edit_wizard"/>
+        <div id="addNewModal" class="modal hide fade scrollable" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Add a new vector species</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="tab-content">
+
+                    <h4>1. Select a template</h4>
+                    <select id="template_select" onchange="populate_form()"></select>
+                    <h4>2. Name your vector</h4>
+                    <input type="text" id="data-my_name" name="my_name" required/>
+
+                    <h4>3. Set its behavior</h4>
+                    <!-- ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a href="#list" data-toggle="tab">List view</a></li>
+                        <li><a href="#picture" data-toggle="tab">Picture view</a></li>
+                    </ul -->
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="list" style="align: center;">
+                            <div>
+                                <input id="id_name" name="name" type="hidden"/><input id="id_description"
+                                                                                      name="description"
+                                                                                      type="hidden"/><input
+                                    id="id_type" name="type" type="hidden"/><input id="id_misc" name="misc"
+                                                                                   type="hidden"/>
+
+                                <div id="json-field" style="display: none; white-space: nowrap;"></div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="picture">
+                            <p>You can set parameters everywhere you have a <i class="icon-info-sign"></i>
+                                displayed.</p>
+
+                            <div style="background:url('/static/ts_emod/img/lifecycle.png'); width:545px; height:491px; position:relative; margin:0 auto;">
+
+                          <span style="position:absolute; right:20px; bottom:200px;" class="label label-success pop"
+                                data-toggle="popover" title="Human-related parameters" data-placement="left"
+                                data-content='<label for="infectiousMortality">Infectious Human Feed Mortality Multiplier</label>
+                                              <input type="text" id="infectiousMortality" data-toggle="tooltip" title="Correction factor (dimensionless) used to modify the death rate of mosquitoes when feeding on humans, to account for the increase caused by infections in mosquitoes. Infected mosquitoes have a higher mortality rate while feeding on humans than uninfected mosquitoes." data-placement="left" />
+
+                                              <label for="anthro">Anthropophily</label>
+                                              <input type="text" id="anthro" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <label for="acquiremod">Acquire Modifier</label>
+                                              <input type="text" id="acquiremod" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <label for="trate">Transmission Rate</label>
+                                              <input type="text" id="trate" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <label for="indoor">Indoor Feeding Fraction</label>
+                                              <input type="text" id="indoor" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <label for="daybetweenfeeds">Days Between Feeds</label>
+                                              <input type="text" id="daybetweenfeeds" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <script>
+                                                $("input").tooltip({container:"#addNewModal"});
+                                              </script>
+                                               '>
+                          <i class="icon-info-sign"></i> Human-related
+                          </span>
+
+                        <span style="position:absolute; left:20px; bottom:170px;" class="label label-success pop"
+                              data-toggle="popover" title="Oviposition parameters" data-placement="right"
+                              data-content='<label for="eggbatchsize">Egg batch size</label>
+                                              <input type="text" id="eggbatchsize" data-toggle="tooltip" title="Size of egg batch laid by one female mosquito that has fed successfully." data-placement="right" />
+
+                                              <script>
+                                                $("input").tooltip({container:"#addNewModal"});
+                                              </script>
+                                               '>
+                          <i class="icon-info-sign"></i> Oviposition
+                          </span>
+
+                        <span style="position:absolute; right:20px; top:70px;" class="label label-success pop"
+                              data-toggle="popover" title="Adult vector parameters" data-placement="left"
+                              data-content='<label for="lifeexp">Adult life expectancy</label>
+                                              <input type="text" id="lifeexp" data-toggle="tooltip" title="Number of days an average mosquito survives. The daily adult mortality rate is 1 / (value of this parameter)." data-placement="left" />
+
+                                              <script>
+                                                $("input").tooltip({container:"#addNewModal"});
+                                              </script>
+                                               '>
+                          <i class="icon-info-sign"></i> Adult
+                          </span>
+
+                        <span style="position:absolute; left:20px; top:70px;" class="label label-success pop"
+                              data-toggle="popover" title="Larval/Immature parameters" data-placement="right"
+                              data-content='<label for="habitat">Habitat</label>
+                                              <select id="habitat" multiple="multiple"><option>Brackish Swamp</option><option>Water vegetation</option><option>Temporary rainfall</option><option>Constant</option></select>
+
+                                              <label for="rhabitat">Required habitat factor</label>
+                                              <input type="text" id="rhabitat" data-toggle="tooltip" title="An array of factors, one for each habitat specified in the Habitat_Type array, that represent the number of larvae in a 1x1-degree area. The factor multiplicatively scales the resulting weather or population dependent functional form." data-placement="right" />
+
+                                              <label for="aquaticm">Aquatic mortality rate</label>
+                                              <input type="text" id="aquaticm" data-toggle="tooltip" title="Base aquatic mortality per day for the species before adjustment for effects of overpopulation and drying. The rate is locally adjusted for other considerations, including overpopulation and drying out of the aquatic habitat." data-placement="right" />
+
+                                              <label for="immature">Immature duration</label>
+                                              <input type="text" id="immature" data-toggle="tooltip" title="Factor (in days) used to calculate the rate at which immature organisms develop into adult mosquitoes, which equals 1 / (value of this parameter). " data-placement="right" />
+
+                                              <script>
+                                                $("input").tooltip({container:"#addNewModal"});
+                                              </script>
+                                               '>
+                          <i class="icon-info-sign"></i> Larval/Immature
+                          </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn left" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn right" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        $(function () {
+            //alert('CALLING POPULATE');
+            populate_form();
+        });
+
+        function populate_form() {
+            var list = document.getElementById("template_select");
+            var selected = list.options[list.selectedIndex].value;
+            //alert(list.options[list.selectedIndex].value);
+            //$.get("/ts_emod/run/species/form/", function(data) {
+            $.get("{% url 'ts_emod_species_create_form' %}" + selected, function (data) {
+                $("#json-field").show();
+                $("#json-field").html(data);
+
+                /* Enable tooltips for the newly loaded fields */
+                $('.tooltip_link').tooltip({container: '#addNewModal', placement: 'top', "delay": { show: 500, hide: 500 }});
+            });
+        }
+
+        $(function () {
+            {% comment %} #4210 - prevent duplicate names {% endcomment %}
+            var name_list = [];
+            for (var key in templates) {
+                name_list.push(key);
+            }
+
+            $("#save").validate({
+                rules: {
+                    "my_name": {
+                        required: true,
+                        notEqualTo: name_list
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

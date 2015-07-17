@@ -1,0 +1,175 @@
+{% extends "ts_emod2/base.html" %}
+
+{% block page_title %}
+    Simulation Campaign (Interventions)
+{% endblock %}
+
+{% block extra_local_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod2/css/intervention_shopping_cart.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod2/css/emod_intervention.css" />
+{% endblock %}
+
+{% block extra_local_js %}
+    <script src="{{ STATIC_URL }}ts_emod2/js/popovers_and_tooltips.js"></script>
+    <script src="{{ STATIC_URL }}ts_emod2/js/emod_intervention.js"></script>
+    <script src="{{ STATIC_URL }}ts_emod2/js/shopping_cart.js"></script>
+    <script src="{{ STATIC_URL }}ts_emod2/js/intervention.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <h3>Campaign (Interventions)</h3>
+
+    <form id='interventions-form' action="" method="post">{% csrf_token %}
+        <p>Drag or click on an Intervention in the lower box to add it to the Simulation. Drag Interventions within the Simulation
+            (upper box) to reorder. {# If no appropriate Intervention exists, #}
+{#                        <a href="#" data-toggle="modal" data-target="#addNewModal">Create</a> a new one.#}
+        </p>
+
+        <div class="well page-well">
+            <div class="row">
+                <div class="span8">
+                    Intervention(s) selected for Simulation
+                    <strong>{{ scenario.id }} {{ scenario.name }}</strong>
+                </div>
+
+                {% include 'ts_emod2/intervention/settings_table_widget.html' %}
+            </div>
+
+            {# Interventions already attached have associated forms and these should be added to the cart #}
+            <div class="box">
+                <ul class="cart">
+                    {% for formset in formsets %}
+                        {{ formset.management_form }}
+
+                        {# This keeps track of how many forms we have. Using this insted of just #}
+                        {# formset.total_form_count for easy use with javascript. Javascript should use #}
+                        {# this as a lookup and then increase it as more forms are added using javascript. #}
+                        <input type="hidden" id="{{ formset.prefix }}-count" value="{{ formset.total_form_count }}" />
+
+                        {# Get empty forms and make templates of them so we can clone them later for new forms #}
+                        <div style="display: none">
+                            <div id="empty-form-{{ formset.prefix }}">
+                                {% with formset.empty_form as form %}
+                                    {% include 'ts_emod2/intervention/emod_intervention.html' with prefix=formset.prefix empty=True index='__prefix__' %}
+                                {% endwith %}
+                            </div>
+                        </div>
+
+                        {% for form in formset %}
+                            <li id="id_{{ formset.prefix }}-{{ forloop.counter0 }}-li">
+                                {% include 'ts_emod2/intervention/emod_intervention.html' with prefix=formset.prefix empty=False index=forloop.counter0 %}
+                            </li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <br>
+
+            {# Save and launch buttons #}
+            <div class="row">
+                <div class="pull-right">
+                    <button type="submit" class="btn" name="submission_type" value="save">
+                        <i class="icon-save"></i>&nbsp;&nbsp;Save
+                    </button>
+
+                    <button type="submit" class="btn" name="submission_type" value="launch">
+                        Save and go to Launch Tool <i class="icon-play"></i>
+                    </button>
+                </div>
+            </div>
+        </div>  {# div for well #}
+        <br>
+
+        <div class="row">
+            <div class="span4">
+                &nbsp;Intervention(s) available for selection
+            </div>
+
+{#                        <p class="pull-right">#}
+{#                            <a class="btn" href="#" data-toggle="modal" data-target="#uploadModal" id="upload_button">#}
+{#                                <i class="icon-file-text-alt"></i> Upload Campaign File#}
+{#                            </a>#}
+{##}
+{#                            <a class="btn" href="#" data-toggle="modal" data-target="#addNewModal">#}
+{#                                <i class="icon-pencil"></i> Create New#}
+{#                            </a>#}
+{#                        </p>#}
+        </div>
+
+        <div id="intervention-templates" class="box">
+            <ul>
+                {% include 'ts_emod2/intervention/emod_intervention_templates.html' %}
+            </ul>
+        </div>
+    </form>
+    <br>
+
+    <div>
+        <!-- Modal -->
+        <form action="{% url 'ts_emod_intervention_save' %}" method="post" id="save">{% csrf_token %}
+            <div id="addNewModal" class="modal hide fade scrollable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Create a new intervention</h3>
+                </div>
+                <div class="modal-body">
+            <h4>1. Name and describe your intervention</h4>
+            <input type="text" id="data-my_name" name="my_name" placeholder="Type in a short intervention name" required/>
+            <div class="row">
+                <div class="span1">
+                <textarea class="description-box-mid" rows="10" placeholder="Type in a short description of the intervention"
+                      id="id_start-description" name="my_description" cols="40" style="margin-bottom: 4px;"></textarea>
+                <span class="helptext" style="position: relative; left: 320px; margin-top:-113px;">
+                    Characters remaining: <span id="count">1000</span></span>
+                </div>
+            </div>
+
+            <h4>2. Select an intervention type</h4>
+            <select id="type_select" name="type_select" required></select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-small" style="margin-bottom: 10px;"
+               href="http://idmod.org/emoddoc/Content/DTKv1_6/v1_6ParameterQRGuide/Intervention%20Parameter%20Listing.htm"
+               title="Docs: Read about this intervention in the EMOD documentation (This will take you to IDM's web site)" target="_blank">
+               <i class="icon-book"></i>&nbsp;&nbsp;Read about intervention types (This will take you to IDM's web site)</a>
+            <h4>3. Configure the new intervention</h4>
+                    <div id="json-field" style="display: none;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn left" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button class="btn right" type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+
+        <form action="{% url 'ts_emod_upload' 'campaign' %}" method="post" id="upload"
+            enctype="multipart/form-data">{% csrf_token %}
+
+            <div id="uploadModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+                aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="uploadModalLabel">Upload an interventions file (campaign.json)</h3>
+                </div>
+                <div class="modal-body">
+                    <div id="upload-div" style="display: none;">
+                        <div class="well">
+                            <br>
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Click Browse to select a file<br/>or drag and drop a file onto the Browse button...</span>
+                            <br/><br/>
+                            <input id="file" type="file" name="file" required="required" class="fileinput-button"/>
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn left" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button class="btn right" type="submit">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

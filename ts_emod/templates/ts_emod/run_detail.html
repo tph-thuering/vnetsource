@@ -1,0 +1,323 @@
+{% extends "ts_emod/index.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 12/10/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load custom_filters %}
+
+{% block page_title %}
+    Simulation Run Details
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/css/prettify.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/ts2.css" />
+    <style>
+        a.btn-small{font-weight: normal;}
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}lib/js/prettify.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/browse_detail.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div id="scenario_details">
+
+        <ul class="breadcrumb">
+                <li class="active">Simulation Run Details</li>
+        </ul>
+        <h3>
+            Simulation Run Details
+            <div class="btn-group pull-right">
+                <a class="btn btn-small" onclick="goBack(); return false;" href="{% url "ts_emod_scenario_details" scenario_id %}" data-toggle="tooltip" title="Back to page you came from"><i class="icon-arrow-left"></i> Back</a>
+            </div>
+        </h3>
+
+        <table class="table" id="scenario_info1" >
+        <thead>
+            <tr>
+                <th>Number</th><th>Name</th><th>Description</th><th>Last Modified</th><th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ run.id }}</td>
+                <td>{{ run.name }}</td>
+                <td>{{ run.description }}</td>
+                <td>{{ run.time_created }}</td>
+                <td>{{ selected_scenario.user.username }}</td>
+            </tr>
+            <tr><td colspan="5">
+                {% if not run.time_launched %}
+                    <strong>Not launched.</strong>
+                {% else %}
+                    <em style="font-size:1.0em;"><strong>Launched:</strong> {{ run.time_launched }}
+                    {% if run.percent_complete == 1 %}
+                        <strong>Complete:</strong>
+                    {% else %}
+                        <strong>In progress:</strong>
+                    {% endif %}
+                    {{ run.my_total }} execution{% if run.my_total > 1 %}s{% endif %}:
+                    {% if run.my_completed > 0 %}<i class="icon-check" style="color: green;"> {{ run.my_completed }} succeeded.</i>{% endif %}
+                    {% if run.my_failed %}<i class="icon-warning-sign"> {{ run.my_failed }} failed.</i>{% endif %}
+                    {% if run.my_incomplete > 0 %}{{ run.my_incomplete }} incomplete.{% endif %}
+                    </em>
+                    {% comment %}
+                    {% for error in run.errors %}
+                        <br/>
+                        {{ error.1 }}
+                        <br/>
+                    {% endfor %}
+                    {% endcomment %}
+                {% endif %}
+            </td></tr>
+
+            {% if notes %}
+                {{ notes.text }}
+            <tr>
+                <th>Notes</th>
+                <td><ul>
+                {% for note in notes %}
+                    <li>{{ note.notes }}</li>
+                {% endfor %}
+                </ul></td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        <table class="table table-striped" id="scenario_info2" >
+            <tbody>
+            <tr>
+                <th>
+                    <strong>Step 1: Location</strong>
+                </th>
+                <td>{% comment %}
+                    <a href="{% url 'ts_emod_template_details' template_id %}"><i class="icon-eye-open"></i> {{ template_name }}</a>: {{ template_description }}
+                    {% endcomment %}
+                    {{ template_name }}: {{ template_description }}
+                </td>
+            </tr>
+            <tr>
+                <th>Step 2: Configuration</th>
+                <td><table>
+                    <tr><td>Simulation Type:</td><td>Malaria</td></tr>
+                    <tr><td>Select Sampling:</td><td>Individual</td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td>Start time:</td><td>{{ start_time_days }} days</td></tr>
+                    <tr><td>Duration:</td><td>{{ duration }} days or {{ duration_years }} years</td></tr>
+                </table></td>
+            </tr>
+            <tr>
+                <th>Step 3: Weather Data</th>
+                <td colspan="2">
+                    {% if not humidity_link %}
+                        <a href="{{ climate_url }}">Download zip file containing climate files <i class="icon-arrow-down"></i></a>
+                    {% else %}
+                        <table>
+                        <tr><td colspan="2"><a href="{{ humidity_link }}">Download humidity file <i class="icon-arrow-down"></i></a></td></tr>
+                        <tr><td colspan="2"><a href="{{ rainfall_link }}">Download rainfall file <i class="icon-arrow-down"></i></a></td></tr>
+                        <tr><td colspan="2"><a href="{{ temperature_link }}">Download temperature file <i class="icon-arrow-down"></i></a></td></tr>
+                        </table>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Step 4: Demographics</th>
+                <td colspan="2">
+                    {% if not demographics_link %}
+                        <a href="{{ climate_url }}">Download zip file containing demographics file <i class="icon-arrow-down"></i></a>
+                    {% else %}
+                        <a href="{{ demographics_link }}">Download demographics file <i class="icon-arrow-down"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Step 5: Vector Species </th>
+                <td><table>
+                {% for vector in Vector_Species_Params %}
+                    <tr><td>
+                        <a class="tooltip_link accordion-toggle" data-toggle="collapse"
+                           data-target="#accordion_{{ vector.name }}" title="Click to show/hide parameters">
+                            {{ vector.name }}&nbsp;&nbsp;&nbsp;<i class="icon-chevron-down"></i>
+                        </a>
+                        <div class="accordion-body collapse" id="accordion_{{ vector.name }}">
+                            <div class="accordion-inner">
+                                <table>
+                                    {% for key, value in vector.params.items %}
+                                        <tr><td>{{ key }}:</td><td>{{ value|safe }}</td></tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </td></tr>
+                {% endfor %}
+                </table></td>
+            </tr>
+            <tr>
+                <th>Step 6: Parasite Parameters </th>
+                <td><table>
+                    <tr><td>Antigen Switch Rate</td><td>{{ Antigen_Switch_Rate }}</td></tr>
+                    <tr><td>Parasite Switch Type</td><td>{{ Parasite_Switch_Type }}</td></tr>
+                    <tr><td>Falciparum MSP Variants</td><td>{{ Falciparum_MSP_Variants }}</td></tr>
+                    <tr><td>Falciparum Nonspecific Types</td><td>Falciparum_Nonspecific_Types</td></tr>
+                    <tr><td>Falciparum PfEMP1 Variants</td><td>{{ Falciparum_PfEMP1_Variants }}</td></tr>
+                    <tr><td>New Diagnostic Detection</td><td>{{ New_Diagnostic_Sensitivity }}</td></tr>
+                    <tr><td>Parasite Smear Sensitivity</td><td>{{ Parasite_Smear_Sensitivity }}</td></tr>
+                </table></td>
+            </tr>
+            <tr>
+                <th>Step 7: Scaling Factors</th>
+                <td><table>
+                    <tr><td>x_Temporary_Larval_Habitat:</td><td>{{ x_Temporary_Larval_Habitat }}</td></tr>
+                </table></td>
+            </tr>
+            {% if user_changes_sweeps %}
+            <tr>
+                <td colspan="2">
+                    <strong>&nbsp;Sweeps</strong>
+                     <pre class="prettyprint"><br/>{% for change in user_changes_sweeps %}{{ change|replace:"/\|/," }}<br/>{% endfor %} </pre>
+                </td>
+            </tr>
+            {% elif old_user_changes %}
+                        <tr>
+                <td colspan="2">
+                    <strong>&nbsp;Sweeps</strong>
+                    <pre class="prettyprint">{% for change in old_user_changes %}{% if change.is_sweep %}{{ change.param|replace:"/\|/," }}<br/>{% endif %}{% endfor %} </pre>
+                </td>
+            </tr>
+            {% endif %}
+            {% if user_changes_interventions %}
+            <tr>
+            <tr>
+                <td colspan="2">
+                    <a class="tooltip_link accordion-toggle" data-toggle="collapse"
+                           data-target="#accordion_Camp" title="Click to show/hide contents of the campaign.json file">
+                           <strong>&nbsp;Interventions (campaign.json)</strong>&nbsp;&nbsp;&nbsp;<i class="icon-chevron-down"></i>
+                    </a>
+                    <span class="pull-right"><a id="campaign_link" download='campaign.json' type='application/json'>Download <i class="icon-arrow-down"></i></a></span>
+                    <div class="accordion-body collapse" id="accordion_Camp">
+                        <div class="accordion-inner">
+                            <pre  class="prettyprint"><div id="intervention_pre"></div></pre>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+                {% if campaign %}
+                <tr>
+                    <td colspan="2"><strong>&nbsp;Interventions (campaign.json)</strong>
+                        <pre class="prettyprint">{{ campaign }}<br/></pre>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+            {% if config %}
+            <tr>
+                <td colspan="2">
+                    <a class="tooltip_link accordion-toggle" data-toggle="collapse"
+                           data-target="#accordion_Config" title="Click to show/hide contents of the config.json file">
+                           <strong>&nbsp;Config.json</strong>&nbsp;&nbsp;&nbsp;<i class="icon-chevron-down"></i>
+                    </a>
+                    <span class="pull-right"><a id='config_link' download='config.json' type='application/json'>Download <i class="icon-arrow-down"></i></a></span>
+                        <div class="accordion-body collapse" id="accordion_Config">
+                            <div class="accordion-inner">
+                    <pre class="prettyprint">{{ config }}<br/></pre>
+                    </div></div>
+                </td>
+            </tr>
+
+            {% endif %}
+            <!-- tr>
+                <th>Created On:</th>
+                <td>{{ scenario.created_on }}</td>
+            </tr>
+            <tr>
+                <th>Public:</th>
+                <td>{{ scenario.is_public }} <em style="font-size:0.8em;" class="text-success">(if True, this scenario can be viewed/used by other users)</em></td>
+            </tr -->
+            {% if user_changes_atomic %}
+            <tr>
+                <td colspan="2">
+                    <strong>Parameter Changes:</strong>
+                     <pre class="prettyprint"><br/>{% for change in user_changes_atomic %}{{ change }}<br/>{% endfor %} </pre>
+                </td>
+            </tr>
+            {% elif old_user_changes %}
+            <tr>
+                <td colspan="2">
+                    <strong>Config.json and Campaign.json changes applied to Template:</strong>
+                     <pre class="prettyprint">{% for change in old_user_changes %}{% if change.is_sweep == False %}{{ change.param|replace:"/=-\$/:\n" }}<br/>{% endif %}{% endfor %}</pre>
+                </td>
+            </tr>
+            {% endif %}
+            {% if user_changes_species %}
+            <tr>
+                <td colspan="2">
+                    <strong>User Created Vector Species:</strong>
+                     <pre class="prettyprint">{% for change in user_changes_species %}{{ change }}<br/>{% endfor %} </pre>
+                </td>
+            </tr>
+            {% endif %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" style="text-align: center;" >
+                        <div class="btn-group ">
+                            <a class="btn btn-small" onclick="goBack(); return false;" href="{% url "ts_emod_scenario_details" scenario_id %}" data-toggle="tooltip" title="Back to Simulation Browser"><i class="icon-arrow-left"></i> Back</a>
+                        {%  comment %}
+                            <a class="btn btn-small" href="{% url "ts_emod_download_scenario" scenario.id %}" data-toggle="tooltip" title="Download XML File"><i class="icon-arrow-down"></i> Download</a>
+                        {%  endcomment %}
+                        </div>
+
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script>
+        $(function () {
+            var test = JSON.stringify({{ user_changes_interventions|safe }}, null, 4);
+            $('#intervention_pre').html(test);
+        });
+
+        function goBack()
+        {
+            /* Goes back to the previous page, even if this was opened in a new tab. Honestly, I don't completely
+            understand how it knows how to get back to a page that may have never been opened at all (ie copying
+            a link from one browser into the other and clicking the back button). */
+            if (document.URL != docuemnt.referrer)
+            {
+                window.location.replace(document.referrer);
+            }
+            else
+            {
+                window.location.replace({% url "ts_emod_scenario_details" scenario_id %});
+            }
+        }
+    </script>
+    <script>
+    var json = {{ config|safe }};
+    var data = new Blob([JSON.stringify(json, null, 4)]);
+
+    var a = document.getElementById('config_link');
+    a.href = URL.createObjectURL(data);
+
+    json = {{ campaign|safe }};
+    data = new Blob([JSON.stringify(json, null, 4)]);
+
+    var c = document.getElementById('campaign_link');
+    c.href = URL.createObjectURL(data);
+
+
+</script>
+{% endblock %}

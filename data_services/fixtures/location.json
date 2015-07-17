@@ -1,0 +1,2466 @@
+[
+    {
+        "pk": 1,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Western Pacific Region",
+            "admin0": "Solomon Islands",
+            "admin2": null,
+            "geom_key": 158,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 3,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Africa Region",
+            "admin0": "Kenya",
+            "admin2": "Kisumu",
+            "geom_key": 44172,
+            "admin1": "Nyanza"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Africa Region",
+            "admin0": "United Republic of Tanzania",
+            "admin2": "Muheza",
+            "geom_key": 33720,
+            "admin1": "United Republic of Tanzania"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Africa Region",
+            "admin0": "Nigeria",
+            "admin2": "Garki",
+            "geom_key": 42255,
+            "admin1": "Nigeria"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Afghanistan",
+            "admin2": null,
+            "geom_key": 160,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 9,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Albania",
+            "admin2": null,
+            "geom_key": 285,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 10,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Algeria",
+            "admin2": null,
+            "geom_key": 144,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 11,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Andorra",
+            "admin2": null,
+            "geom_key": 196,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 12,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Angola",
+            "admin2": null,
+            "geom_key": 280,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 13,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Antigua and Barbuda",
+            "admin2": null,
+            "geom_key": 175,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 14,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Argentina",
+            "admin2": null,
+            "geom_key": 116,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 15,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Armenia",
+            "admin2": null,
+            "geom_key": 67,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 16,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Australia",
+            "admin2": null,
+            "geom_key": 179,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 17,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Austria",
+            "admin2": null,
+            "geom_key": 66,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 18,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Azerbaijan",
+            "admin2": null,
+            "geom_key": 98,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 19,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Bahamas",
+            "admin2": null,
+            "geom_key": 71,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 20,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Bahrain",
+            "admin2": null,
+            "geom_key": 92,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 21,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Bangladesh",
+            "admin2": null,
+            "geom_key": 56,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 22,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Barbados",
+            "admin2": null,
+            "geom_key": 201,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 23,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Belarus",
+            "admin2": null,
+            "geom_key": 197,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 24,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Belgium",
+            "admin2": null,
+            "geom_key": 248,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 25,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Belize",
+            "admin2": null,
+            "geom_key": 188,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 26,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Benin",
+            "admin2": null,
+            "geom_key": 106,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 27,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Bhutan",
+            "admin2": null,
+            "geom_key": 183,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 28,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Bermuda",
+            "admin2": null,
+            "geom_key": 218,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 29,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Botswana",
+            "admin2": null,
+            "geom_key": 36,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 30,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Bulgaria",
+            "admin2": null,
+            "geom_key": 198,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 31,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Burkina Faso",
+            "admin2": null,
+            "geom_key": 259,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 32,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Cambodia",
+            "admin2": null,
+            "geom_key": 237,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 33,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Canada",
+            "admin2": null,
+            "geom_key": 233,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 34,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Chile",
+            "admin2": null,
+            "geom_key": 190,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 35,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "China",
+            "admin2": null,
+            "geom_key": 58,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 36,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Africa Region",
+            "admin0": "Kenya",
+            "admin2": "Siaya",
+            "geom_key": 44178,
+            "admin1": "Nyanza"
+        }
+    },
+    {
+        "pk": 37,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Africa Region",
+            "admin0": null,
+            "admin2": null,
+            "geom_key": 2,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 38,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Colombia",
+            "admin2": null,
+            "geom_key": 45,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 39,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Croatia",
+            "admin2": null,
+            "geom_key": 206,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 40,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Cuba",
+            "admin2": null,
+            "geom_key": 47,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 41,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Czech Republic",
+            "admin2": null,
+            "geom_key": 140,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 42,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Dem People's Rep of Korea",
+            "admin2": null,
+            "geom_key": 24,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 43,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Dominican Republic",
+            "admin2": null,
+            "geom_key": 216,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 44,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Egypt",
+            "admin2": null,
+            "geom_key": 83,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 45,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "El Salvador",
+            "admin2": null,
+            "geom_key": 185,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 46,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Finland",
+            "admin2": null,
+            "geom_key": 289,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 47,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "France",
+            "admin2": null,
+            "geom_key": 229,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 48,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Georgia",
+            "admin2": null,
+            "geom_key": 138,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 49,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Gibraltar",
+            "admin2": null,
+            "geom_key": 38,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 50,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Greece",
+            "admin2": null,
+            "geom_key": 127,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 51,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Hungary",
+            "admin2": null,
+            "geom_key": 271,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 52,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "India",
+            "admin2": null,
+            "geom_key": 69,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 53,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Ireland",
+            "admin2": null,
+            "geom_key": 25,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 54,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Israel",
+            "admin2": null,
+            "geom_key": 174,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 55,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Jamaica",
+            "admin2": null,
+            "geom_key": 48,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 56,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Japan",
+            "admin2": null,
+            "geom_key": 57,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 57,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Kenya",
+            "admin2": null,
+            "geom_key": 292,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 58,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Latvia",
+            "admin2": null,
+            "geom_key": 125,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 59,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Lesotho",
+            "admin2": null,
+            "geom_key": 254,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 60,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Liberia",
+            "admin2": null,
+            "geom_key": 272,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 61,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Lithuania",
+            "admin2": null,
+            "geom_key": 78,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 62,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Luxembourg",
+            "admin2": null,
+            "geom_key": 103,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 63,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Malaysia",
+            "admin2": null,
+            "geom_key": 34,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 64,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Maldives",
+            "admin2": null,
+            "geom_key": 177,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 65,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Malta",
+            "admin2": null,
+            "geom_key": 40,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 66,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Mauritius",
+            "admin2": null,
+            "geom_key": 182,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 67,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Mayotte",
+            "admin2": null,
+            "geom_key": 239,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 68,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Mexico",
+            "admin2": null,
+            "geom_key": 109,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 69,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Mongolia",
+            "admin2": null,
+            "geom_key": 49,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 70,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Montenegro",
+            "admin2": null,
+            "geom_key": 262,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 71,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Morocco",
+            "admin2": null,
+            "geom_key": 186,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 72,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "New Caledonia",
+            "admin2": null,
+            "geom_key": 122,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 73,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "New Zealand",
+            "admin2": null,
+            "geom_key": 82,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 74,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Nicaragua",
+            "admin2": null,
+            "geom_key": 112,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 75,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Nigeria",
+            "admin2": null,
+            "geom_key": 264,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 76,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Norway",
+            "admin2": null,
+            "geom_key": 114,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 77,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Peru",
+            "admin2": null,
+            "geom_key": 152,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 78,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Philippines",
+            "admin2": null,
+            "geom_key": 26,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 79,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Poland",
+            "admin2": null,
+            "geom_key": 212,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 80,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Portugal",
+            "admin2": null,
+            "geom_key": 241,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 81,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Puerto Rico",
+            "admin2": null,
+            "geom_key": 221,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 82,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Qatar",
+            "admin2": null,
+            "geom_key": 225,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 83,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Korea, Republic of",
+            "admin2": null,
+            "geom_key": 157,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 84,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Republic of Moldova",
+            "admin2": null,
+            "geom_key": 126,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 85,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Romania",
+            "admin2": null,
+            "geom_key": 202,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 86,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Rwanda",
+            "admin2": null,
+            "geom_key": 278,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 87,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Saint Pierre et Miquelon",
+            "admin2": null,
+            "geom_key": 60,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 88,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Slovakia",
+            "admin2": null,
+            "geom_key": 97,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 89,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Slovenia",
+            "admin2": null,
+            "geom_key": 227,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 90,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "South Africa",
+            "admin2": null,
+            "geom_key": 294,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 91,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Spain",
+            "admin2": null,
+            "geom_key": 281,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 92,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Swaziland",
+            "admin2": null,
+            "geom_key": 247,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 93,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Switzerland",
+            "admin2": null,
+            "geom_key": 209,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 94,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Thailand",
+            "admin2": null,
+            "geom_key": 44,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 95,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Timor-Leste",
+            "admin2": null,
+            "geom_key": 228,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 96,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Tonga",
+            "admin2": null,
+            "geom_key": 129,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 97,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Turkey",
+            "admin2": null,
+            "geom_key": 242,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 98,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Uganda",
+            "admin2": null,
+            "geom_key": 274,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 99,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "U.K. of Great Britain and Northern Ireland",
+            "admin2": null,
+            "geom_key": 63,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 100,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Uruguay",
+            "admin2": null,
+            "geom_key": 145,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 101,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Zimbabwe",
+            "admin2": null,
+            "geom_key": 85,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 180,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Burundi",
+            "admin2": null,
+            "geom_key": 153,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 181,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Cameroon",
+            "admin2": null,
+            "geom_key": 245,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 182,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Cape Verde",
+            "admin2": null,
+            "geom_key": 146,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 183,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Central African Republic",
+            "admin2": null,
+            "geom_key": 249,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 184,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Chad",
+            "admin2": null,
+            "geom_key": 42,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 185,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Comoros",
+            "admin2": null,
+            "geom_key": 59,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 186,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Congo",
+            "admin2": null,
+            "geom_key": 268,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 187,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Cote d'Ivoire",
+            "admin2": null,
+            "geom_key": 234,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 188,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Democratic Republic of the Congo",
+            "admin2": null,
+            "geom_key": 204,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 189,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Equatorial Guinea",
+            "admin2": null,
+            "geom_key": 246,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 190,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Eritrea",
+            "admin2": null,
+            "geom_key": 283,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 191,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Ethiopia",
+            "admin2": null,
+            "geom_key": 291,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 192,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Gabon",
+            "admin2": null,
+            "geom_key": 95,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 193,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Gambia",
+            "admin2": null,
+            "geom_key": 143,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 194,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Ghana",
+            "admin2": null,
+            "geom_key": 147,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 195,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Guinea",
+            "admin2": null,
+            "geom_key": 275,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 196,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Guinea-Bissau",
+            "admin2": null,
+            "geom_key": 238,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 197,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Madagascar",
+            "admin2": null,
+            "geom_key": 255,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 198,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Malawi",
+            "admin2": null,
+            "geom_key": 102,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 199,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Mali",
+            "admin2": null,
+            "geom_key": 51,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 200,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Mauritania",
+            "admin2": null,
+            "geom_key": 224,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 201,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Mozambique",
+            "admin2": null,
+            "geom_key": 96,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 202,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Namibia",
+            "admin2": null,
+            "geom_key": 72,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 203,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Niger",
+            "admin2": null,
+            "geom_key": 130,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 204,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Sao Tome and Principe",
+            "admin2": null,
+            "geom_key": 100,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 205,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Senegal",
+            "admin2": null,
+            "geom_key": 90,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 206,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Sierra Leone",
+            "admin2": null,
+            "geom_key": 132,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 207,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Togo",
+            "admin2": null,
+            "geom_key": 141,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 208,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "United Republic of Tanzania",
+            "admin2": null,
+            "geom_key": 64,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 209,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Zambia",
+            "admin2": null,
+            "geom_key": 187,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 210,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Bolivia",
+            "admin2": null,
+            "geom_key": 35,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 211,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Brazil",
+            "admin2": null,
+            "geom_key": 149,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 212,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Costa Rica",
+            "admin2": null,
+            "geom_key": 117,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 213,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Ecuador",
+            "admin2": null,
+            "geom_key": 243,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 214,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "French Guiana",
+            "admin2": null,
+            "geom_key": 62,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 215,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Guatemala",
+            "admin2": null,
+            "geom_key": 93,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 216,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Guyana",
+            "admin2": null,
+            "geom_key": 279,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 217,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Haiti",
+            "admin2": null,
+            "geom_key": 65,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 218,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Honduras",
+            "admin2": null,
+            "geom_key": 236,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 219,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Panama",
+            "admin2": null,
+            "geom_key": 223,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 220,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Paraguay",
+            "admin2": null,
+            "geom_key": 208,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 221,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Suriname",
+            "admin2": null,
+            "geom_key": 75,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 222,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Venezuela",
+            "admin2": null,
+            "geom_key": 84,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 223,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Djibouti",
+            "admin2": null,
+            "geom_key": 215,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 224,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Iran (Islamic Republic of)",
+            "admin2": null,
+            "geom_key": 207,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 225,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Pakistan",
+            "admin2": null,
+            "geom_key": 277,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 226,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Saudi Arabia",
+            "admin2": null,
+            "geom_key": 219,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 227,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Somalia",
+            "admin2": null,
+            "geom_key": 115,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 228,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "South Sudan",
+            "admin2": null,
+            "geom_key": 265,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 229,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Sudan",
+            "admin2": null,
+            "geom_key": 293,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 230,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Yemen",
+            "admin2": null,
+            "geom_key": 194,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 231,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Kyrgyzstan",
+            "admin2": null,
+            "geom_key": 32,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 232,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Russian Federation",
+            "admin2": null,
+            "geom_key": 31,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 233,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Tajikistan",
+            "admin2": null,
+            "geom_key": 80,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 234,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Uzbekistan",
+            "admin2": null,
+            "geom_key": 79,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 235,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Indonesia",
+            "admin2": null,
+            "geom_key": 159,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 236,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Myanmar",
+            "admin2": null,
+            "geom_key": 148,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 237,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Nepal",
+            "admin2": null,
+            "geom_key": 137,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 238,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Sri Lanka",
+            "admin2": null,
+            "geom_key": 251,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 239,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Lao People's Democratic Republic",
+            "admin2": null,
+            "geom_key": 269,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 240,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Papua New Guinea",
+            "admin2": null,
+            "geom_key": 161,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 241,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Vanuatu",
+            "admin2": null,
+            "geom_key": 113,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 242,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": null,
+            "admin0": "Viet Nam",
+            "admin2": null,
+            "geom_key": 151,
+            "admin1": null
+        }
+    },
+    {
+        "pk": 243,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Western Pacific Region",
+            "admin0": "Solomon Islands",
+            "admin2": null,
+            "geom_key": 1393,
+            "admin1": "Honiara"
+        }
+    },
+    {
+        "pk": 245,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Africa Region",
+            "admin0": "Kenya",
+            "admin2": null,
+            "geom_key": 3899,
+            "admin1": "Central"
+        }
+    },
+    {
+        "pk": 246,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Africa Region",
+            "admin0": "Kenya",
+            "admin2": null,
+            "geom_key": 3926,
+            "admin1": "Rift Valley"
+        }
+    },
+    {
+        "pk": 247,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "Africa Region",
+            "admin0": "Kenya",
+            "admin2": null,
+            "geom_key": 3928,
+            "admin1": "Nairobi"
+        }
+    },
+    {
+        "pk": 249,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Cyprus",
+            "admin2": "",
+            "geom_key": 33,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 250,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Denmark",
+            "admin2": "",
+            "geom_key": 52,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 251,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Dominica",
+            "admin2": "",
+            "geom_key": 70,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 252,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Estonia",
+            "admin2": "",
+            "geom_key": 23,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 253,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Faroe Islands",
+            "admin2": "",
+            "geom_key": 28,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 254,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Fiji",
+            "admin2": "",
+            "geom_key": 258,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 255,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "French Polynesia",
+            "admin2": "",
+            "geom_key": 77,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 256,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Germany",
+            "admin2": "",
+            "geom_key": 139,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 257,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Greenland",
+            "admin2": "",
+            "geom_key": 214,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 258,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Grenada",
+            "admin2": "",
+            "geom_key": 232,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 259,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Guam",
+            "admin2": "",
+            "geom_key": 261,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 260,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Hong Kong",
+            "admin2": "",
+            "geom_key": 167,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 261,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Iceland",
+            "admin2": "",
+            "geom_key": 170,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 262,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Iraq",
+            "admin2": "",
+            "geom_key": 180,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 263,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Isle of Man",
+            "admin2": "",
+            "geom_key": 250,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 264,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Italy",
+            "admin2": "",
+            "geom_key": 267,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 265,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Jordan",
+            "admin2": "",
+            "geom_key": 166,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 266,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Kazakhstan",
+            "admin2": "",
+            "geom_key": 163,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 267,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Kiribati",
+            "admin2": "",
+            "geom_key": 273,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 268,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Kuwait",
+            "admin2": "",
+            "geom_key": 104,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 269,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Lebanon",
+            "admin2": "",
+            "geom_key": 240,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 270,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Libyan Arab Jamahiriya",
+            "admin2": "",
+            "geom_key": 53,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 271,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Liechtenstein",
+            "admin2": "",
+            "geom_key": 260,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 272,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Macau",
+            "admin2": "",
+            "geom_key": 94,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 273,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "The former Yugoslav Republic of Macedonia",
+            "admin2": "",
+            "geom_key": 230,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 274,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Marshall Islands",
+            "admin2": "",
+            "geom_key": 211,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 275,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Micronesia (Federated States of)",
+            "admin2": "",
+            "geom_key": 27,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 276,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Monaco",
+            "admin2": "",
+            "geom_key": 110,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 277,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Netherlands",
+            "admin2": "",
+            "geom_key": 50,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 278,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Northern Mariana Islands",
+            "admin2": "",
+            "geom_key": 131,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 279,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Oman",
+            "admin2": "",
+            "geom_key": 171,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 280,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Palau",
+            "admin2": "",
+            "geom_key": 199,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 281,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Samoa",
+            "admin2": "",
+            "geom_key": 200,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 282,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "San Marino",
+            "admin2": "",
+            "geom_key": 193,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 283,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Serbia",
+            "admin2": "",
+            "geom_key": 203,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 284,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Seychelles",
+            "admin2": "",
+            "geom_key": 150,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 285,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Singapore",
+            "admin2": "",
+            "geom_key": 119,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 286,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Saint Kitts and Nevis",
+            "admin2": "",
+            "geom_key": 173,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 287,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Saint Lucia",
+            "admin2": "",
+            "geom_key": 217,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 288,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Sweden",
+            "admin2": "",
+            "geom_key": 235,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 289,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Syrian Arab Republic",
+            "admin2": "",
+            "geom_key": 290,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 290,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Trinidad and Tobago",
+            "admin2": "",
+            "geom_key": 276,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 291,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Tunisia",
+            "admin2": "",
+            "geom_key": 68,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 292,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Turkmenistan",
+            "admin2": "",
+            "geom_key": 288,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 293,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Turks and Caicos islands",
+            "admin2": "",
+            "geom_key": 256,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 294,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Tuvalu",
+            "admin2": "",
+            "geom_key": 89,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 295,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Ukraine",
+            "admin2": "",
+            "geom_key": 73,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 296,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "United Arab Emirates",
+            "admin2": "",
+            "geom_key": 134,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 297,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "United States of America",
+            "admin2": "",
+            "geom_key": 86,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 298,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "United States Virgin Islands",
+            "admin2": "",
+            "geom_key": 181,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 299,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "West Bank",
+            "admin2": "",
+            "geom_key": 29,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 300,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Cook Islands",
+            "admin2": "",
+            "geom_key": 111,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 301,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Nauru",
+            "admin2": "",
+            "geom_key": 191,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 302,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Niue",
+            "admin2": "",
+            "geom_key": 108,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 303,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Saint Vincent and the Grenadines",
+            "admin2": "",
+            "geom_key": 128,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 304,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Guadeloupe",
+            "admin2": "",
+            "geom_key": 282,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 305,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Martinique",
+            "admin2": "",
+            "geom_key": 123,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 306,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Netherlands Antilles",
+            "admin2": "",
+            "geom_key": 54,
+            "admin1": ""
+        }
+    },
+    {
+        "pk": 307,
+        "model": "data_services.dimlocation",
+        "fields": {
+            "admin007": "",
+            "admin0": "Western Sahara",
+            "admin2": "",
+            "geom_key": 142,
+            "admin1": ""
+        }
+    }
+]

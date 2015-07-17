@@ -1,0 +1,25 @@
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 6/25/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+<form action="{% url 'ts_emod_note_save' run_id %}" method="post" id="save">{% csrf_token %}
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Add a new note</h3>
+        </div>
+        <br/>
+            {% for field in form.visible_fields %}
+                {{ field }}
+            {% endfor %}
+
+        <div class="modal-footer">
+            <button class="btn left" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;Cancel</button>
+            <button class="btn" type="submit"><i class="icon-save"></i>&nbsp;&nbsp;Save</button>
+        </div>
+</form>

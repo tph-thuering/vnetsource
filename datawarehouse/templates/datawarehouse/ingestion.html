@@ -1,0 +1,43 @@
+{% extends "datawarehouse/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/css/etl.css" />
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/js/etl.js"></script>
+{% endblock %}
+
+{% block page_title %}
+    Datawarehouse: ETL
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            <div class="span12" >
+                {% if messages %}
+                {% for k,v in messages.iteritems %}
+                    <span {% if v == "The file was successfully ingested." %}class="alert alert-success"{% endif %}>{{k}}: {{v}}</span><br />
+                {% endfor %}
+                {% endif %}
+                <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+                    {{ form }}
+                    <br /><br />
+                    <input type="Submit" value="Ingest Data" />
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

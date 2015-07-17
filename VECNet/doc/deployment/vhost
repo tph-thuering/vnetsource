@@ -1,0 +1,56 @@
+# Redirect to https
+<VirtualHost *:80>
+  ServerName ci.vecnet.org
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}?%{QUERY_STRING}
+</VirtualHost>
+
+<VirtualHost *:443>
+  ServerAdmin avyushko@nd.edu
+  ServerName ci.vecnet.org
+  CustomLog /var/log/httpd/ci.vecnet.org.access.log combined
+  ErrorLog /var/log/httpd/ci.vecnet.org.error.log
+
+  TKTAuthPublicKey /etc/httpd/conf/sso/tkt_pubkey_dsa.pem
+
+  DocumentRoot "/opt/vecnetsource/web/ci.vecnet.org/"
+  Alias /static/ /opt/vecnetsource/web/ci.vecnet.org/VECNet/static/
+  <Directory /opt/vecnetsource/web/ci.vecnet.org/VECNet/static/ >
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+  <Directory "/opt/vecnetsource/web/ci.vecnet.org/">
+    Options Includes FollowSymLinks
+    AllowOverride all
+    Order allow,deny
+    Allow from all
+
+    AuthType mod_auth_pubtkt
+    TKTAuthDebug 1
+    TKTAuthLoginURL http://www.vecnet.org/index.php/sso-login
+    TKTAuthTimeoutURL http://www.vecnet.org/index.php/sso-login
+    TKTAuthUnauthURL http://www.vecnet.org/index.php/sso-login
+    TKTAuthToken "people"
+    require valid-user
+  </Directory>
+  WSGIDaemonProcess ci-vecnet  python-path=/opt/vecnetsource/web/ci.vecnet.org/:/opt/vecnetsource/venv/ci/lib/python2.7/site-packages:/opt/python2.7/lib/python2.7/ home=/opt/vecnetsource/web/ci.vecnet.org/  display-name=httpd-ci-vecnet
+  WSGIProcessGroup ci-vecnet
+  WSGIScriptAlias / /opt/vecnetsource/web/ci.vecnet.org/VECNet/wsgi.py
+
+  <Directory "/var/www/icons">
+    Options Indexes MultiViews FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  SSLEngine on
+  SSLProtocol all -SSLv2
+  SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM:+LOW
+  SSLCertificateFile /etc/pki/tls/certs/20130704.ci.vecnet.org.crt
+  SSLCertificateKeyFile /etc/pki/tls/private/ci.vecnet.org.key
+  SSLCertificateChainFile /etc/pki/tls/certs/commodo_int.cer
+
+</VirtualHost>

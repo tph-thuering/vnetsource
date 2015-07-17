@@ -1,0 +1,160 @@
+<a href="#"  style="padding: 2px;">
+    <div id="tree"></div>
+</a>
+
+<style>
+    ul.folder { list-style-type: none; }
+</style>
+<script src="//code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/ui.fancytree.css" />
+<script src="{{ STATIC_URL }}ts_emod/js/jquery.fancytree.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}ts_emod/js/jquery.fancytree.dnd.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}ts_emod/js/jquery.fancytree.edit.js" type="text/javascript"></script>
+
+<style type="text/css">
+  #draggableSample, #droppableSample {
+    height:100px;
+    padding:0.5em;
+    width:150px;
+    border:1px solid #AAAAAA;
+  }
+  #draggableSample {
+    background-color: silver;
+    color:#222222;
+  }
+  #droppableSample {
+    background-color: maroon;
+    color: white;
+  }
+  #droppableSample.drophover {
+    border: 1px solid green;
+  }
+
+  span.pending span.fancytree-title { font-style: italic; }
+  span.pending span.fancytree-title:after { content: "\2026"; /* ellipsis */ }
+</style>
+<!-- Code to initialize the tree when the document is loaded: -->
+<script type="text/javascript">
+  $(function(){
+    // Attach the fancytree widget to an existing <div id="tree"> element
+    // and pass the tree options as an argument to the fancytree() function:
+    $("#tree").fancytree({
+      minExpandLevel: 2,  // Make the root always expanded
+      extensions: ["dnd", "edit"],
+      // titlesTabbable: true,
+      source: [ {{ folder_tree|safe }} ],  // Pass an array of nodes.
+      dnd: {
+        autoExpandMS: 400,
+        focusOnClick: true,
+        preventVoidMoves: true, // Prevent dropping nodes 'before self', etc.
+        preventRecursiveMoves: true, // Prevent dropping nodes on own descendants
+        dragStart: function(node, data) {
+          /** This function MUST be defined to enable dragging for the tree. */
+          return true;
+        },
+        dragEnter: function(node, data) {
+          /** data.otherNode may be null for non-fancytree droppables. */
+           return true;
+        },
+        dragDrop: function(node, data) {
+          /** This function handles dropping of items on the tree
+           *  - Both tree items and list items
+           */
+            var my_url = "{% url 'ts_emod_folder_move' %}";
+
+            if( data.otherNode ){
+                // handle dropping tree items
+                data.otherNode.moveTo(node, data.hitMode);
+                var is_folder = 1;
+                $.ajax({
+                    type: "GET",
+                    url: my_url + data.node.data.id + '/' + data.otherNode.data.id + '/' + is_folder + '/',
+                    success: function () {
+                        // if target or moving item is the open folder, reload the page
+                        location.reload();  // for now, always reload
+                    }
+                })
+            } else {
+                // It's a non-tree draggable - i.e. simulation or folder from list (not from tree)
+                var is_folder = 0;
+                // droppable, draggable, is_folder
+                $.ajax({
+                    type: "GET",
+                    url: my_url + data.node.data.id + '/' + $(data.draggable.element).attr("id") + '/' + is_folder + '/',
+                    success: function () {
+                        {% comment %}// was just hiding these, but nth-child zebra striping would still be off {% endcomment %}
+                        $(data.draggable.element).parent("div").remove();  // remove the dragged item
+
+                        $("#tbody div.row:nth-child(odd)").attr("style", 'background-color: #f4f4f4;');  // retripe dark
+                        $("#tbody div.row:nth-child(even)").attr("style", 'background-color: #fff;');    // retripe light
+                        {% comment %}
+                        // if there are no more items in the folder, enable its delete button if no folders in it's tree
+                        // easiest way to force the recheck of folders in this folder and redisplay empty message
+                        if ($('.ui-draggable').length == 0) {
+                            location.reload();
+                        }
+                        // reload page always now that folders have content counters that need reset each DnD
+                        {% endcomment %}
+                        location.reload();
+                    }
+                });
+                return;
+            }
+        }
+      },
+      activate: function(event, data) {
+          if (data.node.data.id == 0) {
+              window.location.href = "{% url 'ts_emod_scenario_browse' %}";
+          } else {
+              window.location.href = "{% url 'ts_emod_scenario_browse' %}" + data.node.data.id;
+          }
+      },
+      edit: {
+        triggerStart: ["f2", "shift+click", "mac+enter"],  // removed "dblclick",
+        beforeEdit: function(event, data) { if (data.node.data.id == 0 ) { return false; }},  // Return false to prevent edit mode
+        edit: function(event, data){
+            // Editor was opened (available as data.input)
+        },
+        beforeClose: function(event, data){
+        // Return false to prevent cancel/save (data.input is available)
+        },
+        save: function(event, data){
+          var node = data.node;
+
+          // Save data.input.val() or return false to keep the editor open
+          $.ajax({
+            url: "{% url 'ts_emod_folder_rename' %}" + node.data.id + '/' + data.input.val()
+          }).done(function(result){
+              if (result == 'False') {
+                // Server might return an error or a modified title
+                // Maybe also check for non-ajax errors, e.g. 'title invalid', ...
+                node.setTitle(data.orgTitle);
+              } else {
+                  node.setTitle(result); // in case server modified it
+              }
+             location.reload();  // for now, always reload (only really need to if current listing in right panel is folder renamed)
+          }).fail(function(result){
+            // Ajax error: reset title (issue a warning?)
+            node.setTitle(data.orgTitle);
+            alert("Error renaming folder.");
+
+          }).always(function(){
+            // data.input.removeClass("pending");
+            $(data.node.span).removeClass("pending");
+          });
+          // Optimistically assume that save will succeed. Accept the user input
+          return true;
+      },
+      close: function(event, data){
+        // Editor was removed. If we started an async request, mark the node as pending
+        if( data.save ) {
+          $(data.node.span).addClass("pending");
+        }
+      },
+      }
+    });
+  });
+</script>
+

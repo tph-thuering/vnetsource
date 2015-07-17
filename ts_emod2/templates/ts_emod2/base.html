@@ -1,0 +1,50 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% block page_title %}
+    {%  if request.META.PATH_INFO|slice:"1:12" == "ts_emod2"  %}
+        Welcome to EMOD Basic Interface
+    {% else %}
+        VecNet Transmission Simulator - EMOD
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}transmission_simulator/css/ts2.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod2/css/base.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod2/css/spans.css" />
+
+    {% block extra_css1 %}
+        {% block extra_local_css %}
+        {% endblock %}
+    {% endblock %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod2/js/base.js"></script>
+
+    {% block extra_js1 %}
+        {% block extra_local_js %}
+        {% endblock %}
+    {% endblock %}
+{% endblock %}
+
+{% block jumbotron_content %}
+        <img src="{{ STATIC_URL }}transmission_simulator/img/icon_ts.png">
+        <h1>Transmission Simulator</h1>
+        <p class="lead">Basic Workflow using <strong>EMOD</strong></p>
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            {% block left_menu %}
+                {% include "ts_emod2/left_menu.html" %}
+            {% endblock %}
+
+            <div class="span9">
+                {% block page_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

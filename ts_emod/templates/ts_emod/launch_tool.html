@@ -1,0 +1,75 @@
+{% extends "ts_emod/index.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title %}
+    Launch Simulations
+{% endblock %}
+
+{% block page_content %}
+    {% if wizard.steps.current != "start" and wizard.steps.current != "destination" %}
+        <br/>
+        <h3><i class="icon-ok-sign icon-2x"></i>&nbsp;&nbsp; Simulation Successfully Launched</h3>
+        <br/>
+    {% else %}
+        <ul class="breadcrumb">
+            <li><a href="{% url "ts_emod_index" %}">EMOD Expert</a> <span class="divider">/</span></li>
+            <li><a href="{% url "ts_emod_scenario_browse" %}">Browse Scenarios</a> <span class="divider">/</span></li>
+            <li class="active">Launch Simulations</li>
+        </ul>
+        <h3>Launch Simulations:</h3>
+        <p>
+            Please provide a short name for your run before launching.
+        </p>
+        {% comment %}Please select the number of repetitions of each unique parameterization the simulation will run. {% endcomment %}
+        <div class="well page-well">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {% for form in wizard.form.forms %}
+                    {{ form }}
+                {% endfor %}
+            {% else %}
+                <div class="row">
+                    {{ wizard.form.as_grid_div }}
+                    <div class="form-actions">
+                        {% if wizard.steps.prev %}
+                            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="btn"><i class="icon-arrow-left"></i> Previous Step</button>
+                        {% endif %}
+                        <button type="submit" class="btn btn-large pull-right" onmousedown="showdiv('progress');">Launch&nbsp;&nbsp;<i class="icon-play"></i></button>
+                    </div>
+                    <div class="row" name="progress" id="progress" style="display:none;"><div class="span2"></div>
+                        <img src="/static/ts_emod/img/ajax-loader.gif"> Launching Run...</div>
+                </div>
+                {% comment %} Include this script for the character counter for Description {% endcomment %}
+                <script src="{{ STATIC_URL }}ts_emod/js/ts_emod.js" type="text/javascript"></script>
+            {% endif %}
+
+            {% if wizard.steps.current  == "destination" %}
+                <br/>
+                    Special settings can be changed in this step.
+                <br/>
+                <div class="form-actions">
+                    {% if wizard.steps.prev %}
+                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="btn"><i class="icon-arrow-left"></i> Previous Step</button>
+                    {% endif %}
+                    <button type="submit" class="btn pull-right">Next Step <i class="icon-arrow-right"></i></button>
+                </div>
+            {% endif %}
+        </form>
+        </div>
+    {% endif %}
+    <script>
+        $(function () { document.getElementById("progress").style.display = "none"; })
+        function showdiv(id){ document.getElementById(id).style.display = "block"; }
+    </script>
+{% endblock %}

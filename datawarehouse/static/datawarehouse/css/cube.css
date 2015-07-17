@@ -1,0 +1,513 @@
+/*######################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Lawrence Selvy <Lawrence.Selvy.1@nd.edu>
+#   Zachary Torstrick <Zachary.R.Torstrick.1@nd.edu>
+######################################################################################################################*/
+
+
+/* This file contains the styling for the newcube.html template.  This is
+ * currently the "cubes" page on the datawarehouse browser*/
+
+.info{
+    border: 1px solid black;
+}
+
+#infoTabs { margin-bottom: 0; }
+
+#infocontrol .nav-tabs .active a {
+    background: rgb(245,245,245);
+}
+
+#graph_controls {
+    height: 67px;
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius:0;
+
+}
+
+#infocontrol{
+    margin-top:0;
+}
+
+#RCTName{
+    height: 40px;
+}
+
+#RCTCut {
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+    margin-bottom:10px;
+}
+
+.graph-pane{
+    min-height:275px;
+}
+
+/*.dim{
+    background:white;
+}
+
+.meas{
+    background:white;
+}*/
+
+#slice_control{
+    position:relative;
+    min-height:60px;
+    border-right: 1px dotted black;
+}
+
+/*#build_dataset{
+    vertical-align:middle;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+}*/
+
+/*.ui-draggable-dragging{
+    background-color: gray;
+    color: white;
+}*/
+
+.icon-remove-sign{
+    color:red;
+}
+
+.icon-minus-sign{
+    color:red;
+}
+
+#paneAdd{
+    color:green;
+    margin-left:0;
+    padding:0;
+}
+
+#agg_dims{
+    display:none;
+}
+
+/*.meas{
+    border-top: 1px dashed black;
+    border-bottom: 1px dashed black;
+}
+
+.dim{
+    border-top: 1px dashed black;
+    border-bottom: 1px dashed black;
+}*/
+
+#filter{
+    margin-top:0;
+    padding:0;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: #F0F0F0;
+}
+
+/*#measures{
+    margin-bottom:0;
+}*/
+
+.dataset{
+    min-height:40px;
+    background-color: white;
+    line-height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.dataset select {
+    width: initial;
+}
+
+#DatasetSel select { margin-bottom:0; }
+
+#graph_holder{
+    width: 90%;
+    margin-left: 40px;
+}
+
+.graph-pane {
+    min-height: 775px;
+}
+
+#HighChart_toolbar {
+    margin:0;
+    overflow:visible;
+}
+
+
+
+#load_box{
+    height:30px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#window_opts select {
+    margin-bottom:0;
+}
+
+.input-append {
+    margin-bottom:0;
+}
+
+#query_string{
+    word-wrap: break-word;
+    margin-top:10px;
+    width: 85%;
+}
+
+#infobar{
+    height: 507px;
+    margin-bottom:0;
+    padding-top: 0;
+    border-top: 0;
+    border-radius: 0;
+    border-bottom: 0;
+}
+
+#selectionHeader {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#infobar .inputs div:nth-child(even) { background-color: rgb(245,245,245); }
+#infobar .inputs div:nth-child(odd)  { background-color: white; }
+.inputs {
+    padding: 0;
+    height:100px;
+    overflow-y: auto;
+}
+
+.tooltip-inner {
+    color: #4d4d4d;
+    background-color: #ebebeb;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+.tooltip.top .tooltip-arrow { border-top:5px solid #ebebeb; }
+
+/* Dark version
+.tooltip-inner {
+  color: #ccc;
+  background-color: rgba(26, 26, 26, 0.9);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.35);
+}
+.tooltip.top .tooltip-arrow { border-top:5px solid rgba(26, 26, 26, 0.9); }
+*/
+
+#dimensions { height: 140px;}
+#measures {height: 250px;}
+#cube { height: 40px;}
+#topper { width: 100%}
+
+.ds_holder div:nth-child(even) { background-color: rgb(245,245,245); }
+#infobar .inputs {
+    /*height: 120px;*/
+    min-height: 100px;
+    margin:0;
+    border:1px solid #d3d3d3;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+#infobar p {
+    padding-bottom: 0;
+    margin-bottom: 0;
+
+}
+
+#Slice_list {
+    padding-top:10px;
+}
+
+#infobar .tab-content { 
+    overflow:visible;
+}
+
+#xdiv, #ydiv { 
+    /*height:100%; */
+    overflow:auto;
+    padding-bottom:5px;
+}
+
+/*#ydiv { height: 200px !important;}*/
+
+.form-horizontal { margin-bottom: 10px; }
+
+.tags {
+    border: 4px solid rgb(255,159,57);
+    border-bottom: 4px solid white;
+    border-radius: 4px;
+    margin-bottom: -4px;
+    padding: 10px;
+    padding-bottom:0;
+}
+
+#dimensions,#measures, #dataset_holder p {
+    border-top:0 !important;
+    padding:10px;
+    paddng-top:0;
+    margin-right:-10px;
+}
+
+#cube {
+    padding: 5px;
+    margin-left: 5px;
+    width: 100%;
+}
+
+#dataset_holder p {
+    background:rgb(245,245,245);
+    padding-right: 10px;
+}
+
+#dataset_holder {
+    width: 33%;
+    padding-right:10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+#help_box { width: 100%}
+
+#data_error_box{
+    max-height:100px;
+    overflow-x: auto;
+}
+
+#info_box_slide_controls { margin: 0; }
+
+#warning_box { 
+    height:20px;
+    top:50%;
+    margin-top: -5px;
+}
+
+.dataset_info {
+    padding-top: 10px;
+    margin: 0;
+    margin-top: 20px;
+    max-height: 350px;
+    overflow: auto;
+}
+
+#info_holder .dataset_data:nth-child(odd) { background-color: rgb(245,245,245); }
+
+.dataset_info p {
+    float:left;
+    margin-right:20px;
+}
+
+.dataset_info .dim { float: right; }
+.dataset_info .meas { float: right; }
+
+#data_summary, #data_summary_tag {
+    float: left;
+    width: 450px;
+    margin-right: 50px;
+}
+
+.dataset_name {
+    text-align: left;
+    width: 40%;
+    float: left;
+    height: 100%;
+}
+.dataset_data {
+    text-align: left;
+    width: 60%;
+    float: left;
+}
+
+.dataset_data div { width: 100%; }
+#info_holder h3 { text-align:left; color: darkgrey; }
+
+#count_table,#count_table_tag {
+    float: left;
+    width: 200px;
+}
+
+#info_xdiv, #info_ydiv, #ds_cube, #info_slice {
+    border: 0;
+    float:left;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+#info_ydiv,#ds_cube { background: rgb(245,245,245); }
+
+.slice_button{
+    color: white !important;
+    height: 30px;
+}
+
+#slices{ 
+    border: 0;
+    height: 0;
+    min-height: 20px;
+    margin: 0;
+    width:100%;
+}
+
+.slice {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.info_button {
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 10px;
+    width:365px;
+}
+
+#info_controls form .btn { width: 391px; }
+
+.chart { min-height: 600px; width: 650px; overflow-x:auto; }
+
+#graph_info { width: 100%; }
+
+#xdiv select, #ydiv select {
+    margin-right: 4px;
+}
+
+#HC_tabs {
+    width:100%;
+    margin-bottom:0;
+    background-color: white;
+}
+
+#HighChart_toolbar .tab-pane {
+    border: 1px solid #ddd;
+    border-top: 0;
+    padding: 10px;
+    height:150px;
+}
+
+#tabList {
+    float: left;
+    width: 664px;
+    height: 37px;
+}
+
+#vis_tab_controls{
+    height: 37px;
+    float: left;
+    width: 40px;
+    border-bottom: 1px solid #ddd;
+}
+
+#info_holder { overflow: hidden; }
+
+#visualizer {
+    width: 75%;
+    float: left;
+}
+
+#graph_tools {
+    width: 25%;
+    float: right;
+}
+
+.full_width {
+    width: 100%;
+}
+
+#graph_opts .btn-group {
+    padding: 10px;
+}
+
+#HighChart_toolbar select { margin-top: 10px; }
+
+hr {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+#graph_tools .tab-pane {
+    height: 600px;
+    background-color: rgb(245,245,245);
+}
+
+#graph_tools p { margin-top: 20px; }
+
+#graph_tools .nav-tabs .active a { background: rgb(245,245,245); }
+
+
+/* Graph Options menu of the toolbar */
+#window_colors a {
+
+}
+
+#windowbg-cp {
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+#windowbrdr-cp { margin-bottom: 5px; }
+
+#plotbg-cp {margin-left: 15px; }
+
+#invert { width: 190px;}
+#chart_type { width: 200px; }
+.type-sel { width: 160px; }
+#series-colors {width: 170px; }
+
+/* Title menu of toolbar */
+#graph_title { width: 170px; }
+#graph_subtitle { width: 147px }
+#graph_ytitle, #graph_xtitle {width: 159px; }
+
+/* Legend Menu of toolbar */
+/*#legend_left { margin-left: 17px; }*/
+#legend_left,#legend_right,#legend_center { margin-bottom: 10px; }
+#vertical_legend_container {margin-top: 20px;}
+#legend_float {
+    width: 190px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.slicer {
+    width: 50%;
+}
+
+
+/*-------------------------------- Data Tables -------------------------------*/
+tr.odd td, tr.odd th{
+    background-color: #f9f9f9;
+}
+
+tr.even .sorting_1, tr.even td.sorting_1 {
+    background-color: #ffecd7;
+    border: #e9d5c1;
+}
+
+tr.odd .sorting_1, tr.odd td.sorting_1{
+    background-color: #f5e1cd;
+    border: #e9d5c1;
+}
+
+.tooltip.top {
+    border: 0;
+}
+
+.alert-info .icon-info-sign {
+    color: #3a87ad;
+}
+
+a.DTTT_button {display:inline-block;*display:inline;*zoom:1;padding:4px 12px;margin-bottom:0;font-size:12px;line-height:20px;text-align:center;vertical-align:middle;cursor:pointer;color:#333333;text-shadow:0 1px 1px rgba(255, 255, 255, 0.75);background-color:#f5f5f5;background-image:-moz-linear-gradient(top, #ffffff, #e6e6e6);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));background-image:-webkit-linear-gradient(top, #ffffff, #e6e6e6);background-image:-o-linear-gradient(top, #ffffff, #e6e6e6);background-image:linear-gradient(to bottom, #ffffff, #e6e6e6);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*background-color:#e6e6e6;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);border:1px solid #cccccc;*border:0;border-bottom-color:#b3b3b3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;*margin-left:.3em;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);}.btn:hover,.btn:focus,.btn:active,.btn.active,.btn.disabled,.btn[disabled]{color:#333333;background-color:#e6e6e6;*background-color:#d9d9d9;}
+
+[hidden] {display: none;}

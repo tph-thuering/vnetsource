@@ -1,0 +1,28 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% block page_title %}
+    Software Revision
+{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}
+
+{% block jumbotron_content %}
+    <h1>VecNet</h1>
+    <p class="lead">Software Revision</p>
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        {% if svnversion_error %}
+            ERROR when running 'svnversion': {{ svnversion_error }}
+        {% else %}
+            Output from 'svnversion': <br>
+            {{ svn_revision }}
+        {% endif %}
+    </div>
+
+{% endblock %}

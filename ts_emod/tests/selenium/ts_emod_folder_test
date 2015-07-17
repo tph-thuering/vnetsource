@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8000/" />
+<title>ts_emod_folder_test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ts_emod_folder_test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Transmission Simulator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ts_basic_emod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My Simulations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is the list of the EMOD simulations you have created, contained in your &quot;home&quot; folder.</td>
+	<td></td>
+</tr>
+<!--Make sure no folders remain from prior executions of this testcase-->
+<tr>
+	<td>assertNotText</td>
+	<td>css=li.fancytree-lastsib &gt; ul</td>
+	<td>*Selenium Folder Test*</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add New Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>This field is required</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='submit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This field is required</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_folder-name</td>
+	<td>Selenium Folder Test 1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#addNewFolderModal &gt; div.modal-footer &gt; button.btn.left</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add New Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_folder-name</td>
+	<td>Selenium Folder Test 1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_folder-description</td>
+	<td>First folder created by Selenium folder testcase ts_emod_folder_test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//button[@type='submit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! You have successfully created the folder Selenium Folder Test 1.*</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder Test 1 folder</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add New Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_folder-name</td>
+	<td>Selenium Folder 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_folder-description</td>
+	<td>Second folder made by selenium test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//button[@type='submit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! You have successfully created the folder Selenium Folder 2.*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=span.fancytree-title</td>
+	<td></td>
+</tr>
+<!--Next try deleting the top level folder-->
+<!--- should not because it contains a folder-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='tree']/ul/li/ul/li/span/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add New Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#addNewFolderModal &gt; div.modal-footer &gt; button.btn.left</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='tree']/ul/li/ul/li[2]/span/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder Test 1 folder</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder Test 1 folder</td>
+</tr>
+<!--Now add a simulation to the subfolder and try to delete subfolder-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='tree']/ul/li/ul/li/ul/li/span/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder 2 folder</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.error</td>
+	<td>*No simulations found. To create a simulation, click the button above.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add a New Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=c_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-name</td>
+	<td>Selenium folder test simulation</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-description</td>
+	<td>created by ts_emod_folder_test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*The simulation was saved.*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My Simulations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='tree']/ul/li/ul/li[2]/span/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder Test 1 folder</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='tree']/ul/li/ul/li/ul/li/span/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder 2 folder</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Parent Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder Test 1 folder</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='tree']/ul/li/ul/li/ul/li/span/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tree']/ul/li/ul/li/ul/li/span/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder 2 folder</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div/div[2]/div/div</td>
+	<td>*Selenium folder test simulation*</td>
+</tr>
+<!--Try to delete the sub folder-->
+<!--- should not because it contains a simulation-->
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder 2 folder</td>
+</tr>
+<!--Now delete the simulation so we can...-->
+<tr>
+	<td>click</td>
+	<td>//div[4]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dataConfirmOK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Success!*You have successfully deleted the simulation Selenium folder test simulation*</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//div[2]/div/div[2]/div/div</td>
+	<td>*Selenium folder test simulation*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div/div[2]/div/div</td>
+	<td>No simulations found. To create a simulation, click the button above.</td>
+</tr>
+<!--...delete the folder-->
+<tr>
+	<td>click</td>
+	<td>css=i.icon-trash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dataConfirmOK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Success! You have successfully deleted the folder.*</td>
+</tr>
+<!--Should put us into first test folder-->
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Selenium Folder Test 1 folder</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.span8.error</td>
+	<td>No simulations found. To create a simulation, click the button above.</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>*Selenium Folder 2*Second folder made by selenium test*</td>
+	<td></td>
+</tr>
+<!--now delete first folder, verify it was deleted-->
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dataConfirmOK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Success! You have successfully deleted the folder.*</td>
+</tr>
+<!--Should put us into root folder-->
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*My Simulations</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>*Selenium Folder*</td>
+	<td></td>
+</tr>
+<!--END of Testcase-->
+</tbody></table>
+</body>
+</html>

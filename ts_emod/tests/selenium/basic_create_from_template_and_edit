@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8000/" />
+<title>new_workflow_initial_creation</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">new_workflow_initial_creation</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Transmission Simulator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ts_basic_emod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My Simulations</td>
+	<td></td>
+</tr>
+<!--Make sure there are no simulations present from previous runs of this test-->
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Selenium test initial </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Selenium test - second Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=d_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-name</td>
+	<td>Selenium test initial</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-description</td>
+	<td>created by selenium test nwf_scenario_create_template</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Simulation Details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Selenium test initial</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>created by selenium test nwf_scenario_create_template</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Step 1 of 6: Configure Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>created by selenium test nwf_scenario_create_template</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My Simulations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is the list of the EMOD simulations you have created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.tooltip_link &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Simulation Details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>created by selenium test nwf_scenario_create_template</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-danger</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is the list of the EMOD simulations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Success! You have successfully deleted the simulation Selenium test initial </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//input[@name='location-template_id'])[5]</td>
+	<td></td>
+</tr>
+<!--Check if validation keeps save button from working yet-->
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Selecting a Location provides default values for EMOD parameters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-name</td>
+	<td>Selenium test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-description</td>
+	<td>This simulation was created by selenium test nwf_scenario_create_template</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Step 1 of 6: Configure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_config-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_config-Simulation_Duration</td>
+	<td>109</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Step 1 of 6: Configure Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_config-name</td>
+	<td>Selenium test - second Simulation</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td></td>
+	<td>Demographic Data</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>BRACKISH SWAMP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>BRACKISH SWAMP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Acquire Modifier</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=farauti__json_Acquire_Modifier</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=farauti__json_Adult_Life_Expectancy</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a value between 0 and 1.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a value between 0 and 1.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=farauti__json_Acquire_Modifier</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=30</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Parasite Parameters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=parasite-json_Falciparum_MSP_Variants</td>
+	<td>400</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a value between 0 and 100.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=parasite-json_Falciparum_MSP_Variants</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.wizard_form.wizard_goto_step[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<!--ToDo: Check for "Custom radio button upon changed value"-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Scaling Factors</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_scaling_factors-x_Temporary_Larval_Habitat</td>
+	<td>3.40283e+038</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a value between 0 and 10000.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_scaling_factors-x_Temporary_Larval_Habitat</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Selenium test - second Simulation </td>
+	<td></td>
+</tr>
+<!--Test new Copy functionality-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Copy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Success! The simulation Selenium test - second Simulation has been copied. You are now viewing the copy. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Selenium test - second Simulation copy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-danger</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Success! You have successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Selenium test - second Simulation copy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.fancytree-title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is the list of the EMOD simulations you have created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[contains(text(),'Delete')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dataConfirmOK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Success! You have successfully deleted the simulation Selenium test - second Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.close</td>
+	<td></td>
+</tr>
+<!--Confirm nothing has been left behind (return to pretest conditions)-->
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Selenium test initial</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Selenium test - second Simulation</td>
+	<td></td>
+</tr>
+<!--END of Test-->
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,98 @@
+Guidelines for Preparing & Distributing Releases
+================================================
+
+1) Designate the Release Engineer
+
+Determine which member of the development team is responsible for the
+upcoming release of the package.  This Release Engineer will use these
+guidelines to prepare and distribute the release.
+
+2) Review and Close Tickets
+
+Review all tickets (issues) that have been assigned to the release (i.e.,
+the tickets whose Target Version is this release).  Ensure that each ticket
+has been closed.  If a ticket cannot be resolved in time for the release,
+change its Target Version to blank (empty).  Also update the ticket with a
+comment explaining why the ticket was postponed.
+
+Note: the Release Engineer is responsible for ensuring tickets are closed.
+
+3) Add an Entry in the History
+
+The history of the package's releases is described in the History section
+of the Version documentation page (../version.rst).  That section is in
+reverse chronological order: newest to oldest.  So add an entry from the
+upcoming release at the top of the list, just under the section title.
+
+The entry for a release describes the highlights for that release.  It
+should not describe every change made to the code (that information is
+available in the repository's log).  Instead, a release entry should
+describe the major changes that impact the users or developers of the
+package.
+
+The tickets assigned to the release can help determine what to put in the
+release's history.  The entries for previous releases can provide further
+guidance on content and format.
+
+For the release's date, just put in a placeholder because the actual date
+should only be entered right before the release is done.  Since the release
+has a target date, the month and year are definitely set, but the specific
+day isn't.  So, the placeholder will have "??" for the day.  For example,
+if the target release date is 15 February 2014, then the placeholder would
+be:
+
+  ``?? February 2014`` **TBD**
+
+The double back ticks tell Sphinx to render the date as a literal so it
+clearly stands out.  The bold "TBD" also indicates that the date needs to
+be edited before the actual release.
+
+Rebuild the documentation in HTML to confirm the history entry is rendered
+properly.
+
+4) Get Final Approval to Push to Trunk
+
+The project's lead developer needs to give the final OK to push the release
+to the project's trunk.  This is to ensure the release is coordinated with
+the project's other development activities.
+
+5) Update the Date in Release's History
+
+Once the approval to push the release has been given, update the date in
+the release's history to today's date.  Remove the special formatting (i.e.,
+the backticks and the "TBD") so that the date renders in the same format as
+the dates of previous releases.
+
+6) Run tests for the very last time
+   python manage.py test job_services
+All tests should pass. If at least one test fails, do not push release to the
+trunk without consulting with the lead developer.
+
+7) Push Release to Trunk
+
+Sync the release's branch one final time with the trunk to capture any recent
+changes to the latter.  Make sure unit tests pass and the server can be run.
+If necessary, manually test new and updated functionality. Then, reintegrate
+the branch back into the trunk.
+
+8) Tag the Release
+
+There is a "job_services" subfolder in the tags/ directory for the package's
+releases.  The naming convention for the tags is to use the short format of
+the version and release numbers.  For example, the tag for the 4th release of
+version 2.1 would "2.1,r04".
+
+The log messages for the tags have a standard format; for the above example,
+the log message would be:
+
+  "Tagged version 2.1, release 04 of job services."
+
+9) Branch Maintenance
+
+After tagging the release, delete its branch in the repository.  The log
+message should note the revision that the branch was re-integrated.  This
+makes it easy to jump to that revision's log message when a developer is
+perusing the revision log in Redmine.  For example,
+
+  "Deleted the 2.1,r04 branch for job services, which was re-integrated into
+   the trunk in revision r9876."

@@ -1,0 +1,22 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 1/15/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Caleb Reinking <Caleb.M.Reinking.2@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block jumbotron_content %}
+    <!-- <img src="{{ STATIC_URL }}datawarehouse/img/icon_dw.jpg"> -->
+    <h1>Results Viewer</h1>
+    <p class="lead">Transmission Simulator Output Visualization</p>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}results_visualizer/css/results_visualizer2.css" />
+    {% block extracss %}{% endblock %}
+{% endblock %}

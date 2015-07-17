@@ -1,0 +1,313 @@
+{% extends "ts_emod/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 09/22/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load custom_filters %}
+
+{% block page_title %}
+    VecNet Transmission Simulator / EMOD / Browse Public Simulations
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/browse.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block main_content %}
+    <script>
+        $(document).ready(function () {
+            // Change jumbotron tagline cause it's easier than changing base to inherit/replace tagline
+            $("p.lead").replaceWith("<p>Public <strong>EMOD</strong> Simulations</p>");
+
+            $('a[data-confirm]').click(function (ev)
+            {
+                var href = $(this).attr('href');
+
+                if (!$('#dataConfirmModal').length)
+                {
+                    $('body').append('<div id="dataConfirmModal" class="modal fade" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true">' +
+                            '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
+                            '<h3 id="dataConfirmLabel"><i class="icon-warning-sign"></i>&nbsp;&nbsp;&nbsp;Please Confirm</h3></div>' +
+                            '<div class="modal-body"></div><div class="modal-footer"><button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Cancel</button>' +
+                            '<a class="btn btn-danger" id="dataConfirmOK">Delete</a></div></div>');
+                }
+                $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+                $('#dataConfirmOK').attr('href', href);
+                $('#dataConfirmModal').modal({show: true});
+                return false;
+            });
+        });
+
+    </script>
+
+    <div id="scenario_browser">
+        <style>
+            .modal-body
+            {
+                max-height: 600px;
+            }
+
+            #addNewModal
+            {
+                width: 585px;
+                margin: 0 0 0 -325px;
+            }
+
+            div[class="tooltip-inner"]
+            {
+                max-width: 300px;
+            }
+        </style>
+
+        <div class="container">
+            <div class="row">
+                {% include "ts_emod/left_menu.html" %}
+
+                <div class="span9">
+                    {% block page_content %}
+                        <p>This is the list of the EMOD simulations others have created and made "public".</p>
+                        <table class="table table-hover table-striped table-condensed table-striped" id="scenario_table">
+                            <thead>
+                                {% if scenario_count > 10 %}
+                                    <tr>
+                                        <td colspan="8">
+                                            <span>
+                                                <em style="font-size:0.8em;">Showing {{ current_start }}-{{ current_stop }}
+                                                    of {{ scenario_count }}</em>
+                                            </span>
+                                            <div class="btn-group text-left">
+                                                <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="icon-cog"></i>
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li><input type="radio" name="limit_size" value="10"
+                                                        {% if pager_size == 10 %}checked="checked"{% endif %} id="limit_10"/>
+                                                        <label for="limit_10">10 Simulations/Page</label>
+                                                    </li>
+                                                    <li><input type="radio" name="limit_size" value="25"
+                                                        {% if pager_size == 25 %}checked="checked"{% endif %} id="limit_25"/>
+                                                        <label for="limit_25">25 Simulations/Page</label>
+                                                    </li>
+                                                    <li><input type="radio" name="limit_size" value="50"
+                                                        {% if pager_size == 50 %}checked="checked"{% endif %} id="limit_50"/>
+                                                    <label for="limit_50">50 Simulations/Page</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+
+                                <tr>
+                                    <th colspan=2>ID/Name/Description</th>
+                                    <th colspan=2>Location</th>
+                                    <th colspan=1>EMOD <br/>Version</th>
+                                    <th colspan="1">Created by</th>
+                                    <th colspan="3"></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for scenario in scenario_list %}
+                                    <tr>
+                                        <td class="accordion" id="accordion2" colspan="3">
+                                            {{ scenario.id }} {{ scenario.name }}
+
+                                            {% if scenario.run_count == 0 %}
+                                                <a class="tooltip_link accordion-toggle btn btn-small pull-right"
+                                                    style="margin-right:.5em;" disabled title="No Runs to view.">
+                                                    0 runs
+                                                </a>
+                                            {% else %}
+                                                <a class="tooltip_link accordion-toggle btn btn-small pull-right" data-toggle="collapse"
+                                                    style="margin-right:.5em;"
+                                                    data-parent="#accordion2"
+                                                    href="#collapse{{ scenario.id }}" title="Click to show/hide Run Status">
+                                                    {{ scenario.run_count }} run{% if scenario.run_count > 1 %}s{% endif %} <i class="icon-angle-down"></i>
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                        <td colspan="1">{{ scenario.location_key }}</td>
+                                        <td colspan=1>
+                                            &nbsp;{{ scenario.model_version|replace:"/emod /" }}&nbsp;
+                                        </td>
+                                        <td colspan="1">{{ scenario.user }}</td>
+                                        <td colspan="1">
+                                            <a class="btn tooltip_link"
+                                                {% if scenario.run_count == 1 %}
+                                                    {% if scenario %}
+                                                        href="{% url "results_viewer.scenario" scenario.id %}"
+                                                    {% else %}
+                                                        disabled
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% if scenario.run_count == 0 %}
+                                                        disabled
+                                                        title="No results to visualize."
+                                                    {% else %}
+                                                        {% if scenario %}
+                                                            href="{% url "results_viewer.scenario" scenario.id %}"
+                                                        {% else %}
+                                                            disabled
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endif %}
+                                                data-original-title="View Results">
+                                                <i class="icon-bar-chart"></i> Visualize results
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="1"></td>
+                                        <td colspan="5">
+                                            <div id="collapse{{ scenario.id }}" class="accordion-body collapse">
+                                                <div class="accordion-inner">
+                                                    {% for run in scenario.run_list %}
+                                                        {% comment %}{% if run.my_completed >= 0 or run.my_failed %}{% endcomment %}
+                                                            <em style="font-size:0.8em;">Name:</em> {% if dim_user.is_staff == True %} ({{ run.id }}) {% endif %} {{ run.name }}
+                                                            <br/>
+                                                            <em style="font-size:0.8em;">Launched at: {{ run.time_launched }}</em>
+                                                            <em style="font-size:0.8em;">{{ run.my_completed }} execution{% if run.my_completed != 1 %}s{% endif %} completed.
+                                                                {% if run.my_failed %}{{ run.my_failed }} failed. <i class="icon-warning-sign"></i>{% endif %}</em>
+                                                            <br/>
+                                                            <div class="btn-group">
+                                                                <a class="btn tooltip_link"
+                                                                    href="{% url "ts_emod_run_details" run.id %}"
+                                                                    data-original-title="View Details">
+                                                                    <i class="icon-eye-open"></i> Details
+                                                                </a>
+                                                                {% comment %}{% if scenario.user|safe != user.username %}{% endcomment %}
+                                                                <a class="btn tooltip_link" href="{% url "ts_emod_run_to_scenario" run.id %}"
+                                                                    data-original-title="Create a simulation in my workspace using these settings.">
+                                                                    <i class="icon-copy"></i> Copy
+                                                                </a>
+                                                                {% comment %}{% endif %}{% endcomment %}
+                                                            {% if run.my_completed != 0 %}
+                                                                <a class="btn tooltip_link"
+                                                                    {% if scenario %}
+                                                                        href="{% url "results_viewer.run" run.id %}"
+                                                                    {% else %}
+                                                                        disabled
+                                                                    {% endif %}
+                                                                    data-original-title="Visualize the run's results"> <i class="icon-bar-chart"></i> Visualize run
+                                                                </a>
+                                                            {% else %}
+                                                                <a class="btn tooltip_link" disabled data-original-title="No results to visualize."> <i class="icon-bar-chart"></i> Visualize run</a>
+                                                            {% endif %}
+
+                                                            <a class="btn tooltip_link"
+                                                                href="{% url "ts_emod_run_metadata_details" run.id %}"
+                                                                data-original-title="View Metadata Details">
+                                                                <i class="icon-eye-open"></i> Metadata
+                                                            </a>
+                                                        </div>
+                                                        <hr/>
+                                                        {% comment %}{% endif %}{% endcomment %}
+                                                    {% endfor %}
+                                                </div> {# Ends div for inner accordion #}
+                                            </div> {# Ends div for accordion body #}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        <form method="get" action="{% url "ts_emod_scenario_browse_public" %}" id="pager_form">
+                                            <div class="pagination pagination-small pagination-centered" id="pager">
+                                                {% csrf_token %}
+                                                <div style="display:none;">
+                                                    <input type="hidden" value="{{ pager_size }}" id="pager_size" name="pager_size"/>
+                                                        name="scenario_id"/>
+                                                </div>
+                                                {% if page_obj.has_previous %}
+                                                    <a href="/cars?page={{ page_obj.previous_page_number }}">previous</a>
+                                                {% endif %}
+                                                <ul id="pager_list">
+                                                    {% if scenario_count > 10 %}
+                                                        <li {% if pager_obj.has_previous %}>
+                                                            <a href="?page={{ pager_obj.previous_page_number }}&pager_size={{ pager_size }}"> Prev </a>{% else %}
+                                                            class="disabled"><a href="#">Prev</a>{% endif %}
+                                                        </li>
+                                                        {% for item in scenario_range %}
+                                                            <li {% if pager_obj.number == forloop.counter %}class="active"{% endif %}><a
+                                                                href="?page={{ forloop.counter }}&pager_size={{ pager_size }}">{{ forloop.counter }}</a>
+                                                            </li>
+                                                        {% endfor %}
+                                                        <li {% if pager_obj.has_next %}>
+                                                            <a href="?page={{ pager_obj.next_page_number }}&pager_size={{ pager_size }}"> Next </a>{% else %}
+                                                            class="disabled"><a href="#">Next</a>{% endif %}
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div> {# Ends div for pager #}
+                                        </form> {# Ends pager form #}
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    {% endblock %}
+
+                    <!-- Modal -->
+                    <form id="save" method="post" action="{% url 'ts_emod_note_save' %}">{% csrf_token %}
+                        <div id="addNewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="myModalLabel">Add a new note</h3>
+                            </div>
+
+                            <div class="modal-body">
+                                <input type="hidden" name="scenario_id" id="scenario_id" value=""/>
+                                <br/>
+                                <textarea id="id_text" class="description-box" rows="10"
+                                    placeholder="Type in a note for this simulation and click save." name="text" label=""
+                                    cols="40" required>
+                                </textarea>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn left" data-dismiss="modal" aria-hidden="true">
+                                    <i class="icon-remove"></i>&nbsp;&nbsp;Cancel
+                                </button>
+                                <button class="btn" type="submit"><i class="icon-save"></i>&nbsp;&nbsp;Save</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    {% comment %} would put this js include above in extra js block, but didn't work there. {% endcomment %}
+                    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js" type="text/javascript"></script>
+                    <script>
+                        $(document).on("click", ".add_note", function()
+                        {
+                            var my_scenario_id = $(this).data('id');
+                            $(".modal-body #scenario_id").val(my_scenario_id);
+                        });
+
+                        $("#save").validate(
+                        {
+                            rules:
+                            {
+                                "text":
+                                {
+                                    required: true
+                                }
+                            }
+                        });
+                    </script>
+                </div> {# Ends div with block page content including the table and modal #}
+            </div> {# Ends div for the row for the container #}
+        </div> {# Ends div for the container #}
+    </div> {# Ends div for scenario browser #}
+{% endblock %}

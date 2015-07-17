@@ -1,0 +1,74 @@
+<button class="pull-right btn-small info" id="info" data-toggle="popover" type='button'>
+    <i class="icon-info-sign icon-2x"></i>
+</button>
+
+<div class="popover-content hide">
+    <br>
+    <br>
+    <table class="table table-bordered table-striped">
+        <th>Setting</th>
+        <th>Name</th>
+        <th>Values</th>
+        <th>
+            Description
+            <button class="close" id="close" class="close" onclick="hide_info()" type="button">×</button>
+        </th>
+
+        <tr>
+            <td>Start Day</td>
+            <td>Event Start Day</td>
+            <td>0 to 2.14748e+009 or number of days in data files, whichever is lower, default is 0</td>
+            <td>
+                The day of the event within the simulation. For most events, this will be a
+                one-time distribution beginning on this day. But, within the software, this
+                is simply the simulation time at which the event becomes active and is
+                handled by the Event Coordinator.
+            </td>
+        </tr>
+
+        <tr>
+            <td>Number Reps</td>
+            <td>Number of Repetitions</td>
+            <td>-1 to 1000, default is -1 (disabled)</td>
+            <td>
+                [Optional] Number of times the event will be repeated at intervals after
+                the first time. It is used for repeated spraying interventions or drug
+                screen-and-treat interventions. This parameter is used in conjunction with
+                Timesteps_Between_Repetitions.  A value of -1 disables this optional
+                parameter.
+            </td>
+        </tr>
+
+        <tr>
+            <td>Time Between Reps</td>
+            <td>Time Steps Between Repetitions</td>
+            <td>-1 to 10000, default is -1 (disabled)</td>
+            <td>
+                [Optional] Specifies the repetition interval. This parameter is used for
+                repeated spraying interventions or drug screen-and-treat interventions.
+                This parameter is used in conjunction with Number_Repetitions.  A value of
+                -1 disables this optional parameter.
+            </td>
+        </tr>
+
+        <tr>
+            <td>Number Distributions</td>
+            <td>Max Number of Distributions</td>
+            <td>-1 to 2.14748e+009, default is -1 (no limit)</td>
+            <td>
+                Maximum number of interventions to distribute.  By convention, no limit
+                is specified by -1.
+            </td>
+        </tr>
+
+        <tr>
+            <td>Demographic Coverage</td>
+            <td>Demographic Usage</td>
+            <td>0% to 100%, default is 100%</td>
+            <td>
+                Specifies the probability that an individual in the specified
+                Target_Demographic will receive the intervention.
+            </td>
+        </tr>
+    </table>
+</div>

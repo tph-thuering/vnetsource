@@ -1,0 +1,89 @@
+{% extends "ts_get_started/base.html" %}
+{% load staticfiles %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_get_started/style.css' %}" />
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_index' %}">Get Started</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_modeling1' %}">Modeling Transmission at one site</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_modeling2' %}">Modeling Representative Scenarios</a></li>
+    > Model Overview
+</ul>
+
+<table class="table noborder" style="table-layout: fixed">
+    <tr>
+        <td>
+            <p align="justify">
+                <b>EMOD</b> offers flexibility for applying detailed vector inputs: life cycle,
+                biting and landing behaviour;
+            </p>
+
+            <p align="justify">
+                EMOD also provides more measurable vector related outputs that may make EMOD
+                of
+                interest to users with vector related queries, and those who study vector population
+                dynamics. <a href="http://idmod.org/idmdoc/" target="_blank">Read more on IDM's
+                site</a>
+            </p>
+
+            <p align="justify">
+                EMOD also has additional output parameters including:
+            <ul>
+                <li>Adult vector numbers</li>
+                <li>Human Biting Rate (HBR),</li>
+                <li>Infectious vectors.</li>
+            </ul>
+            </p>
+
+        </td>
+
+        <td>
+            <p align="justify">
+                <b>OpenMalaria</b> offers flexibility for modelling malaria in humans (epidemiology)
+                allowing
+                great input in the details of human disease including; variation in human exposure
+                and response to the parasite, vaccine mechanisms, and drug treatments available to
+                villages
+                prior to intervention simulation. These strengths in epidemiology make OpenMalaria
+                attractive to those interested in human disease outputs and human population
+                dynamics.
+                Read more on OpenMalaria <a
+                    href="http://code.google.com/p/openmalaria/wiki/Start?tm=6"
+                    target="_blank">here</a>.
+            </p>
+
+            <p align="justify">
+                OpenMalaria’s additional output parameters include:
+                <ul>
+                    <li>Hospitalizations,</li>
+                    <li>Direct deaths,</li>
+                    <li>Indirect deaths,</li>
+                    <li>Number of doses of MDA/vaccine administered</li>
+                    <li>Number of people screened and treated via MSAT</li>
+                    <li>Number of people newly protected by ITN/IRS</li>
+                </ul>
+            </p>
+
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <form action='{% url "ts_get_started_modeling4" %}'>
+                <button class="btn">Create Scenario with EMOD</button>
+            </form>
+        </td>
+
+        <td style="text-align: center;">
+            <form action='{% url "ts_om.index" %}'>
+                <button class="btn">Create Scenario with OM</button>
+            </form>
+        </td>
+    </tr>
+</table>
+{%  endblock %}

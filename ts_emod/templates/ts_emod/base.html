@@ -1,0 +1,38 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title %}
+    {%  if request.META.PATH_INFO|slice:"1:12" == "ts_emod"  %}
+        Welcome to EMOD Basic Interface
+    {% else %}
+        VecNet Transmission Simulator - EMOD
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/ts2.css" />
+    {% block extra_local_css %}
+    {% endblock %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/ts_emod.js"></script>
+{% endblock %}
+
+{% block jumbotron_content %}
+        <img src="{{ STATIC_URL }}ts_emod/img/icon_ts.png">
+        <h1>Transmission Simulator</h1>
+        <p class="lead">Basic Workflow using <strong>EMOD</strong></p>
+{% endblock %}
+
+{% block main_content %}
+{% endblock %}

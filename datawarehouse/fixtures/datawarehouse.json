@@ -1,0 +1,550 @@
+{
+    "dimensions": [
+        {
+            "name": "location",
+            "label": "Location",
+            "levels": [
+                {
+                    "name": "region",
+                    "label": "Region",
+                    "key": "region",
+                    "attributes": ["region"]
+                },
+                {
+                    "name": "country",
+                    "label": "Country",
+                    "label_attribute": "country",
+                    "key": "country",
+                    "attributes": ["country", "country_short_label"]
+                },
+                {
+                    "name": "place",
+                    "label": "Place",
+                    "key": "place",
+                    "attributes": ["place"]
+                }
+            ]
+        },
+
+        {
+            "name": "date",
+            "label": "Date",
+            "info": ["range"],
+            "levels": [
+                {
+                    "name": "year",
+                    "label": "Year",
+                    "key": "year",
+                    "attributes": ["year"]
+                },
+                {
+                    "name": "month",
+                    "label": "Month",
+                    "key": "month",
+                    "label_attribute": "month_short_name",
+                    "attributes": ["month", "month_full_name", "month_short_name"]
+                },
+                {
+                    "name": "day",
+                    "label": "Day",
+                    "key": "day",
+                    "attributes": ["day"]
+                }
+            ]
+        },
+
+        {
+            "name": "time_interval",
+            "label": "Time Interval",
+            "info": ["range"],
+            "levels": [
+                {
+                    "name": "start_date_month_short_name",
+                    "label": "Start Date Month",
+                    "key": "start_date_month_short_name",
+                    "attributes": ["start_date_month_short_name"]
+                },
+                {
+                    "name": "end_date_month_short_name",
+                    "label": "End Date Month",
+                    "key": "end_date_month_short_name",
+                    "attributes": ["end_date_month_short_name"]
+                },
+                {
+                    "name": "start_date_year",
+                    "label": "Start Date Year",
+                    "key": "start_date_year",
+                    "attributes": ["start_date_year"]
+                },
+                {
+                    "name": "end_date_year",
+                    "label": "End Date Year",
+                    "key": "end_date_year",
+                    "attributes": ["end_date_year"]
+                }
+            ]
+        },
+
+        {
+            "name": "source",
+            "label": "Source"
+        },
+
+        {
+            "name": "subgroup",
+            "label": "Subgroup"
+        },
+
+        {
+            "name": "gsod_station",
+            "label": "GSOD Station",
+            "levels": [
+                {
+                    "name": "gsod_station_number",
+                    "label": "GSOD Station Number",
+                    "key": "gsod_station_number",
+                    "attributes": ["gsod_station_number"]
+                },
+                {
+                    "name": "gsod_wban_number",
+                    "label": "GSOD WBAN Number",
+                    "key": "gsod_wban_number",
+                    "attributes": ["gsod_wban_number"]
+                }
+            ]
+        },
+
+        {
+            "name": "pacrain_site",
+            "label": "PACRAIN Site",
+            "levels": [
+                {
+                    "name": "pacrain_site_identifier",
+                    "label": "PACRAIN Site Identifier",
+                    "key": "pacrain_site_identifier",
+                    "attributes": ["pacrain_site_identifier"]
+                },
+                {
+                    "name": "pacrain_site_data_source",
+                    "label": "PACRAIN Site Data Source",
+                    "key": "pacrain_site_data_source",
+                    "attributes": ["pacrain_site_data_source"]
+                }
+            ]
+        },
+
+        {
+            "name": "beginning_of_observation_date",
+            "label": "Beginning of Observation Date",
+            "info": ["range"],
+            "levels": [
+                {
+                    "name": "year",
+                    "label": "Year",
+                    "key": "year",
+                    "attributes": ["year"]
+                },
+                {
+                    "name": "month",
+                    "label": "Month",
+                    "key": "month",
+                    "attributes": ["month"]
+                },
+                {
+                    "name": "day",
+                    "label": "Day",
+                    "key": "day",
+                    "attributes": ["day"]
+                },
+                {
+                    "name": "timestamp",
+                    "label": "Timestamp",
+                    "key": "timestamp",
+                    "attributes": ["timestamp"]
+                }
+            ]
+        },
+
+        {
+            "name": "last_modification_date",
+            "label": "Last Modification Date",
+            "info": ["range"],
+            "levels": [
+                {
+                    "name": "year",
+                    "label": "Year",
+                    "key": "year",
+                    "attributes": ["year"]
+                },
+                {
+                    "name": "month",
+                    "label": "Month",
+                    "key": "month",
+                    "attributes": ["month"]
+                },
+                {
+                    "name": "day",
+                    "label": "Day",
+                    "key": "day",
+                    "attributes": ["day"]
+                },
+                {
+                    "name": "timestamp",
+                    "label": "Timestamp",
+                    "key": "timestamp",
+                    "attributes": ["timestamp"]
+                }
+            ]
+        },
+
+        {
+            "name": "georeference",
+            "label": "Georeference",
+            "attributes": [
+                {"name": "latitude", "order": "asc", "label" : "Latitude"},
+                {"name": "longitude", "order": "asc", "label" : "Longitude"}
+            ]
+        },
+
+        {
+            "name": "georeference_source",
+            "label": "Georeference Source"
+        },
+
+        {
+            "name": "land_use",
+            "label": "Land Use"
+        },
+
+        {
+            "name": "seasonality_meaning",
+            "label": "Seasonality Meaning"
+        },
+
+        {
+            "name": "sporozoite_index_method",
+            "label": "Sporozoite Index Method"
+        },
+
+        {
+            "name": "biting_rate_method",
+            "label": "Biting Rate Method"
+        },
+
+        {
+            "name": "citation",
+            "label": "Citation"
+        }
+
+    ],
+
+    "cubes": [
+        {
+            "name":"wmr_household_surveys",
+            "label":"WMR Household Surveys", 
+            "dimensions": ["location", "date", "source", "subgroup"],
+            "measures": [
+                {"name": "percent_household_with_gte_one_anet", "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_household_with_gte_one_etn",   "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_household_with_gte_one_itn",    "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_total_population_slept_an_itn","aggregations": ["avg", "min", "max"] },
+                {"name": "percent_children_lt_five_years_slept_anet", "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_children_lt_five_years_slept_etn",  "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_children_lt_five_years_slept_an_itn",  "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_pregnant_women_slept_anet",   "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_pregnant_women_slept_etn",   "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_pregnant_women_slept_an_itn" ,  "aggregations": ["avg", "min", "max"] }
+            ] ,
+            "mappings": {
+
+                "_comment" : "for all dimension.attribute",
+                "location.region": "location.region",
+                "location.country": "location.country",
+                "date.year": "date.year",
+                "date.month": "date.month",
+                "date.month_label": "date.month_full_name",
+                "date.day": "date.day",
+                "date.timestamp": "date.timestamp",
+                "source": "source.source",
+                "subgroup":"subgroup.subgroup",
+
+                "_comment" : "for all fact.attribute, including ids/keys",
+                "id":"household_surveys_key",
+                "percent_household_with_gte_one_anet":"percent_household_with_gte_one_anet",
+                "percent_household_with_gte_one_etn":"percent_household_with_gte_one_etn",
+                "percent_household_with_gte_one_itn":"percent_household_with_gte_one_itn",
+                "percent_total_population_slept_an_itn":"percent_total_population_slept_an_itn",
+                "percent_children_lt_five_years_slept_anet":"percent_children_lt_five_years_slept_anet",
+                "percent_children_lt_five_years_slept_etn":"percent_children_lt_five_years_slept_etn",
+                "percent_children_lt_five_years_slept_an_itn":"percent_children_lt_five_years_slept_an_itn",
+                "percent_pregnant_women_slept_anet":"percent_pregnant_women_slept_anet",
+                "percent_pregnant_women_slept_etn":"percent_pregnant_women_slept_etn",
+                "percent_pregnant_women_slept_an_itn":"percent_pregnant_women_slept_an_itn"
+
+            }  ,
+            "joins":[
+                {"master":"wmr_household_surveys.location_key", "detail":"location.location_key"},
+                {"master":"wmr_household_surveys.date_key", "detail":"date.date_key"},
+                {"master":"wmr_household_surveys.subgroup_key", "detail":"subgroup.subgroup_key"},
+                {"master":"wmr_household_surveys.source_key", "detail":"source.source_key"}
+            ]
+        },
+        {
+            "name":"wmr_itn_operational_coverage",
+            "label":"WMR ITN Operational Coverage",
+            "dimensions": ["location", "date"],
+            "measures": [	{"name": "number_of_llin_sold_or_delivered", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "number_of_itn_sold_or_delivered",   "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "number_of_itn_and_llin_sold_or_delivered",    "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "percent_itn_coverage","aggregations": ["avg", "min", "max"] }
+            ] ,
+            "mappings": {
+
+                "_comment" : "for all dimension.attribute",
+                "location.region": "location.region",
+                "location.country": "location.country",
+                "date.year": "date.year",
+                "date.month": "date.month",
+                "date.month_label": "date.month_full_name",
+                "date.day": "date.day",
+                "date.timestamp": "date.timestamp",
+
+                "_comment" : "for all fact.attribute, including ids/keys",
+                "id":"itn_operational_coverage_key"
+
+            }  ,
+            "joins":[
+                {"master":"wmr_itn_operational_coverage.location_key", "detail":"location.location_key"},
+                {"master":"wmr_itn_operational_coverage.date_key", "detail":"date.date_key"}
+            ]
+        },
+        {
+            "name":"wmr_irs_operational_coverage",
+            "label":"WMT IRS Operational Coverage",
+            "dimensions": ["location", "date"],
+            "measures": [
+                {"name": "number_of_people_protected_by_irs", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "percent_irs_coverage","aggregations": ["avg", "min", "max"] }
+            ] ,
+            "mappings": {
+
+                "_comment" : "for all dimension.attribute",
+                "location.region": "location.region",
+                "location.country": "location.country",
+                "date.year": "date.year",
+                "date.month": "date.month",
+                "date.month_label": "date.month_full_name",
+                "date.timestamp": "date.timestamp",
+                "date.day": "date.day",
+
+                "_comment" : "for all fact.attribute, including ids/keys",
+                "id":"irs_operational_coverage_key"
+
+            }  ,
+            "joins":[
+                {"master":"wmr_irs_operational_coverage.location_key", "detail":"location.location_key"},
+                {"master":"wmr_irs_operational_coverage.date_key", "detail":"date.date_key"}
+            ]
+        },
+        {
+            "name":"wmr_act_operational_coverage",
+            "label":"WMR ACT Operational Coverage",
+            "dimensions": ["location", "date"],
+            "measures": [
+                {"name": "any_first_line_treatment_courses_delivered_including_act", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "act_treatment_courses_delivered","aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "percent_any_antimalarial_coverage_total", "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_act_coverage_total","aggregations": ["avg", "min", "max"] }
+            ] ,
+            "mappings": {
+
+                "_comment" : "for all dimension.attribute",
+                "location.region": "location.region",
+                "location.country": "location.country",
+                "date.year": "date.year",
+                "date.month": "date.month",
+                "date.month_label": "date.month_full_name",
+                "date.day": "date.day",
+                "date.timestamp": "date.timestamp",
+
+                "_comment" : "for all fact.attribute, including ids/keys",
+                "id":"act_operational_coverage_key"
+
+            }  ,
+            "joins":[
+                {"master":"wmr_act_operational_coverage.location_key", "detail":"location.location_key"},
+                {"master":"wmr_act_operational_coverage.date_key", "detail":"date.date_key"}
+            ]
+        },
+        {
+            "name":"gsod_weather_station_data",
+            "label":"GSOD Weather Station Data",
+            "dimensions": ["gsod_station", "date"],
+            "measures": [
+                {"name": "mean_temperature", "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_temperature_observation_count",   "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_dew_point",    "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_dew_point_observation_count","aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_sea_level_pressure", "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_sea_level_pressure_observation_count",  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_station_pressure",  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_station_pressure_observation_count",   "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_visibility",   "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_visibility_observation_count" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_wind_speed" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_wind_speed_observation_count" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "maximum_sustained_wind_speed" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "maximum_wind_gust" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "maximum_temperature" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "minimum_temperature" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "total_precipitation" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "snow_depth" ,  "aggregations": ["avg","sum", "min", "max"] }
+            ] ,
+            "mappings": {
+
+                "_comment" : "for all dimension.attribute",
+                "_comment" : "form: dimension.logical_attribute_in_cubes: table_in_rdbms.physical_attribute_in_rdbms",
+
+                "gsod_station.gsod_station_number": "gsod_station.gsod_station_number",
+                "gsod_station.gsod_wban_number": "gsod_station.gsod_wban_number",
+                "date.year": "date.year",
+                "date.month": "date.month",
+                "date.day": "date.day",
+                "date.timestamp": "date.timestamp",
+
+                "_comment" : "for all fact.attribute, including ids/keys",
+                "id":"gsod_weather_station_data_key",
+                "mean_temperature":"mean_temperature",
+                "mean_temperature_observation_count":"mean_temperature_observation_count",
+                "mean_dew_point":"mean_dew_point",
+                "mean_dew_point_observation_count":"mean_dew_point_observation_count",
+                "mean_sea_level_pressure":"mean_sea_level_pressure",
+                "mean_sea_level_pressure_observation_count":"mean_sea_level_pressure_observation_count",
+                "mean_station_pressure":"mean_station_pressure",
+                "mean_station_pressure_observation_count":"mean_station_pressure_observation_count",
+                "mean_visibility":"mean_visibility",
+                "mean_visibility_observation_count":"mean_visibility_observation_count",
+                "mean_wind_speed":"mean_wind_speed",
+                "mean_wind_speed_observation_count":"mean_wind_speed_observation_count",
+                "maximum_sustained_wind_speed":"maximum_sustained_wind_speed",
+                "maximum_wind_gust":"maximum_wind_gust",
+                "maximum_temperature":"maximum_temperature",
+                "minimum_temperature":"minimum_temperature",
+                "total_precipitation":"total_precipitation",
+                "snow_depth":"snow_depth",
+
+                "_comment" : "I ignored the last character (flag) for now for maximum_temperature, minimum_temperature, total_precipitation",
+                "_comment" : "I ignored all_indicators (flag) for now"
+
+            }  ,
+            "joins":[
+                {"master":"gsod_weather_station_data.gsod_station_key", "detail":"gsod_station.gsod_station_key"},
+                {"master":"gsod_weather_station_data.date_key", "detail":"date.date_key"}
+            ]
+        },
+        {
+            "name":"pacrain_rainfall_data", 
+            "label":"PACRAIN Rainfall Data",
+            "dimensions": ["pacrain_site", "beginning_of_observation_date", "last_modification_date"],
+            "measures": [
+                {"name": "length_of_observation", "aggregations": ["avg", "min", "max"] },
+                {"name": "rainfall_amount", "aggregations": ["avg", "sum", "min", "max"] }
+            ] ,
+            "joins":[
+                {"master":"pacrain_rainfall_data.pacrain_site_key", "detail":"pacrain_site.pacrain_site_key"},
+
+                {
+                    "_comment" : "specify join for beginning_of_observation_date",
+                    "master":"pacrain_rainfall_data.beginning_of_observation_date_key",
+                    "detail":"date.date_key",
+                    "alias":"beginning_of_observation_date"
+                },
+                {
+                    "_comment" : "specify join for last_modification_date",
+                    "master":"pacrain_rainfall_data.last_modification_date_key", "detail":"date.date_key",
+                    "alias":"last_modification_date"
+                }
+            ],
+            "mappings": {
+
+                "_comment" : "form: dimension.logical_attribute_in_cubes: table_in_rdbms.physical_attribute_in_rdbms",
+                "_comment" : "for all dimension.attribute",
+                "pacrain_site.pacrain_site_identifier": "pacrain_site.pacrain_site_identifier",
+                "pacrain_site.pacrain_site_data_source": "pacrain_site.pacrain_site_data_source",
+
+                "_comment" : "though we have two dates (beginning_of_observation_date and last_modification_date),",
+                "_comment" : "we specify one mapping (here in dimension mappings) for the date type",
+                "_comment" : "both joins are specified below in \"joins\" ",
+                "beginning_of_observation_date.year": "beginning_of_observation_date.year",
+                "beginning_of_observation_date.month": "beginning_of_observation_date.month",
+                "beginning_of_observation_date.day": "beginning_of_observation_date.day",
+                "beginning_of_observation_date.timestamp": "beginning_of_observation_date.timestamp",
+
+                "last_modification_date.year": "last_modification_date.year",
+                "last_modification_date.month": "last_modification_date.month",
+                "last_modification_date.day": "last_modification_date.day",
+                "last_modification_date.timestamp": "last_modification_date.timestamp",
+
+                "_comment" : "for all fact.attribute, including ids/keys",
+                "id":"pacrain_rainfall_data_key",
+                "pacrain_rainfall_data.beginning_of_observation_date_key":"date.date_key",
+                "pacrain_rainfall_data.last_modification_date_key":"date.date_key"
+
+            }
+        },
+        {
+            "name":"mara_georeferenced_eir",
+            "label":"MARA Georeferenced EIR", 
+            "dimensions": ["location", "land_use", "georeference", "georeference_source", "seasonality_meaning", "sporozoite_index_method", "biting_rate_method", "time_interval", "citation"],
+            "measures": [
+                {"name": "sporozoite_index", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "biting_rate", "aggregations": ["avg", "min", "max"] },
+                {"name": "eir", "aggregations": ["avg", "min", "max"] },
+                {"name": "seasonality", "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_relative_eir_anopheles_gambiae_sl", "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_relative_eir_anopheles_funestus", "aggregations": ["avg", "min", "max"] },
+                {"name": "percent_relative_eir_other_vectors", "aggregations": ["avg", "min", "max"] }
+            ] ,
+            "mappings": {
+
+                "id":"mara_georeferenced_eir_key",
+
+                "_comment" : "form: dimension.logical_attribute_in_cubes: table_in_rdbms.physical_attribute_in_rdbms",
+                "land_use": "land_use.land_use_type",
+                "location.region": "location.region",
+                "location.country": "location.country",
+                "location.place": "location.place",
+                "georeference_source": "georeference.georeference_source",
+                "georeference.latitude": "georeference.latitude",
+                "georeference.longitude": "georeference.longitude",
+                "seasonality_meaning": "seasonality_meaning.seasonality_meaning",
+                "sporozoite_index_method": "sporozoite_index_method.sporozoite_index_method",
+                "biting_rate_method": "biting_rate_method.biting_rate_method",
+                "start_date_year": "time_interval.start_date_year",
+                "end_date_year": "time_interval.end_date_year",
+                "citation": "citation.citation",
+
+                "sporozoite_index":"sporozoite_index",
+                "biting_rate":"biting_rate",
+                "eir":"eir",
+                "percent_relative_eir_anopheles_gambiae_sl":"percent_relative_eir_anopheles_gambiae_sl",
+                "percent_relative_eir_anopheles_funestus":"percent_relative_eir_anopheles_funestus",
+                "percent_relative_eir_other_vectors":"percent_relative_eir_other_vectors",
+                "seasonality":"seasonality"
+
+            }  ,
+            "joins":[
+                {"master":"mara_georeferenced_eir.location_key", "detail":"location.location_key"},
+                {"master":"mara_georeferenced_eir.georeference_key", "detail":"georeference.georeference_key"},
+                {"master":"mara_georeferenced_eir.land_use_key", "detail":"land_use.land_use_key"},
+                {"master":"mara_georeferenced_eir.seasonality_meaning_key", "detail":"seasonality_meaning.seasonality_meaning_key"},
+                {"master":"mara_georeferenced_eir.sporozoite_index_method_key", "detail":"sporozoite_index_method.sporozoite_index_method_key"},
+                {"master":"mara_georeferenced_eir.biting_rate_method_key", "detail":"biting_rate_method.biting_rate_method_key"},
+                {"master":"mara_georeferenced_eir.time_interval_key", "detail":"time_interval.time_interval_key"},
+                {"master":"mara_georeferenced_eir.citation_key", "detail":"citation.citation_key"}
+
+            ]
+        }
+
+    ]
+}

@@ -1,0 +1,71 @@
+{% extends "ts_repr/base.html" %}
+
+{% block page_title %}
+    Representative Demographics
+{% endblock %}
+
+{% block extra_local_js %}
+    <script>
+        // demographics.js needs this variable
+        var demographics_data_url = "{{ demographics_data_url }}";
+        // save_buttons.js needs these variables
+        var page_name = "{{ page_name }}";
+        var data_to_save = {};
+    </script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/creation/demographics.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/creation/save_buttons.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <form id="form" action="" method="post">{% csrf_token %}<br>
+        <input type="hidden" id="scenario_id" value="{{ scenario.id }}" />
+        <input type="hidden" name="demographics_id" id="demographics_id" value="0" />
+        <input type="hidden" id="form-is-valid" name="form-is-valid" value="false" />
+
+        <div class="row">
+            <div class="span5">
+                Select the demographics for your simulation:
+            </div>
+            <div class="span3">
+                <select id="demographics-select">
+                    {% for demographics_option in demographics_options %}
+                        {% if demographics_option.id == demographics_id %}
+                            <option name="{{ demographics_option.name }}"
+                                value="{{ demographics_option.id }}" selected>
+                                {{ demographics_option.name }}
+                            </option>
+                        {% else %}
+                            <option name="{{ demographics_option.name }}"
+                                value="{{ demographics_option.id }}">
+                                {{ demographics_option.name }}
+                            </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span9">
+                <p id="demographics-description">
+                </p>
+            </div>
+        </div>
+
+        {% include "ts_repr/creation/save_buttons.html" %}
+        <br>
+
+
+        <div class="row">
+            <div class="well well-large span8" id="demographics-chart" style="height: 400px; width: 90%"></div>
+        </div>
+        <br>
+
+        {% include "ts_repr/creation/save_buttons.html" %}
+
+    </form>
+{% endblock %}

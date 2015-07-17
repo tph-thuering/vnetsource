@@ -1,0 +1,49 @@
+{% extends "ts_get_started/base.html" %}
+{% load staticfiles %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_get_started/style.css' %}" />
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_index' %}">Get Started</a></li>
+    > Modeling Transmission at one site
+</ul>
+
+<br>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            Modeling Transmission at one site
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText">
+            Exploring transmission and control in different epidemiological and ecological settings using EMOD.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='{% url "ts_get_started_modeling2" %}'>
+                <button class="btn">Modeling Representative Scenarios</button>
+            </form>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="span9 boxText">
+            Modeling specific scenarios in geographically defined individual sites.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='{% url "ts_baseline_step" 'location/0' %}'>
+                <button class="btn">Modeling a Specific Location</button>
+            </form>
+        </div>
+    </div>
+</div>
+{%  endblock %}

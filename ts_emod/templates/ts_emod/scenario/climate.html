@@ -1,0 +1,148 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 3/10/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load custom_filters %}
+
+{% block page_title_local %}Weather Data{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="https://code.highcharts.com/stock/2.0.4/highstock.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://code.highcharts.com/stock/2.0.4/modules/exporting.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/intervention_shopping_cart.css" /> {# just using intervention for now #}
+{% endblock %}
+
+{% block breadcrumb %}Weather Data{% endblock %}
+{% block step_title %}Weather Data{% endblock %}
+{% block page_content %}
+    <p>In this step, weather files have been prepared for your geographic area of Interest.  It is recommended that you examine the files to ensure that they reflect your understanding of temperature, humidity and rainfall by clicking on the ”eye” icon next to ‘View’”.  Errors in weather files should be reported to VecNet via the <a href='https://www.vecnet.org/index.php/contact-us'>"Contact Us"</a> link in the top menu.
+    </p>
+    <div class="well page-well scenario">
+        <form action="" method="post" name="wizard_form">{% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {% for form in wizard.form.forms %}
+                    {{ form }}
+                {% endfor %}
+            {% else %}
+                {{ wizard.form }}
+            {% endif %}
+
+            <br/>
+            Selected files (from {{ template.template_name }}):
+            <br/><br/>
+            <div class="box">
+                <ul>
+                    {% for key, file in climate_files %}
+                        <li><strong>{{ key|capfirst|replace:"/ binary/"|replace:"/Air/Temperature" }}:</strong> {{ file }}
+                            <em style="font-size:0.9em;">
+                                <span class="btn-group pull-right">
+                                    <a id="modal-button-{{ key }}" class="btn tooltip_link modal-button" href="#" data-toggle="modal"
+                                        data-target="#feedbackModal" data-id="{{ scenario_id }}/{{ key }}"
+                                        title="Visualize the selected file.">
+                                        <i class="icon-eye-open"></i>&nbsp;&nbsp;View</a>
+                                    {% comment %}
+                                    <a class="btn btn-right disabled tooltip_link" title="Not yet available." href="#">
+                                       <i class="icon-arrow-up"></i>&nbsp;&nbsp;Upload my file</a>
+                                   {% endcomment %}
+                                </span>
+                            </em>
+                        </li>
+                    {% empty %}
+                        <li class="error">No files selected at this time.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <br/>{% comment %}
+            <br/>Note: &nbsp;&nbsp;
+        You may download selected data files to your computer.  After editing the files you can upload them back into
+        the system for use in this simulation.{% endcomment %}
+            <br/><br/>
+
+            <div class="form-actions">
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn"><i
+                            class="icon-arrow-left"></i> Previous Step
+                    </button>
+                {% endif %}
+                <button type="submit" class="right btn" {% comment %}onmousedown="showdiv('progress');"{% endcomment %}>
+                    Next Step <i class="icon-arrow-right"></i></button>
+            </div>
+        </form>
+    </div>
+    <style>
+        #feedbackModal {
+            max-height: 650px;
+            width: 800px;
+            margin: 0 0 0 -400px;
+            position: absolute;
+        }
+    </style>
+    <form action="{% url 'ts_emod_upload' 'demographics' %}" method="post" id="upload" enctype="multipart/form-data">{% csrf_token %}
+        <div id="uploadModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+                     aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="uploadModalLabel">Upload a file (binary format)</h3>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button class="btn left" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn right" type="submit">Upload</button>
+            </div>
+        </div>
+    </form>
+    <div id="feedbackModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3><span id="myModalLabel">Please review the <span id="type"></span> data.</span></h3>
+            <div id="spinner" style="display: none;">
+                <i class="icon-spinner icon-spin icon-large"></i>&nbsp;&nbsp;Loading <span id="spinner_type"></span> data...
+            </div>
+        </div>
+        <div class="modal-body">
+            <div id="graph-location" style="display: none;">
+                <div id="chart-div"></div>
+            </div>
+        </div>
+        <div class="modal-footer" style="text-align:left">
+                    <em>The small bottom chart is a "summary overview" of the main chart.<br/>
+                    Drag the "handles" at right and left of the overview to change the range of the main chart.</em>
+                    <button class="btn right" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+    <script>
+        $('.modal-button').click(function () {
+            if (!$(this).data('id')) {
+                return false;
+            }
+            // hide tooltips when user clicks to show chart
+            $('.tooltip').hide();
+            $("*").css("cursor", "progress");
+            var my_type = $(this).data('id').split('/')[1];
+            my_type = my_type.replace('air', 'temperature');
+            $("#graph-location").hide();
+            $("#myModalLabel").hide();
+            $("#type").text("");
+            $("#spinner_type").text(my_type);
+            $("#spinner").show();
+            $("#type").text(my_type);
+            $.get("{% url 'ts_emod_scenario_bin_chart' %}" + $(this).data('id'), function (chart_dict) {
+                $("#spinner").hide();
+                $("#myModalLabel").show();
+                $("#graph-location").show();
+                $('#chart-div').highcharts("StockChart", chart_dict);
+                $("*").css("cursor", "default");
+            });
+        });
+    </script>
+{% endblock %}

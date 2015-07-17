@@ -1,0 +1,19 @@
+<div class="row" id="save-buttons-row">
+    {% if can_use_just_save %}
+        <div class="span5">
+            {# Deliberately empty div to space #}
+        </div>
+
+        <div class="span2">
+            <input class="btn pull-right save-button" style="display:none;" type="button" onclick="save_data('save')" value="Save">
+        </div>
+    {% else %}
+        <div class="span7">
+            {# Deliberately empty div to space #}
+        </div>
+    {% endif %}
+
+    <div class="span2">
+        <input class="btn pull-right save-and-continue-button" type="button" onclick="save_data('save_and_continue')" value="Save and Continue">
+    </div>
+</div>

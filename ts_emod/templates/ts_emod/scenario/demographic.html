@@ -1,0 +1,255 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 3/10/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block extra_js %}
+    <script>
+        var chart_name = 'Generic Age distribution';
+        var bin_data = '[[5, 0.188], [10, 0.151], [15, 0.118], [20, 0.1], [25, 0.08], [30, 0.066], [35, 0.055], [40, 0.04], [45, 0.03], [50, 0.024], [55, 0.0185], [60, 0.015], [65, 0.0125], [70, 0.01], [75, 0.008], [80, 0.0055], [85, 0.003]]'; // , [90, 0.004], [95, 0.002], [100, 0.004], [105, 0.01]]';
+    </script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+{% endblock %}
+
+{% block page_title_local %}Demographic Data{% endblock %}
+{% block breadcrumb %}Demographic Data{% endblock %}
+{% block step_title %}Demographic Data{% endblock %}
+{% block page_content %}
+    <p>
+        {% comment %}Select a demographic data file to use for this simulation.{% endcomment %}
+        Demographic data includes population size, age breakdown and birth and death rates.
+        Demography data for the geographic area selected is uploaded from the digital library.
+    </p>
+    <div class="well page-well scenario">
+        <form action="" method="post" name="wizard_form">{% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {% for form in wizard.form.forms %}
+                    {{ form }}
+                {% endfor %}
+            {% else %}
+                {% comment %}
+                <div class="row">
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <input type="radio" name="demographic_type" checked />&nbsp;&nbsp;VecNet Data Warehouse &nbsp;
+                        <span class="tooltip_link"
+                            data-original-title="Hypothetical, developing country, population of 1000, with equal birth and death rates to maintain population stability. Currently this is the only choice." data-toggle="tooltip">
+                            <i class="icon-info-sign"></i></span>
+                    </div>
+                    <div class="span2">
+                        <input type="radio" name="demographic_type" disabled />&nbsp;&nbsp;WorldPop&nbsp;&nbsp;
+                        <span class="tooltip_link"
+                            data-original-title="Not yet available." data-toggle="tooltip">
+                            <i class="icon-info-sign"></i></span>
+                    </div>
+                    <div class="span2">
+                        <input type="radio" name="demographic_type" disabled />&nbsp;&nbsp;CIA&nbsp;&nbsp;
+                        <span class="tooltip_link"
+                            data-original-title="Not yet available." data-toggle="tooltip">
+                            <i class="icon-info-sign"></i></span>
+                    </div>
+                </div>
+                {% endcomment %}
+                <br/>
+                <div class="row">
+                    &nbsp;&nbsp;&nbsp;Selected file (from {{ template.template_name }}): </strong>
+                    <br/><br/>
+                    <div class="row">
+                        <div class="span9" id="demographics-chart" style="height: 400px; width: 100%"></div>
+                    </div>
+                    {% comment %}
+                    <div class="span9">
+                        <div class="btn-group">
+                            <a disabled id="modal-button" class="btn tooltip_link" href="#"
+                                title="Not yet available.">
+                            <i class="icon-eye-open"></i>&nbsp;&nbsp;View</a>
+                            <a disabled class="btn btn-right tooltip_link" href="#" id="upload_button" title="Not yet available.">
+                            <i class="icon-arrow-up"></i>&nbsp;&nbsp;Upload my own file</a>
+                        </div>
+                    </div>
+                    {% endcomment %}
+                </div>
+            {% endif %}
+            <br/><br/>
+            {% comment %}
+            <br/><br/>
+            Note: &nbsp;&nbsp;
+            Total population of the selected region may be far too large to be reasonably simulated,
+            thus it should be scaled down.  We suggest an upper limit no larger than 1,000.
+            <br/><br/>
+
+        {% comment %}
+            <div class="row">
+                <div class="span1"> </div>
+                <div class="span3">
+                    <!-- a href="{% url 'ts_emod_download' 'demographics' %}" class="left btn btn-left"><i class="icon-arrow-down"></i> Download File for Editing</a-->
+                    <a disabled href="#" class="left btn btn-left"><i class="icon-arrow-down"></i> Download File for Editing</a>
+                </div>
+                <div class="span3">
+                    <!-- a class="btn btn-right" href="{% url 'ts_emod_upload' %}" data-toggle="modal"
+                       data-target="#uploadModal" id="upload_button" -->
+                    <a disabled class="btn btn-right" href="#" id="upload_button">
+                    <i class="icon-arrow-up"></i> Upload Edited File</a>
+                </div>
+            </div>
+            <br/><br/>
+            <br/>Note: &nbsp;&nbsp;
+                You may download the selected data file to your computer.  After editing the file you can upload it
+                back into the system for use in this simulation.
+            <br/>
+            {% endcomment %}
+            <br/>
+            <div class="form-actions">
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn"><i
+                            class="icon-arrow-left"></i> Previous Step
+                    </button>
+                {% endif %}
+                <button type="submit" class="right btn" {% comment %}onmousedown="showdiv('progress');"{% endcomment %}>
+                    Next Step <i class="icon-arrow-right"></i></button>
+            </div>
+            {% comment %}
+            <div class="row" name="progress" id="progress" style="display:none;">
+                <div class="span2"></div>
+                <i class="icon-spinner icon-spin icon-large"></i>&nbsp;&nbsp;Loading Location data...
+            </div>
+        {% endcomment %}
+        </form>
+    </div>
+    <style>
+        #feedbackModal {
+            max-height: 650px;
+            width: 800px;
+            margin: 0 0 0 -400px;
+        }
+    </style>
+
+    <form action="{% url 'ts_emod_upload' 'demographics' %}" method="post" id="upload" enctype="multipart/form-data">{% csrf_token %}
+        <div id="uploadModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+                     aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="uploadModalLabel">Upload a demographics file (JSON format)</h3>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button class="btn left" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn right" type="submit">Upload</button>
+            </div>
+        </div>
+    </form>
+    <div id="feedbackModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Please review the demographics data.</h3>
+        </div>
+        <div class="modal-body">
+            <div id="default-message" style="display: block;">
+                <h4>Please select a data set.</h4>
+            </div>
+            <div id="spinner" style="display: none;">
+                <i class="icon-spinner icon-spin icon-large"></i>&nbsp;&nbsp;Loading data...
+            </div>
+            <div id="graph-location" style="display: none;">
+                <h3>&nbsp;&nbsp;&nbsp;Mean Temp</h3>
+                <div id="mean-temp-div"></div>
+                <br/>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn right" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+    <script>
+        {% comment %}
+            $(function () { document.getElementById("progress").style.display = "none"; });
+            function showdiv(id) { document.getElementById(id).style.display = "block"; }
+        {% endcomment %}
+        /*  {% comment %} #3129 - add location feedback graphs to a modal {% endcomment %} */
+        $('#modal-button').click(function () {
+            if (!$("select").val()) {
+                return false;
+            }
+            $("#default-message").hide();
+            $("#spinner").show();
+            $("#graph-location").hide();
+            $.get("{% url 'ts_emod_location_graphs' %}" + $("select").val(), function (chart_dict) {
+                $("#spinner").hide();
+                $("#graph-location").show();
+                $('#rainfall-div').highcharts("StockChart", JSON.parse(chart_dict.rainfall_chart));
+                $('#mean-temp-div').highcharts("StockChart", JSON.parse(chart_dict.mean_temp_chart));
+                $('#humidity-div').highcharts("StockChart", JSON.parse(chart_dict.humidity_chart));
+            });
+        });
+    </script>
+
+    <script> // build demographics chart
+    $(document).ready(function() {
+        var bin_data_json = JSON.parse(bin_data);
+        var bins = [];
+        var chart_data = [];
+        var CATEGORY = 0;
+        var VALUE = 1;
+        var i;
+
+        for (i = 0; i < bin_data_json.length; i++)
+        {
+            bins.push(bin_data_json[i][CATEGORY]);
+            chart_data.push([i, bin_data_json[i][VALUE] * 100]);
+        }
+
+        // Create the chart
+        $('#demographics-chart').highcharts('Chart',
+        {
+            chart:
+            {
+                type: 'column'
+            },
+
+            title:
+            {
+                text: 'Age Distribution'
+            },
+
+            xAxis:
+            {
+                title:
+                {
+                    text: 'Age - Upperbound'
+                },
+                categories: bins
+            },
+
+            yAxis:
+            {
+                title:
+                {
+                    text: 'Percentage of Population'
+                }
+            },
+
+            series:
+            [{
+                name: chart_name,
+                data: chart_data,
+                tooltip:
+                {
+                    valueDecimals: 2,
+                    valueSuffix: ''
+                }
+            }]
+        });
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "transmission_simulator/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Alexander Vyushkov <Alexander.Vyushkov@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            {% include "transmission_simulator/left_menu.html" %}
+
+            <div class="span9">
+                {% block page_content %}
+                    <h2>Welcome to Transmission Simulator</h2>
+
+{#                    <a href="{{ STATIC_URL }}ts_get_started/getting_started_3.png">#}
+{#                        <img src="{{ STATIC_URL }}ts_get_started/getting_started_3.png" width="50%" height="50%"/>#}
+{#                    </a>#}
+{##}
+{#                    <a href="{{ STATIC_URL }}ts_get_started/proposed_workflow3.png">#}
+{#                        <img src="{{ STATIC_URL }}ts_get_started/proposed_workflow3.png" width="25%" height="25%"/>#}
+{#                    </a>#}
+{##}
+{#                    <a href="https://vecnet.mybalsamiq.com/projects/robstest/%28Before%20Run%29%20Summary-Details%20Page">#}
+{#                        Summary Page Mockup#}
+{#                    </a><br>#}
+{#                    <br>#}
+                    <br/>
+                    <p align="justify">
+                        <strong>Transmission Simulator</strong> offers two types of workflows to support modeling of Malaria transmission:
+                        <ul>
+                            <li> The <strong>Representative Workflow</strong> for generic locations, and</li>
+                            <li> The <strong>Basic Workflow</strong> for geographically specific locations.</li>
+                        </ul>
+                    </p>
+                    <br/>
+                    <p align="justify">
+                        Each workflow supports two Malaria transmission models:
+                        <ul>
+                            <li> <strong>EMOD</strong> {% include "transmission_simulator/more_on_emod.html" %}
+                                (The Institute for Disease Modeling), and</li>
+                            <li> <strong>OpenMalaria </strong> {% include "transmission_simulator/more_on_om.html" %}
+                                (Swiss Tropical and Public Health Institute).</li>
+                        </ul>
+                    </p>
+                    <br/>
+                    <p align="justify">
+                        Both <strong>EMOD</strong> and <strong>OpenMalaria</strong> help the user create simulations to analyze malaria transmission and
+                        its control. They share a number of common features: each requires entomological and
+                        epidemiological inputs. The outputs of each are viewable online and accessible as downloadable graphs and datasets.
+                    </p>
+                    <br>
+                    <p align="justify">
+                        Both <strong>EMOD</strong> and <strong>OpenMalaria</strong> generate many outputs, including the following:
+                        <ul>
+                            <li> Entomological Inoculation Rate (EIR),</li>
+                            <li> Prevalence of malaria infections by age group,</li>
+                            <li> Clinical prevalence,</li>
+                            <li> Incidence of new infections.</li>
+                        </ul>
+                    </p>
+                    <br/>
+                    <p align="justify">
+                        The two models have different features that may make either model more useful depending on the
+                        data available to the user as inputs as well as the outputs that are generated.
+                    </p>
+        {% comment %}
+                   <div style="float:left; padding-left:110px">
+                   {%  if APP_ENV == 'production' %}
+                        <form action='{% url "ts_emod_index" %}'>
+                            <button class="btn">Use EMOD Model</button>
+                        </form>
+                   {% else %}
+                        <form action='{% url "ts_get_started.frank.emod" %}'>
+                            <button class="btn">Use EMOD Model</button>
+                        </form>
+                   {% endif %}
+                    </div>
+
+                    <div style="float:right; padding-right:90px">
+                        <form action='{% url "ts_om.index" %}'>
+                            <button class="btn">Use Open Malaria Model</button>
+                        </form>
+                    </div>
+        {% endcomment %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

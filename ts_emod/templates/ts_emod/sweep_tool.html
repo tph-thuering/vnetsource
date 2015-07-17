@@ -1,0 +1,381 @@
+{% extends "ts_emod/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 05/05/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu
+########################################################################################################################
+{% endcomment %}
+
+{% block extra_js %}
+    {# Dynatree library and Stylesheet - put above sweep_shopping_cart.css so we can override #}
+    <script src="{{ STATIC_URL }}lib/js/jquery.dynatree.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/sweep_shopping_cart.css" />
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script>
+        var idCounter = new Date().getTime();
+        {% comment %}
+           These are used in function in sweep.js which
+           loads the cart with previously selected sweeps (from step storage - collected in view)
+        {% endcomment %}
+        var sweeps_selected = '{{ sweeps_selected|safe }}';
+        var sweep_values = '{{ sweep_values|safe }}';
+
+    </script>
+{% endblock %}
+
+{% block page_title %}
+    VecNet Transmission Simulator - EMOD Expert
+{% endblock %}
+
+{% block breadcrumb %}VecNet Transmission Simulator / EMOD / Intervention Tool{% endblock %}
+{% block step_title %}Interventions{% endblock %}
+{% block main_content %}
+    <div class="container">
+    <div class="row">
+    <div class="span3">
+        <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked">
+            <li {% if nav_button == "index" %}class="active"{% endif %}><a href="{% url "ts.index" %}"><i
+                    class="icon-home"></i> Transmission Simulator<i class="icon-angle-right pull-right"></i></a></li>
+            {% comment %}<li class="disabled"><a>Simulation Options</a></li>{% endcomment %}
+            <li {% if nav_button == "index" %}class="active"{% endif %}><a href="{% url "ts_emod_index" %}"><i
+                    class="icon-wrench"></i> EMOD <i class="icon-angle-right pull-right"></i></a></li>
+            <li {% if nav_button == "ts_emod_scenario_browse" %}class="active"{% endif %}><a
+                    href="{% url 'ts_ScenarioCreateByTemplate_step' 'location' %}"><i class="icon-edit"></i> New Simulation<i
+                    class="icon-angle-right pull-right"></i></a></li>
+            <li><a
+                    href="{% url "ts_emod_scenario_browse" %}"><i class="icon-list icon-rotate-180"></i> My Simulations<i
+                    class="icon-angle-right pull-right"></i></a></li>
+            <li><a
+                    href="{% url "ts_emod_scenario_browse_public" %}"><i class="icon-list icon-rotate-180"></i> Public Simulations<i
+                    class="icon-angle-right pull-right"></i></a></li>
+            {% comment %}
+                <li {% if nav_button == "browse_baseline" %}class="active"{% endif %}><a
+                        href="{% url "ts_emod_baseline_browse" %}"><i class="icon-list icon-rotate-180"></i> Existing Simulations<i
+                        class="icon-angle-right pull-right"></i></a></li>
+            {% endcomment %}
+        </ul>
+    </div>
+    <div class="span9">{% block page_content %}
+
+    <form id='sweepForm' action="" method="post" name="wizard_form">{% csrf_token %}
+
+    <p>Drag or click on a parameter in the lower box to sweep it in the Run. Then apply the values to configure the sweep.</p>
+
+    <div class="well page-well">
+        {{ wizard.management_form }}
+        <div class="row">
+            <div class="span1">
+                <label for="id_sweep-name">Name</label>
+            </div>
+            <div class="span1">
+                <input id="id_sweep-name" type="text" required="" placeholder="Name this sweep configuration" name="sweep-name" data-original-title="" title="" value="{{ run_name }}"></input>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sweep(s) selected for this Run
+        {%  comment %}
+            Help Text: would be great if this was pulled from a DB field
+             - and if the sweep input values get built here by DB Config then this should also be pulled from DB.
+        {%  endcomment %}
+        <button class="pull-right btn-small info" id="info" data-toggle="popover" type='button'
+           data-content='<table class="table table-striped"><tr><td><strong>Select</strong> a parameter from the
+           available list below.  Then choose one of the following methods to apply sweep values:
+           </td></tr><tr><td>A. Enter <strong>each value</strong> to be used separated by commas or pipes ("|").
+           For parameters with value ranges or choices. <br/>For example: 1,2,3 or 1|2|3 will create three executions
+           of the simulation, one each for values 1, 2, and 3. </td></tr><tr><td>B. Enter <strong>start,
+           stop and increment</strong> values separated by ":".  Only applicable to parameters with value ranges.<br/>
+           For example: 1:5:1 will sweep values from 1 to 5 in increments of 1.</td></tr>'>
+            <i class="icon-info-sign icon-2x"></i></button>
+        </div>
+        <div class="box" id="cart">
+            <ul class="cart"></ul>
+        </div>
+
+        <div class="form-actions">
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn"><i class="icon-arrow-left"></i> Previous Step</button>
+            {% endif %}
+            {% if scenario.is_representative and not scenario.representative_is_completed and 0 %}
+                <a class="btn tooltip_link"
+                    href="{% url 'ts_repr.determine_view' scenario.id %}"
+                    id="{{ scenario.id }}-open"
+                    data-original-title="View configuration details and results and continue to work on the simulation">
+                    <i class="icon-undo"></i>&nbsp;Cancel
+                </a>
+            {% else %}
+                <a class="btn tooltip_link"
+                    href="{% url 'ts_emod_scenario_details' scenario.id %}"
+                    id="{{ scenario.id }}-open"
+                    data-original-title="View configuration details and results and continue to work on the simulation">
+                    <i class="icon-undo"></i>&nbsp;Cancel
+                </a>
+            {% endif %}
+            <p class="pull-right">
+                <button type="submit" class="btn">Save <i class="icon-save"></i></button>
+                <button id="launch" class="btn">Save and go to Launch Tool <i class="icon-play"></i></button>
+            </p>
+        </div>
+
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="span4 header">&nbsp;Parameters available for sweeping</div>
+    </div>
+
+    <div id="catalog" class="box">
+            <ul>
+                {% for camp in sweep_list %}
+                    <li data-id="{{ camp.id }}" data-name="{{ camp.name }}">
+                            <strong>{{ camp.name }}</strong>
+                            <br/><span class="span7">
+                            <em style="font-size:0.9em;">{{ camp.description }}</em>
+                            {% comment %}<div class="span1">{{ camp.sweep.name }} </div> {% endcomment %}
+                            <button class="btn-small view" title="View Sweep Details"><i class="icon-eye-open"></i></button>
+                            <button class="btn-small edit" title="Edit this Sweep"><i class="icon-edit"></i></button>
+                            <button class="btn-small add"  title="Add an instance of this Sweep to Scenario">
+                                <i class="icon-plus"></i></button></span>
+                    </li>
+                {% endfor %}
+            </ul>
+    </div>
+</form>
+  <br/>
+  <script type="text/javascript">
+
+    $(function(){
+        //$("#catalog").dynatree({{ my_tree_obsolete|safe }});
+        // get the tree from the context and apply to the available list
+        $("#catalog").dynatree(
+              { children: [ {{ sweeps_available|safe }} ],
+                  selectMode: 2,
+                  clickFolderMode: 2,
+                  checkbox: false,
+                    onActivate: function(node) {
+                        //$("#echoActive").text(node.data.title + "(" + node.data.key + ")");
+                        // don't allow nodes to get activated (not used in this page)
+                        node.deactivate();
+                    },
+                    dnd: {
+                      onDragStart: function(node) {
+                        /** This function MUST be defined to enable dragging for the tree.
+                         *  Return false to cancel dragging of node.
+                         */
+                        //logMsg("tree.onDragStart(%o)", node);
+                        if(node.data.isFolder)
+                          return false;
+                        if(node.isSelected())
+                          return false;
+
+                        // #3767 allow nodes with children to be selected
+                        //if(node.hasChildren())  // don't allow path nodes to be dragged
+                        //  return false;
+                        return true;
+                      }
+                    },
+                  onClick: function(node, event) {
+                    // We should not toggle, if target was "checkbox", because this
+                    // would result in double-toggle (i.e. no toggle)
+                    if( node.getEventTargetType(event) != "expander" ) {
+                      if( ! node.data.isFolder && ! node.isSelected() ) {
+                            alert(node.data.title + ' has been successfully added to this Run.' );
+                            var my_path = '';
+                            node.visitParents( function (node) {
+                                my_path = String(node.data.title).replace(/^\s+|\s+$/g,'') + '/' + my_path
+                             },false);
+                            li_append(node.data.key, node.data.title, my_path, '');
+                            node.toggleSelect();
+                            //node.data.unselectable = true;
+                            node.data.activate = false;
+                            node.draggable( 'disable' );
+                      }
+                    }
+                  },
+                  onKeydown: function(node, event) {
+                    if( event.which == 32 ) {
+                      node.toggleSelect();
+                      return false;
+                    }
+                  }
+    });
+
+  // Initialize droppable cart
+  $("#cart").droppable({
+    hoverClass: "drophover",
+    addClasses: true,
+    drop: function(event, ui) {
+        var node = ui.helper.data("dtSourceNode") || ui.draggable;
+        var my_path = '';
+        node.visitParents( function (node) {
+            my_path = String(node.data.title).replace(/^\s+|\s+$/g,'') + '/' + my_path
+         },false);
+        li_append(node.data.key, node.data.title, my_path, '');
+        node.toggleSelect();
+    }
+  });
+
+    // This function runs when delete button is pressed
+    $(".cart li button.delete").live("click", function () {
+        $('.tooltip').remove();  //remove the tool tip element
+
+        // get the key to the referenced node
+        var key = $(this).next("input[name='sweep-sweeps']").val().split(':')[0].replace(/^\s+|\s+$/g, '');
+        if (key == '_0') {
+            var title = $(this).next("input[name='sweep-sweeps']").val().split(':')[1].replace(/^\s+|\s+$/g, '');
+            $("#catalog").dynatree("getTree").visit(function(node){
+                if(node.data.title.split(' ')[1] === title){
+                    // check path to see if matches
+                    key = node.data.key;
+                    return false; // stop traversal (if we are only interested in first match)
+                }
+            });
+        }
+
+        var node = $("#catalog").dynatree("getTree").getNodeByKey(key);
+        node.data.unselectable = false;
+        if (node.isSelected()) {
+            node.toggleSelect();
+        }
+        $(this).closest("li").remove();
+    });
+
+    // This function loads the cart with previously selected interventions (from step storage - collected in view)
+    if (sweeps_selected != "[]" && sweeps_selected != "") {
+        sweeps_selected = sweeps_selected.replace(/\[/g, '').replace(/\]/g, '');
+
+        sweeps_array = sweeps_selected.replace(/"/g, '').split(",");
+        sweep_values = sweep_values.replace(/\[/g, '').replace(/\]/g, '').replace(/"/g, '').replace(/\s+/g, '').split(",");
+
+        for (var i=0; i < sweeps_array.length; i++) {
+            sweep = sweeps_array[i].split(":");
+            var liID = sweep[0] || 0;
+            // Don't display the sweep if no name
+            if ( typeof sweep[1] === "undefined" || sweep[1] == 'undefined') {
+            } else {
+                var liName = sweep[1];
+                var liPath = sweep[2] || '';
+                var liValue = sweep_values[i].replace(/\|/g, ',') || '';
+
+                li_append(liID, liName, liPath, liValue);
+                // get the key to the referenced node
+                if (liID.replace(/^\s+|\s+$/g, '') != '_0') {
+                    var node = $("#catalog").dynatree("getTree").getNodeByKey(liID.replace(/^\s+|\s+$/g, ''));
+                    node.toggleSelect();
+                } else {
+                    var title = liName.replace(/^\s+|\s+$/g, ''); //$(this).next("input[name='sweep-sweeps']").val().split(':')[1].replace(/^\s+|\s+$/g, '');
+                    $("#catalog").dynatree("getTree").visit(function(node){
+
+                        if(node.data.title.split(' ')[1] === title){
+                            // check path to see if matches
+                            var my_path = '';
+                            node.visitParents( function (node) {
+                                my_path = String(node.data.title).replace(/^\s+|\s+$/g,'') + '/' + my_path },false);
+
+                            if (my_path.indexOf("Model Configuration (config.json)") > -1 ) {
+                                my_path = my_path.replace("Model Configuration (config.json)", "config");
+                                if (liPath != my_path)
+                                {
+                                    return true;
+                                }
+                            } else if (my_path.indexOf("Intervention Configuration (campaign.json)") > -1 ) {
+                                my_path = my_path.replace("Events_", "Events/").replace("Intervention Configuration (campaign.json)", "campaign");
+                                my_path = my_path.split('/');
+                                my_path[3] = my_path[3].split(" ")[0];
+                                my_path = my_path.join('/');
+                                if (liPath != my_path)
+                                {
+                                    return true;
+                                }
+                            }
+
+                            liID = node.data.key;
+                            node.select(true);
+                            return false; // stop traversal
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+  });
+
+    /* This function appends an li to the cart.
+     It is called each time a sweep is added to the cart,
+     no matter how it was added. This keeps all formatting in one place. */
+    function li_append(liID, liName, liPath, liValue) {
+        if ($(this).not('.ui-draggable-dragging')) {
+            $('ul.cart').append(li_get(liID, liName, liPath, liValue));
+            $('.tooltip_link').tooltip({container:'body', placement:'top', 'delay': { show: 500, hide: 500 }});
+        }
+    }
+
+    /* Create the <li> structure required for this page.
+     - idCounter unique id allows jQuery validation to know which sweep to display the validation error messages in.
+     */
+    function li_get(liID, liName, liPath, liValue) {
+        liDisplay = liPath.replace('null/', '').replace(/\/$/, '').replace(/\//g, ' > ').replace('Model Configuration (config.json)', 'config');
+        liDisplay = liDisplay.replace('Intervention Configuration (campaign.json)', 'campaign').replace('Events_', 'Events > ');
+        {% comment %} #3563 - display field's range{% endcomment %}
+        var my_dict = get_range(liName, liPath); // || '';
+        var range = my_dict.range;
+        var description = my_dict.description;
+        my_li = '<li style="line-height: 10px; padding-top:5px;">'
+        if (description != "") {
+            my_li = my_li + '<span class="tooltip_link" href="" data-original-title="' + description +
+                '" data-toggle="tooltip"><i class="icon-info-sign"></i></span>';
+        }
+        my_li = my_li + liName + '<br/><br/>' + '<em style="font-size:0.7em; line-height: 10px;">' + liDisplay + '</em>'
+                + '<br/><br/><em style="font-size:0.9em;">Values '
+                + '<input value="' + liValue + '" type="text" name="sweep-values" id="' + idCounter++ + '" required>'
+                + '<button class="btn-small delete" title="Remove this Sweep"><i class="icon-remove"></i></button>'
+                + '<input type="hidden" name="sweep-sweeps" value="' + liID + ':' + liName + ':' + liPath + '"/>'
+                + '&nbsp;&nbsp;<em id="range_display" style="font-size:0.9em; font-style:italic;">' + range + '</em></li>';
+        return my_li;
+    }
+
+    // add validation to require values for any selected sweeps
+    $(document).ready(function () {
+        $("#sweepForm").validate({
+            rules: {
+                "sweep-values": {
+                    required: true
+                }
+            }
+        });
+    });
+
+    function get_range(name, path) {
+        //return 'Range 0.00 to 100';
+        if (!name) {
+            return false;
+        }
+
+        var results = {};
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "{% url 'ts_emod_get_range_from_schema' %}",
+            data: { name: name, path: path }
+            }).done(function( text ) {
+                results = JSON.parse(text);
+        });
+        return results;
+    }
+
+    $('#launch').click(function () {
+        var input = $("<input>")
+                   .attr("type", "hidden")
+                   .attr("name", "launch").val('1');
+        $('#sweepForm').append($(input));
+    });
+
+  </script>
+{% endblock %}
+{% endblock %}

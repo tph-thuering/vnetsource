@@ -1,0 +1,147 @@
+{% extends "datawarehouse/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 3/15/2015
+# Institution: University of Notre Dame
+# Primary Authors:
+# Anna Alber
+#  <aalber1@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load prettyLookups %}
+{% load mathTags %}
+{% block page_title %}
+    Data Warehouse: Look Up Tables
+{% endblock %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="/static/datawarehouse/DataTables/media/css/demo_table.css" />
+    <link rel="stylesheet" type="text/css" href="/static/datawarehouse/TableTools/media/css/TableTools.css" />
+    <link rel="stylesheet" type="text/css" href="/static/datawarehouse/css/dataTablesBootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/static/datawarehouse/css/luresults.css" />
+     <link rel="stylesheet" type="text/css" href="/static/datawarehouse/css/form.css">
+    <link rel="stylesheet" type="text/css" href="/static/datawarehouse/css/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/static/datawarehouse/css/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/static/datawarehouse/css/easyui/demo/demo.css">
+
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="/static/datawarehouse/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/static/datawarehouse/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+
+    function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    crossDomain: false, // obviates need for sameOrigin test
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type)) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/datawarehouse">Data Warehouse Browser</a><span class="divider">/</span></li>
+            <li class="active">Lookup Tables</li>
+        </ul>
+
+        <img src="/static/datawarehouse/img/ajax-loader.gif" id="loading-indicator" style="display:none;" />
+               <img src="{{STATIC_URL}}datawarehouse/img/ajax-loader.gif" id="loading-indicator" style="display:none;" />
+        <div class="tabbed_panel">
+            <ul>
+                 <li>
+                    <a href="/datawarehouse/alltables?tablename=LutSpecies" >Species Bionomics</a>
+                    </li>
+                    <li>
+                     <a href="/datawarehouse/alltables?tablename=LutEntomologicalEndpoint" >Entomological Parameters</a>
+                     </li>
+
+            {% comment %}    {% if user.is_authenticated == True %}{% endcomment %}
+                    <li>
+                    <a href="/datawarehouse/alltables?LutInterventionIrsCoveragesAdmin1">IRS Coverage in Africa</a>
+                    </li>
+                    <li>
+                    <a href="/datawarehouse/alltables?tablename=LutInterventionItnCoveragesAdmin1">ITN Coveraga in Africa</a>
+
+                    </li>
+
+              {% comment %}   {% endif %}{% endcomment %}
+             <li>
+                    <a href="/datawarehouse/lookuptable" >Vector Species Parameters</a>
+                    </li>
+                    <li>
+                     <a href="/datawarehouse/simpleparam" >Representative Workflow Parameters</a>
+                     </li>
+
+            </ul>
+            <div class="tab-content">
+                {% for key, value in results.iteritems %}
+                <div class="tab-pane" id='{{key}}'>
+                    <h1>{{key|prettyModelName}}</h1>
+                    <label><div class="toggleTitle" btn btn-link>Hide/Show Column Selection </div></label>
+                    <label> <input type="checkbox" id='{{ key|add:"checkAll" }}' class="checkAll" /> Select/Deselect All Columns</label>
+
+                    <div id='{{key|add:"toggleButtons"}}' class="toggleButtons">
+                        <hr />
+                    </div>
+
+                    <table id='{{key|add:"Table"}}' class="lookuptable table table-striped"></table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>  <h3> Representative Workflow Parameters</h3>
+
+                    <table class="easyui-datagrid" id="box-table" style="width:900px;height:800px;" title="{{ title }}"
+                            url="{{ url }}"
+                           pageSize="20"
+
+                           fitColumns="true" rownumbers="true"
+                           pagination="true">
+
+
+                        <thead>
+                        <tr>
+                            {% for theField in fields %}
+
+                                <th field="{{ theField }}" width="40" sortable="true"><a href="#">{{ theField }}</a>
+                                                </th>
+
+
+
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+
+
+    </div>
+
+{% endblock %}

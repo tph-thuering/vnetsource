@@ -1,0 +1,32 @@
+/* Prevent extra padding narrowing well contents in accordions. */
+.accordion-inner
+{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+/* Changes the shadow and text color of the tooltips. */
+.tooltip-inner
+{
+    color: #4d4d4d;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* This makes the arrows of tooltips not black. */
+.tooltip.top .tooltip-arrow
+{
+    border-top:5px
+    solid #ebebeb;
+}
+
+/* This is for striping div rows */
+.gray-row
+{
+    background-color: #e8e8e8;
+}
+
+/* This is for striping table rows */
+.table-striped tr:nth-child(even)
+{
+    background-color: #e8e8e8;
+}

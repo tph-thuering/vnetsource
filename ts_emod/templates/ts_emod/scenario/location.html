@@ -1,0 +1,276 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/07/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title_local %}Select Location{% endblock %}
+
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/browse.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block breadcrumb %} Select Location {% endblock %}
+{% block step_title %} Select Location {% endblock %}
+{% block page_content %}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+        var locations = {'Binh Long, Vietnam': ['#A', [11.671814, 106.577050]],
+                         'Kisumu, Kenya': ['#B', [-0.090594, 34.767080]],
+                         'Honiara, Solomon Islands': ['#C', [-9.435697, 159.952862]],
+                         'Bougainville Island, Papua New Guinea': ['#E', [-6.2444, 155.3839]],
+                         'Tororo, Uganda': ['#D', [0.692894, 34.180527]]};
+        var lowestLatitude = 300; // These are just values that will be trumped by real values. Any latitude will be
+        var lowestLongitude = 300; // more than -90 and less than 90 and any longitude will be more than -180 and
+        var highestLatitude = -300; // less than 180. These are just arbitrary choices outside of the bounds.
+        var highestLongitude = -300;
+
+        function fillMap()
+        {
+            var latLong;
+            var mapOptions = {};
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var latLongBounds = new google.maps.LatLngBounds();
+
+            for (var locationName in locations)
+            {
+                console.log(locations[locationName][0]);
+                latLong = new google.maps.LatLng(locations[locationName][1][0], locations[locationName][1][1]);
+
+                var marker = new google.maps.Marker
+                ({
+                    position: latLong,
+                    map: map,
+                    title: locationName,
+                    url: locations[locationName][0]
+                });
+
+                google.maps.event.addListener(marker, 'click', function()
+                {
+                    window.location.href = this.url;
+                });
+
+                latLongBounds.extend(latLong);
+            }
+
+            map.fitBounds(latLongBounds);
+        }
+
+        google.maps.event.addDomListener(window, 'load', fillMap);
+    </script>
+
+    <div id="location_browser">
+
+        <p>Selecting a <i>Location</i> provides default values for EMOD parameters, including weather and
+            demographics files. You can change input parameters later.</p>
+
+        <div class="well page-well location">
+        <form action="" method="post" id="wizard">{% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.location.errors %}
+                <li class="errorlist"><h4><i class="icon-warning-sign"></i><strong> Please select a location before proceeding.</strong></h4></li>
+            {% endif %}
+
+        <div id="map-canvas" style="width: 100%; height: 359px; margin: 0px; padding: 0px"></div>
+        <map name="locations_map">
+            <area shape="circle" coords="359,72,25" title="Vietnam" href="#A">
+            <area shape="circle" coords="169,103,25" title="Kenya" href="#B">
+            <area shape="circle" coords="510,129,25" title="Solomon Islands" href="#C">
+            <area shape="circle" coords="127,119,25" title="Uganda" href="#D">
+        </map>
+        <table class="table table-hover table-striped table-condensed emod-table" id="location_table">
+            <thead>
+                {% if location_count > 10 %}
+                <tr>
+                    <th colspan="3">
+                        <span>
+                            Showing {{ current_start }}-{{ current_stop }} of {{ location_count }}
+                        </span>
+                        <div class="btn-group text-left">
+                            <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-cog"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li><input type="radio" name="limit_size" value="10" {% if pager_size == 10 %}checked="checked"{% endif %} id="limit_10"/> <label for="limit_10">10 Results/Page</label></li>
+                                <li><input type="radio" name="limit_size" value="25" {% if pager_size == 25 %}checked="checked"{% endif %} id="limit_25"/> <label for="limit_25">25 Results/Page</label></li>
+                                <li><input type="radio" name="limit_size" value="50" {% if pager_size == 50 %}checked="checked"{% endif %} id="limit_50"/> <label for="limit_50">50 Results/Page</label></li>
+                                {% if user.is_authenticated %}
+                                    <li class="divider"></li>
+                                    <li><input type="radio" name="limit_group" value="0" {% if pager_group == 0 %}checked="checked"{% endif %} id="limit_none"/> <label for="limit_none">All Run Templatess</label></li>
+                                    <li><input type="radio" name="limit_group" value="1" {% if pager_group == 1 %}checked="checked"{% endif %} id="limit_yours"/> <label for="limit_yours">Created By You</label></li>
+                                    <li><input type="radio" name="limit_group" value="2" {% if pager_group == 2 %}checked="checked"{% endif %} id="limit_others"/> <label for="limit_others">Created By Others</label></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </th>
+                </tr>
+                {% endif %}
+                <tr><th style="width:60%"></th><th style="width:auto;text-align: right;"><!-- Creator --> </th>
+                    <th style="text-align: right;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for template_key, template in templates_a.iteritems %}
+                    <tr onclick='$("#a_{{ forloop.counter }}").attr("checked", "checked");'><a id="A"></a>
+                        <td><h3>A. {{ template.name }} </h3>
+                        {{ template.description }}</td>
+                        <td>
+                            <ul class="nav nav-pills pull-right">
+                                <!-- li><a class="btn-small" href="{% url "ts_emod_template_details" template_key %}" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li-->
+                                <li><a class="btn-small" href="https://www.google.com/maps/place/Binh+Long/@11.6724022,106.5715563,12z/data=!3m1!4b1!4m2!3m1!1s0x3173547226c5d5f1:0x60e3244920c05893" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li>
+                                <li><input class="btn-small" id="a_{{ forloop.counter }}"
+                                           {% if template.value|add:"0" == template_key|add:"0" %}checked="checked"{% endif %}
+                                           {% if template.checked|add:"0" == 1 %}checked="checked"{% endif %}
+                                            name="location-template_id" type=radio form="wizard" value={{ template_key }} title="Select this Location">&nbsp;&nbsp;&nbsp;</li>
+                                {% if  template.created_by == user and not template.is_public %}
+                                    <li><a class="btn-small btn-delete" href="{% url "ts_emod_delete_scenario" location_key %}" title="Delete Run"><i class="icon-trash"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="3" class="error">No predefined locations are available at this time.</td></tr>
+                {% endfor %}
+                {% for template_key, template in templates_b.iteritems %}
+                    <tr onclick='$("#b_{{ forloop.counter }}").attr("checked", "checked");'>
+                        <td><a id="B"></a><h3>B{{forloop.counter}}. {{ template.name }}</h3>
+                        {{ template.description }}</td>
+                        <td>
+                            <ul class="nav nav-pills pull-right">
+                                <!-- li><a class="btn-small" href="{% url "ts_emod_template_details" template_key %}" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li-->
+                                <li><a class="btn-small" href="https://www.google.com/maps/@-0.5984522,34.5590405,70947m/data=!3m1!1e3" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li>
+                                <li><input class="btn-small" id="b_{{ forloop.counter }}"
+                                           {% if template.value|add:"0" == template_key|add:"0" %}checked="checked"{% endif %}
+                                           {% if template.checked|add:"0" == 1 %}checked="checked"{% endif %}
+                                            name="location-template_id" type=radio form="wizard" value={{ template_key }} title="Select this Location">&nbsp;&nbsp;&nbsp;</li>
+                                {% if  template.created_by == user and not template.is_public %}
+                                    <li><a class="btn-small btn-delete" href="{% url "ts_emod_delete_scenario" location_key %}" title="Delete Run"><i class="icon-trash"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="3" class="error">No predefined locations are available at this time.</td></tr>
+                {% endfor %}
+                {% for template_key, template in templates_c.iteritems %}
+                    <tr onclick='$("#c_{{ forloop.counter }}").attr("checked", "checked");'>
+                        <td><a id="C"></a><h3>C{{forloop.counter}}. Honiara, Solomon Islands</h3>
+                        {{ template.description }}</td>
+                        <td>
+                            <ul class="nav nav-pills pull-right">
+                                <!-- li><a class="btn-small" href="{% url "ts_emod_template_details" template_key %}" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li-->
+                                <li><a class="btn-small" href="https://www.google.com/maps/@-9.4361203,159.9732901,6289m/data=!3m1!1e3" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li>
+                                <li><input class="btn-small" id="c_{{ forloop.counter }}"
+                                           {% if template.value|add:"0" == template_key|add:"0" %}checked="checked"{% endif %}
+                                           {% if template.checked|add:"0" == 1 %}checked="checked"{% endif %}
+                                            name="location-template_id" type=radio form="wizard" value={{ template_key }} title="Select this Location">&nbsp;&nbsp;&nbsp;</li>
+                                {% if  template.created_by == user and not template.is_public %}
+                                    <li><a class="btn-small btn-delete" href="{% url "ts_emod_delete_scenario" location_key %}" title="Delete Run"><i class="icon-trash"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="3" class="error">No predefined locations are available at this time.</td></tr>
+                {% endfor %}
+                {% for template_key, template in templates_d.iteritems %}
+                    {% if 'Uganda' in template.name %}
+                    <tr onclick='$("#d_{{ forloop.counter }}").attr("checked", "checked");'>
+                        <td><h3><a id="D"></a>D. {{ template.name }} </h3>
+                        {{ template.description }}</td>
+                        <td>
+                            <ul class="nav nav-pills pull-right">
+                                <!-- li><a class="btn-small" href="{% url "ts_emod_template_details" template_key %}" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li-->
+                                <li><a class="btn-small" href="https://www.google.com/maps/place/Tororo,+Uganda/@0.7418145,34.0928915,11z/data=!3m1!4b1!4m2!3m1!1s0x177f3d0f48868f1f:0x8a9df6f2f76ad3af" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li>
+                                <li><input class="btn-small" id="d_{{ forloop.counter }}"
+                                           {% if template.value|add:"0" == template_key|add:"0" %}checked="checked"{% endif %}
+                                           {% if template.checked|add:"0" == 1 %}checked="checked"{% endif %}
+                                            name="location-template_id" type=radio form="wizard" value={{ template_key }} title="Select this Location">&nbsp;&nbsp;&nbsp;</li>
+                                {% if  template.created_by == user and not template.is_public %}
+                                    <li><a class="btn-small btn-delete" href="{% url "ts_emod_delete_scenario" location_key %}" title="Delete Run"><i class="icon-trash"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% empty %}
+                    <tr><td colspan="3" class="error">No predefined locations are available at this time.</td></tr>
+                {% endfor %}
+                {% for template_key, template in templates_e.iteritems %}
+                    {% if 'Bougainville' in template.name %}
+                    <tr onclick='$("#e_{{ forloop.counter }}").attr("checked", "checked");'>
+                        <td><h3><a id="E"></a>E. {{ template.name }} </h3>
+                        {{ template.description }}</td>
+                        <td>
+                            <ul class="nav nav-pills pull-right">
+                                <!-- li><a class="btn-small" href="{% url "ts_emod_template_details" template_key %}" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li-->
+                                <li><a class="btn-small" href="https://www.google.com/maps/place/Bougainville+Island,+Papua+New+Guinea/@-6.1137865,155.2786258,10z/data=!4m2!3m1!1s0x68cedd368a18f199:0x99cab5ed068067c" data-toggle="tooltip" title="Location Details"><i class="icon-eye-open icon-2x"></i></a></li>
+                                <li><input class="btn-small" id="e_{{ forloop.counter }}"
+                                           {% if template.value|add:"0" == template_key|add:"0" %}checked="checked"{% endif %}
+                                           {% if template.checked|add:"0" == 1 %}checked="checked"{% endif %}
+                                            name="location-template_id" type=radio form="wizard" value={{ template_key }} title="Select this Location">&nbsp;&nbsp;&nbsp;</li>
+                                {% if  template.created_by == user and not template.is_public %}
+                                    <li><a class="btn-small btn-delete" href="{% url "ts_emod_delete_scenario" location_key %}" title="Delete Run"><i class="icon-trash"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% empty %}
+                    <tr><td colspan="3" class="error">No predefined locations are available at this time.</td></tr>
+                {% endfor %}
+            </tbody>
+            {% comment %}
+            removing the table footer if there isn't a need for paging
+            {% endcomment %}
+            {% if location_count > 10 %}
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <form method="post" action="{% url "ts_emod_scenario_browse" %}" id="pager_form">
+                            <div class="pagination pagination-small pagination-centered" id="pager">
+                                {% csrf_token %}
+                                <div style="display:none;">
+                                    <input type="hidden" value="{{ pager_size }}" id="pager_size" name="pager_size" />
+                                    <input type="hidden" value="{{ pager_offset }}" id="pager_offset" name="pager_offset"/>
+                                    <input type="hidden" value="{{ pager_group }}" id="pager_group" name="pager_group"/>
+                                </div>
+                                <ul id="pager_list">
+                                    {% if pager_max >= 2 %}
+                                        <li {% if pager_offset < 1 %}class="disabled"{% endif %}><a href="#" id="pager_previous" {% if pager_offset >= 1 %}onclick="goToPage({{ pager_offset|add:"-1" }})"{% endif %}>Prev</a></li>
+                                        {% for item in pager_count %}
+                                            <li {% if pager_offset == forloop.counter0 %}class="active"{% endif %}><a href="#" id="pager_{{ forloop.counter }}" onclick="goToPage({{ forloop.counter0 }})">{{ forloop.counter }}</a></li>
+                                        {% endfor %}
+                                        <li {% if pager_offset == pager_max|add:"-1" %}class="disabled"{% endif %}><a href="#"  id="pager_next" {% if pager_offset < pager_max|add:"-1" %}onclick="goToPage({{ pager_offset|add:"1" }})"{% endif %}>Next</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tfoot>
+            {% endif %}
+        </table>
+        <div class="form-actions" id="actions_form">
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn"><i class="icon-arrow-left"></i> Previous Step</button>
+            {% endif %}
+            <button type="submit" class="right btn">Next Step <i class="icon-arrow-right"></i></button>
+        </div>
+    </form>
+    </div>
+    </div>
+<script>
+    function goBack() { window.history.back(); }
+</script>
+{% endblock %}

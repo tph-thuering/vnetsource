@@ -1,0 +1,40 @@
+{% extends "ts_om/utilities.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Alexander Vyushkov <Alexander.Vyushkov@nd.edu>
+#   Nicolas Reed <nreed4@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block extra_local_css %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{{ STATIC_URL }}ts_om/css/summary.css">
+{% endblock %}
+
+{% block extra_js_ts %}
+	{{ block.super }}
+  <script src="{{ STATIC_URL }}ts_om/js/popovers_tooltips.js"></script>
+  <script src="{{ STATIC_URL }}ts_om/js/summary.js"></script>
+{% endblock %}
+
+{% block header_content %}
+	<h3>Submit your XML scenario</h3>
+
+{% endblock %}
+
+{% block right_content %}
+    <p> Copy-paste your XML to the form below and submit it.
+    New simulation in <a href="{% url "ts_om.list" %}">My Simulations</a> will be created.
+    </p>
+  <form action="" method="post">{% csrf_token %}
+  {{ form }}
+  	      <div class="form-actions">
+	        <button class="btn btn-primary" id="nextPage" type="submit">Submit</button>
+		    </div>
+  </form>
+{% endblock %}

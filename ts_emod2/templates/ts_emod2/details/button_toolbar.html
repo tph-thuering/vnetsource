@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="btn-group pull-right">
+        <a class="btn btn-small" data-toggle="tooltip" onclick="copy()"
+            title="Make a copy of this simulation">
+            <i class="icon-copy"></i> Copy Simulation
+        </a>
+
+        {% if scenario.is_representative %}
+            <a class="btn btn-small" href="{% url 'ts_repr.determine_view' scenario.id %}"
+                data-toggle="tooltip" title="Edit scenario">
+                <i class="icon-edit"></i> Edit Simulation
+            </a>
+        {% else %}
+            <a class="btn btn-small {% if not scenario.has_required_files or not has_results %}btn-target{% endif %}"
+                href="{% url 'ts_edit_step' 'config' scenario.id %}"
+                data-toggle="tooltip" title="Edit simulation">
+                <i class="icon-edit"></i> Edit Simulation
+            </a>
+        {% endif %}
+
+        <a class="btn btn-small scenario_button tooltip_link {% if scenario.is_approved and not campaign %}btn-target{% endif %}"
+            href="{% url 'ts_emod2.intervention2' scenario.id %}"
+            data-original-title="Add/Edit Interventions (Configure campaign file)">
+            <i class="icon-beaker"></i>
+            {% if has_interventions %} Edit {% else %} Add {% endif %}Interventions
+        </a>
+
+        <a class="btn btn-small scenario_button tooltip_link"
+            href="{% url 'ts_sweep_tool_step' 'sweep' scenario.id %}"
+            data-original-title="Add/Edit Sweeps">
+            <i class="icon-sort-by-attributes icon-rotate-270"></i>
+            {% if has_sweep %} Edit {% else %} Add {% endif %}Sweeps
+        </a>
+
+        <a class="btn btn-small scenario_button tooltip_link"
+            {% if not scenario %}disabled{% endif %}  {# This needs a real condition. Needs to check readiness #}
+            href="{% url 'ts_emod2.launch' scenario.id %}"
+            data-original-title="Run this simulation with current settings.">
+            <i class="icon-play"></i> Launch Simulation
+        </a>
+
+        {% if scenario.is_public == False %}
+            <a class="btn btn-small" href="{% url 'ts_emod2.publicize_scenario' scenario.id %}"
+                data-toggle="tooltip" title="Promote to public">
+                <i class="icon-cloud-upload"></i> Make Simulation Public
+            </a>
+        {% else %}
+            <a class="btn btn-small" href="{% url 'ts_emod2.privatize_scenario' scenario.id %}"
+                data-toggle="tooltip" title="Demote to private">
+                <i class="icon-cloud-download"></i> Make Simulation Private
+            </a>
+        {% endif %}
+    </div>
+</div>

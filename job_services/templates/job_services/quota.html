@@ -1,0 +1,8 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% block main_content %}
+    <form action="" method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Set Quota" />
+    </form>
+{% endblock %}

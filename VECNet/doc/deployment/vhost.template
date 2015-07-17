@@ -1,0 +1,56 @@
+# Redirect to https
+<VirtualHost *:80>
+  ServerName $vhost
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}?%{QUERY_STRING}
+</VirtualHost>
+
+<VirtualHost *:443>
+  ServerAdmin avyushko@nd.edu
+  ServerName $vhost
+  CustomLog /var/log/httpd/$vhost.access.log combined
+  ErrorLog /var/log/httpd/$vhost.error.log
+
+  #TKTAuthPublicKey /etc/httpd/conf/sso/tkt_pubkey_dsa.pem
+
+  DocumentRoot "/opt/vecnetsource/web/$vhost/"
+  Alias /static/ /opt/vecnetsource/web/$vhost/VECNet/static/
+  <Directory /opt/vecnetsource/web/$vhost/VECNet/static/ >
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+  <Directory "/opt/vecnetsource/web/$vhost/">
+    Options Includes FollowSymLinks
+    AllowOverride all
+    Order allow,deny
+    Allow from all
+
+    #AuthType mod_auth_pubtkt
+    #TKTAuthDebug 1
+    #TKTAuthLoginURL http://www.vecnet.org/index.php/sso-login
+    #TKTAuthTimeoutURL http://www.vecnet.org/index.php/sso-login
+    #TKTAuthUnauthURL http://www.vecnet.org/index.php/sso-login
+    #TKTAuthToken "people"
+    #require valid-user
+  </Directory>
+  WSGIDaemonProcess $venv  python-path=/opt/vecnetsource/web/$vhost/:/opt/vecnetsource/venv/$venv/lib/python2.7/site-packages:/opt/python2.7/lib/python2.7/ home=/opt/vecnetsource/web/$vhost/  display-name=$venv
+  WSGIProcessGroup $venv
+  WSGIScriptAlias / /opt/vecnetsource/web/$vhost/VECNet/wsgi.py
+
+  <Directory "/var/www/icons">
+    Options Indexes MultiViews FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  SSLEngine on
+  SSLProtocol all -SSLv2
+  SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM:+LOW
+  SSLCertificateFile /etc/pki/tls/certs/20130704.$vhost.crt
+  SSLCertificateKeyFile /etc/pki/tls/private/$vhost.key
+  SSLCertificateChainFile /etc/pki/tls/certs/commodo_int.cer
+
+</VirtualHost>

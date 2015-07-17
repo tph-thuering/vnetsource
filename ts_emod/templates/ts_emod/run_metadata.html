@@ -1,0 +1,157 @@
+{% extends "ts_emod/index.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 12/18/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load custom_filters %}
+
+{% block page_title %}
+    Simulation Run MetaData
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/ts2.css" />
+    <style>
+        a.btn-small{font-weight: normal;}
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block page_content %}
+    {% if edit == True %}
+        <form method="post" id="metadata" name="metadata" action="">
+        {% csrf_token %}
+    {% endif %}
+    <div id="metadata_details" {% if edit == True %}class="well" {% endif %}>
+        {% comment %}
+        <ul class="breadcrumb">
+                <li class="active">{% if edit == True %}Edit {% endif %}Simulation Run Metadata</li>
+        </ul>
+        {% endcomment %}
+        <h3>
+            {% if edit == True %}Edit {% endif %}Simulation Run MetaData
+
+            <div class="btn-group pull-right">
+                <a class="btn btn-small" onclick="goBack(); return false;" href="#" data-toggle="tooltip" title="Back to previous page"><i class="icon-arrow-left"></i> Back</a>
+                {% if edit == True %}
+                    <button class="btn btn-small" type="submit"><i class="icon-save"></i> Save</button>
+                {% else %}
+                    {% if metaData.username|safe == user|safe %}
+                        <a class="btn btn-small" href="{% url 'ts_emod_run_metadata_details' metaData.dimRun.id  'edit' %}" data-toggle="tooltip" title="Edit the metadata for this run"><i class="icon-edit"></i> Edit</a>
+                        <a disabled class="btn btn-small btn-delete" href="#" data-toggle="tooltip" title="Delete Metadata"><i class="icon-trash"></i> Delete</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </h3>
+        <a href="{% url "datawarehouse_metadata" metaData.dimRun.id %}"> Record in machine-readable format (JSON) </a>
+
+        <style>
+             div.row:nth-child(even) { background-color: #f4f4f4; }
+        </style>
+        <div class="row">
+            <div class="span1"><strong>ID</strong></div>
+            <div class="span4">{{ metaData.dimRun.id }}</div>
+            <div class="span3">{% if edit == True %}
+                <input id="is_public" name="is_public" type=checkbox {% if metaData.is_public == 'on' %}checked{% endif %}></input>&nbsp;&nbsp;MetaData is Public
+            {% else %}
+{#                Commented out for Natalie's demo in January 2015 - Alex#}
+{#                {% if metaData.is_public == 'on' %} <i class="icon-check" style="color: green;"></i>&nbsp;&nbsp;MetaData is Public{% else %}MetaData is <span style="color: red;">Not</span> Public{% endif %}#}
+            {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="span1"><strong>Name</strong></div>
+            <div class="span7">{{ metaData.autoname }}</div>
+        </div>
+        <div class="row">
+            <div class="span1"><strong>Title</strong></div>
+            <div class="span7">{% if edit == True %}<input id="title" name="title" type="text" value="{{ metaData.title }}">{% else %}{{ metaData.title }}{% endif %}</div>
+        </div>
+        <div class="row">
+            <div class="span1"><strong>Creator</strong></div>
+            <div class="span7">{{ metaData.creator }}</div>
+        </div>
+        <div class="row">
+            <div class="span1"><strong>Cite as</strong></div>
+            <div class="span7">{% if edit == True %}<textarea id="citation" name="citation" type="text">{{ metaData.citation }}</textarea>{% else %}{{ metaData.citation|linebreaks }}{% endif %}</div>
+        </div>
+        <div class="row">
+            <div class="span1"><strong>URL</strong></div>
+            <div class="span7"><a href="{{ metaData.results_url }}">{{ metaData.results_url }}</a></div>
+        </div>
+        <div class="row">
+            <div class="span1"><strong>Location</strong></div>
+            <div class="span7">{{ metaData.location }} &nbsp;&nbsp;&nbsp;<strong>Latitude, Longitude</strong> &nbsp; {{ metaData.coordinates.latitude|floatformat:4 }}, {{ metaData.coordinates.longitude|floatformat:4 }}</div>
+        </div>
+        <div class="row">
+            <div class="span3"><strong>Time Period of Simulation</strong></div>
+            <div class="span5">{{ metaData.time_period.0 }} - {{ metaData.time_period.1 }}</div>
+        </div>
+        <div class="row"><div class="span8">&nbsp;</div></div>
+        <div class="row">
+            <div class="span1"><strong>Description</strong></div>
+            <div class="span7"></div>
+        </div>
+        <div class="row">
+            <div class="span1"></div>
+            <div class="span7">{% if edit == True %}<textarea id="description" name="description">{{ metaData.description }}</textarea>{% else %}{{ metaData.description|linebreaks }}{% endif %}</div>
+        </div>
+        <div class="row"><div class="span8">&nbsp;</div></div>
+        <div class="row">
+            <div class="span1"><strong>Species</strong></div>
+            <div class="span7"><i>{{ metaData.species|unordered_list }}</i></div>
+        </div>
+        <div class="row">
+            <div class="span2"><strong>Interventions</strong></div>
+            <div class="span6">{% comment %}{% if edit == True %}<input id="interventions" name="interventions" type="text" value="{{ metaData.interventions }}">{% else %}{% endcomment %}
+                {{ metaData.interventions_set|unordered_list }}{% comment %}{% endif %}{% endcomment %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="span3"><strong>Parameters of Interest</strong></div>
+            <div class="span5">{% if edit == True %}<input id="parameters_of_interest" name="parameters_of_interest" tags="parameters" type="text" value="{{ metaData.parameters_of_interest }}">{% else %}{{ metaData.parameters_of_interest }}{% endif %}</div>
+        </div>
+        <div class="row">
+            <div class="span1"><strong>Tags</strong></div>
+            <div class="span7">
+                {% if edit == True %}<input id="tags" name="tags" type="text" value="{{ metaData.tags }}">{% else %}{{ metaData.tags }}{% endif %}
+            </div>
+        </div>
+    {% comment %}
+        <br/><br/>
+        <div class="row">
+            <div class="span3"><strong>NLM Subject Headings</strong></div>
+            <div class="span5"> </div>
+        </div>
+    {% endcomment %}
+        <div class="row"><div class="span8">&nbsp;</div></div>
+        <div class="row">
+            <div class="span1"><strong>Model</strong></div>
+            <div class="span7">{{ metaData.model_version }}, {{ metaData.simulation_type }}</div>
+        </div>
+        <div class="row">
+            <div class="span1"><strong>RunDate</strong></div>
+            <div class="span7">{{ metaData.run_date}}</div>
+        </div>
+        <div class="row">
+            <div class="span3"><strong>MetaDataLast Updated</strong></div>
+            <div class="span5">{{ metaData.metadata_last_update_date }}</div>
+        </div>
+        <br/><br/>
+        {% if edit == True %}<button class="btn btn-small" type="submit"><i class="icon-save"></i> Save</button>{% endif %}
+    </div>
+    {% if edit == True %}</form>{% endif %}
+    <script>
+        function goBack() { window.history.back(); }
+    </script>
+{% endblock %}

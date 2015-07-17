@@ -1,0 +1,112 @@
+{# Name values are intervention-prefix-__prefix__-field_name where intervention-prefix is the prefix for the #}
+{# intervention, and field_name is the name of the field in the form that the intervention is associated with. #}
+{# Example: human-host-seeking-trap-__prefix__-cost_to_consumer #}
+
+<div class="row">
+    {# Start Day #}
+    <div class="span1">
+        <em style="font-size:0.8em;">
+            <span style="position: absolute; margin-top: -5px;">
+                {{ form.start_day.label }}:
+            </span>
+        </em>
+    </div>
+
+    <div class="span1">
+        <span class="small_input" style="position: relative; margin-left: -25px; white-space: nowrap">
+            {{ form.start_day }}
+        </span>
+    </div>
+
+    {# Max Distributions #}
+    <div class="span2">
+        <span style="position: absolute; margin-top: -5px;">
+            <input type="checkbox" id="id_{{ prefix }}-{{ index }}-distributions-checkbox"
+                onclick="toggle_disabled_and_set_empty('id_{{ prefix }}-{{ index }}-max_number_of_distributions');"
+                {% if form.max_number_of_distributions.value != -1 and form.max_number_of_distributions.value != 0 %} checked {% endif %}
+            />
+            <em style="font-size:0.8em;">
+                {{ form.max_number_of_distributions.label }}:
+            </em>
+        </span>
+    </div>
+
+    <div class="span1">
+        <span class="small_input" style="position: relative; margin-left: 8px; white-space: nowrap">
+            <input type="text" id="{{ form.max_number_of_distributions.auto_id }}"
+                name="{{ form.max_number_of_distributions.html_name }}"
+                {# If there is a valid value here, use it. Otherwise don't show anything. #}
+                {% if form.max_number_of_distributions.value != -1 and form.max_number_of_distributions.value != 0 %}
+                    value="{{ form.max_number_of_distributions.value }}"
+                {% endif %}
+                {% if form.max_number_of_distributions.value == -1 or form.max_number_of_distributions.value == 0 %} disabled {% endif %}
+            />
+        </span>
+    </div>
+
+    {# Demographic Coverage #}
+    <div class="span2">
+        <em style="font-size:0.8em;">
+            <span style="position: absolute; margin-top: -5px;">
+                {{ form.demographic_coverage.label }} (%):
+            </span>
+        </em>
+    </div>
+
+    <div class="span1">
+        <span class="small_input" style="position: relative; margin-left: -13px; white-space: nowrap">
+            {{ form.demographic_coverage }}
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    {# Number Repetitions #}
+    <div class="span2">
+        <span style="position: absolute; margin-top: -5px;">
+            <input type="checkbox" id="id_{{ prefix }}-{{ index }}-repetitions-checkbox"
+                onclick="toggle_disabled_and_set_empty('id_{{ prefix }}-{{ index }}-number_of_repetitions');
+                         toggle_disabled_and_set_empty('id_{{ prefix }}-{{ index }}-timesteps_between_repetitions');"
+                {% if form.number_of_repetitions.value != -1 and form.number_of_repetitions.value != 0 %} checked {% endif %}
+            />
+            <em style="font-size:0.8em;">
+                {{ form.number_of_repetitions.label }}:
+            </em>
+        </span>
+    </div>
+
+    <div class="span1">
+        <span class="small_input" style="position: relative; margin-left: -23px; white-space: nowrap">
+            <input type="text" id="{{ form.number_of_repetitions.auto_id }}"
+                name="{{ form.number_of_repetitions.html_name }}"
+                {# If there is a valid value here, use it. Otherwise don't show anything. #}
+                {% if form.number_of_repetitions.value != -1 and form.number_of_repetitions.value != 0 %}
+                    value="{{ form.number_of_repetitions.value }}"
+                {% endif %}
+                {% if form.number_of_repetitions.value == -1 or form.number_of_repetitions.value == 0 %} disabled {% endif %}
+            />
+        </span>
+    </div>
+
+    {# Timesteps Between Repetitions #}
+    <div class="span2">
+        <em style="font-size:0.8em;">
+            <span style="position: absolute; margin-top: -5px;">
+                {{ form.timesteps_between_repetitions.label }}:
+            </span>
+        </em>
+    </div>
+
+    <div class="span1">
+        <span class="small_input" style="position: relative; margin-left: 3px; white-space: nowrap">
+            <input type="text" id="{{ form.timesteps_between_repetitions.auto_id }}"
+                name="{{ form.timesteps_between_repetitions.html_name }}"
+                {# If there is a valid value for number of repetitions, then use timesteps. Otherwise don't show anything. #}
+                {% if form.number_of_repetitions.value != -1 and form.number_of_repetitions.value != 0 %}
+                    value="{{ form.timesteps_between_repetitions.value }}"
+                {% endif %}
+                {% if form.number_of_repetitions.value == -1 or form.number_of_repetitions.value == 0 %} disabled {% endif %}
+            />
+        </span>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+{% extends "ts_get_started/base.html" %}
+{% load staticfiles %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_get_started/style.css' %}" />
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_index' %}">Get Started</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_modeling1' %}">Modeling Transmission at one site</a></li>
+    > Modeling Representative Scenarios
+</ul>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            Modeling Representative Scenarios
+        </span>
+    </div>
+
+    <div class="boxTextBig">
+        Steps:<br>
+    </div>
+
+    <div class="boxText">
+        1.  Choose the model<br>
+        2.  Create a baseline model by selecting the characteristics of the weather, vectors and intensity of transmission<br>
+        3.  Define the characteristics of the intervention to be applied<br>
+        4.  Visualize the impact on entomological, parasitological, and clinical outcomes<br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span2" style="float: left; padding-left: 250px">
+        <form action='{% url "ts.index" %}'>
+            <button class="btn">Go back to TS homepage</button>
+        </form>
+    </div>
+    <div class="span2" style="float: right; padding-right: 250px">
+        <form action='{% url "ts_get_started_modeling3" %}'>
+            <button class="btn">Choose a model</button>
+        </form>
+    </div>
+</div>
+{%  endblock %}

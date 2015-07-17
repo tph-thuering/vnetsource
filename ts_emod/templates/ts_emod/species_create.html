@@ -1,0 +1,150 @@
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 6/18/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Benoit Raybaud <braybaud@nd.edu>
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+<script>
+    var templates = new Object;
+
+    var select = document.getElementById("template_select");
+	select.options[select.options.length] = new Option('Default Species Settings');
+
+    var templates = new Object;
+
+    /* loop through templates provided */
+    {% for template in species_templates %}
+        /* add template to options list */
+        select.options[select.options.length] = new Option('{{ template }}');
+
+        /* save settings to JS */
+        templates['{{ template }}'] = "{{ template.settings|safe }}";
+
+        //alert(templates['{{ template }}']);
+    {% endfor %}
+
+$(function () {
+    /* Enable tooltips */
+    $('.tooltip_link').tooltip({container:'#addNewModal', placement:'top'});
+});
+
+function populate_form() {
+    //document.getElementsByName('json_Acquire_Modifier')[0].value = document.getElementById('template_select').value;
+    /* Loop through all the values for the selected species and set each field to that value: */
+    var settings = templates[document.getElementById('template_select').value].replace('[', '').replace(']', '').split(',')
+    for (i in settings) {
+        var item = settings[i].split("/").pop().replace("'",'');
+        var k = item.split('=');
+        var v = k.pop();
+        document.getElementsByName('json_'+k)[0].value = v;
+    }
+
+}
+
+</script>
+
+<form action="{% url 'ts_emod_species_save' %}" method="post" id="save">{% csrf_token %}
+        <div class="modal-body2">
+            <h4>1. Select a template</h4>
+            <select id="template_select" onchange="populate_form()"></select>
+            <h4>2. Name your vector</h4>
+            <input type="text" id="data-my_name" name="my_name" required/>
+
+            <h4>3. Set its behavior</h4>
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#list" data-toggle="tab">List view</a></li>
+                <li><a href="#picture" data-toggle="tab">Picture view</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="list" style="align: center;">
+                    <div style="margin-left:4em;"> {{ form }} </div>
+                </div>
+                <div class="tab-pane" id="picture">
+                    <p>You can set parameters everywhere you have a <i class="icon-info-sign"></i> displayed.</p>
+                    <div style="background:url('{{ STATIC_URL }}ts_emod/img/lifecycle.png'); width:545px; height:491px; position:relative; margin:0 auto;" >
+
+                          <span style="position:absolute; right:20px; bottom:200px;" class="label label-success pop" data-toggle="popover" title="Human-related parameters" data-placement="left"
+                                data-content='<label for="infectiousMortality">Infectious Human Feed Mortality Multiplier</label>
+                                              <input type="text" id="infectiousMortality" data-toggle="tooltip" title="Correction factor (dimensionless) used to modify the death rate of mosquitoes when feeding on humans, to account for the increase caused by infections in mosquitoes. Infected mosquitoes have a higher mortality rate while feeding on humans than uninfected mosquitoes." data-placement="left" />
+
+                                              <label for="anthro">Anthropophily</label>
+                                              <input type="text" id="anthro" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <label for="acquiremod">Acquire Modifier</label>
+                                              <input type="text" id="acquiremod" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <label for="trate">Transmission Rate</label>
+                                              <input type="text" id="trate" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <label for="indoor">Indoor Feeding Fraction</label>
+                                              <input type="text" id="indoor" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <label for="daybetweenfeeds">Days Between Feeds</label>
+                                              <input type="text" id="daybetweenfeeds" data-toggle="tooltip" title="Propensity (dimensionless) of the mosquito to feed on humans instead of animals, measured as a fraction of blood meals from human hosts. This propensity is important in differentiating the mosquito species." data-placement="left" />
+
+                                              <script>
+                                                $("input").tooltip({container:"#addNewModal"});
+                                              </script>
+                                               ' >
+                          <i class="icon-info-sign"></i> Human-related
+                          </span>
+
+                        <span style="position:absolute; left:20px; bottom:170px;" class="label label-success pop"  data-toggle="popover" title="Oviposition parameters" data-placement="right"
+                                data-content='<label for="eggbatchsize">Egg batch size</label>
+                                              <input type="text" id="eggbatchsize" data-toggle="tooltip" title="Size of egg batch laid by one female mosquito that has fed successfully." data-placement="right" />
+
+                                              <script>
+                                                $("input").tooltip({container:"#addNewModal"});
+                                              </script>
+                                               ' >
+                          <i class="icon-info-sign"></i> Oviposition
+                          </span>
+
+                        <span style="position:absolute; right:20px; top:70px;" class="label label-success pop"  data-toggle="popover" title="Adult vector parameters" data-placement="left"
+                                data-content='<label for="lifeexp">Adult life expectancy</label>
+                                              <input type="text" id="lifeexp" data-toggle="tooltip" title="Number of days an average mosquito survives. The daily adult mortality rate is 1 / (value of this parameter)." data-placement="left" />
+
+                                              <script>
+                                                $("input").tooltip({container:"#addNewModal"});
+                                              </script>
+                                               ' >
+                          <i class="icon-info-sign"></i> Adult
+                          </span>
+
+                        <span style="position:absolute; left:20px; top:70px;" class="label label-success pop"  data-toggle="popover" title="Larval/Immature parameters" data-placement="right"
+                                data-content='<label for="habitat">Habitat</label>
+                                              <select id="habitat" multiple="multiple"><option>Brackish Swamp</option><option>Water vegetation</option><option>Temporary rainfall</option><option>Constant</option></select>
+
+                                              <label for="rhabitat">Required habitat factor</label>
+                                              <input type="text" id="rhabitat" data-toggle="tooltip" title="An array of factors, one for each habitat specified in the Habitat_Type array, that represent the number of larvae in a 1x1-degree area. The factor multiplicatively scales the resulting weather or population dependent functional form." data-placement="right" />
+
+                                              <label for="aquaticm">Aquatic mortality rate</label>
+                                              <input type="text" id="aquaticm" data-toggle="tooltip" title="Base aquatic mortality per day for the species before adjustment for effects of overpopulation and drying. The rate is locally adjusted for other considerations, including overpopulation and drying out of the aquatic habitat." data-placement="right" />
+
+                                              <label for="immature">Immature duration</label>
+                                              <input type="text" id="immature" data-toggle="tooltip" title="Factor (in days) used to calculate the rate at which immature organisms develop into adult mosquitoes, which equals 1 / (value of this parameter). " data-placement="right" />
+
+                                              <script>
+                                                $("input").tooltip({container:"#addNewModal"});
+                                              </script>
+                                               ' >
+                          <i class="icon-info-sign"></i> Larval/Immature
+                          </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" type="submit">Save and use</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+
+</form>

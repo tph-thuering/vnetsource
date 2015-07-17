@@ -1,0 +1,95 @@
+{% extends "datawarehouse/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/css/etl.css" />
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/js/etl.js"></script>
+{% endblock %}
+
+{% block page_title %}
+    Data Warehouse: ETL
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="well">
+                <p>
+                    {% if step == 'upload' %}
+                    Select a <i>transformed</i> input file to load data from.<br />
+                    {% elif step == 'selectTable' %}
+                    Select a table to load data into.<br />
+                    {% elif step == 'createMap' %}
+                    Map the table columns to the input columns. Foreignkey relationships will be handled automatically.<br />
+                    {% else %}
+                    {% endif %}
+                </p>
+                
+                <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+                    {{ wizard.management_form }}
+                    <table id="uploadTable">
+                        {% for field in wizard.form %}
+                            <tr>
+                                <td>{{ field.label }}</td>
+                                <td>{{ field }}</td>
+                                <td>{{ field.help_text }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    
+                    {% if step == 'createMap'%}
+                    <br />
+                    <div class="leftinput">Input Columns</div>
+                    <div class="rightinput">Database Columns</div>
+                    
+                    <div class="leftinput" id="inputcolumns">
+                        {% for c in inputColumns %}
+                        <div id="{{c}}" class="inputDraggable">{{c}}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="rightinput" id="dbcolumns">
+                        {% for c in tableColumns %}
+                        <div id="{{c}}" class="dbDraggable">{{c}}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="clear"></div>
+                    
+                    <div id="inputDrop" class="leftinput inputdrop"><p>Drop an input column here</p></div>
+                    <div id="dbDrop" class="rightinput inputdrop"><p>Drop a database column here</p></div>
+                    <div class="clear"></div>
+                    <a id="addToMap" class="btn" onclick="addMap('#inputDrop', '#dbDrop')">Add to mapping <i class="icon-plus"></i></a>
+                    <div class="clear"></div>
+                    <div id="fulloutput"></div>
+                    {% endif %}
+                    <div class="clear"></div>
+                    <div class="form-actions">
+                        {% if wizard.steps.prev %}
+                        <button name="wizard_goto_step" class="left btn" type="submit" value="{{ wizard.steps.prev }}"><i class="icon-arrow-left"></i> Previous Step</button>
+                        {% endif %}
+                        {% if wizard.steps.next %}
+                        <button class="right btn" type="submit" value="{{ wizard.steps.next }}">Next Step <i class="icon-arrow-right"></i></button>
+                        {% else %}
+                        <button class="right btn" type="submit" value="{{ wizard.steps.complete }}">Download Mapping File</button>
+                        {% endif %}
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

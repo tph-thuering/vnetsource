@@ -1,0 +1,31 @@
+<div class="tab-pane" id="chart-tab">
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#rainfall-tab">Rainfall</a>
+            </li>
+
+            <li>
+                <a data-toggle="tab" href="#humidity-tab">Humidty</a>
+            </li>
+
+            <li>
+                <a data-toggle="tab" href="#temperature-tab">Temperature</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="rainfall-tab">
+            {% include "lib/charts/single_weather_tab.html" with type='rainfall' %}
+        </div>
+
+        <div class="tab-pane" id="humidity-tab">
+            {% include "lib/charts/single_weather_tab.html" with type='humidity' %}
+        </div>
+
+        <div class="tab-pane" id="temperature-tab">
+            {% include "lib/charts/single_weather_tab.html" with type='temperature' %}
+        </div>
+    </div>
+</div>

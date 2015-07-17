@@ -1,0 +1,44 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Alexander Vyushkov <Alexander.Vyushkov@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load i18n %}
+
+{% block page_title %}
+    VecNet Transmission Simulator
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_om/css/ts2.css" />
+    {% block extra_local_css %}
+    {% endblock %}
+{% endblock %}
+
+
+{% block extra_js %}
+    {% block extra_js_ts %}
+    {% endblock %}
+{% endblock %}
+
+{% block jumbotron_content %}
+    <img src="{{ STATIC_URL }}ts_om/img/icon_ts.png">
+    <h1>Transmission Simulator</h1>
+    <p class="lead">Getting started</p>
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        {% block inner_content %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

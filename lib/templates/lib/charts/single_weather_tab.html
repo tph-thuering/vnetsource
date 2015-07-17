@@ -1,0 +1,32 @@
+<div class="well well-large {% if span == 7 %}span7{% else %}span8{% endif %}">
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#{{ type }}-daily-tab">Daily</a>
+            </li>
+
+            <li>
+                <a data-toggle="tab" href="#{{ type }}-monthly-tab">Monthly</a>
+            </li>
+        </ul>
+
+        {% if no_total_or_average == false %}
+            <div id="{{ type }}-yearly-{% if type == 'rainfall' %}total{% else %}average{% endif %}">
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="{{ type }}-daily-tab">
+            <div class="row">
+                <div class="{% if span == 7 %}span7{% else %}span8{% endif %}" id="{{ type }}-daily-chart"></div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="{{ type }}-monthly-tab">
+            <div class="row">
+                <div class="{% if span == 7 %}span7{% else %}span8{% endif %}" id="{{ type }}-monthly-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>

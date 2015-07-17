@@ -1,0 +1,134 @@
+{% extends "ts_get_started/base.html" %}
+{% load staticfiles %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_get_started/style.css' %}" />
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started.frank.index' %}">Select a model</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started.frank.emod' %}">Select a simulation type</a></li>
+    > Select data type
+</ul>
+
+<br>
+
+<div style="font-size: 35px">
+    Select a data type:<br>
+</div>
+<br>
+<br>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            EXPERT DATA Track
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText" aligh="justify">
+The EXPERT DATA Track invites the user to create a malaria transmission baseline,
+
+along with interventions, that are designed as closely as possible to represent
+
+malaria in a real location, such as Garki, Nigeria, where very specific data can be
+
+used to set parameter values.  This Track also allows the user to select several such
+
+sites where the baseline parameter values have already been set and made publicly
+
+available by other VecNet users.  In addition, this track exposes the user to the
+
+highest number of model parameters that can be user defined, although default
+
+settings are suggested for users who do not have their own values.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='{% url "ts_emod_index" %}'>
+                <button class="btn">Select Expert track</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            REPRESENTATIVE DATA
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText" align="justify"> Here, the user is guided to build a malaria transmission baseline by making a series
+
+of guided choices from among a small range of settings (typically High, Medium, or
+
+Low) that end up defining the weather pattern, the demographic characteristics, the
+
+vector or vectors and the parasites present and their endemicity.  Calibration of
+
+fitted parameters and ‘burn-in’ is the same as described above.  The resulting
+
+baseline may be designed to represent malaria transmission under conditions that
+
+closely resemble a true site that the VecNet user is attempting to emulate, but
+
+strictly speaking the site produced is hypothetical.  The main goal of this track is to
+
+give the user a relatively simple means of exploring transmission and interventions
+
+in a range of different hypothetical settings.        </div>
+
+        <div class="span2" style="float: right">
+            <form action='{% url "ts_get_started_modeling4" %}'>
+                <button class="btn">Use Representative data</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            PREDEFINED DATA
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText" align="justify"> The third Track allows the user to build a malaria transmission scenario using
+
+geographically PREDEFINED DATA.  The user can select data by explicitly using a
+
+pointer to identify a site on an interactive map and then choosing to use the data
+
+that are associated with this point.  Note that the user is given a choice of specifying
+
+data associated with the point itself (specific latitude and longitude) or the average
+
+of the data within the smallest administrative zone that includes this point.  The
+
+administrative zone choice is recommended.  Data for this track will be derived from
+
+data produced by the Malaria Atlas Project (parasite and vector data and
+
+intervention data) or from the VecNet Data Warehouse (weather and demographic
+
+data).  Fitted parameters will be calibrated in the ‘burn-in’ of the simulation run.
+in a range of different hypothetical settings.        </div>
+
+        <div class="span2" style="float: right">
+            <form action='{% url "rm_index" %}' >
+                <button class="btn" disabled>Use Predefined data</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{%  endblock %}

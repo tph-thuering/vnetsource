@@ -1,0 +1,34 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}job_services/css/table.css" />
+{% endblock %}
+
+{% block main_content %}
+    <a href="{% url "create_quota" %}">Create a New Quota</a>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Cluster</th>
+                <th>Maximum Per Month</th>
+                <th>Maximum Per Run</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in object_list %}
+            <tr>
+                <td>{{ o.user }}</td>
+                <td>{{ o.cluster }}</td>
+                <td>{{ o.max_per_month }}</td>
+                <td>{{ o.max_per_run }}</td>
+                <td>
+                    <a href="{% url "update_quota" pk=o.pk %}">Update</a>
+                    <a href="{% url "delete_quota" pk=o.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,1 @@
+This folder is required for autoscotty application (EMOD output files received by autoscotty are stored in this folder)

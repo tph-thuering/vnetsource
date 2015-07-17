@@ -1,0 +1,545 @@
+{% extends "ts_weather/base.html" %}
+{% load staticfiles %}
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_weather/style.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+<!-- PreScripts -->
+<script>
+    var googleMapWidth = 500;
+    var googleMapHeight = 281;
+    var zoomLevel = 6;
+    var idList = [{% for node in nodeIDs %} "{{ node }}",{% endfor %}];
+    var dataType = '{{ dataTypeName }}';
+    var locationList = [];
+    var latitudeLongitudePairs = [];
+    var resolution = "";
+    var googleMapUrl = "https://maps.google.com/maps?q=&output=embed&z=" + zoomLevel;
+    var previousResolutionValue = "None";
+    var previousResolutionType = "None";
+    var googleQueryErrorHasBeenDisplayed = false;
+    var googleQueries;
+    var googleQueryList;
+    var currentGoogleQueryIndex = -1;
+    var googleDelay = 300;
+    var oneArcsecInDegrees = 1 / 60 / 60;
+    var loadingMessage = "LOADING PLEASE WAIT";
+
+    function addLoadingMessage()
+    {
+        document.getElementById('loadingMessage').innerHTML = loadingMessage;
+    }
+
+    function removeLoadingMessage()
+    {
+        document.getElementById('loadingMessage').innerHTML = "";
+    }
+
+    function getLocationsFromDatabase()
+    {
+        var nodeID;
+        var locationName;
+
+        googleQueries = 0;
+        googleQueryList = [];
+        addLoadingMessage();
+
+        for (var i = 0; i < idList.length; i++)
+        {
+            latitudeLongitudePairs[i] = [];
+            nodeID = idList[i];
+            $.ajax
+            ({
+                 data: nodeID,
+                 index: i,
+                 type: "POST",
+                 url: "/ts_weather/getLocation/" + resolution + '/',
+
+                 success: function (loc)
+                 {
+                     newLocation = JSON.parse(loc);
+                     var j = this.index;
+
+                     if (newLocation.length < 2) // Error. This shouldn't happen
+                     {
+                         alert("Error with conversion of node id to location.");
+                     }
+                     else if (newLocation.length == 2) // If the location is not in the database, then add it
+                     {
+                         latitudeLongitudePairs[j][0] = newLocation[0];
+                         latitudeLongitudePairs[j][1] = newLocation[1];
+                         googleQueryList[googleQueries] = j;
+                         googleQueries++;
+                         locationList[j] = "";
+                     }
+                     else // If the location is in the database
+                     {
+                         latitudeLongitudePairs[j][0] = newLocation[0];
+                         latitudeLongitudePairs[j][1] = newLocation[1];
+                         locationList[j] = newLocation[2];
+                         // Now add it to the visual list
+                         list[j].text = idList[j] + " - " + locationList[j] + " (" + latitudeLongitudePairs[j][0].toFixed(4) + ", "
+                                 + latitudeLongitudePairs[j][1].toFixed(4) + ")";
+                     }
+
+                     if (j == idList.length - 1) // If last node
+                     {
+                         selectNode();
+                         if (googleQueries > 0)
+                         {
+                             doNextGoogleQuery();
+                         }
+                         else
+                         {
+                             removeLoadingMessage();
+                         }
+                     }
+                 }
+            });
+        }
+
+        googleQueryErrorHasBeenDisplayed = false;
+    }
+
+    function doNextGoogleQuery()
+    {
+        currentGoogleQueryIndex++;
+        if (currentGoogleQueryIndex == googleQueries)
+        {
+            currentGoogleQueryIndex = -1;
+            removeLoadingMessage();
+            return;
+        }
+        getLocationFromGoogle(currentGoogleQueryIndex);
+    }
+
+    function getLocationFromGoogle(i)
+    {
+        var j;
+        var googleLocation;
+
+        j = googleQueryList[i];
+        console.log("Google query for nodeID " + idList[j]);
+
+        $.ajax
+        ({
+            url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + latitudeLongitudePairs[i][0]
+                    + ", " + latitudeLongitudePairs[i][1],
+            type: "POST",
+
+            success: function(query)
+            {
+                locationList[j] = "";
+
+                /*
+                if (JSON.stringify(query['error_message']) == '"You have exceeded your daily request quota for this API."')
+                {
+                    alert("Google daily quota reached.");
+                    return;
+                }
+                else
+                {
+                    alert(JSON.stringify(query['error_message']));
+                }
+                */
+
+                if (query['results'][0] != undefined) // Collected data from Google correctly
+                {
+                    googleLocation = JSON.stringify(query['results'][0]['formatted_address'], null, 4);
+                    try
+                    {
+                        locationList[j] = googleLocation.replace(/"/g, ''); // Remove extra quotes
+                        addLocationToDatabase(j);
+                        // Add data to list. If it failed to get data, this will just insert latitude and longitude
+                        list[j].text = idList[j] + " - " + locationList[j] + " (" + latitudeLongitudePairs[j][0].toFixed(4)
+                                        + ", " + latitudeLongitudePairs[j][1].toFixed(4) + ")";
+                    }
+                    catch(error)
+                    {
+                        console.log("Google query failed.");
+                    }
+                }
+                else // Failed to collect data from Google correctly
+                {
+                    if (JSON.stringify(query['error_message']) == '"You have exceeded your rate-limit for this API."')
+                    {
+                        alert("Error: Querying google too fast.");
+                    }
+                    else if (JSON.stringify(query['error_message']) == undefined)
+                    {
+                        if (!googleQueryErrorHasBeenDisplayed)
+                        {
+                            alert("Error: Bad google query " + JSON.stringify(query));
+                            googleQueryErrorHasBeenDisplayed = true;
+                        }
+                    }
+                    else
+                    {
+                        alert(JSON.stringify(query['error_message']));
+                    }
+                }
+            },
+
+            error: function (request, status, error)
+            {
+                alert(JSON.stringify(request.responseText));
+            }
+
+        }).done(setTimeout(doNextGoogleQuery, googleDelay));
+    }
+
+    function addLocationToDatabase(index)
+    {
+        var locationData = {};
+
+        locationData['latitude'] = latitudeLongitudePairs[index][0];
+        locationData['longitude'] = latitudeLongitudePairs[index][1];
+        locationData['resolution'] = resolution;
+        locationData['locationName'] = locationList[index];
+
+        $.ajax
+        ({
+            async: false,
+            data: JSON.stringify(locationData),
+            type: "POST",
+            url: "/ts_weather/addLocation/" + idList[index] + '/',
+
+            success: function (a)
+            {
+            },
+            error: function (request, status, error)
+            {
+                alert(JSON.stringify(request.responseText));
+            }
+        });
+    }
+</script>
+
+<!-- Page -->
+<ul class="breadcrumb">
+<li class="active"><a href="{% url 'ts_weather.index' %}">EMOD Weather Conversion Tool</a></li>
+</ul>
+
+<div id="loadingMessage">LOADING PLEASE WAIT</div>
+
+<div style="float:left">
+    <label for="list">Nodes: </label>
+    <select id="list" size="10" style="width:450px; overflow:scroll;" multiple onchange="selectNode();"></select>
+
+    <label for="resolutionValue">Resolution Value: </label>
+    <input id="resolutionValue" type="text" name="resolutionValue" maxlength="20" value="2.5">
+
+    <label for="resolutionType">Resolution Type: </label>
+    <select id="resolutionType" name="resolutionType">
+        <option value="degree">Degrees</option>
+        <option value="arcmin" selected>Arcminutes</option>
+        <option value="arcsec">Arcseconds</option>
+    </select>
+
+    <button onclick="updateNodeTable()">Convert Node Ids to Locations</button>
+</div>
+
+<div id="googleMap">
+
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="row">
+    <div class="span2" id="dataTypeName">{{ dataTypeName }}</div>
+</div>
+
+<div class="row">
+	<div class="span1" id="chart" style="height: 506px; min-width: 950px"></div>
+</div>
+
+<br>
+<br>
+<div class="row">
+    <div class="span3">
+        {% if formType == "csv" %}
+            <form id="csvDownload" enctype="multipart/form-data" action="{% url "ts_weather.download" %}"
+                  method="post" target="_blank"> {% csrf_token %}
+                <label for="filePrefix">File Name: </label>
+                &nbsp&nbsp&nbsp<input id="filePrefix" type="text" name="filePrefix" maxlength="100">
+                <br>
+                <input type='hidden' name='csvData' value='{{ csvData }}' />
+                <input type="hidden" name="downloadType" value="csv" />
+            </form>
+            <button onclick="checkTextFields('DownloadCsv', '')">Download as CSV</button>
+        {% else %}
+            <form id="emodDownload" enctype="multipart/form-data" action="{% url "ts_weather.download" %}"
+                  method="post" target="_blank"> {% csrf_token %}
+                <label for="filePrefix">File Name: </label>
+                <input id="filePrefix" type="text" name="filePrefix" maxlength="100">
+                <input type='hidden' name='csvData' value='{{ csvData }}' />
+                <input type="hidden" name="downloadType" value="emod" />
+                <input type='hidden' id='emodType' name='emodType' value='none' />
+                <br>
+            </form>
+            <button onclick="checkTextFields('DownloadEmod', 'Bin')">Download as EMOD binary</button>
+            <button onclick="checkTextFields('DownloadEmod', 'Json')">Download as EMOD json</button>
+        {% endif %}
+
+        <br>
+        <br>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script>
+    var list = document.getElementById('list');
+
+    document.getElementById('googleMap').innerHTML = "&nbsp&nbsp<iframe width='" + googleMapWidth + "' height='" +
+                    googleMapHeight + "' " + "frameborder='0' scrolling='no' marginheight='0' marginwidth='0' " +
+                    "src=" + googleMapUrl + "></iframe>";
+
+    function createList()
+    {
+        var option = document.createElement("option");
+        option.value = idList[0];
+        option.text = idList[0];
+        list.appendChild(option);
+
+		for (var i = 1; i < idList.length; i++)
+		{
+            option = document.createElement("option");
+            option.value = idList[i];
+            option.text = idList[i];
+            list.appendChild(option);
+		}
+        list.selectedIndex = 0;
+        selectNode();
+    }
+
+    function fillChart(nodeID)
+    {
+        var unit;
+
+        $.ajax
+        ({
+            data: "{{ csvData }}",
+            type: "POST",
+            url: "/ts_weather/chartData/" + nodeID + '/',
+
+            success: function (nodeData)
+            {
+                if (dataType == "Rainfall")
+                {
+                    unit = "mm"
+                }
+                else if (dataType == "Temperature")
+                {
+                    unit = "C"
+                }
+                else
+                {
+                    unit = ""
+                }
+
+                // Create the chart
+                $('#chart').highcharts('StockChart',
+                {
+                    rangeSelector:
+                    {
+                        selected: -1,
+                        inputEnabled: $('#chart').width() > 290
+                    },
+
+                    series:
+                    [{
+                        name: dataType,
+                        data: nodeData,
+                        tooltip:
+                        {
+                            valueDecimals: 2,
+                            valueSuffix: unit
+                        }
+                    }]
+                });
+             }
+         });
+    }
+
+    function selectNode()
+    {
+        var nodeIndex = list.selectedIndex;
+
+        fillChart(idList[nodeIndex]);
+        if (latitudeLongitudePairs[nodeIndex] != undefined)
+        {
+            googleMapUrl = "https://maps.google.com/maps?q=" + latitudeLongitudePairs[nodeIndex] +  "&output=embed&z=" +
+                        zoomLevel;
+            document.getElementById('googleMap').innerHTML = "&nbsp&nbsp<iframe width='" + googleMapWidth + "' height='" +
+                    googleMapHeight + "' " + "frameborder='0' scrolling='no' marginheight='0' marginwidth='0' " +
+                    "src=" + googleMapUrl + "></iframe>";
+        }
+    }
+
+    function checkTextFields(downloadType, secondaryType)
+    {
+        if ($("#filePrefix").val() != "")
+        {
+            if (downloadType == 'DownloadCsv')
+            {
+                $("#csvDownload").submit();
+            }
+            else if (downloadType == 'DownloadEmod')
+            {
+                if (true)
+                {
+                    if (secondaryType == "Bin")
+                    {
+                        document.forms["emodDownload"].emodType.value = 'binary';
+                        $("#emodDownload").submit();
+                    }
+                    else if (secondaryType == "Json")
+                    {
+                        document.forms["emodDownload"].emodType.value = 'json';
+                        $("#emodDownload").submit();
+                    }
+                    else
+                    {
+                        alert("Bad secondary type.")
+                    }
+                }
+                else
+                {
+                    alert("Please enter an id reference, update resolution, and a data provenance.");
+                }
+            }
+        }
+        else
+        {
+            alert("Please enter a file name.")
+        }
+
+        return false;
+    }
+
+    function updateNodeTable()
+    {
+        var resolutionValue = $("#resolutionValue").val();
+        var resolutionType = $("#resolutionType").val();
+        var cleanResolutionValue = parseFloat(resolutionValue).toFixed(6);
+        var resolutionHasChanged = false;
+        var maxNodeID = 0;
+        var maxResolution;
+        var xFactor;
+        var yFactor;
+        var xMaxResolution;
+        var yMaxResolution;
+        var resolutionInDegrees;
+        var alertMessage;
+
+        if (previousResolutionValue != cleanResolutionValue || previousResolutionType != resolutionType)
+        {
+            resolutionHasChanged = true;
+        }
+
+        if (locationList.length == 0 || resolutionHasChanged) // If we haven't filled the list with all info yet
+        {
+            if (resolutionValue != "" && resolutionType != "") // If we have the required info to calculate location
+            {
+                if (cleanResolutionValue > 0) // If the resolution is valid
+                {
+                    resolutionInDegrees = getResolutionInDegrees(cleanResolutionValue, resolutionType);
+
+                    if (resolutionInDegrees >= oneArcsecInDegrees) // If resolution is not too small
+                    {
+                        // Determine maximum resolution
+                        for (var i = 0; i < idList.length; i++)
+                        {
+                            if (maxNodeID < Math.floor(parseInt(idList[i])))
+                            {
+                                maxNodeID = Math.floor(parseInt(idList[i]));
+                            }
+                        }
+
+                        xFactor = Math.floor(maxNodeID / Math.pow(2, 16));
+                        yFactor = Math.floor(maxNodeID % Math.pow(2, 16));
+                        xMaxResolution = 360 / xFactor;
+                        yMaxResolution = 180 / yFactor;
+                        maxResolution = Math.min(xMaxResolution, yMaxResolution);
+
+                        if (resolutionInDegrees <= maxResolution) // If resolution is not too big
+                        {
+                            resolution = cleanResolutionValue + " " + resolutionType;
+                            getLocationsFromDatabase();
+                        }
+                        else
+                        {
+                            alertMessage = "Resolution is too large. Perhaps you meant something less than ";
+                            if (resolutionType == "degree")
+                            {
+                                alertMessage += maxResolution.toFixed(4) + " degrees.";
+                            }
+                            else if (resolutionType == "arcmin")
+                            {
+                                alertMessage += degreesToArcmin(maxResolution).toFixed(4) + " arcmin.";
+                            }
+                            else
+                            {
+                                alertMessage += degreesToArcsec(maxResolution).toFixed(4) + " arcsec.";
+                            }
+                            alert(alertMessage);
+                        }
+                    }
+                    else
+                    {
+                        alert("Resolution is too small.");
+                    }
+                }
+                else
+                {
+                    alert("Resolution Value must be greater than 0.")
+                }
+            }
+            else
+            {
+                alert("Resolution Value and Resolution Type need to be supplied.");
+            }
+        }
+    }
+
+    function getResolutionInDegrees(theResolutionValue, theResolutionType)
+    {
+        if (theResolutionType == "degree")
+        {
+            return theResolutionValue;
+        }
+        else if (theResolutionType == "arcmin")
+        {
+            return theResolutionValue / 60.0;
+        }
+        else if (theResolutionType == "arcsec")
+        {
+            return theResolutionValue / 3600.0;
+        }
+    }
+
+    function degreesToArcmin(degrees)
+    {
+        return degrees * 60;
+    }
+
+    function degreesToArcsec(degrees)
+    {
+        return degreesToArcmin(degrees) * 60;
+    }
+
+</script>
+
+<!-- After everything is loaded, run these scripts -->
+<script>
+	$(document).ready(function()
+	{
+        createList();
+        removeLoadingMessage();
+	});
+</script>
+{% endblock %}

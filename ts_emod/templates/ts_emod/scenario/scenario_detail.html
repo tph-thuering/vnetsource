@@ -1,0 +1,677 @@
+{% extends "ts_emod/index.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/11/2013
+# Institution: University of Notre Dame
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title %}
+    View Simulation Details
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/css/prettify.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/ts2.css" />
+    <style>
+        a.btn-small{font-weight: normal;}
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        var calibration_data = {{ species_info|safe }};
+        var calibration_url = "{% url 'data_services.send_calibration_request' scenario.id %}";
+    </script>
+    <script src="{{ STATIC_URL }}lib/js/prettify.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/browse_detail.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/ts_emod.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div id="scenario_details">
+        <ul class="breadcrumb">
+            <li><a href="{% url "ts_emod_scenario_browse" %}">Simulations</a> <span class="divider">/</span>
+                <li class="active">Simulation Details</li>
+        </ul>
+        <h3>Simulation Details</h3>
+
+        <p align="justify">
+            On this page, the scenario can be reviewed and the parameter values edited before launching the
+            simulation. Interventions can be added to your scenario at this step as well as adding a Sweep Run to see
+            the sensitivity of transmission to changes in parameters or interventions.
+        </p>
+
+        <div class="btn-group pull-right">
+            <a class="btn btn-small" href="{% url "ts_emod_scenario_browse" %}" data-toggle="tooltip" title="Back to previous page"><i class="icon-arrow-left"></i> Back</a>
+            {% comment %}{% if not scenario.is_approved %}{% endcomment %}
+            <a class="btn btn-small" href="{% url 'ts_emod_duplicate_scenario' scenario.id %}" data-toggle="tooltip"
+               title="Make a copy of this simulation"><i class="icon-copy"></i> Copy</a>
+            {% if scenario.is_representative %}
+                <a class="btn btn-small" href="{% url 'ts_repr.determine_view' scenario.id %}"
+                    data-toggle="tooltip" title="Edit scenario">
+                    <i class="icon-edit"></i> Edit
+                </a>
+            {% else %}
+                <a class="btn btn-small {% if not scenario.has_required_files or not has_results %}btn-target{% endif %}"
+                    href="{% url 'ts_edit_step' 'config' scenario.id %}"
+                    data-toggle="tooltip" title="Edit simulation">
+                    <i class="icon-edit"></i> Edit
+                </a>
+            {% endif %}
+
+            {% if has_results and not scenario.is_approved and scenario.has_required_files %}
+                <a class="btn btn-small {% if not scenario.is_approved %}btn-target{% endif %}"
+                    href="{% url 'ts_emod_approve_scenario' scenario.id %}"
+                    data-toggle="tooltip" title="Approve simulation">
+                    <i class="icon-check"></i> Approve
+                </a>
+            {% endif %}
+            {% comment %}{% else %}{% endcomment %}
+            {% comment %} if scenario.has_required_files %}{% endcomment %}
+                <a class="btn btn-small scenario_button tooltip_link {% if scenario.is_approved and not campaign %}btn-target{% endif %}"
+                    href="{% url 'ts_intervention_tool_step' scenario.id %}"
+                    data-original-title="Add/Edit Interventions (Configure campaign file)">
+                    <i class="icon-beaker"></i>{% if campaign %} Edit{% else %}Add{% endif %} Interventions
+                </a>
+
+                <a class="btn btn-small scenario_button tooltip_link"
+                    href="{% url 'ts_sweep_tool_step' 'sweep' scenario.id %}"
+                    data-original-title="Add/Edit Sweeps">
+                    <i class="icon-sort-by-attributes icon-rotate-270"></i> Add a Sweep Run
+                </a>
+
+                <a class="btn btn-small scenario_button tooltip_link"
+                    {% if not scenario.has_required_files %}disabled{% endif %}
+                    href="{% url 'ts_emod_launch_tool' 'start' scenario.id %}"
+                    data-original-title="Run this simulation with current settings (not including sweeps, which must be launched below.">
+                    <i class="icon-play"></i> Launch
+                </a>
+
+                {% if scenario.is_public == False %}
+                    <a class="btn btn-small" href="{% url 'publicize_scenario' scenario.id %}"
+                        data-toggle="tooltip" title="Promote to public"><i class="icon-cloud-upload"></i> Make Public
+                    </a>
+                {% endif %}
+                {% if run_list %}
+                    {% with run_list|first as my_run %}
+                    <a class="add_note btn btn-small baseline_button tooltip_link" href="#"
+                       data-original-title="Add Note"
+                       data-toggle="modal" data-target="#addNewModal"
+                       data-id="{{ my_run.id }}">
+                        <i class="icon-file-alt"></i> Add Note</a>
+                    {% endwith %}
+                {% endif %}
+            {% comment %}{% endif %}{% endcomment %}
+            {% if  scenario.created_by == user and not scenario.is_public %}
+                <a class="btn btn-small btn-delete" href="{% url "ts_emod_delete_scenario" scenario.id %}" data-toggle="tooltip" title="Delete Baseline Scenario"><i class="icon-trash"></i> Delete</a>
+            {% endif %}
+            <a class="btn btn-small btn-delete" href="{% url "ts_emod_delete_scenario" scenario.id %}" data-toggle="tooltip" title="Delete Baseline Simulation"><i class="icon-trash"></i> Delete</a>
+        </div>
+
+        {% if APP_ENV != "production" %}
+        <br>
+        <br>
+        <div class="btn-group pull-right">
+            <a class="btn btn-small" href="{% url 'ts_emod2.convert' scenario.id %}">
+                <i class="icon-play"></i> Convert to Scenario
+            </a>
+
+            <a class="btn btn-small tooltip_link" href="#"
+                data-original-title="Calibrate"
+                data-toggle="modal" data-target="#calibration-modal"
+                {% if scenario.calibration_status == 'sent' %}disabled{% endif %}>
+                <i class="icon-bug"></i> Calibrate
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="span9">
+                <span class="pull-right">
+                    {{ scenario.calibration_status }}
+                </span>
+            </div>
+        </div>
+        {% endif %}
+
+        {% for species, species_stuff in calibration_verification_info.items %}
+
+            <table class="table table-striped table-condensed">
+                <tr>
+                    <th>{{ species|title }}</th>
+                    <th>Target</th>
+                    <th>Years 2-3</th>
+                    <th>Years 4-9</th>
+                    <th>Years 10-20</th>
+                </tr>
+
+                <tr>
+                    <th>Annual EIR</th>
+                    <td>{{ species_stuff.eir.target }}</td>
+                    <td>{{ species_stuff.eir.years_2_3|floatformat:2 }}</td>
+                    <td>{{ species_stuff.eir.years_4_9|floatformat:2 }}</td>
+                    <td>{{ species_stuff.eir.years_10_20|floatformat:2 }}</td>
+                </tr>
+
+                <tr>
+                    <th>Daily Sporozoite Rate</th>
+                    <td>{{ species_stuff.sporozoite_rate.target }}</td>
+                    <td>{{ species_stuff.sporozoite_rate.years_2_3|floatformat:5 }}</td>
+                    <td>{{ species_stuff.sporozoite_rate.years_4_9|floatformat:5 }}</td>
+                    <td>{{ species_stuff.sporozoite_rate.years_10_20|floatformat:5 }}</td>
+                </tr>
+
+                <tr>
+                    <th>Daily Biting Rate</th>
+                    <td>{{ species_stuff.biting_rate.target }}</td>
+                    <td>{{ species_stuff.biting_rate.years_2_3|floatformat:2 }}</td>
+                    <td>{{ species_stuff.biting_rate.years_4_9|floatformat:2 }}</td>
+                    <td>{{ species_stuff.biting_rate.years_10_20|floatformat:2 }}</td>
+                </tr>
+            </table>
+
+{#                {{ species_stuff }}#}
+        {% endfor %}
+
+        <table class="table table-striped table-condensed" id="scenario_info" >
+            <tbody>
+            <tr>
+                <th>ID Number:</th>
+                <td>{{ scenario.id }}</td>
+            </tr>
+            <tr>
+                <th style="width:20%;">Name:</th>
+                <td>{{ scenario.name }}</td>
+            </tr>
+            <tr>
+                <th>Location:</th>
+                <td>{{ scenario.template }} - <em style="font-size:0.8em">{{ scenario.template.description }}</em></td>
+            </tr>
+            {% if scenario.description %}
+            <tr>
+                <th>Description:</th>
+                <td>{{ scenario.description|linebreaksbr }}</td>
+            </tr>
+            {% endif %}
+            {% if scenario.model_version %}
+            <tr>
+                <th>EMOD Version:</th>
+                <td>{{ scenario.model_version }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>Last Modified:</th>
+                <td>{{ scenario.last_edited }}</td>
+            </tr>
+            {% if scenario.time_launched != None %}
+            <tr>
+                <th>Launched:</th>
+                <td>{{ scenario.time_launched }} EST</td>
+            </tr>
+            {% endif %}
+            {% if note_list %}
+            <tr>
+                <th>Notes:</th>
+                <td><ul>
+                {% for note in note_list %}
+                    <li>{% autoescape off %}{{ note.notes|linebreaksbr }}{% endautoescape %}</li>
+                {% endfor %}
+                </ul></td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>Requirements Met: &nbsp;&nbsp;&nbsp;<span class="tooltip_link"
+                      data-original-title={% if scenario.has_required_files %}"The simulation has everything it needs to run. You may launch it now."
+                      {% else %}"The simulation requires more work before it can be run. Please click the edit button above."{% endif %}
+                      data-toggle="tooltip"><i class="icon-info-sign"></i></span>
+                </th>
+                <td>{% if scenario.has_required_files %}<i class="icon-check" style="color: green;"></i>{% else %}<span style="color: red;">No</span>{% endif %}</td>
+            </tr>
+            {% comment %}
+            <tr>
+                <th>Approved:</th>
+                <td>{% if scenario.is_approved %}<span style="color: green;"><i class="icon-check"></i></span>{% else %}<span style="color: red;">No</span>{% endif %}</td>
+            </tr>
+            {% endcomment %}
+            <tr>
+                <th>Public:</th>
+                <td>{% if scenario_userid == 1 %}<span style="color: green;"><i class="icon-check"></i></span> Can be viewed by other users
+                    {% else %}<span style="color: red;">Private</span> - Cannot be viewed by other users.{% endif %}</td>
+            </tr>
+            <tr>
+                <th>
+                    <strong>Files:</strong>
+                </th>
+                <td>
+                    {% for file in file_list %}{{ file }}<br/>{% endfor %}
+                </td>
+            </tr>
+
+            {% if run_list %}
+            <tr>
+                <th colspan="2">
+                    <strong>Runs:</strong>
+                </th>
+            </tr>
+                {% for simulation in simulation_list %}
+                    <tr>
+                        <td colspan="2" class="accordion">
+                            <br>
+
+                            <span class="pull-right">
+                                <em style="font-size:1.0em;">
+                                    <strong>Launched:</strong> {{ simulation.group.submitted_when }} EST
+                                    {% if simulation.is_complete %}
+                                        <strong>Complete:</strong>
+                                    {% elif simulation.has_failed %}
+                                        <strong>Failed:</strong>
+                                    {% else %}
+                                        <strong>In progress:</strong>
+                                    {% endif %}
+                                </em>
+                            </span>
+
+{#                            <div class="row">#}
+{#                                <div class="pull-right">#}
+{#                                    <a class="btn btn-small"#}
+{#                                        href="{% url "results_viewer.run" run.id %}"#}
+{#                                        data-original-title="Results">#}
+{#                                        <i class="icon-bar-chart"></i> Visualize results#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                {% for run in run_list %}
+                    <tr>
+                    <td colspan="2" class="accordion">
+                     <br/>
+                    {% if dim_user.is_staff == True %} ({{ run.id }}) {% endif %} {{ run.name }}
+                    {% if not run.time_launched %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<em style="font-size:0.8em;"><strong>Created at:</strong> {{ run.time_created }}</em>
+                        <span class="pull-right"><strong>Not yet launched.</strong></span>
+                    {% else %}
+                        <span class="pull-right"><em style="font-size:1.0em;"><strong>Launched:</strong> {{ run.time_launched }} EST
+                        {% if run.percent_complete == 1 %}
+                            <strong>Complete:</strong>
+                        {% else %}
+                            <strong>In progress:</strong>
+                        {% endif %}
+                        {{ run.my_total }} execution{% if run.my_total > 1 %}s{% endif %}:
+                        {% if run.my_completed > 0 %}<i class="icon-check" style="color: green;"> {{ run.my_completed }} succeeded.</i>{% endif %}
+                        {% if run.my_failed %}<i class="icon-warning-sign"> {{ run.my_failed }} failed.</i>{% endif %}
+                        {% if run.my_incomplete > 0 %}{{ run.my_incomplete }} incomplete.{% endif %}
+                        </em></span>
+                    {% endif %}
+                     <br/><em style="font-size:0.8em;">{{ run.description }}</em>
+
+                    <div class="btn-group pull-right row" style="margin-bottom: 15px;">
+                        <a class="btn btn-small" href="{% url "ts_emod_scenario_run_delete" scenario.id run.id %}"
+                           data-original-title="Delete"
+                           data-confirm="Are you sure you want to delete run {{ run.name }} and its related data?"><i
+                                class="icon-trash"></i> Delete</a>
+                        {% if run.csv_output %}
+                        <a class="btn btn-small" href="{% url "ts_emod.csv_download" run.id %}"
+                           data-original-title="Download CSV">
+                            Download CSV</a>
+                        {% endif %}
+                        <a class="btn btn-small tooltip_link"
+                           href="{% url "ts_emod_run_details" run.id %}"
+                           data-original-title="View Details">
+                            <i class="icon-eye-open"></i> Details</a>
+                        {% if not run.time_launched %}
+                            <a class="btn btn-small scenario_button tooltip_link"
+                               href="{% url 'ts_sweep_tool_step' 'sweep' scenario.id run.id%}"
+                               data-original-title="Edit Sweeps">
+                                <i class="icon-sort-by-attributes icon-rotate-270"></i> Edit Sweeps</a>
+                        {% endif %}
+                    {% if run.diffs %}
+                        <a class="btn btn-small tooltip_link accordion-toggle" data-toggle="collapse"
+                                   data-parent="#accordion2" href="#collapse{{ run.id }}"
+                                   title="Click to show/hide differences between current config.json and the one used for this run."> View Parameter Changes
+                        </a>
+                    {% else %}
+                        <a class="btn btn-small tooltip_link" href="#config" title="View config.json">
+                            View config.json
+                        </a>
+                        {% if campaign %} <a class="btn btn-small tooltip_link" href="#campaign" title="View campaign.json">
+                            View Interventions</a>
+                        {% endif %}
+                    {% endif %}
+                    {% if run.my_completed == None %}
+                        <a class="btn btn-small scenario_button tooltip_link"
+                           href="{% url 'ts_emod_launch_tool' 'start' scenario.id run.id %}"
+                           data-original-title="Run simulation for these settings, including any sweeps specified">
+                            <i class="icon-play"></i> Launch Run</a>
+                    {% else %}
+                        {% comment %} #6452 - hide this - too much confusion
+                        <a class="btn btn-small" href="{% url "ts_emod_duplicate_run" run.id %}"
+                                               data-original-title="Make a copy of this run. (for relaunch only)"><i class="icon-copy"></i> Duplicate Run</a>
+                        {% endcomment %}
+                        {% if run.my_failed == run.my_total %}
+                            <a class="tooltip_link btn btn-small btn-target" disabled
+                                href="{% url 'ts_emod_scenario_details' scenario.id %}" title="No Results">
+                                All Runs Failed
+                            </a>
+                        {% elif run.my_completed == 0 %}
+                            <a class="tooltip_link btn btn-small btn-target"
+                                href="{% url 'ts_emod_scenario_details' scenario.id %}" title="No Results Currently Available">
+                                <i class="icon-refresh"></i> Refresh for results
+                            </a>
+                        {% else %}
+                            <a class="btn btn-small"
+                                href="{% url "results_viewer.run" run.id %}"
+                                data-original-title="Results">
+                                <i class="icon-bar-chart"></i> Visualize results
+                            </a>
+                        {% endif %}
+                        <a class="btn btn-small tooltip_link"
+                            href="{% url "ts_emod_run_metadata_details" run.id %}"
+                            data-original-title="View Metadata Details">
+                            <i class="icon-eye-open"></i> Metadata
+                        </a>
+                    {% endif %}
+                    </div>
+
+                    <div id="collapse{{ run.id }}" class="accordion-body collapse" style="width: 100%">
+                        <div class="accordion-inner" style="border-top: 0;">
+                        {% if run.diffs %}
+                        <table>
+                            {% for diff in run.diffs %}
+                                <tr>
+                                <td>{{ diff.key }}:&nbsp;&nbsp;&nbsp;</td><td><strong>{{ diff.run }}</strong></td>
+                                    <td>{% if diff.scenario %}&nbsp;&nbsp;&nbsp;&nbsp;is now <strong>{{ diff.scenario }}</strong>{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        {% endif %}
+                       </div>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            {% endif %}
+            {% if user_changes_atomic %}
+            <tr>
+                <td colspan="2">
+                    <strong>Parameter Changes:</strong>
+                     <pre class="prettyprint"><br/>{% for change in user_changes_atomic %}{{ change }}<br/>{% endfor %} </pre>
+                </td>
+            </tr>
+            {% endif %}
+            {% if campaign %}
+            <tr>
+                <td colspan="2">
+                    <div class="row">
+                        <div class="span3">
+                            <a class="tooltip_link accordion-toggle" name="campaign" data-toggle="collapse"
+                                   data-target="#accordion_Camp" title="Click to show/hide contents of the campaign.json file">
+                                   <strong>&nbsp;Interventions (campaign.json)</strong>
+                            </a>
+                        </div>
+                        <div class="span3"></div>
+                        <div class="span3">
+                            <div class="btn-group pull-right">
+                                <a class="btn btn-small tooltip_button accordion-toggle" name="campaign" data-toggle="collapse"
+                                       data-target="#accordion_Camp" title="Click to show/hide contents of the campaign.json file">
+                                       <i class="icon-eye-open"></i>&nbsp;&nbsp;View
+                                </a>
+                                <a class="btn btn-small tooltip_link" id="campaign_link" download='campaign.json'
+                                   title="Download a copy of the file to your computer."
+                                   type='application/json'><i class="icon-arrow-down"></i>&nbsp;&nbsp;Download</a>
+                                <a class="btn btn-small btn-warn" href="{% url "ts_emod_json_edit" scenario.id 'campaign' %}"
+                                   data-title="Manually edit the JSON content of this file."
+                                        onClick="return window.confirm('Are you sure you want to manually edit this file? ' +
+                                         'Doing so may make the file invalid and cause EMOD to fail to run correctly. ' +
+                                          'Use at your own risk.')">
+                                <i class="icon-edit"></i> Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span9">
+                            <div class="accordion-body collapse" id="accordion_Camp">
+                                <div class="accordion-inner">
+                                    <pre class="prettyprint">{{ campaign }}<br/></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+            {% if config %}
+            <tr>
+                <td colspan="2">
+                    <div class="row">
+                        <div class="span3">
+                            <a class="tooltip_link accordion-toggle" name="config" data-toggle="collapse"
+                                   data-target="#accordion_Config" title="Click to show/hide contents of the config.json file">
+                                   <strong>&nbsp;Config.json</strong>
+                            </a>
+                        </div>
+                        <div class="span3"></div>
+                        <div class="span3">
+                            <div class="btn-group pull-right">
+                                <a class="btn btn-small tooltip_button accordion-toggle" name="config" data-toggle="collapse"
+                                       data-target="#accordion_Config" title="Click to show/hide contents of the config.json file">
+                                       <i class="icon-eye-open"></i>&nbsp;&nbsp;View
+                                </a>
+                                <a class="btn btn-small tooltip_link" id="config_link" download='config.json'
+                                   title="Download a copy of the file to your computer."
+                                   type='application/json'><i class="icon-arrow-down"></i>&nbsp;&nbsp;Download</a>
+                                <a class="btn btn-small btn-warn" href="{% url "ts_emod_json_edit" scenario.id 'config' %}"
+                                   data-title="Manually edit the JSON content of this file."
+                                        onClick="return window.confirm('Are you sure you want to manually edit this file? ' +
+                                         'Doing so may make the file invalid and cause EMOD to fail to run correctly. ' +
+                                          'Use at your own risk.')">
+                                <i class="icon-edit"></i> Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span9">
+                            <div class="accordion-body collapse" id="accordion_Config">
+                                <div class="accordion-inner">
+                                    <pre class="prettyprint">{{ config }}<br/></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+            {% if user_changes_species %}
+            <tr>
+                <td colspan="2">
+                    <strong>User Created Vector Species:</strong>
+                     <pre class="prettyprint">{% for change in user_changes_species %}{{ change }}<br/>{% endfor %} </pre>
+                </td>
+            </tr>
+            {% endif %}
+            </tbody>
+            <tfoot>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;" >
+                        <div class="btn-group ">
+                            <a class="btn btn-small" href="{% url "ts_emod_scenario_browse" %}" data-toggle="tooltip" title="Back to previous page"><i class="icon-arrow-left"></i> Back</a>
+                            {% comment %}
+                            {% if not scenario.is_approved %}
+                            <a class="btn btn-small" href="{% url 'ts_baseline_step' 'location' scenario.id %}"
+                               data-toggle="tooltip" title="Edit simulation"><i class="icon-edit"></i> Edit</a>
+                            {% else %}
+                                {% if scenario_userid != 1 %}
+                                <a class="btn btn-small" href="{% url 'publicize_scenario' scenario.id %}"
+                                   data-toggle="tooltip" title="Promote to public"><i class="icon-cloud-upload"></i> Make Public</a>
+                                {% endif %}
+                            {% endif %}
+                            <a class="btn btn-small" href="{% url "ts_emod_download_baseline" scenario.id %}" data-toggle="tooltip" title="Download XML File"><i class="icon-arrow-down"></i> Download</a>
+
+                            {% if  scenario.created_by == user and not scenario.is_public %}
+                                <a class="btn btn-small btn-delete" href="{% url "ts_emod_delete_baseline" scenario.id %}" data-toggle="tooltip" title="Delete Baseline Scenario"><i class="icon-trash"></i> Delete</a>
+                            {% endif %}
+                            {%  endcomment %}
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+
+
+    <!-- Note Modal -->
+    <form id="save" method="post" action="{% url 'ts_emod_note_save' %}">{% csrf_token %}
+        <div id="addNewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Add a new note</h3>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" name="run_id" id="run_id" value=""/>
+                <br/>
+                <textarea id="id_text" class="description-box" rows="10"
+                          placeholder="Type in a note for this simulation and click save." name="text" label=""
+                          cols="40" required></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn left" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;Cancel
+                </button>
+                <button class="btn" type="submit"><i class="icon-save"></i>&nbsp;&nbsp;Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Calibration Modal -->
+    <div id="calibration-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="calibration-modal-label"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="calibration-modal-label">Calibration Parameters</h3>
+        </div>
+
+        <div class="modal-body">
+            <div id="calibration-request-spinner" style="display: none; text-align: center">
+                <i class="icon icon-spinner icon-spin"></i>
+            </div>
+
+            <div id="calibration-request-error" style="display: none; text-align: center">
+            </div>
+
+            {% for species, info_dictionary in species_info.items %}
+                <div class="row">
+                    <div class="span5">
+                        {{ species|title }}:
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span1"></div>
+
+                    <div class="span2">
+                        EIR/Prevalence
+                    </div>
+
+                    <div class="span2">
+                        <input type="text" value="{{ info_dictionary.eir }}" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span1"></div>
+
+                    <div class="span2">
+                        Sporozoite Rate
+                    </div>
+
+                    <div class="span2">
+                        <input type="text" value="{{ info_dictionary.sporozoite }}">
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn pull-right" onclick="send_calibration_request()"
+                data-toggle="tooltip" title="Calibrate Baseline"
+                {% if scenario.calibration_status == 'sent' %}disabled{% endif %}>
+                <i class="icon-bug"></i> Calibrate
+            </button>
+
+            <button class="btn pull-right" data-dismiss="modal" aria-hidden="true">
+                <i class="icon-remove"></i>&nbsp;&nbsp;Cancel
+            </button>
+        </div>
+    </div>
+
+
+    <script> {% comment %} Build the modal to confirm deletion of a run, could be used to delete scenario also {% endcomment %}
+        $(document).ready(function () {
+
+            // Change jumbotron tagline cause it's easier than changing base to inherit/replace tagline
+            if ("{{ scenario.is_representative }}" == 'False') {
+                $("p.lead").replaceWith("<p>Basic Workflow using <strong>EMOD</strong></p>");
+            } else {
+                $("p.lead").replaceWith("<p>Representative Workflow using <strong>EMOD</strong></p>");
+            }
+
+            $('a[data-confirm]').click(function (ev) {
+                var href = $(this).attr('href');
+
+                if (!$('#dataConfirmModal').length) {
+                    $('body').append('<div id="dataConfirmModal" class="modal fade" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true">' +
+                            '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
+                            '<h3 id="dataConfirmLabel"><i class="icon-warning-sign"></i>&nbsp;&nbsp;&nbsp;Please Confirm</h3></div>' +
+                            '<div class="modal-body"></div><div class="modal-footer"><button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Cancel</button>' +
+                            '<a class="btn btn-danger" id="dataConfirmOK">Delete</a></div></div>');
+                }
+                $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+                $('#dataConfirmOK').attr('href', href);
+                $('#dataConfirmModal').modal({show: true});
+                return false;
+            });
+
+            // pulse the "target" buttons the user is most likely to want to click
+            // - make right width 2 so not hidden by next button to the right's left border
+            pulse($('.btn-target'), 1250, 'swing', {'borderColor': '#B3B3B3', 'borderRightWidth': '2'},
+                    {'borderColor': '#000', 'borderRightWidth': '2'}, function() { return false; });
+
+        });
+    </script>
+    <script>
+        var json = {{ config|safe }};
+        var data = new Blob([JSON.stringify(json, null, 4)]);
+
+        var a = document.getElementById('config_link');
+        a.href = URL.createObjectURL(data);
+
+        {% if campaign %}
+            json = {{ campaign|safe }};
+            data = new Blob([JSON.stringify(json, null, 4)]);
+
+            var c = document.getElementById('campaign_link');
+            c.href = URL.createObjectURL(data);
+        {% endif %}
+    </script>
+    <script>
+        $(document).on("click", ".add_note", function () {
+            var my_scenario_id = $(this).data('id');
+            $(".modal-body #run_id").val(my_scenario_id);
+        });
+    </script>
+
+
+{% endblock %}

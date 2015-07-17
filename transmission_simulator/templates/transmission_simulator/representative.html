@@ -1,0 +1,72 @@
+{% extends "transmission_simulator/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 04/10/2015
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <rjones29@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            {% include "transmission_simulator/left_menu.html" %}
+
+            <div class="span9">
+                {% block page_content %}
+                    <h2>Representative Workflow</h2>
+
+                    <br/>
+                    <p align="justify">
+                        The <strong>Representative Workflow</strong> is used to model malaria transmission for generic locations.
+                    </p>
+                    <br/>
+                    <p align="justify">
+                        The <strong>Representative Workflow</strong> builds a simulation using Representative Data. Either of two models can be used:
+                        <ul>
+                            <li> <strong>EMOD</strong> {% include "transmission_simulator/more_on_emod.html" %}
+                                (The Institute for Disease Modeling), and</li>
+                            <li> <strong>OpenMalaria </strong> {% include "transmission_simulator/more_on_om.html" %}
+                                (Swiss Tropical and Public Health Institute).</li>
+                        </ul>
+                    </p>
+
+                    <br/>
+                    <p align="justify">
+                        The <strong>Representative Workflow</strong> helps build a malaria transmission baseline by
+                        making a series of guided choices from among a small range of settings (typically High, Medium,
+                        or Low) that end up defining the weather pattern, the demographic characteristics, the vector
+                        or vectors and the parasites present and their endemicity.
+                    </p>
+                    <br>
+                    <p align="justify">
+                        The resulting baseline may be designed to represent malaria transmission under conditions that
+                        closely resemble a true site, but strictly speaking the site produced is hypothetical.
+                    </p>
+                    <br>
+                    <p align="justify">
+                        The main goal of this workflow is to provide a relatively simple means of exploring transmission
+                        and interventions in a range of different hypothetical locations.
+                    </p>
+                    <br/>
+                    <br/>
+                    <div class="pull-right">
+                        <div class="span2">
+                            <a class="btn" style="width:114px;" href="{% url 'ts_emod_index' %}">
+                                Start using EMOD
+                            </a>
+                        </div>
+                        <div class="span2">
+                            <a class="btn" href="{% url 'ts_om.index' %}">
+                                <span style="white-space: nowrap">Start using OpenMalaria</span>
+                            </a>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

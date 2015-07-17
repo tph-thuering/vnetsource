@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8000/" />
+<title>nwf_intervention_tool</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">nwf_intervention_tool</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Transmission Simulator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ts_basic_landing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ts_basic_emod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=EMOD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My Simulations</td>
+	<td></td>
+</tr>
+<!--Make sure nothing's left from last time test was run-->
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>*Selenium basic_intervention_tool*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=a_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-name</td>
+	<td>Selenium </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-name</td>
+	<td>Selenium basic_intervention_tool</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-description</td>
+	<td>basic_intervention_tool</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit Interventions</td>
+	<td></td>
+</tr>
+<!--Check info popup-->
+<tr>
+	<td>click</td>
+	<td>id=info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//td[4]</td>
+	<td>The day of the event within the simulation. For most events,</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>*Intervention(s) selected for Simulation * Selenium basic_intervention_tool*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul</td>
+	<td>*Outbreak*</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul/li/span/button[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>css=ul.cart.ui-sortable</td>
+	<td>*Outbreak*</td>
+</tr>
+<!--Add a simple bednet (predefined)-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='intervention']//ul//li[contains(., &quot;Simple_Bednets_(predefined)&quot;)]/div/div[2]/span/button[2]</td>
+	<td></td>
+</tr>
+<!--Check start day validation-->
+<tr>
+	<td>type</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul/li/em/span/input</td>
+	<td>a</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul/li/em/span[3]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=label.error</td>
+	<td>*Please enter a value between*</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul/li/em/span/input</td>
+	<td>0</td>
+</tr>
+<!--Check Demog % validation-->
+<tr>
+	<td>type</td>
+	<td>document.wizard_form.elements['intervention-demographic_coverage']</td>
+	<td>-12</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>*Please enter a value between 0 and 100*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.wizard_form.elements['intervention-demographic_coverage']</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul/li/span/button</td>
+	<td></td>
+</tr>
+<!--Check blocking rate validation-->
+<tr>
+	<td>type</td>
+	<td>document.wizard_form.elements[14]</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.span3 &gt; label.error</td>
+	<td>Please enter a value between 0 and 1.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.wizard_form.elements[14]</td>
+	<td>.75</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! The intervention(s) have been saved to Selenium basic_intervention_tool.*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit Interventions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul/li/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td></td>
+	<td>0.75</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul/li/em/span[3]/input</td>
+	<td>77</td>
+</tr>
+<!--Add another (Simple_Bednets_(predefined))-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='intervention']//ul//li[contains(., &quot;Simple_Bednets_(predefined)&quot;)]/div/div[2]/span/button[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='interventionForm']/div/div[2]/ul/li[2]/span/button[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//li[2]/em/div/div/div/div[3]/div[2]/input</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.wizard_form.elements['intervention-demographic_coverage'][1]</td>
+	<td>.123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! The intervention(s) have been saved to*</td>
+</tr>
+<!--Make sure config has Interventions enabled-->
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='scenario_info']/tbody/</td>
+	<td>*&quot;Enable_Interventions&quot;: 1,*</td>
+</tr>
+<!--Make sure Campaign is displayed.-->
+<tr>
+	<td>assertText</td>
+	<td>css=a[name=&quot;campaign&quot;] &gt; strong</td>
+	<td>Interventions (campaign.json)</td>
+</tr>
+<!--Make sure demog percentages greater than .9% are handled properly-->
+<tr>
+	<td>assertText</td>
+	<td>css=pre.prettyprint</td>
+	<td>*&quot;Demographic_Coverage&quot;: 0.77,*</td>
+</tr>
+<!--Make sure demog percentages less than 1% are handled properly-->
+<tr>
+	<td>assertText</td>
+	<td>css=pre.prettyprint</td>
+	<td>*&quot;Demographic_Coverage&quot;: 0.00123,*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pre.prettyprint</td>
+	<td>*&quot;my_name&quot;: &quot;Simple_Bednets_(predefined)&quot;*</td>
+</tr>
+<!--Now attempt to launch from inside Intervention Tool-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit Interventions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=launch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! The intervention(s) have been saved to*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*Launch Simulations:*</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*Launch Simulations:*</td>
+</tr>
+<!--Need a way to fill in a unique value here to id this later-->
+<tr>
+	<td>type</td>
+	<td>id=id_start-name</td>
+	<td>Selenium test Intervention Tool Launch</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! Run launched.*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.accordion</td>
+	<td>*Selenium test Intervention Tool Launch*Launched:* In progress: 1 execution: 1 incomplete.*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Refresh for results</td>
+	<td>Refresh for results</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-danger</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Success! You have successfully deleted the simulation Selenium basic_intervention_tool</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>*Selenium basic_intervention_tool*</td>
+	<td></td>
+</tr>
+<!--END: At this point, we don't know how long run will take, so not too much else we can check for (more campaign params?)-->
+</tbody></table>
+</body>
+</html>

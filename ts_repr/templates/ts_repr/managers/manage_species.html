@@ -1,0 +1,132 @@
+{% extends "ts_repr/base.html" %}
+
+{% block extra_local_js %}
+    <script>
+        // manage_species.js needs these variables
+        var species_data_url = "{{ species_data_url }}";
+        var emod_snippet_data_url = "{{ emod_snippet_data_url }}";
+        var om_snippet_data_url = "{{ om_snippet_data_url }}";
+    </script>
+
+{#    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/weather.js"></script>#}
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/managers/manage_species.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <form id="form" action="" method="post">{% csrf_token %}<br>
+        <input type="hidden" name="species_id" id="species_id" value="0" />
+        <input type="hidden" name="emod_snippet_id" id="emod_snippet_id" value="0" />
+        <input type="hidden" name="om_snippet_id" id="om_snippet_id" value="0" />
+        <input type="hidden" id="form-is-valid" name="form-is-valid" value="false" />
+
+        <div class="row">
+            <div class="span2">
+                Species:
+            </div>
+
+            <div class="span4">
+                <select id="species-select">
+                    <option value="0">New Species</option>
+
+                    <optgroup label="Active">
+                        {% for species in active_species %}
+                            <option value="{{ species.id }}">{{ species.id }} {{ species.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+
+                    <optgroup label="Inactive">
+                        {% for species in inactive_species %}
+                            <option value="{{ species.id }}">{{ species.id }} {{ species.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span9">
+                NOTE: The species name is as it is seen by users. Example: An. farauti
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                Species Name:
+            </div>
+
+            <div class="span3">
+                <input type="text" id="name" name="name" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                Description:
+            </div>
+
+            <div class="span6">
+                <textarea id="description" name="description" rows="10"></textarea>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span2">
+                <input type="checkbox" id="is_active" name="is_active" checked> is_active
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span2">
+                EMOD Snippet:
+            </div>
+
+            <div class="span4">
+                <select id="emod-snippet-select">
+                    <option value="0">None</option>
+
+                    {% for emod_snippet in emod_snippets %}
+                        <option value="{{ emod_snippet.id }}">{{ emod_snippet.id }} {{ emod_snippet.name }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span9">
+                <textarea readonly rows="20" id="emod-snippet-textarea">
+                </textarea>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span2">
+                OM Snippet:
+            </div>
+
+            <div class="span4">
+                <select id="om-snippet-select">
+                    <option value="0">None</option>
+
+                    {% for om_snippet in om_snippets %}
+                        <option value="{{ om_snippet.id }}">{{ om_snippet.id }} {{ om_snippet.name }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span9">
+                <textarea readonly rows="20" id="om-snippet-textarea">
+                </textarea>
+            </div>
+        </div>
+        <br>
+
+        <input type="submit" class="btn" value="Save Species" />
+    </form>
+{% endblock %}

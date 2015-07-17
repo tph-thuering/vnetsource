@@ -1,0 +1,28 @@
+{% for intervention in intervention_templates %}
+    <li data-prefix="{{ intervention.prefix }}" data-name="{{ intervention.name }}">
+        <div class="row">
+            <div class="span7">
+                <strong>{{ intervention.name }}</strong>
+            </div>
+
+            <div class="span1">
+                <span class="btn-group pull-right">
+                    <a class="btn btn-small" href="http://idmod.org/emoddoc/Content/EMOD/ParameterReference/{{ intervention.name_for_url }}.htm"
+                        title="Read about this intervention in the EMOD documentation (This will take you to IDM's web site)" target="_blank">
+                        <i class="icon-book"></i>&nbsp;&nbsp;Documentation
+                    </a>
+
+                    <button type='button' class="btn btn-small btn-preview"
+                        data-content='<table class="table-striped">{{ intervention.details }}</table>'>
+                        <i class="icon-eye-open"></i>&nbsp;&nbsp;Details
+                    </button>
+
+                    <button type='button' class="btn btn-small" onclick="add_intervention('{{ intervention.prefix }}');"
+                        title="Add an instance of this Intervention to  Simulation">
+                        <i class="icon-plus"></i>&nbsp;&nbsp;Add to Simulation
+                    </button>
+                </span>
+            </div>
+        </div>
+    </li>
+{% endfor %}

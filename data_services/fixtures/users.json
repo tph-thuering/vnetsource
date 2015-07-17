@@ -1,0 +1,15 @@
+[
+    {
+        "pk": 1,
+        "model": "data_services.dimuser",
+        "fields": {
+            "username": "Test",
+            "first_name": "Test",
+            "last_name": "User",
+            "is_active": true,
+            "is_staff": false,
+            "email": "",
+            "date_joined": "2013-01-01T05:00:00Z"
+        }
+    }
+]

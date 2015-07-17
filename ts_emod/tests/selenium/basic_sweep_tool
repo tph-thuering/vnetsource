@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8000/" />
+<title>nfw_sweep_tool</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">nfw_sweep_tool</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Transmission Simulator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ts_basic_landing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ts_basic_emod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=c_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-name</td>
+	<td>Selenium test - basic sweep tool</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-description</td>
+	<td>simulation created by selenium testing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add a Sweep Run</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_sweep-name</td>
+	<td>Selenium Sweep Test 1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.dynatree-expander</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='catalog']/ul/li/ul/li/span/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Acquisition_Blocking_Immunity_Decay_Rate (0.01)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td> Acquisition_Blocking_Immunity_Decay_Rate (0.01) has been successfully added to this Run.</td>
+	<td></td>
+</tr>
+<!--This id changes each time, find a better way to pick element or this will fail HERE-->
+<tr>
+	<td>type</td>
+	<td>name=sweep-values</td>
+	<td>5,10|15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit Sweeps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table/tbody/tr[1]/td[1]/strong[1]</td>
+	<td>Select</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=sweep-name</td>
+	<td>Selenium Sweep Test 1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_sweep-name</td>
+	<td>Selenium Sweep Test 1a</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='cart']/ul/li</td>
+	<td>*Acquisition_Blocking_Immunity_Decay_Rate*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=em</td>
+	<td>config &gt; parameters</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td></td>
+	<td>Rate at which aquisition-blocking</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=range_display</td>
+	<td>Range: 0 to 1000</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='cart']/ul/li/em[2]/input</td>
+	<td>5,10,15</td>
+</tr>
+<!--Check to make sure previously selected items are NOT selectable.-->
+<tr>
+	<td>click</td>
+	<td>css=span.dynatree-expander</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='catalog']/ul/li/ul/li/span/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Acquisition_Blocking_Immunity_Decay_Rate (0.01)</td>
+	<td></td>
+</tr>
+<!--this should be assertNOTalert but bug 6384 requires this to accept the alert (til the bug is fixed)-->
+<tr>
+	<td>assertAlert</td>
+	<td> Acquisition_Blocking_Immunity_Decay_Rate (0.01) has been successfully added to this Run.</td>
+	<td> Acquisition_Blocking_Immunity_Decay_Rate (0.01) has been successfully added to this Run.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cart']/ul/li/em[2]/input</td>
+	<td>5|10|15</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn-small.delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=label.error</td>
+	<td>This field is required.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cart']/ul/li/em[2]/input</td>
+	<td>5, 10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=launch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! You have successfully saved the sweep Selenium Sweep Test 1a.*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*Launch Simulations:*</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_start-name</td>
+	<td>Selenium Sweep Test 1b</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! Run launched.*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='scenario_info']/tbody</td>
+	<td>*Selenium Sweep Test 1b Launched:*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='scenario_info']/tbody</td>
+	<td>* In progress: 2 executions: 2 incomplete.*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='scenario_info']/tbody</td>
+	<td>*Refresh for results*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add a Sweep Run</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_sweep-name</td>
+	<td>Selenium Sweep Test 1a</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.dynatree-expander</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_sweep-name</td>
+	<td>Selenium Sweep Test 1c</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='catalog']/ul/li/ul/li/span/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Acquisition_Blocking_Immunity_Decay_Rate (0.01)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td> Acquisition_Blocking_Immunity_Decay_Rate (0.01) has been successfully added to this Run.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cart']/ul/li/em[2]/input</td>
+	<td>0.1, 0.2, 0.3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Success! You have successfully saved the sweep Selenium Sweep Test 1c. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit Sweeps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cart']/ul/li/em[2]/input</td>
+	<td>0.1,0.2,0.3, 0.4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit Sweeps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn-small.delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.dynatree-expander</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='catalog']/ul/li/ul/li/span/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Antibody_CSP_Decay_Days (90)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td> Antibody_CSP_Decay_Days (90) has been successfully added to this Run.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cart']/ul/li/em[2]/input</td>
+	<td>1, 2, 3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>config.json/parameters/Antibody_CSP_Decay_Days=1,2,3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Launch Run</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.alert.alert-success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Success! Run launched. </td>
+	<td></td>
+</tr>
+<!--Clean up-->
+<tr>
+	<td>click</td>
+	<td>css=i.icon-trash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-danger</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Success! You have successfully deleted the simulation Selenium test - basic sweep tool*</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//div[2]/div/div[2]/div/div</td>
+	<td>*Selenium test - basic sweep tool*</td>
+</tr>
+<!--END of testcase-->
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends "ts_emod/index.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 07/30/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+
+{% block page_title %}
+    Transmission Simulator EMOD / Simulations / Simulation Detail / Edit File
+{% endblock %}
+
+{% block page_content %}
+    <ul class="breadcrumb">
+        <li><a href="{% url "ts_emod_index" %}">EMOD Expert</a> <span class="divider">/</span></li>
+            <li><a href="{% url "ts_emod_scenario_browse" %}">Simulations</a> <span class="divider">/</span></li>
+            <li><a href="{% url "ts_emod_scenario_details" scenario_id %}">Simulation Detail</a> <span class="divider">/</span></li>
+        <li class="active">Edit File</li>
+    </ul>
+    <p>
+        <button class="button" onclick="undo()"><i class="icon-rotate-left"></i> Undo</button>
+        <button class="button" onclick="redo()"><i class="icon-rotate-right"></i> Redo</button>
+    <span style="float: right;"><em style="font-size:0.9em;"> Use ctrl+z / cmd+z to undo, ctrl+y / cmd+y to redo.</em></span>
+    </p>
+
+    <form action="" method="post">{% csrf_token %}
+        <div style="border:1px solid #000;">
+            <textarea id="json" name="json">{{ json }}</textarea>
+            <input type="hidden" name="file_type" value="{{ file_type }}">
+            <input type="hidden" name="scenario_id" value="{{ scenario_id }}">
+        </div>
+
+        <!-- input type="submit" value="<i class=\"icon-trash\"></i> Save changes"/ -->
+        <button class="btn" type="submit"><i class="icon-save"></i> Save changes</button>
+        <a class="btn" onclick="goBack();"><i class="icon-undo"></i> Cancel</a>
+        <span style="float: right;"><em style="font-size:0.9em;"> Use ctrl+f / cmd+f to start searching, ctrl+g / cmd+g to find next.</em></span>
+    </form>
+
+    {# Include CodeMirror library #}
+    <script src="{{ STATIC_URL }}lib/js/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/js/codemirror/lib/codemirror.css">
+    <script src="{{ STATIC_URL }}lib/js/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/codemirror/mode/javascript/javascript.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/codemirror/addon/search/searchcursor.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/codemirror/addon/search/search.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/codemirror/addon/dialog/dialog.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/js/codemirror/addon/dialog/dialog.css">
+    <script>
+        var my_json = {{ json|safe }};
+        document.getElementById("json").innerHTML = JSON.stringify(my_json, null, 4);
+        var editor = CodeMirror.fromTextArea(document.getElementById("json"), {
+            lineNumbers: true,
+            matchBrackets: true
+        });
+
+        window.jsoneditor = editor
+
+        function undo() {
+            window.jsoneditor.undo()
+        }
+        function redo() {
+             window.jsoneditor.redo()
+        }
+
+        function goBack() { window.history.back(); }
+    </script>
+
+{% endblock %}

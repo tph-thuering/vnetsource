@@ -1,0 +1,209 @@
+{% extends "ts_repr/base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}
+    VecNet Transmission Simulator / Representative / Browse Simulations
+{% endblock %}
+
+{% block extra_local_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_repr/css/browse_scenario.css" />
+{% endblock %}
+
+{% block extra_local_js %}
+    <script>
+        // browse_scenario.js needs these variables
+        var previous_page_number;
+        var next_page_number;
+        var type_currently_shown = {{ type_currently_shown }};
+
+        {% if representative_scenarios.has_previous %}
+            previous_page_number = {{ representative_scenarios.previous_page_number }};
+        {% else %}
+            previous_page_number = -1;
+        {% endif %}
+
+        {% if representative_scenarios.has_next %}
+            next_page_number = {{ representative_scenarios.next_page_number }};
+        {% else %}
+            next_page_number = -1;
+        {% endif %}
+    </script>
+
+    <script src="{{ STATIC_URL }}ts_repr/js/browse_scenario.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block page_content %}
+    <h3>My Representative Simulation</h3>
+    <p>
+        This is the list of the representative simulations you started, but didn't complete. However, you can
+        also view the list of completed simulations by selecting "Complete" from the drop down menu.
+    </p>
+
+    <p>
+        <b>NOTE:</b> This is currently shared by all users. This will be private later.
+    </p>
+
+    {% if number_of_representative_scenarios > 10 %}
+        <div class="row">
+            <div class="span4">
+                <i>
+                    Showing {{ current_start }}-{{ current_stop }}
+                    of {{ number_of_representative_scenarios }}&nbsp;&nbsp;
+                </i>
+
+                <div class="btn-group text-left">
+                    <button class="btn btn-md dropdown-toggle" data-toggle="dropdown">
+                        {{ pager_size }} Simulations/Page
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu pull-right">
+                        <li {% if pager_size == 10 %}class="active"{% endif %}>
+                            <a href="?page={{ page }}&pager_size=10&type={{ type_currently_shown }}">
+                                10 Simulations/Page
+                            </a>
+                        </li>
+
+                        <li {% if pager_size == 25 %}class="active"{% endif %}>
+                            <a href="?page={{ page }}&pager_size=25&type={{ type_currently_shown }}">
+                                25 Simulations/Page
+                            </a>
+                        </li>
+
+                        <li {% if pager_size == 50 %}class="active"{% endif %}>
+                            <a href="?page={{ page }}&pager_size=50&type={{ type_currently_shown }}">
+                                50 Simulations/Page
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    {% else %}
+        <div class="row">
+            <div class="span4"></div>
+    {% endif %}
+
+        <div class="span2" id="type-dropdown">
+            Type:
+            <div class="btn-group text-left pull-right">
+                <button class="btn btn-md dropdown-toggle" data-toggle="dropdown">
+                    {{ type_currently_shown }}
+                    <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu pull-right">
+                    <li {% if type_currently_shown == 'Incomplete' %}class="active"{% endif %}>
+                        <a href="?page={{ page }}&pager_size={{ pager_size }}&type=Incomplete">
+                            Incomplete
+                        </a>
+                    </li>
+
+                    <li {% if type_currently_shown == 'Complete' %}class="active"{% endif %}>
+                        <a href="?page={{ page }}&pager_size={{ pager_size }}&type=Complete">
+                            Complete
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr style="margin:5px; margin-left:-20px; border-bottom-color:#000000;"/>
+    <div class="row">
+        <div class="span3">
+            <b>ID/Name</b>
+        </div>
+
+        <div class="span3">
+            <b>Model Compatibility</b>
+        </div>
+    </div>
+    <hr style="margin:5px; margin-left:-20px; margin-bottom: 0px; border-bottom-color:#000000;"/>
+
+    {% for scenario in representative_scenarios %}
+        <div class="row" id="scenario-row">
+            <div class="span3">
+                <a href="{% url 'ts_repr.weather' scenario.id %}">
+                    {{ scenario.id }}
+                </a>
+                {% if scenario.name == '' %}
+                    {{ scenario.derived_name }}
+                {% else %}
+                    {{ scenario.name }}
+                {% endif %}
+            </div>
+
+            <div class="span4">
+                Not Available&nbsp;
+            </div>
+
+            <div class="span2">
+                <div class="btn-group pull-right">
+                    <form id="form-{{ scenario.id }}" action="{% url 'ts_repr.determine_view' scenario.id %}"
+                        method="post" style="margin: 0px;">{% csrf_token %}
+                        <a class="btn" href="{% url "ts_repr.delete_scenario" scenario.id %}"
+                            data-confirm="Are you sure you want to delete simulation
+                            {% if scenario.name == '' %}
+                                {{ scenario.derived_name }}
+                            {% else %}
+                                {{ scenario.name }}
+                            {% endif %}
+                            ?">
+                            <i class="icon-trash"></i> Delete
+                        </a>
+
+                        <a class="btn scenario-button" href=""
+                           onclick="document.getElementById('form-{{ scenario.id }}').submit(); return false;">
+                           <i class="icon-folder-open-alt"></i>&nbsp;Open
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="row">
+            <div class="span9 error">
+                No simulations found. To create a simulation, click the button below.
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="span9">
+            <div class="pagination pagination-small pagination-centered" id="pager">
+                {% csrf_token %}
+                <input type="hidden" value="{{ pager_size }}" id="pager_size" name="pager_size"/>
+
+                <ul id="pager-list">
+                    {% if number_of_representative_scenarios > 10 %}
+                        <li id="previous-button-li">
+                            <a id="previous-button" href="">
+                                <-
+                            </a>
+                        </li>
+
+                        {% for item in scenario_range %}
+                            <li {% if representative_scenarios.number == forloop.counter %}class="active"{% endif %}>
+                                <a href="?page={{ forloop.counter }}&pager_size={{ pager_size }}&type={{ type_currently_shown }}">
+                                    {{ forloop.counter }}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                        <li id="next-button-li">
+                            <a id="next-button" href="">
+                                ->
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <p class="pull-left">
+        <a class="btn" href="{% url 'ts_repr.new_scenario' %}">
+            <i class="icon-plus"></i> Create a New Simulation
+        </a>
+    </p>
+{% endblock %}

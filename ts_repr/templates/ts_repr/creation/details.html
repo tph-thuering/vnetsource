@@ -1,0 +1,337 @@
+{% extends "ts_repr/base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}
+    Simulation Review
+{% endblock %}
+
+{% block extra_local_css %}
+
+{% endblock %}
+
+{% block extra_local_js %}
+    <script>
+        // details.js needs these variable
+        var weather_base_url = "{{ weather_base_url }}";
+        var demographics_base_url = "{{ demographics_base_url }}";
+        var details_save_url = "{{ details_save_url }}";
+        var data_to_save = {};
+    </script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}lib/js/charts/weather.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}lib/js/charts/demographics.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/creation/details.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <input type="hidden" id="scenario_id" value="{{ scenario.id }}" />
+    <input type="hidden" id="weather-id" value={{ weather_id }} />
+    <input type="hidden" id="demographics-id" value={{ demographics_id }} />
+
+    <hr style="margin:0px; margin-left:-20px; border-bottom-color:#000000;"/>
+
+{# Scenario Name #}
+    <div class="row gray-row">
+        <div class="span3">
+            <b>Simulation Name:</b>
+        </div>
+
+        {% if not scenario_is_editable %}
+            <div class="span6">
+                <input type="hidden" id="scenario_name" name="scenario_name" value="{{ scenario_name }}" />
+                {{ scenario_name }}
+            </div>
+        {% else %}
+            <div class="span5" style="margin-top: 5px; margin-bottom: -5px;">
+                <input type="hidden" id="scenario_name" name="scenario_name" value="{{ scenario_name }}" />
+                <input type="text" id="scenario-name-input" name="scenario-name-input" value="{{ scenario_name }}" />
+            </div>
+
+            <div class="span1" style="margin-top: 5px; margin-bottom: -5px;">
+                <input type="button" class="btn pull-right" onclick="save_scenario_name()" value="Save Name" />
+            </div>
+        {% endif %}
+    </div>
+    <hr style="margin:0px; margin-left:-20px; border-bottom-color:#000000;"/>
+
+{# Weather #}
+    {% if dim_user.is_staff == True and debug_mode %}
+        <div class="row gray-row">
+            <div class="span3">
+                 <b>Weather ID:</b>
+            </div>
+
+            <div class="span3">
+                {{ weather_id }}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="span3">
+             <b>Weather Name:</b>
+        </div>
+
+        <div class="span3">
+            {{ weather_name }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span9">
+            <a class="tooltip_link accordion-toggle" data-toggle="collapse"
+                data-target="#weather-accordion">
+                Weather Charts&nbsp;&nbsp;&nbsp;
+                <i class="icon-chevron-down"></i>
+            </a>
+            {% include "lib/charts/weather_accordion.html" with span=7 %}
+        </div>
+    </div>
+    <hr style="margin:0px; margin-left:-20px; border-bottom-color:#000000;"/>
+
+{# Demographics #}
+    {% if dim_user.is_staff == True and debug_mode %}
+        <div class="row">
+            <div class="span3">
+                 <b>Demographics ID:</b>
+            </div>
+
+            <div class="span3">
+                {{ demographics_id }}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row gray-row">
+        <div class="span3">
+             <b>Demographics Name:</b>
+        </div>
+
+        <div class="span3">
+            {{ demographics_name }}
+        </div>
+    </div>
+
+    <div class="row gray-row">
+        <div class="span9">
+            <a class="tooltip_link accordion-toggle" data-toggle="collapse"
+                data-target="#demographics-accordion">
+                Demographics Chart&nbsp;&nbsp;&nbsp;
+                <i class="icon-chevron-down"></i>
+            </a>
+            {% include "lib/charts/demographics_accordion.html" %}
+        </div>
+    </div>
+    <hr style="margin:0px; margin-left:-20px; border-bottom-color:#000000;"/>
+
+{# Species #}
+    {% for specie in species %}
+        <div style="display:none">
+        <div class="row {% if forloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}">&nbsp;</div>
+        <hr style="margin:0px; margin-left:-20px; margin-top:-15px; border-bottom-color:#000000;"/>
+        </div>
+
+        {% if dim_user.is_staff == True and debug_mode %}
+            <div class="row {% if forloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}">
+                <div class="span3">
+                     <b>Species ID:</b>
+                </div>
+
+                <div class="span3">
+                    {{ specie.id }}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row {% if forloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}">
+            <div class="span3">
+                <b>Species Name:</b>
+            </div>
+
+            <div class="span3">
+                {{ specie.pretty_name }}
+            </div>
+        </div>
+
+        <div class="row {% if forloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}">
+            <div class="span9">
+                <a class="tooltip_link accordion-toggle" data-toggle="collapse"
+                    data-target="#species{{ forloop.counter0 }}-accordion">
+                    Parameters&nbsp;&nbsp;&nbsp;<i class="icon-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="accordion-body collapse row {% if forloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}"
+            id="species{{ forloop.counter0 }}-accordion">
+            <div class="accordion-inner" style="margin-left:30px">
+                {% for parameter in specie.parameters %}
+                    <div style="display:none">
+                        <div class="row {% if forloop.parentloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}">
+                            <div class="span3">
+                                <b>Parameter Name:</b>
+                            </div>
+
+                            <div class="span3">
+                                {{ parameter.name }}
+                            </div>
+                        </div>
+
+                        <div class="row {% if forloop.parentloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}">
+                            <div class="span3">
+                                <b>Parameter Choice:</b>
+                            </div>
+
+                            <div class="span3">
+                                {{ parameter.choice }}
+                            </div>
+                            {# This currently only shows emod values. Later there should be a way to view om #}
+                            {# fixthis #}
+                        </div>
+                    </div>
+
+                    <div class="row {% if forloop.parentloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}">
+                        <div class="span8">
+                            <hr size="1" style="margin: 1px; background-color: black; border:none">
+                        </div>
+                    </div>
+
+                    <div class="row {% if forloop.parentloop.counter0|add:1|divisibleby:2 %}gray-row{% endif %}">
+                        <div class="span3">
+                            <b>{{ parameter.name }}:</b> {# <b>Parameter Value:</b> #}
+                        </div>
+
+                        <div class="span3">
+                            {% if parameter.is_list %}
+                                {% for parameter_value in parameter.value %}
+                                    {{ parameter_value }}
+                                {% endfor %}
+                            {% else %}
+                                {{ parameter.value }}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if forloop.counter < species|length %}
+            <hr style="margin:0px; margin-left:-20px; border-bottom-color:#000000;"/>
+        {% endif %}
+        <hr style="margin:0px; margin-left:-20px; border-bottom-color:#000000;"/>
+    {% endfor %}
+
+{# EIR #}  {# if statement translation: if (species.length + 1) % 2 == 0 #}
+{#    <div class="row {% if species|length|add:1|divisibleby:2 %}gray-row{% endif %}">#}
+    {% for species_name, species_dictionary in parasite_parameters.species.items %}
+        <div class="row">
+            <div class="span3">
+                <b>{{ species_name|title }} Target EIR:</b>
+            </div>
+
+            <div class="span3">
+                {{ species_dictionary.EIR }}
+            </div>
+        </div>
+        <hr style="margin: 0px; margin-left: -20px; border-bottom-color: #000000;"/>
+    {% endfor %}
+    <br>
+
+{# Parasite Parameters #}  {# if statement translation: if species.length % 2 == 0 #}
+{#    <div class="row {% if species|length|divisibleby:2 %}gray-row{% endif %}">#}
+{#        <div class="span3">#}
+{#            <b>New Diagnostic Sensitivity:</b>#}
+{#        </div>#}
+{##}
+{#        <div class="span3">#}
+{#            {{ parasite_parameters.new_diagnostic_sensitivity }}#}
+{#        </div>#}
+{#    </div>#}
+{#    <hr style="margin:0px; margin-left:-20px; border-bottom-color:#000000;"/>#}
+{##}
+    {# if statement translation: if (species.length + 1) % 2 == 0 #}
+{#    <div class="row {% if species|length|add:1|divisibleby:2 %}gray-row{% endif %}">#}
+{#        <div class="span3">#}
+{#            <b>Parasite Smear Sensitivity:</b>#}
+{#        </div>#}
+{##}
+{#        <div class="span3">#}
+{#            {{ parasite_parameters.parasite_smear_sensitivity }}#}
+{#        </div>#}
+{#    </div>#}
+{#    <hr style="margin:0px; margin-left:-20px; border-bottom-color:#000000;"/>#}
+{#    <br>#}
+
+
+{# Buttons #}
+    <div class="well well-large">
+        <div class="row">
+            <div class="span8">
+                <p>
+                    Your baseline is now complete. This button will use pre-calibrated values to achieve the EIR you
+                    requested. This is a nearly instant process. After clicking this button, you will be taken to the
+                    Basic Details page.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <form id="pre-calibration-form" action="" method="post">{% csrf_token %}
+                <input type="submit" class="btn pull-right" name="pre-calibration" value="Use Pre-Calibrated Values" />
+            </form>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="span8">
+                <p>
+                    This button will initiate a calibration process that may take several hours to complete. This
+                    calibration will try to achieve your requested EIR. After clicking this button, you
+                    will be taken to the Basic Details page.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <form id="calibration-form" action="" method="post">{% csrf_token %}
+                <input type="submit" class="btn pull-right" name="calibrate" value="Calibrate" />
+            </form>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="span8">
+                <p>
+                    This button allows you to skip the calibration process and will take you directly to
+                    the Basic Details page where you can run the simulation, add interventions,
+                    add sweeps, etc.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <form id="skip-calibration-form" action="" method="post">{% csrf_token %}
+                <input type="submit" class="btn pull-right" name="skip_calibration" value="Skip Calibration" />
+            </form>
+        </div>
+
+        {% if not scenario_is_editable %}
+            <div class="row">
+                <div class="span8">
+                    <p>
+                        Use the "Copy Simulation" button to make a copy of this simulation. Your old
+                        simulation will not be touched. The new simulation will start with all options
+                        chosen from the previous steps. Anything that was changed via the json editor
+                        will not be copied.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <input type="button" class="btn pull-right" onclick="copy()" value="Copy Simulation" />
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

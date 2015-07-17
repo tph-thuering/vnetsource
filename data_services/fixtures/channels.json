@@ -1,0 +1,5975 @@
+[
+    {
+        "pk": 1,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "immunity h"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "immunity Y"
+        }
+    },
+    {
+        "pk": 1495,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 1496,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-4",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 1497,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 1498,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 1499,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 1500,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-4",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 1501,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 1502,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 1503,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 1504,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-4",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 1505,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 1506,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 1507,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 1508,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-4",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 1509,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 1510,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 1511,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 1512,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-4",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 1513,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 1514,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 1515,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 1516,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-4",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 1517,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 1518,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 223030,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "timestep"
+        }
+    },
+    {
+        "pk": 223031,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "N_v0"
+        }
+    },
+    {
+        "pk": 223032,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "N_v"
+        }
+    },
+    {
+        "pk": 223033,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "O_v"
+        }
+    },
+    {
+        "pk": 223034,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "S_v"
+        }
+    },
+    {
+        "pk": 223035,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "P_A"
+        }
+    },
+    {
+        "pk": 223036,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "P_df"
+        }
+    },
+    {
+        "pk": 223037,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "P_dif"
+        }
+    },
+    {
+        "pk": 223038,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "alpha_i"
+        }
+    },
+    {
+        "pk": 223039,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "P_B"
+        }
+    },
+    {
+        "pk": 223040,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "P_C*P_D"
+        }
+    },
+    {
+        "pk": 223041,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "input EIR"
+        }
+    },
+    {
+        "pk": 223042,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "simulated EIR"
+        }
+    },
+    {
+        "pk": 223043,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "host % \u2264 1"
+        }
+    },
+    {
+        "pk": 223044,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "host % \u2264 5"
+        }
+    },
+    {
+        "pk": 223045,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "host % \u2264 10"
+        }
+    },
+    {
+        "pk": 223046,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "host % \u2264 15"
+        }
+    },
+    {
+        "pk": 223047,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "host % \u2264 25"
+        }
+    },
+    {
+        "pk": 223048,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "recent births"
+        }
+    },
+    {
+        "pk": 223049,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "patent hosts"
+        }
+    },
+    {
+        "pk": 223050,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "human infectiousness"
+        }
+    },
+    {
+        "pk": 223051,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "new infections"
+        }
+    },
+    {
+        "pk": 223052,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "num transmitting humans"
+        }
+    },
+    {
+        "pk": 223053,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "nets owned"
+        }
+    },
+    {
+        "pk": 223054,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "mean hole index"
+        }
+    },
+    {
+        "pk": 223055,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "mean insecticide content"
+        }
+    },
+    {
+        "pk": 223056,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "IRS insecticide content"
+        }
+    },
+    {
+        "pk": 223057,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "IRS rel attr "
+        }
+    },
+    {
+        "pk": 223058,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "IRS preprand surv factor "
+        }
+    },
+    {
+        "pk": 223059,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "farauti",
+            "title": "IRS postprand surv factor "
+        }
+    },
+    {
+        "pk": 228406,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Average Age"
+        }
+    },
+    {
+        "pk": 228407,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Gender Ratio (fraction male)"
+        }
+    },
+    {
+        "pk": 228408,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "New Births"
+        }
+    },
+    {
+        "pk": 228409,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "New Natural Deaths"
+        }
+    },
+    {
+        "pk": 228410,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 10-14"
+        }
+    },
+    {
+        "pk": 228411,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 15-19"
+        }
+    },
+    {
+        "pk": 228412,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 20-24"
+        }
+    },
+    {
+        "pk": 228413,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 25-29"
+        }
+    },
+    {
+        "pk": 228414,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 30-34"
+        }
+    },
+    {
+        "pk": 228415,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 35-39"
+        }
+    },
+    {
+        "pk": 228416,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 40-44"
+        }
+    },
+    {
+        "pk": 228417,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 45-49"
+        }
+    },
+    {
+        "pk": 228418,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 5-9"
+        }
+    },
+    {
+        "pk": 228419,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 50-54"
+        }
+    },
+    {
+        "pk": 228420,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 55-59"
+        }
+    },
+    {
+        "pk": 228421,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 60-64"
+        }
+    },
+    {
+        "pk": 228422,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 65-69"
+        }
+    },
+    {
+        "pk": 228423,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 70-74"
+        }
+    },
+    {
+        "pk": 228424,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 75-79"
+        }
+    },
+    {
+        "pk": 228425,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 80-84"
+        }
+    },
+    {
+        "pk": 228426,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 85-89"
+        }
+    },
+    {
+        "pk": 228427,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 90-94"
+        }
+    },
+    {
+        "pk": 228428,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age 95-99"
+        }
+    },
+    {
+        "pk": 228429,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age <5"
+        }
+    },
+    {
+        "pk": 228430,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Population Age >100"
+        }
+    },
+    {
+        "pk": 228431,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Possible Mothers"
+        }
+    },
+    {
+        "pk": 228432,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Pseudo-Population"
+        }
+    },
+    {
+        "pk": 228433,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "DemographicsSummary",
+            "runs": [],
+            "type": null,
+            "title": "Statistical Population"
+        }
+    },
+    {
+        "pk": 228434,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Vectors",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Adult Vectors"
+        }
+    },
+    {
+        "pk": 228435,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Air Temperature"
+        }
+    },
+    {
+        "pk": 228436,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Births",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Births"
+        }
+    },
+    {
+        "pk": 228437,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "USD",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Campaign Cost"
+        }
+    },
+    {
+        "pk": 228438,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Cumulative Infections"
+        }
+    },
+    {
+        "pk": 228439,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Cumulative Reported Infections"
+        }
+    },
+    {
+        "pk": 228440,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Bites/Day",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Daily Bites per Human"
+        }
+    },
+    {
+        "pk": 228441,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Infectious Bites/Day",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Daily EIR"
+        }
+    },
+    {
+        "pk": 228442,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228443,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Infected %",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Fever Prevalence"
+        }
+    },
+    {
+        "pk": 228444,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Total Infectivity",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Human Infectious Reservoir"
+        }
+    },
+    {
+        "pk": 228445,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Infected fraction",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228446,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Infectious %",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Infectious Vectors"
+        }
+    },
+    {
+        "pk": 228447,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Land Temperature"
+        }
+    },
+    {
+        "pk": 228448,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Log Prevalence",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Log Prevalence"
+        }
+    },
+    {
+        "pk": 228449,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Geo. mean parasites/microliter",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228450,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "New Clinical Cases"
+        }
+    },
+    {
+        "pk": 228451,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Infected %",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228452,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228453,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "New Reported Infections"
+        }
+    },
+    {
+        "pk": 228454,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "New Severe Cases"
+        }
+    },
+    {
+        "pk": 228455,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Infected %",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Parasite Prevalence"
+        }
+    },
+    {
+        "pk": 228456,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Infection Rate",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Probability of New Infection"
+        }
+    },
+    {
+        "pk": 228457,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "mm/day",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Rainfall"
+        }
+    },
+    {
+        "pk": 228458,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Relative Humidity"
+        }
+    },
+    {
+        "pk": 228459,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "Population",
+            "file_name": "InsetChart",
+            "runs": [],
+            "type": null,
+            "title": "Statistical Population"
+        }
+    },
+    {
+        "pk": 228460,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "VectorSpeciesReport",
+            "runs": [],
+            "type": "farauti",
+            "title": "Adult Vectors"
+        }
+    },
+    {
+        "pk": 228461,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "VectorSpeciesReport",
+            "runs": [],
+            "type": "farauti",
+            "title": "Daily EIR"
+        }
+    },
+    {
+        "pk": 228462,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "VectorSpeciesReport",
+            "runs": [],
+            "type": "farauti",
+            "title": "Daily HBR"
+        }
+    },
+    {
+        "pk": 228463,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "VectorSpeciesReport",
+            "runs": [],
+            "type": "farauti",
+            "title": "Infectious Vectors"
+        }
+    },
+    {
+        "pk": 228464,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228465,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228466,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228467,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228468,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228469,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228470,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228471,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228472,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228473,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228474,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228475,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228476,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228477,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "<1",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228478,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228479,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228480,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228481,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228482,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228483,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228484,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228485,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228486,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228487,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228488,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228489,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228490,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228491,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "1-2",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228492,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228493,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228494,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228495,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228496,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228497,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228498,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228499,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228500,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228501,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228502,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228503,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228504,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228505,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "2-3",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228506,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228507,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228508,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228509,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228510,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228511,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228512,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228513,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228514,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228515,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228516,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228517,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228518,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228519,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "3-4",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228520,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228521,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228522,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228523,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228524,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228525,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228526,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228527,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228528,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228529,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228530,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228531,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228532,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228533,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "4-5",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228534,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228535,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228536,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228537,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228538,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228539,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228540,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228541,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228542,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228543,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228544,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228545,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228546,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228547,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "5-10",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228548,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228549,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228550,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228551,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228552,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228553,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228554,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228555,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228556,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228557,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228558,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228559,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228560,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228561,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "10-20",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228562,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228563,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228564,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228565,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228566,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228567,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228568,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228569,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228570,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228571,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228572,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228573,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228574,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228575,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "20-30",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228576,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228577,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228578,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228579,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228580,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228581,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228582,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228583,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228584,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228585,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228586,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228587,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228588,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228589,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": "30-40",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228590,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Disease Deaths"
+        }
+    },
+    {
+        "pk": 228591,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Fever Positive"
+        }
+    },
+    {
+        "pk": 228592,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Infected"
+        }
+    },
+    {
+        "pk": 228593,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Mean Parasitemia"
+        }
+    },
+    {
+        "pk": 228594,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "New Diagnostic Prevalence"
+        }
+    },
+    {
+        "pk": 228595,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "New Infections"
+        }
+    },
+    {
+        "pk": 228596,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Parasite Positive"
+        }
+    },
+    {
+        "pk": 228597,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Population"
+        }
+    },
+    {
+        "pk": 228598,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Sum MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228599,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Sum Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228600,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Sum PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 228601,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Sum of Squared MSP Variant Fractions"
+        }
+    },
+    {
+        "pk": 228602,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Sum of Squared Non-Specific Variant Fractions"
+        }
+    },
+    {
+        "pk": 228603,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": null,
+            "file_name": "BinnedReport",
+            "runs": [],
+            "type": ">40",
+            "title": "Sum of Squared PfEMP1 Variant Fractions"
+        }
+    },
+    {
+        "pk": 300001,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "N_v0"
+        }
+    },
+    {
+        "pk": 300002,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "N_v0"
+        }
+    },
+    {
+        "pk": 300003,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "N_v0"
+        }
+    },
+    {
+        "pk": 300004,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "N_v"
+        }
+    },
+    {
+        "pk": 300005,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "N_v"
+        }
+    },
+    {
+        "pk": 300006,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "N_v"
+        }
+    },
+    {
+        "pk": 300007,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "O_v"
+        }
+    },
+    {
+        "pk": 300008,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "O_v"
+        }
+    },
+    {
+        "pk": 300009,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "O_v"
+        }
+    },
+    {
+        "pk": 300010,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "S_v"
+        }
+    },
+    {
+        "pk": 300011,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "S_v"
+        }
+    },
+    {
+        "pk": 300012,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "S_v"
+        }
+    },
+    {
+        "pk": 300013,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "P_A"
+        }
+    },
+    {
+        "pk": 300014,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "P_A"
+        }
+    },
+    {
+        "pk": 300015,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "P_A"
+        }
+    },
+    {
+        "pk": 300016,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "P_df"
+        }
+    },
+    {
+        "pk": 300017,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "P_df"
+        }
+    },
+    {
+        "pk": 300018,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "P_df"
+        }
+    },
+    {
+        "pk": 300019,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "P_dif"
+        }
+    },
+    {
+        "pk": 300020,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "P_dif"
+        }
+    },
+    {
+        "pk": 300021,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "P_dif"
+        }
+    },
+    {
+        "pk": 300022,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "alpha_i"
+        }
+    },
+    {
+        "pk": 300023,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "alpha_i"
+        }
+    },
+    {
+        "pk": 300024,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "alpha_i"
+        }
+    },
+    {
+        "pk": 300025,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "P_B"
+        }
+    },
+    {
+        "pk": 300026,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "P_B"
+        }
+    },
+    {
+        "pk": 300027,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "P_B"
+        }
+    },
+    {
+        "pk": 300028,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "P_C*P_D"
+        }
+    },
+    {
+        "pk": 300029,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "P_C*P_D"
+        }
+    },
+    {
+        "pk": 300030,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "P_C*P_D"
+        }
+    },
+    {
+        "pk": 300031,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "IRS rel attr "
+        }
+    },
+    {
+        "pk": 300032,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "IRS preprand surv factor "
+        }
+    },
+    {
+        "pk": 300033,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "gambiae",
+            "title": "IRS postprand surv factor "
+        }
+    },
+    {
+        "pk": 300034,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "IRS rel attr "
+        }
+    },
+    {
+        "pk": 300035,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "IRS preprand surv factor "
+        }
+    },
+    {
+        "pk": 300036,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "arabiensis",
+            "title": "IRS postprand surv factor "
+        }
+    },
+    {
+        "pk": 300037,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "IRS rel attr "
+        }
+    },
+    {
+        "pk": 300038,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "IRS preprand surv factor "
+        }
+    },
+    {
+        "pk": 300039,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "funestus",
+            "title": "IRS postprand surv factor "
+        }
+    },
+    {
+        "pk": 300040,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nTreatments3"
+        }
+    },
+    {
+        "pk": 300041,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nTreatments3"
+        }
+    },
+    {
+        "pk": 300042,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nTreatments3"
+        }
+    },
+    {
+        "pk": 300043,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nTreatments3"
+        }
+    },
+    {
+        "pk": 300044,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nTreatments3"
+        }
+    },
+    {
+        "pk": 300045,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nTreatments3"
+        }
+    },
+    {
+        "pk": 300046,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nTreatments2"
+        }
+    },
+    {
+        "pk": 300047,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nTreatments2"
+        }
+    },
+    {
+        "pk": 300048,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nTreatments2"
+        }
+    },
+    {
+        "pk": 300049,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nTreatments2"
+        }
+    },
+    {
+        "pk": 300050,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nTreatments2"
+        }
+    },
+    {
+        "pk": 300051,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nTreatments2"
+        }
+    },
+    {
+        "pk": 300052,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nTreatments1"
+        }
+    },
+    {
+        "pk": 300053,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nTreatments1"
+        }
+    },
+    {
+        "pk": 300054,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nTreatments1"
+        }
+    },
+    {
+        "pk": 300055,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nTreatments1"
+        }
+    },
+    {
+        "pk": 300056,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nTreatments1"
+        }
+    },
+    {
+        "pk": 300057,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nTreatments1"
+        }
+    },
+    {
+        "pk": 300058,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nDirDeaths"
+        }
+    },
+    {
+        "pk": 300059,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nDirDeaths"
+        }
+    },
+    {
+        "pk": 300060,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nDirDeaths"
+        }
+    },
+    {
+        "pk": 300061,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nDirDeaths"
+        }
+    },
+    {
+        "pk": 300062,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nDirDeaths"
+        }
+    },
+    {
+        "pk": 300063,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nDirDeaths"
+        }
+    },
+    {
+        "pk": 300064,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 300065,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 300066,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 300067,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 300068,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nHospitalSeqs"
+        }
+    },
+    {
+        "pk": 300069,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nHospitalSeqs"
+        }
+    },
+    {
+        "pk": 300070,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nHospitalSeqs"
+        }
+    },
+    {
+        "pk": 300071,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nHospitalSeqs"
+        }
+    },
+    {
+        "pk": 300072,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nHospitalSeqs"
+        }
+    },
+    {
+        "pk": 300073,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nHospitalSeqs"
+        }
+    },
+    {
+        "pk": 300074,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "Clinical_HospitalFirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300075,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "Clinical_HospitalFirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300076,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "Clinical_HospitalFirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300077,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "Clinical_HospitalFirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300078,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "Clinical_HospitalFirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300079,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "Clinical_HospitalFirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300080,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "innoculationsPerAgeGroup"
+        }
+    },
+    {
+        "pk": 300081,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "innoculationsPerAgeGroup"
+        }
+    },
+    {
+        "pk": 300082,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "innoculationsPerAgeGroup"
+        }
+    },
+    {
+        "pk": 300083,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "innoculationsPerAgeGroup"
+        }
+    },
+    {
+        "pk": 300084,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "innoculationsPerAgeGroup"
+        }
+    },
+    {
+        "pk": 300085,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "innoculationsPerAgeGroup"
+        }
+    },
+    {
+        "pk": 300086,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nAntibioticTreatments"
+        }
+    },
+    {
+        "pk": 300087,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nAntibioticTreatments"
+        }
+    },
+    {
+        "pk": 300088,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nAntibioticTreatments"
+        }
+    },
+    {
+        "pk": 300089,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nAntibioticTreatments"
+        }
+    },
+    {
+        "pk": 300090,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nAntibioticTreatments"
+        }
+    },
+    {
+        "pk": 300091,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nAntibioticTreatments"
+        }
+    },
+    {
+        "pk": 300092,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nMassIRS"
+        }
+    },
+    {
+        "pk": 300093,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nMassIRS"
+        }
+    },
+    {
+        "pk": 300094,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nMassIRS"
+        }
+    },
+    {
+        "pk": 300095,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nMassIRS"
+        }
+    },
+    {
+        "pk": 300096,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nMassIRS"
+        }
+    },
+    {
+        "pk": 300097,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nMassIRS"
+        }
+    },
+    {
+        "pk": 300098,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "allCauseIMR"
+        }
+    },
+    {
+        "pk": 300099,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "allCauseIMR"
+        }
+    },
+    {
+        "pk": 300100,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "allCauseIMR"
+        }
+    },
+    {
+        "pk": 300101,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "allCauseIMR"
+        }
+    },
+    {
+        "pk": 300102,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "allCauseIMR"
+        }
+    },
+    {
+        "pk": 300103,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "allCauseIMR"
+        }
+    },
+    {
+        "pk": 300104,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nIndDeaths"
+        }
+    },
+    {
+        "pk": 300105,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nIndDeaths"
+        }
+    },
+    {
+        "pk": 300106,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nIndDeaths"
+        }
+    },
+    {
+        "pk": 300107,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nIndDeaths"
+        }
+    },
+    {
+        "pk": 300108,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nIndDeaths"
+        }
+    },
+    {
+        "pk": 300109,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nIndDeaths"
+        }
+    },
+    {
+        "pk": 300110,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nSeq"
+        }
+    },
+    {
+        "pk": 300111,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nSeq"
+        }
+    },
+    {
+        "pk": 300112,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nSeq"
+        }
+    },
+    {
+        "pk": 300113,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nSeq"
+        }
+    },
+    {
+        "pk": 300114,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nSeq"
+        }
+    },
+    {
+        "pk": 300115,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nSeq"
+        }
+    },
+    {
+        "pk": 300116,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nMassITNs"
+        }
+    },
+    {
+        "pk": 300117,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nMassITNs"
+        }
+    },
+    {
+        "pk": 300118,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nMassITNs"
+        }
+    },
+    {
+        "pk": 300119,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nMassITNs"
+        }
+    },
+    {
+        "pk": 300120,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nMassITNs"
+        }
+    },
+    {
+        "pk": 300121,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nMassITNs"
+        }
+    },
+    {
+        "pk": 300122,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nMassVA"
+        }
+    },
+    {
+        "pk": 300123,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nMassVA"
+        }
+    },
+    {
+        "pk": 300124,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nMassVA"
+        }
+    },
+    {
+        "pk": 300125,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nMassVA"
+        }
+    },
+    {
+        "pk": 300126,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nMassVA"
+        }
+    },
+    {
+        "pk": 300127,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nMassVA"
+        }
+    },
+    {
+        "pk": 300128,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nEPI_ITNs"
+        }
+    },
+    {
+        "pk": 300129,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nEPI_ITNs"
+        }
+    },
+    {
+        "pk": 300130,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nEPI_ITNs"
+        }
+    },
+    {
+        "pk": 300131,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nEPI_ITNs"
+        }
+    },
+    {
+        "pk": 300132,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nEPI_ITNs"
+        }
+    },
+    {
+        "pk": 300133,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nEPI_ITNs"
+        }
+    },
+    {
+        "pk": 300134,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nNMFever"
+        }
+    },
+    {
+        "pk": 300135,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nNMFever"
+        }
+    },
+    {
+        "pk": 300136,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nNMFever"
+        }
+    },
+    {
+        "pk": 300137,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nNMFever"
+        }
+    },
+    {
+        "pk": 300138,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nNMFever"
+        }
+    },
+    {
+        "pk": 300139,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nNMFever"
+        }
+    },
+    {
+        "pk": 300140,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nHospitalRecovs"
+        }
+    },
+    {
+        "pk": 300141,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nHospitalRecovs"
+        }
+    },
+    {
+        "pk": 300142,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nHospitalRecovs"
+        }
+    },
+    {
+        "pk": 300143,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nHospitalRecovs"
+        }
+    },
+    {
+        "pk": 300144,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nHospitalRecovs"
+        }
+    },
+    {
+        "pk": 300145,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nHospitalRecovs"
+        }
+    },
+    {
+        "pk": 300146,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 300147,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 300148,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 300149,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 300150,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nHospitalDeaths"
+        }
+    },
+    {
+        "pk": 300151,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nHospitalDeaths"
+        }
+    },
+    {
+        "pk": 300152,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nHospitalDeaths"
+        }
+    },
+    {
+        "pk": 300153,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nHospitalDeaths"
+        }
+    },
+    {
+        "pk": 300154,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nHospitalDeaths"
+        }
+    },
+    {
+        "pk": 300155,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nHospitalDeaths"
+        }
+    },
+    {
+        "pk": 300156,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 300157,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 300158,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 300159,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 300160,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nExpectd"
+        }
+    },
+    {
+        "pk": 300161,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nExpectd"
+        }
+    },
+    {
+        "pk": 300162,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nExpectd"
+        }
+    },
+    {
+        "pk": 300163,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nExpectd"
+        }
+    },
+    {
+        "pk": 300164,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nExpectd"
+        }
+    },
+    {
+        "pk": 300165,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nExpectd"
+        }
+    },
+    {
+        "pk": 300166,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 300167,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 300168,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 300169,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 300170,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nNmfDeaths"
+        }
+    },
+    {
+        "pk": 300171,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nNmfDeaths"
+        }
+    },
+    {
+        "pk": 300172,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nNmfDeaths"
+        }
+    },
+    {
+        "pk": 300173,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nNmfDeaths"
+        }
+    },
+    {
+        "pk": 300174,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nNmfDeaths"
+        }
+    },
+    {
+        "pk": 300175,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nNmfDeaths"
+        }
+    },
+    {
+        "pk": 300176,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "Clinical_FirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300177,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "Clinical_FirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300178,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "Clinical_FirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300179,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "Clinical_FirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300180,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "Clinical_FirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300181,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "Clinical_FirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300182,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 300183,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 300184,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 300185,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 300186,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "nNewInfections"
+        }
+    },
+    {
+        "pk": 300187,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nNewInfections"
+        }
+    },
+    {
+        "pk": 300188,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nNewInfections"
+        }
+    },
+    {
+        "pk": 300189,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nNewInfections"
+        }
+    },
+    {
+        "pk": 300190,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nNewInfections"
+        }
+    },
+    {
+        "pk": 300191,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nNewInfections"
+        }
+    },
+    {
+        "pk": 300192,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 300193,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 300194,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 300195,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 300196,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-0",
+            "title": "totalPatentInf"
+        }
+    },
+    {
+        "pk": 300197,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "1-3",
+            "title": "totalPatentInf"
+        }
+    },
+    {
+        "pk": 300198,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "4-4",
+            "title": "totalPatentInf"
+        }
+    },
+    {
+        "pk": 300199,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-13",
+            "title": "totalPatentInf"
+        }
+    },
+    {
+        "pk": 300200,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "14-14",
+            "title": "totalPatentInf"
+        }
+    },
+    {
+        "pk": 300201,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "totalPatentInf"
+        }
+    },
+    {
+        "pk": 300202,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "Vector_Nv"
+        }
+    },
+    {
+        "pk": 300203,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "simulatedEIR"
+        }
+    },
+    {
+        "pk": 300204,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "annAvgK"
+        }
+    },
+    {
+        "pk": 300205,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "Clinical_RDTs"
+        }
+    },
+    {
+        "pk": 300206,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "inputEIR"
+        }
+    },
+    {
+        "pk": 300207,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "Vector_Nv0"
+        }
+    },
+    {
+        "pk": 300208,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "Vector_Sv"
+        }
+    },
+    {
+        "pk": 300209,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "Vector_Ov"
+        }
+    },
+    {
+        "pk": 300210,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nTransmit"
+        }
+    },
+    {
+        "pk": 300211,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "N_v0"
+        }
+    },
+    {
+        "pk": 300212,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "N_v"
+        }
+    },
+    {
+        "pk": 300213,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "O_v"
+        }
+    },
+    {
+        "pk": 300214,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "S_v"
+        }
+    },
+    {
+        "pk": 300215,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "P_A"
+        }
+    },
+    {
+        "pk": 300216,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "P_df"
+        }
+    },
+    {
+        "pk": 300217,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "P_dif"
+        }
+    },
+    {
+        "pk": 300218,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "alpha_i"
+        }
+    },
+    {
+        "pk": 300219,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "P_B"
+        }
+    },
+    {
+        "pk": 300220,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "P_C*P_D"
+        }
+    },
+    {
+        "pk": 300221,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": null,
+            "title": "median immunity Y"
+        }
+    },
+    {
+        "pk": 300222,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "IRS rel attr "
+        }
+    },
+    {
+        "pk": 300223,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "IRS preprand surv factor "
+        }
+    },
+    {
+        "pk": 300224,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Continuous",
+            "runs": [],
+            "type": "minor",
+            "title": "IRS postprand surv factor "
+        }
+    },
+    {
+        "pk": 300225,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nAddedToCohort"
+        }
+    },
+    {
+        "pk": 300226,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "sumLogPyrogenThres"
+        }
+    },
+    {
+        "pk": 300227,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nTreatments3"
+        }
+    },
+    {
+        "pk": 300228,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nTreatments2"
+        }
+    },
+    {
+        "pk": 300229,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nTreatments1"
+        }
+    },
+    {
+        "pk": 300230,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nDirDeaths"
+        }
+    },
+    {
+        "pk": 300231,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "totalInfs"
+        }
+    },
+    {
+        "pk": 300232,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nHospitalSeqs"
+        }
+    },
+    {
+        "pk": 300233,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "Clinical_HospitalFirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300234,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "innoculationsPerAgeGroup"
+        }
+    },
+    {
+        "pk": 300235,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nAntibioticTreatments"
+        }
+    },
+    {
+        "pk": 300236,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nMassIRS"
+        }
+    },
+    {
+        "pk": 300237,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nIndDeaths"
+        }
+    },
+    {
+        "pk": 300238,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nSeq"
+        }
+    },
+    {
+        "pk": 300239,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nMassITNs"
+        }
+    },
+    {
+        "pk": 300240,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nMassVA"
+        }
+    },
+    {
+        "pk": 300241,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nEPI_ITNs"
+        }
+    },
+    {
+        "pk": 300242,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nNMFever"
+        }
+    },
+    {
+        "pk": 300243,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nHospitalRecovs"
+        }
+    },
+    {
+        "pk": 300244,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nInfect"
+        }
+    },
+    {
+        "pk": 300245,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "sumlogDens"
+        }
+    },
+    {
+        "pk": 300246,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nHospitalDeaths"
+        }
+    },
+    {
+        "pk": 300247,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nMDAs"
+        }
+    },
+    {
+        "pk": 300248,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nSevere"
+        }
+    },
+    {
+        "pk": 300249,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nExpectd"
+        }
+    },
+    {
+        "pk": 300250,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nHost"
+        }
+    },
+    {
+        "pk": 300251,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nNmfDeaths"
+        }
+    },
+    {
+        "pk": 300252,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "Clinical_FirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300253,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nRemovedFromCohort"
+        }
+    },
+    {
+        "pk": 300254,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nPatent"
+        }
+    },
+    {
+        "pk": 300255,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nNewInfections"
+        }
+    },
+    {
+        "pk": 300256,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "nUncomp"
+        }
+    },
+    {
+        "pk": 300257,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "0-4",
+            "title": "totalPatentInf"
+        }
+    },
+    {
+        "pk": 300258,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nAddedToCohort"
+        }
+    },
+    {
+        "pk": 300259,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "sumLogPyrogenThres"
+        }
+    },
+    {
+        "pk": 300260,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nTreatments3"
+        }
+    },
+    {
+        "pk": 300261,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nTreatments2"
+        }
+    },
+    {
+        "pk": 300262,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nTreatments1"
+        }
+    },
+    {
+        "pk": 300263,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nDirDeaths"
+        }
+    },
+    {
+        "pk": 300264,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nHospitalSeqs"
+        }
+    },
+    {
+        "pk": 300265,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "Clinical_HospitalFirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300266,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "innoculationsPerAgeGroup"
+        }
+    },
+    {
+        "pk": 300267,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nAntibioticTreatments"
+        }
+    },
+    {
+        "pk": 300268,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nMassIRS"
+        }
+    },
+    {
+        "pk": 300269,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nIndDeaths"
+        }
+    },
+    {
+        "pk": 300270,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nSeq"
+        }
+    },
+    {
+        "pk": 300271,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nMassITNs"
+        }
+    },
+    {
+        "pk": 300272,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nMassVA"
+        }
+    },
+    {
+        "pk": 300273,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nEPI_ITNs"
+        }
+    },
+    {
+        "pk": 300274,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nNMFever"
+        }
+    },
+    {
+        "pk": 300275,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nHospitalRecovs"
+        }
+    },
+    {
+        "pk": 300276,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "sumlogDens"
+        }
+    },
+    {
+        "pk": 300277,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nHospitalDeaths"
+        }
+    },
+    {
+        "pk": 300278,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nMDAs"
+        }
+    },
+    {
+        "pk": 300279,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nExpectd"
+        }
+    },
+    {
+        "pk": 300280,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nNmfDeaths"
+        }
+    },
+    {
+        "pk": 300281,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "Clinical_FirstDayDeaths"
+        }
+    },
+    {
+        "pk": 300282,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nRemovedFromCohort"
+        }
+    },
+    {
+        "pk": 300283,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "nNewInfections"
+        }
+    },
+    {
+        "pk": 300284,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "5-14",
+            "title": "totalPatentInf"
+        }
+    },
+    {
+        "pk": 300285,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nAddedToCohort"
+        }
+    },
+    {
+        "pk": 300286,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "sumLogPyrogenThres"
+        }
+    },
+    {
+        "pk": 300287,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "sumlogDens"
+        }
+    },
+    {
+        "pk": 300288,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nMDAs"
+        }
+    },
+    {
+        "pk": 300289,
+        "model": "data_services.dimchannel",
+        "fields": {
+            "units": "",
+            "file_name": "Survey",
+            "runs": [],
+            "type": "15-98",
+            "title": "nRemovedFromCohort"
+        }
+    }
+]

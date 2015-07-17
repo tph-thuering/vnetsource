@@ -1,0 +1,66 @@
+{% extends "results_visualizer/vizbase.html" %}
+{% load i18n %}
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 1/14/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Caleb Reinking <Caleb.M.Reinking.2@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+
+{% block page_title %}
+    VecNet Results Viewer
+{% endblock %}
+
+{% block main_content %}
+
+    <style>
+        .split-column-left, .split-column-right {height: 265px;text-align: center;}
+        .split-column-left {margin-left: 0px}
+        .split-column-right {margin-right: 0px}
+        .launch-button {margin-top: 20px;}
+        .description-text {height: 190px;}
+
+        /* This is used to space the buttons effectively. Really only needed for the leftmost buttons */
+        .launch-button>a {margin-right:10px}
+    </style>
+
+    <div class="container" >
+        <div class="span11">
+            <div class="well">
+                <h2>VecNet Results Viewer</h2>
+                <h4>This tool is provided as a portal to the results of Transmission Simulator executions. All
+                of your private executions as well as public executions are available for visualization.
+                Get started by reading and choosing one of the options below!</h4>
+            </div>
+            <div>
+                <div class="well span5 split-column-left">
+                    <div class="description-text">
+                        <h3>Scenario-Based</h3>
+                        The scenario-based visualization interface allows the graphing and download of data series from a specific Transmission Simulator
+                        run. The Scenario-based interface is useful for viewing and comparing data from within the same Transmission Simulator scenario
+                        or run. Use the buttons below to browse either EMOD or OpenMalaria results data.
+                    </div>
+                    <div class="launch-button">
+                        <a href="{% url 'results_vis_model' 'EMOD' %}" class="btn btn-primary">EMOD Results</a>
+                        <a href="{% url 'results_vis_model' 'OM' %}" class="btn btn-primary">OpenMalaria Results</a>
+                    </div>
+                </div>
+                <div class="well span5 split-column-right">
+                    <div class="description-text">
+                        <h3>Custom</h3>
+                        The custom interface is provided to visualize data from multiple Transmission Simulator runs on the same chart. This
+                        method opens up the output data to create custom charts that are not bound by simulation model, scenario, or homogenous
+                        output types.
+                    </div>
+                    <div class="launch-button">
+                        <a href="{% url 'custom_results_viewer' %}" class="btn btn-primary">Custom Visualization</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

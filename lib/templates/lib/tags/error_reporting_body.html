@@ -1,0 +1,99 @@
+
+
+{% block extra_css %}
+    <style>
+    .server-error-form-table {
+        width:85%;
+        margin-left:5%;
+    }
+
+    .server-error-form-table>tbody>tr>td:nth-child(1) {
+        width:25%;
+    }
+
+
+    input.form-input-area, textarea.form-input-area{
+        width:100%;
+    }
+
+    #rant-row {
+        vertical-align: top;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    #form-submit-button {
+        margin-right:7.5%;
+        float:right;
+        width: 100px;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    </style>
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+        <div class="well">
+            <div class="span11">
+            <p>{{ error_explanation|safe }}</p><br/><br/>
+            </div>
+
+            <div class="row">
+                <div class="span11">
+                    <div class="row">
+            <div class="span7">
+                <form action="{% url 'submit_server_error' %}" method="post">
+                    {% csrf_token %}
+                    <table class="server-error-form-table">
+                        <tbody>
+                            <tr>
+                                <td><label for="name">Your Name:</label></td>
+                                <td><input type="text" placeholder="John Smith" name="name" class="form-input-area" ></td>
+                            </tr>
+                            <tr>
+                                <td><label for="email">Your Email:</label></td>
+                                <td><input type="text" placeholder="John@theSmiths.org" name="email" class="form-input-area" ></td></tr>
+                            <tr id="rant-row">
+                                <td><label for="rant">Tell us about the problem you are experiencing:</label></td>
+                                <td><textarea placeholder="I encountered this page as I was trying to create a new Transmission Simulator scenario" class="form-input-area" name="rant" class="form-input-area" rows="10"></textarea></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <input type=hidden name="error_code" value="{{error_code}}">
+                    <button type=submit class="btn btn-primary" id="form-submit-button">Send Report</button>
+                </form>
+         <!--<p>Please let our programmers know that they messed up by filling out this form! We'll bribe them with pizza to fix it asap!</p> -->
+            </div>
+
+            <div class="span4">
+
+                <ul>
+{#                    <li><a href="https://www.vecnet.org/index.php/about-vecnet">About VecNet</a></li>#}
+{#                    <li><a href="https://www.vecnet.org/index.php/about-vecnet/partner-sites">Partner Sites</a></li>#}
+                    <li><a href="https://www.vecnet.org/index.php/about-vecnet/faq">FAQs</a></li>
+                    <li><a href="https://www.vecnet.org/index.php/contact-us">Contact Us</a></li>
+                    <li><a href="https://www.vecnet.org/index.php/about-vecnet/vecnet-how-to">VecNet How To</a></li>
+                    <li><a href="https://www.vecnet.org/index.php/about-vecnet/quick-start-guide">Quick Start Guide</a></li>
+                    <li><a href="https://www.vecnet.org/index.php/about-vecnet/known-issues">Known Issues</a></li>
+                </ul>
+                <br/>
+{#                Tools:#}
+{#                <ul>#}
+{#                    <li><a href="/ts">Transmission Simulator</a></li>#}
+{#                    <li><a href="/pie">PIE</a></li>#}
+{#                    <li><a href="/cifer">CIFER</a></li>#}
+{#                    <li><a href="https://dl.vecnet.org">Digital Library</a></li>#}
+{#                    <li><a href="/datawarehouse">Datawarehouse Browser</a></li>#}
+{#                </ul>#}
+            </div></div></div>
+                </div>
+        </div>
+    </div>
+{% endblock %}

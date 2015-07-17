@@ -1,0 +1,28 @@
+.boxHeaderDiv
+{
+    height: 35px;
+    text-align: center;
+    position: relative;
+    font-size: 35px;
+}
+
+.boxHeaderSpan
+{
+    position: relative;
+    top: -.3em;
+    background: white;
+    display: inline-block;
+}
+
+.boxText
+{
+    font-size: 21px;
+    line-height: 1.2em;
+}
+
+
+.boxTextBig
+{
+    font-size: 30px;
+    line-height: 1.2em;
+}

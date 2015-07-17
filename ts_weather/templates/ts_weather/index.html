@@ -1,0 +1,104 @@
+{% extends "ts_weather/base.html" %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_weather/style.css' %}" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+{% block inner_content %}
+
+<script>
+    function checkFiles(buttonName)
+    {
+        if (buttonName == 'UploadCsv')
+        {
+            if ($("#id_csvUploadForm-dataType").val() != "" && $("#id_csvUploadForm-csvFile").val() != "")
+            {
+                $("#csvUpload").submit();
+            }
+            else
+            {
+                alert("Select a data type and supply a csv file.");
+            }
+        }
+        else if (buttonName == 'UploadEmod')
+        {
+            if ($("#id_climateUploadForm-dataType").val() != "" && $("#id_climateUploadForm-binFile").val() != ""
+                    && $("#id_climateUploadForm-jsonFile").val() != "")
+            {
+                $("#emodUpload").submit();
+            }
+            else
+            {
+                alert("Select a data type and supply a binary and json file.");
+            }
+        }
+
+        return false;
+    }
+</script>
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+</ul>
+<br>
+     <div class="well well-large">
+
+         <div style="height: 1px; border-top: 1px solid black; text-align: center; position: relative"><span style="position: relative; top: -.7em; background: white; display: inline-block">Generate EMOD weather files</span></div>
+        <br>
+    The types of climate input data are air temperature, land temperature, rainfall, and relative humidity.<br>
+    You can generate one type of climate data at a time.
+
+<div id="csvFileUpload">
+    <form id="csvUpload" enctype="multipart/form-data" action="" method="post">{% csrf_token %}<br>
+        <input type="hidden" name="action" value="uploadCsv" />
+        <div class="row" style="float:left">
+            {% for field in csvUploadForm %}
+                <div class="span1">{{ field.label }}:</div>
+                <div class="span4">{{ field }}</div>
+            {% endfor %}
+        </div>
+    </form>
+    <div class="uploadButton">
+        <button onclick="checkFiles('UploadCsv')">Upload</button>
+    </div>
+</div>
+<br>
+<br>
+</div>
+
+<div class="well well-large">
+<div style="height: 1px; border-top: 1px solid black; text-align: center; position: relative">
+    <span style="position: relative; top: -.7em; background: white; display: inline-block">View or convert EMOD weather files to CSV</span>
+</div>
+<br>
+    <p align="justify">
+         The DTK uses two types of files for the input of climate by data, one for metadata and one for binary data. <br>
+    <b> A binary file </b> (for example, Madagascar_2_5arcmin_air_temperature_daily.bin) contains the climate data itself. <br>
+    A corresponding <b>JSON file</b> (for example, Madagascar_2_5arcmin_air_temperature_daily.bin.json) contains metadata
+    that describes the binary data. One set comprised of these two input files is required for each of the basic climate
+    by data types used in the simulation configuration file. <br>
+    The types of climate input data are air temperature, land temperature, rainfall, and relative humidity.<br>
+    You can visualize one type of climate data at a time.
+
+    </p>
+<div id="emodFileUpload">
+    <form id="emodUpload" enctype="multipart/form-data" action="" method="post">{% csrf_token %}<br>
+        <div style="float:left">
+            <input type="hidden" name="action" value="uploadEmod" />
+            <div id="climateUploadFormat">{{ climateUploadForm.formHtml }}</div>
+            <div class="row">
+                {% for field in climateUploadForm %}
+	                </div><div class="row">
+
+                        <div class="span2"> {{ field.label }}:</div>
+                        <div class="span4">{{ field }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+    <div class="uploadButton">
+        <button onclick="checkFiles('UploadEmod')">Upload</button>
+    </div>
+</div>
+<br><br>
+</div>
+{%  endblock %}

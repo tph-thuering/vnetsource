@@ -1,0 +1,139 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/14/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title_local %}Scaling Factors{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/ts_emod.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js" type="text/javascript"></script>
+{% endblock %}
+{% block breadcrumb %}Scaling Factors{% endblock %}
+{% block step_title %}Scaling Factors{% endblock %}
+{% block page_content %}
+    {% comment %}<p>Set the Larval Habitat factor or have the ND Calibration tool (not yet available)  provide this factor based on your target EIR.
+        This may take a while.</p>{% endcomment %}
+    <p align="justify">
+        Insertion of a value for x_Temporary_Larval_Habitat will modify the parameter values of the “Habitat Type”
+        selected in step 4 (Vector Selection) without changing the temporal dynamics of the habitat type selected in
+        Step 4. The effect will be to increase or decrease the productivity of the habitat type by a factor specified by
+        the value of the scaling factor selected (“1” will not change the x_Temporary_Larval_Habitat” a value of “2”
+        will double the value while 0.5 will halve the x_Temporary_Larval_Habitat value. The Scaling Factor provides a
+        mechanism to rapidly fit your simulation to the biting rates and entomological inoculation rates observed in the
+        geographic area for which you are creating a simulation.
+    </p>
+    <div class="well page-well scenario">
+    <form action="" method="post" name="wizard_form">{% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {% for form in wizard.form.forms %}
+                    {{ form }}
+                {% endfor %}
+            {% else %}
+                <div class="row">
+                    <div class="span1"></div>
+                    <div class="span6">
+                        {% for field in form %}
+                            <div class="fieldWrapper">
+                                {% if field.errors %}
+                                <!-- {{ field.label_tag }} -->{{ field.errors }}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br/><br/>
+
+                <div class="row">
+                    <div class="span1"></div>
+                    <div class="span8">
+
+                        <input type="hidden" name="scaling_type" checked />&nbsp;&nbsp;x_Temporary_Larval_Habitat&nbsp;
+                        <span class="tooltip_link"
+                        data-original-title="Scales the habitat size for all mosquito populations." data-toggle="tooltip">
+                            <i class="icon-info-sign"></i></span>&nbsp;&nbsp;
+                        {{ form.x_Temporary_Larval_Habitat }}
+                    </div>
+                    {% comment %}
+                    <div class="span3" style="margin-left: 0;">
+                        <input type="radio" name="demographic_type" disabled />&nbsp;Calibrate with target annual EIR
+                    </div>
+                </div>{% endcomment %}
+                {% comment %}
+                <div class="row">
+                    <div class="span1"></div>
+                    <div class="span6">
+                        <span class="help-block">&nbsp;Range: 0.00 to 10,000</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span1"></div>
+                    <div class="span4">
+                        <input disabled type="radio" />&nbsp;&nbsp;Set x_Local_Migration
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="tooltip_link"
+                        data-original-title="Not yet available: Multiplier for rate of migration by foot travel." data-toggle="tooltip">
+                            <i class="icon-info-sign"></i></span>
+                        <input disabled id="id_scaling_factors-x_Local_Migration" type="text"/>
+                        </div><div class="span3" style="margin-left: 0;">
+                        <input type="radio" disabled />&nbsp;Calibrate with target Migration
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="span1"></div>
+                    <div class="span6">
+                        <span class="help-block">&nbsp;Range: 0.00 to 3.40282e+038</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span1"></div>
+                    <div class="span4">
+                        <input disabled type="radio"/>&nbsp;&nbsp;Set up an Outbreak
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="tooltip_link"
+                        data-original-title="Not yet available: This intervention allows the introduction of a disease outbreak event by the addition of infected individuals or by the infection of existing individuals in the specified node set. " data-toggle="tooltip">
+                            <i class="icon-info-sign"></i></span>
+                        <br/>
+                        <input disabled id="id_scaling_factors-x_Local_Migration" type="text"/>
+                    </div><div class="span3" style="margin-left: 0;">
+                        <input type="radio" name="demographic_type" disabled />&nbsp;Calibration
+                        </div>
+                {% endcomment %}
+                </div>
+            {% endif %}
+        <br/><br/>
+        <div class="form-actions">
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn">
+                    <i class="icon-arrow-left"></i> Previous Step</button>
+            {% endif %}
+            {% if wizard.steps.next %}
+                <button type="submit" class="right btn">Next Step <i class="icon-arrow-right"></i></button>
+            {% else %}
+                <button type="submit" class="right btn">Save <i class="icon-save"></i></button>
+            {% endif %}
+        </div>
+    </form>
+    </div>
+    <script>
+        // add validation to require values name
+        $(document).ready(function () {
+            $("form").validate({
+                rules: {
+                    "id_start-name": {
+                        required: true
+                    }
+                }
+            });
+        });
+  </script>
+{% endblock %}

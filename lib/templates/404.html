@@ -1,0 +1,15 @@
+{% extends "lib/base_jumbotron.html" %}
+{% load error_reporting_body %}
+
+{% block page_title %}
+    VecNet - 404 Page Not Found
+{% endblock %}
+
+{% block jumbotron_content %}
+    <h1>VecNet</h1>
+    <p class="lead">404 Page Not Found</p>
+{% endblock %}
+
+{% block main_content %}
+    {% error_reporting_body '404'%}
+{% endblock %}

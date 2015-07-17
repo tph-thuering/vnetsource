@@ -1,0 +1,59 @@
+{% extends "ts_repr/base.html" %}
+
+{% block extra_local_js %}
+    <script>
+{#        // weather.js needs this variable#}
+{#        var weather_description_url = "{{ weather_description_url }}";#}
+{#        // save_buttons.js needs these variables#}
+{#        var page_name = "{{ page_name }}";#}
+{#        var data_to_save = {};#}
+    </script>
+
+{#    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/weather.js"></script>#}
+{#    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/save_buttons.js"></script>#}
+{% endblock %}
+
+{% block page_content %}
+    <form id="form" action="" method="post">{% csrf_token %}<br>
+{#                        <input type="hidden" id="representative_id" value="{{ representative.id }}" />#}
+                        {# This is defaultly set to -1 but will immediately change on page load to the id #}
+                        {# of the first element in the weather list in the dropdown menu. #}
+{#                        <input type="hidden" name="weather_id" id="weather_id" value="-1" />#}
+{#                        <input type="hidden" id="form-is-valid" name="form-is-valid" value="false" />#}
+{##}
+{#                        <div class="row">#}
+{#                            <div class="span5">#}
+{#                                Select a Koppen climate type for your simulation:#}
+{#                            </div>#}
+{#                            <div class="span3">#}
+{#                                <select id="weather-select">#}
+{#                                    {% for weather_option in weather %}#}
+{#                                        <option value="{{ weather_option.id }}">{{ weather_option.name }} ({{ weather_option.short_description }})</option>#}
+{#                                    {% endfor %}#}
+{#                                </select>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <br>#}
+{##}
+{#                        <div class="row">#}
+{#                            <div class="span9">#}
+{#                                <p id="weather-description">#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <br>#}
+{##}
+{#                        <div class="row">#}
+{#                            <div class="span9">#}
+{#                                <p>#}
+{#                                    There will be a way to visualize the weather here later.#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <br>#}
+{##}
+{#                        {% include "ts_repr/save_buttons.html" %}#}
+{##}
+        <input type="submit" class="btn" value="Save Species Parameter" />
+    </form>
+{% endblock %}

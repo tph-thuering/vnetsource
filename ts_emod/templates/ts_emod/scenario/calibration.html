@@ -1,0 +1,59 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/14/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title_local %}Calibration{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/ts_emod.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js" type="text/javascript"></script>
+{% endblock %}
+{% block breadcrumb %}Calibration{% endblock %}
+{% block step_title %}Calibration{% endblock %}
+{% block page_content %}
+
+    <div class="well page-well scenario">
+    <p>Calibrating to find target annual EIR of 25...</p>
+    <form action="" method="post" name="wizard_form">{% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {% for form in wizard.form.forms %}
+                    {{ form }}
+                {% endfor %}
+            {% else %}
+                <div class="row">
+                    {{ wizard.form.as_grid_div }}
+                </div>
+            {% endif %}
+        <br/><br/><br/>
+    You can leave this page now. When you come back to this simulation, you will be brought back to this step.
+        <div class="form-actions">
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn">
+                    <i class="icon-arrow-left"></i> Previous Step</button>
+            {% endif %}
+            <button type="submit" class="right btn">Use Selected <i class="icon-arrow-right"></i></button>
+        </div>
+    </form>
+    </div>
+    <script>
+        // add validation to require values name
+        $(document).ready(function () {
+            $("form").validate({
+                rules: {
+                    "id_start-name": {
+                        required: true
+                    }
+                }
+            });
+        });
+  </script>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% comment %}
+    IMPORTANT!!!! This template tag requires that the page including it specify and load the following javascript files
+    If you don't do this, it WILL NOT WORK!
+
+    <script type="text/javascript" src="https://code.highcharts.com/stock/2.0.4/highstock.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://code.highcharts.com/stock/2.0.4/modules/exporting.js"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/stock/2.0.4/highcharts-more.js"></script>
+{% endcomment %}
+
+{% block extra_css %}
+        <style>
+            .row-pressable, .accordion_link{cursor: pointer;}
+            .help-block {font-size: 10px; margin-top:-5px; margin-bottom: 5px;}
+            .accordion-heading .accordion-toggle.key-accordion-heading {padding-bottom: 0px;}
+            .accordion-heading {background-color: #f5f5f5;}
+            .select-locked {font-size: 12px;vertical-align: top;}
+            .key-summary-row , .channel-summary-row {font-size:12px;}
+            .key-summary-row:nth-child(odd), .channel-summary-row:nth-child(odd) { background-color: #f9f9f9}
+            .data-option{margin-bottom: 5px;margin-top: 5px;}
+            .data-option-label{margin-bottom: 0px;}
+            .accordion-toggle.vis-old{cursor: auto;}
+            {% comment %}Overwrite the padding, text align, and width to get the tabs to be skinnier{% endcomment %}
+            .nav-tabs>li>a{padding-left: 0px;padding-right: 0px;text-align: center;width: 65px;}
+            .series-select-option-label {font-weight: bold;font-size: 14px}
+            select{width:100%}
+            .tooltip-inner {
+                max-width: 600px;
+            }
+
+        </style>
+
+{% endblock %}
+
+    <script type="text/javascript">
+        var CSRF_TOKEN = "{{ csrf_token }}";
+        var viewtastic_link = {% url 'results_viewer.index' %};
+        var run_chosen_flag = false;
+        var execIDObject = {}; // contains the execution id assuming no sweeps are present for the selected run.
+    </script>
+
+    <div class="container" >
+        <div class="row">
+            <!-- span for scenario, run, key, and channel selection elements -->
+            <div class="span4">
+
+                <!-- well for scenario and run selection elements -->
+                <div class="well">
+
+                    <!-- Twitter Bootstrap tabs - see http://getbootstrap.com/2.3.2/components.html#navs for info -->
+                    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                        <li class="active" id="options-tab"><a href="#options-div" data-toggle="tab">Options</a></li>
+                        <li id="legend-tab"><a href="#legend-div" data-toggle="tab">Legend</a></li>
+                    </ul>
+                    <div id="my-tab-content" class="tab-content">
+                        <div class="tab-pane active" id="options-div">
+
+                            <div id="scenario-select-wrapper" >
+                                <label for="scenario-select" class="series-select-option-label">Simulations:</label>
+                                <select id="scenario-select">
+                                    <option value="default">Select a simulation</option>
+                                {% if private_scenarios %}
+                                    <optgroup label="My Simulations">
+                                    {% autoescape off %} {% comment %} Allow html in tags for formatting option names (extra spaces) {% endcomment %}
+                                        {% for scenario in private_scenarios %}
+                                            {% if scenario.id == 0 %}
+                                                <optgroup label="{{ scenario.name }}"></optgroup>
+                                            {% else %}
+                                                <option value="{{ scenario.id }}">{{ scenario.name }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endautoescape %}
+                                    </optgroup>
+                                {% endif %}
+                                    <optgroup label="Public Simulations">
+                                        {% for scenario in public_scenarios %}
+                                            <option value="{{ scenario.id }}">({{ scenario.id }}) {{ scenario.name }}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            {% if scenario_choice %}
+                                <script>
+                                    $('#scenario-select').val('{{ scenario_choice }}').change();
+                                </script>
+                            {% endif %}
+
+                            <div id="scenario-load-spinner" style="display:none;text-align: center"><i class="icon icon-spinner icon-spin"></i></div>
+                            <div id="run-select-wrapper" {% if not scenario_choice %}style="display: none"{% endif %}>
+                                <label for="run-select" class="series-select-option-label">Runs:</label>
+                                <select id="run-select">
+                                    <option value="default">Select a run</option>
+                                    {% for run in runs %}
+                                        <option value="{{ run.id }}">({{ run.id }}) {{ run.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            {% if run_choice %}
+                                <script>
+                                    $('#scenario-select').val('{{ scenario_choice }}').change();
+                                    $('#run-select').val('{{ run_choice }}').change();
+                                    var run_chosen_flag = true;
+                                </script>
+                            {% endif %}
+
+                            <div id="run-load-spinner" style="display:none; text-align: center"><i class="icon icon-spinner icon-spin"></i></div>
+                            <div id="channel-choice" style="display: none">
+                                <label for="channel-select" class="series-select-option-label">Outputs:</label>
+                                <select id="channel-select">
+                                </select>
+                            </div>
+                            <div id="sweep-select-wrapper" style="display: none">
+                                <label class="series-select-option-label">Sweeps:</label>
+                                <div id="sweep-select-div"></div>
+                            </div>
+                            <div id="align-select-wrapper" style="display: none">
+                                <label for="align-option-select" class="series-select-option-label">Time Alignment:</label>
+                                <select id="align-option-select">
+                                    <option value="True">True Date Alignment</option>
+                                    <option value="Left">Forced Date Alignment (1/1/1970)</option>
+                                </select>
+                            </div>
+                            <div id="aggregation-select-wrapper" style="display: none">
+                                <label for="aggregation-option-select" class="series-select-option-label">Aggregation:</label>
+                                <select id="aggregation-option-select">
+                                    <option value="daily">None</option>
+                                    <option value="yearly_sum">Yearly Sum</option>
+                                </select>
+                            </div>
+                            <button type="button" style="margin-right:5px" class="btn btn-success disabled" id="add-data-set-to-chart">Add data to chart
+                            </button>
+                            <span id="dataset-loading-span" style="display:none"><i class="icon icon-spin icon-spinner"></i> Loading. <a id="cancel-fetch-link" href="javascript:void(0)">Cancel?</a></span>
+                        </div>
+                        <div class="tab-pane" id="legend-div" style="height:443px">
+                            <div id="legend-inner-div">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- span for the selection summary and chart accordions -->
+            <div class="span8">
+                <div class="well">
+                    <div id="highchart-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+

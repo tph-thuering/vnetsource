@@ -1,0 +1,159 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 3/12/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title_local %}Review Results{% endblock %}
+
+{% block breadcrumb %}Review Results{% endblock %}
+{% block step_title %}Review Results{% endblock %}
+{% block page_content %}
+    <div class="well page-well scenario">
+        <form action="" method="post" name="wizard_form">{% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {% for form in wizard.form.forms %}
+                    {{ form }}
+                {% endfor %}
+            {% else %}
+                    {{ wizard.form }}
+            {% endif %}
+        {% if not my_run.time_launched %}
+            This simulation run has not been launched, please go back to the previous step.
+        {% endif %}
+        {% if my_run.my_completed == 0 or my_run.my_completed == None %}
+            This simulation run is still running.  Please check back later (or hit the refresh button).
+            <br/><br/>
+            Simulation info:
+            <br/>
+            &nbsp;&nbsp;&nbsp;ID: {{ scenario.id }}
+            <br/>
+            &nbsp;&nbsp;&nbsp;Name: {{ scenario.name }}
+            <br/>
+            &nbsp;&nbsp;&nbsp;Location: {{ scenario.template }}
+            <br/>
+            &nbsp;&nbsp;&nbsp;Duration: {{ Simulation_Duration }} days
+            <br/><br/>Simulation running:
+            &nbsp;&nbsp;[ progress unknown ]&nbsp;&nbsp;&nbsp;&nbsp; <i class="icon-spinner icon-spin icon-large"></i>
+            <br/><br/>
+            <a href="{% url "ts_scenario_step" 'review' %}" class="btn btn-large"><i class="icon-refresh"></i>&nbsp;&nbsp;Refresh</A>
+        {% endif %}
+        {% if my_run.my_completed > 0 %}
+            <br/>
+                1. Review Results for this test run of <strong>{{ scenario.id }}&nbsp;{{ scenario.name }}&nbsp;(location: {{ scenario.template }}).</strong>
+            <br/>
+            <div class="row">
+                <div class="span1"> </div>
+                <div class="span3">
+                    <a href="{% url "results_viewer.run" my_run.id %}" class="btn btn-large" style="width:160px;">Visualize Results &nbsp;&nbsp;<i class="icon-bar-chart"></i></a>
+                </div>
+            </div>
+            <br/>
+                2. (Optional) Change parameters by revisiting previous pages and rerunning the simulation.
+            <br/>
+            <div class="row">
+                <div class="span1"> </div>
+                <div class="span3">
+                    <a href="{% url "ts_scenario_step" 'config' %}" class="btn btn-large" style="width:160px;">Change Parameters &nbsp;&nbsp;<i class="icon-undo"></i></a>
+                </div>
+            </div>
+            <br/>
+                3. Done editing the simulation.  Once you've closed the editor, you can add interventions to your simulation and run sweeps on values.
+            <br/>
+            <div class="row">
+                <div class="span1"> </div>
+                <div class="span3">
+
+                    <button type="submit" class="btn btn-large" style="width:200px;">
+                        Close Editor &nbsp;&nbsp;<i class="icon-check"></i></button>
+                </div>
+            </div>
+        {% endif %}
+            <br/><br/>
+            <br/>
+            <div class="form-actions">
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn"><i
+                            class="icon-arrow-left"></i> Previous Step
+                    </button>
+                {% endif %}
+                {% if my_run.my_completed > 0 %}
+                    <button type="submit" class="right btn" {% comment %}onmousedown="showdiv('progress');"{% endcomment %}>
+                        Close Editor &nbsp;&nbsp;<i class="icon-check"></i></button>
+                {% endif %}
+            </div>
+            {% comment %}
+            <div class="row" name="progress" id="progress" style="display:none;">
+                <div class="span2"></div>
+                <i class="icon-spinner icon-spin icon-large"></i>&nbsp;&nbsp;Loading Location data...
+            </div>
+        {% endcomment %}
+        </form>
+    </div>
+    <style>
+        #feedbackModal {
+            max-height: 650px;
+            width: 800px;
+            margin: 0 0 0 -400px;
+        }
+    </style>
+    <div id="feedbackModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Please review the weather data.</h3>
+        </div>
+        <div class="modal-body">
+            <div id="default-message" style="display: block;">
+                <h4>Please select a data set.</h4>
+            </div>
+            <div id="spinner" style="display: none;">
+                <i class="icon-spinner icon-spin icon-large"></i>&nbsp;&nbsp;Loading data...
+            </div>
+            <div id="graph-location" style="display: none;">
+                <h3>&nbsp;&nbsp;&nbsp;Mean Temp</h3>
+                <div id="mean-temp-div"></div>
+                <br/>
+
+                <h3>&nbsp;&nbsp;&nbsp;Rainfall</h3>
+                <div id="rainfall-div"></div>
+                <br/>
+
+                <h3>&nbsp;&nbsp;&nbsp;Humidity</h3>
+                <div id="humidity-div"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn right" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+    <script>
+        {% comment %}
+            $(function () { document.getElementById("progress").style.display = "none"; });
+            function showdiv(id) { document.getElementById(id).style.display = "block"; }
+        {% endcomment %}
+        /*  {% comment %} #3129 - add location feedback graphs to a modal {% endcomment %} */
+        $('#modal-button').click(function () {
+            if (!$("select").val()) {
+                return false;
+            }
+            $("#default-message").hide();
+            $("#spinner").show();
+            $("#graph-location").hide();
+            $.get("{% url 'ts_emod_location_graphs' %}" + $("select").val(), function (chart_dict) {
+                $("#spinner").hide();
+                $("#graph-location").show();
+                $('#rainfall-div').highcharts("StockChart", JSON.parse(chart_dict.rainfall_chart));
+                $('#mean-temp-div').highcharts("StockChart", JSON.parse(chart_dict.mean_temp_chart));
+                $('#humidity-div').highcharts("StockChart", JSON.parse(chart_dict.humidity_chart));
+            });
+        });
+    </script>
+{% endblock %}

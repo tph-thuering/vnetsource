@@ -1,0 +1,64 @@
+                    <div class="row">
+                    <div class="span2"> </div>
+                    <div class="span2" id="div_button_emod"><a class="btn btn-large" href="#emodModal" role="button" data-toggle="modal">
+                        More on EMOD</a> </div>
+                    <div class="span2" id="div_button_om"><a class="btn btn-large" href="#omModal" role="button" data-toggle="modal">
+                        More on OpenMalaria</a> </div>
+                    </div>
+
+    <!-- EMOD Modal -->
+    <style>
+    .modal { position: fixed; }
+    </style>
+<div id="emodModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">EMOD</h3>
+  </div>
+  <div class="modal-body">
+    <p><strong>EMOD</strong> was developed by The Institute for Disease Modeling (IDM).   Publications about <strong>EMOD</strong> can be found at:</p>
+      <p align="center">
+          <a href="http://idmod.org/publications/topic/malaria" target="_blank"><strong>http://idmod.org/publications/topic/malaria</strong></a>
+    </p>
+    <p align="justify">
+        <ul>
+            <li> <strong>EMOD</strong> models both humans and vectors as individual “agents”.</li>
+            <li> The <strong>EMOD</strong> model is designed for both human and vector-centric interventions.</li>
+            <li> Currently, on VecNet, the <strong>EMOD</strong> workflow has more input and output options,
+                and hence is more detailed to setup and run (compared to <strong>OpenMalaria</strong>).</li>
+            <li> <strong>EMOD</strong> simulations run longer on VecNet (than <strong>OpenMalaria</strong>).</li>
+            <li> <strong>EMOD</strong> documentation can be found at:
+                 <a href="http://idmod.org/idmdoc/" target="_blank"><strong>http://idmod.org/idmdoc/</strong></a>
+        </ul>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+<!-- OM Modal -->
+<div id="omModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">OpenMalaria</h3>
+  </div>
+  <div class="modal-body">
+    <p><strong>OpenMalaria</strong>: was developed by the Swiss Tropical and Public Health Institute (Swiss TPH).
+        Publications about <strong>OpenMalaria</strong> can be found at:</p>
+      <p align="center">
+          <a href="https://github.com/SwissTPH/openmalaria/wiki/References" target="_blank"><strong></strong>https://github.com/SwissTPH/openmalaria/wiki/References</strong></a>
+    </p>
+    <p align="justify">
+        <ul>
+            <li> <strong>OpenMalaria</strong> models humans as individual “agents”; vector dynamics are modeled with a system of equations.</li>
+            <li> <strong>OpenMalaria</strong> model is designed for human-centric interventions.</li>
+            <li> Currently, on VecNet, the <strong>OpenMalaria</strong> workflow is simpler to setup and run (compared to <strong>EMOD</strong>).</li>
+            <li> <strong>OpenMalaria</strong> simulations run quicker on VecNet (than <strong>EMOD</strong>).</li>
+        </ul>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+

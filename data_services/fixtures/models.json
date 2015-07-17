@@ -1,0 +1,52 @@
+[
+    {
+        "pk": 1,
+        "model": "data_services.dimmodel",
+        "fields": {
+            "model": "EMOD"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "data_services.dimmodel",
+        "fields": {
+            "model": "OpenMalaria"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "data_services.dimdtkversion",
+        "fields": {
+            "release_date_stamp": "2013-03-04T12:57:40",
+            "version_number": 1.5,
+            "release_number": 2695
+        }
+    },
+    {
+        "pk": 2,
+        "model": "data_services.dimdtkversion",
+        "fields": {
+            "release_date_stamp": "2013-03-04T12:57:40",
+            "version_number": 1.5,
+            "release_number": 2695
+        }
+    },
+    {
+        "pk": 8,
+        "model": "data_services.dimdtkversion",
+        "fields": {
+            "release_date_stamp": null,
+            "version_number": 1.5,
+            "release_number": 2659
+        }
+    },
+    {
+        "pk": 9,
+        "model": "data_services.dimdtkversion",
+        "fields": {
+            "release_date_stamp": null,
+            "version_number": 30.0,
+            "release_number": 3
+        }
+    }
+]

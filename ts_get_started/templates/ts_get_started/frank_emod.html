@@ -1,0 +1,89 @@
+{% extends "ts_get_started/base.html" %}
+{% load staticfiles %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_get_started/style.css' %}" />
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started.frank.index' %}">Select a model</a></li>
+    > Select a simulation type
+</ul>
+
+<br>
+
+<div style="font-size: 35px">
+    Select a simulation type:<br>
+</div>
+<br>
+<br>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            SINGLE NODE SIMULATION
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText" aligh="justify">
+            The EMOD System allows the user to build a temporal
+
+model that simulates both a baseline of malaria transmission across time in a
+
+simulated environment as well as the possible impact on this baseline of different
+
+combinations of malaria interventions.  The model runs at daily time steps, and in
+
+its simplest form, it simulates events at a single point or node.  This kind of
+
+simulation can conceptually represent a region across which all conditions of
+
+malaria transmission and control are represented by the single node simulation.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='{% url "ts_get_started.frank.emod_single_node" %}'>
+                <button class="btn">Single Node Simulation</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            MULTIPLE NODE SIMULATION
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText" align="justify"> More spatially explicit simulations can be produced
+two ways.  The simplest is to establish a single node simulation that is directly
+
+modified by linearly increasing or decreasing the model output parameters by
+
+application of an external scaling factor called the Larval_Habitat_Multiplier.  These
+
+different versions of the single node simulation are linked by data that are shared
+
+across each version.  A more complex approach that is also much more robust is to
+
+run multiple different simulations, each with its own unique parameter settings,
+
+that are allowed to communicate with each other at each time step by rules that
+
+involve the movement of people and parasites across the different nodes.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='http://129.74.247.13:9000/' >
+                <button class="btn">Multiple node simulation</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{%  endblock %}

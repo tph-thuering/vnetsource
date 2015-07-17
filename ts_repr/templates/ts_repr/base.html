@@ -1,0 +1,29 @@
+{% extends "ts_emod2/base.html" %}
+
+{% load i18n %}
+
+{% block page_title %}
+    Representative Workflow
+{% endblock %}
+
+{% block extra_css1 %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_repr/css/ts_repr.css" />
+
+    {% block extra_local_css %}
+    {% endblock %}
+{% endblock %}
+
+{% block extra_js1 %}
+    {% block extra_local_js %}
+    {% endblock %}
+{% endblock %}
+
+{% block jumbotron_content %}
+    <img src="{{ STATIC_URL }}transmission_simulator/img/icon_ts.png">
+    <h1>Transmission Simulator</h1>
+    <p class="lead">Representative Workflow using <strong>EMOD</strong></p>
+{% endblock %}
+
+{% block left_menu %}
+    {% include "ts_repr/left_menu.html" %}
+{% endblock %}

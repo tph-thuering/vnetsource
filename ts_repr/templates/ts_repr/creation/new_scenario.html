@@ -1,0 +1,27 @@
+{% extends "ts_repr/base.html" %}
+{% load staticfiles %}
+
+{% block page_content %}
+    <form id="form" action="" method="post">{% csrf_token %}<br>
+        <div class="well well-large">
+            <div class="row">
+                <div class="span8">
+                    <p>
+                        After pressing "Save and Continue" on each page, you will be saving choices to
+                        your simulation. You can return back to any page at any time, by clicking on
+                        the corresponding tab from the left hand menu.<br>
+                        <br>
+                        If you need to leave your simulation prior to completion, you can find it in
+                        the "My Simulations" section on the left hand menu.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="span8">
+                    <input type="submit" class="btn pull-right" value="Begin">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

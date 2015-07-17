@@ -1,0 +1,2 @@
+from ReportErrorViewTest import ReportErrorViewTest
+from UploadZipViewTest import UploadZipViewTest

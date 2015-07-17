@@ -1,0 +1,65 @@
+<div class="span3">
+    <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked">
+        <li>
+            <a href="{% url "ts.index" %}">
+                <i class="icon-home"></i> Transmission<Br> Simulator
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+
+        <li {% if nav_button == "index" %}class="active"{% endif %}>
+            <a href="{% url "ts_emod_index" %}">
+                <i class="icon-wrench"></i> EMOD
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+
+        <li>
+            <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked">
+                <li {% if nav_button == "ts_ScenarioCreateByTemplate_step" %}class="active"{% endif %}>
+                    <a href="{% url 'ts_ScenarioCreateByTemplate_step' 'location' %}">
+                        <i class="icon-edit"></i> <span style="font-size:0.9em">New Simulation</span>
+                        <i class="icon-angle-right pull-right"></i>
+                    </a>
+                </li>
+
+                {% if dim_user.is_staff %}
+                    <li {% if nav_button == "simulation_uploader" %}class="active"{% endif %}>
+                        <a href="{% url 'ts_emod2.simulation_uploader' %}">
+                            <i class="icon-edit"></i> <span style="font-size:0.9em">Simulation Uploader</span>
+                            <i class="icon-angle-right pull-right"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li {% if nav_button == "my_simulations" %}class="active"{% endif %}>
+                    <a href="{% url "ts_emod2.my_simulations" %}">
+                        <i class="icon-folder-close-alt"></i> <span style="font-size:0.9em">My Simulations</span>
+                        <i class="icon-angle-right pull-right"></i>
+                    </a>
+                </li>
+
+                <li {% if nav_button == "public_simulations" %}class="active"{% endif %}>
+                    <a href="{% url "ts_emod2.public_simulations" %}">
+                        <i class="icon-list icon-rotate-180"></i> <span style="font-size:0.9em">Public Simulations</span>
+                        <i class="icon-angle-right pull-right" style="margin: 0;"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url "ts_emod.utilities" %}">
+                        <i class="icon-wrench"></i> <span style="font-size:0.9em">Utilities</span>
+                        <i class="icon-angle-right pull-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="{% url "results_viewer.index" %}">
+                <i class="icon-wrench"></i> Results Viewer
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+    </ul>
+</div>

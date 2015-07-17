@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8000/" />
+<title>new_wf_step2_intervention_button</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">new_wf_step2_intervention_button</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Transmission Simulator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ts_basic_emod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=EMOD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//div[2]/div/div[2]/div/div</td>
+	<td>*Selenium test - basic intervention button*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=e_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_location-name</td>
+	<td>Selenium test - basic intervention button</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>The simulation was saved.*</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_config-Simulation_Duration</td>
+	<td>109</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.tooltip_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Intervention(s) selected for Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>*Success! The intervention(s) have been saved to Selenium test - basic intervention button.*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*Simulation Details*</td>
+</tr>
+<!--Check for Interventions in the Simulation-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Interventions (campaign.json)</td>
+	<td></td>
+</tr>
+<!--Clean up-->
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-danger</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Success! You have successfully deleted the simulation Selenium test - basic intervention button*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>My Simulations</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//div[2]/div/div[2]/div/div</td>
+	<td>*Selenium test - basic intervention button*</td>
+</tr>
+<!--END of testcase-->
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% extends "ts_emod/index.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+#   Gregory Davis <gdavis2@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title %}
+    Template Details
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/css/prettify.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_emod/css/ts2.css" />
+    <style>
+        a.btn-small{font-weight: normal;}
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}lib/js/prettify.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/browse_detail.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div id="scenario_details">
+        <ul class="breadcrumb">
+            <li>Selected Simulation: <a href="{% url "ts_emod_run_browse" selected_scenario.id %}">{{ selected_scenario.name }} </a>
+                <a href="{% url "ts_scenario_step" 'template' %}">New Run</a> <span class="divider">/</span>
+                <li class="active">Template Details</li>
+        </ul>
+        <h3>
+            Template Details
+            <div class="btn-group pull-right">
+                <a class="btn btn-small" onclick="goBack(); return false;" data-toggle="tooltip" title="Back to previous page"><i class="icon-arrow-left"></i> Back</a>
+                {% if  scenario.created_by == user and not scenario.is_public %}
+                    <a class="btn btn-small btn-delete" href="{% url "ts_emod_delete_scenario" scenario.id %}" data-toggle="tooltip" title="Delete Baseline Scenario"><i class="icon-trash"></i> Delete</a>
+                {% endif %}
+            </div>
+        </h3>
+
+
+        <table class="table table-striped table-condensed" id="scenario_info" >
+            <tbody>
+            <tr class="table-striped">
+                <th style="width:20%;">Name:</th>
+                <td>{{ template_name }}</td>
+            </tr>
+            <!-- tr>
+                <th>Number:</th>
+                <td>{{ template.id }}</td>
+            </tr -->
+            <tr>
+                <th>Description:</th>
+                <td>{{ template_description }}</td>
+            </tr>
+            <tr>
+                <th>Location:</th>
+                <td>{{ template_location_name }} <br/>
+                    Start Date: {{ template_location_start_date }} <br/>
+                    End Date: {{ template_location_end_date }} <br/>
+                    Data Resolution: {{ template_location_resolution }} <br/>
+                    <a href="{{ template_location_link }}">Click to download</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong>Template campaign.json: </strong><br/>{{ template_campaign_description }}
+                    {% if not template_campaign_warning %}
+                        <br/>
+                        <em style="font-size:0.9em;"><strong>Note:</strong> The Config below has Interventions Disabled ("Enable_Interventions": 0),
+                                                so interventions here will be ignored by default, unless enabled by the user.</em><br/>
+                    {% endif %}
+                    <pre class="prettyprint">{{ template_campaign }}</pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong>Template config.json: </strong><br/>{{ template_config_description }}
+                    <pre class="prettyprint">{{ template_config }}</pre>
+                </td>
+            </tr>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" style="text-align: center;" >
+                        <div class="btn-group ">
+                            <a class="btn btn-small" onclick="goBack(); return false;" data-toggle="tooltip" title="Back to previous page"><i class="icon-arrow-left"></i> Back</a>
+                        {%  comment %}
+                            <a class="btn btn-small" href="{% url "ts_emod_download_scenario" scenario.id %}" data-toggle="tooltip" title="Download XML File"><i class="icon-arrow-down"></i> Download</a>
+                        {%  endcomment %}
+                            {% if  template.created_by == user and not scenario.is_public %}
+                                <a class="btn btn-small btn-delete" href="{% url "ts_emod_delete_scenario" template.id %}" data-toggle="tooltip" title="Delete Baseline Scenario"><i class="icon-trash"></i> Delete</a>
+                            {% endif %}
+                        </div>
+
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+    <script>
+        function goBack() { window.history.back(); }
+    </script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "lib/base_jumbotron_json.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Lawrence Selvy <Lawrence.Selvy.1@nd.edu>
+#   Zachary Torstrick <Zachary.R.Torstrick.1@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block jumbotron_content %}
+    <img src="/static/datawarehouse/img/icon_dw.png">
+    <h1>Data Warehouse Browser</h1>
+<!--    <p class="lead">Meeting all of your data needs!</p>-->
+{% endblock %}
+
+{% block extra_css %}
+   <link rel="stylesheet" type="text/css" href="/static/datawarehouse/css/dw2.css" />
+    {% block extracss %}{% endblock %}
+{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="{{ STATIC_URL }}datawarehouse/js/easyui/jquery.easyui.min.js"></script>
+{% endblock %}

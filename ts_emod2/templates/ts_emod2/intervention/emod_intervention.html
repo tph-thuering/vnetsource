@@ -1,0 +1,52 @@
+{# Name values are intervention-prefix-__prefix__-field_name where intervention-prefix is the prefix for the #}
+{# intervention, and field_name is the name of the field in the form that the intervention is associated with. #}
+{# Example: human-host-seeking-trap-__prefix__-cost_to_consumer #}
+
+<div class="row">
+    <div class="span7">
+        <b>{{ form.name.value }}</b>
+    </div>
+
+    <div class="span1">
+        <span class="btn-group pull-right" style="margin-top: 5px; margin-right: 10px;">
+            <button type="button" class="tooltip_link accordion-toggle btn btn-small btn-left" id="id_{{ prefix }}-{{ index }}-edit-button"
+                data-toggle="collapse" data-target="#id_{{ prefix }}-{{ index }}-accordion" title="Edit intervention values"
+                style="color: black;">
+                <i class="icon-edit"></i> Edit
+            </button>
+
+            <button type="button" class="tooltip_link btn btn-small btn-right" id="id_{{ prefix }}-{{ index }}-remove-button"
+                onclick="remove_intervention('id_{{ prefix }}-{{ index }}-li');" title="Remove this intervention"
+                style="color: black;">
+                <i class="icon-remove"></i> Remove
+            </button>
+        </span>
+    </div>
+</div>
+
+{# Section for always-visible parameters #}
+{% include 'ts_emod2/intervention/emod_always_visible_parameters.html' %}
+
+<div class="accordion-body collapse" id="id_{{ prefix }}-{{ index }}-accordion">
+    <div class="accordion-inner">
+        {% for field in form.visible_fields %}
+            {% if field.label != 'Start day' and field.label != 'Number of repetitions' and field.label != 'Timesteps between repetitions' and field.label != 'Max number of distributions' and field.label != 'Demographic coverage' and field.label != 'Delete' %}
+                <div class="row">
+                    <div class="span4">
+                        {{ field.label }}:
+                    </div>
+
+                    <div class="span1">
+                        <button type='button' class="pull-right btn-small info" id="id_{{ prefix }}-{{ index }}-accordion" title="">
+                            <i class="icon-info-sign icon-2x"></i>
+                        </button>
+                    </div>
+
+                    <div class="span3">
+                        {{ field }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

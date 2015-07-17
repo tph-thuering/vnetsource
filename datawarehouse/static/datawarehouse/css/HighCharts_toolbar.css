@@ -1,0 +1,19 @@
+/*######################################################################################################################
+ * # VECNet CI - Prototype
+ * # Date: 4/5/2013
+ * # Institution: University of Notre Dame
+ * # Primary Authors:
+ * #   Lawrence Selvy <Lawrence.Selvy.1@nd.edu>
+ * #   Zachary Torstrick <Zachary.R.Torstrick.1@nd.edu>
+ * ######################################################################################################################*/
+
+/* This file contains the styling used for the HighCharts toolbar */
+
+.hctoolbar_row {
+    margin-top:10px;
+    margin-bottom: 10px;
+    margin-right:auto;
+    margin-left:auto;
+    text-align: center;
+    width: 100%;
+}

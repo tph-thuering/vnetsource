@@ -1,0 +1,72 @@
+{% extends "datawarehouse/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Lawrence Selvy <Lawrence.Selvy.1@nd.edu>
+#   Zachary Torstrick <Zachary.R.Torstrick.1@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load prettyLookups %}
+{% load mathTags %}
+{% block page_title %}
+    Data Warehouse: Look Up Tables
+{% endblock %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/DataTables/media/css/demo_table.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/TableTools/media/css/TableTools.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/css/dataTablesBootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/css/luresults.css" />
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/DataTables/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/DataTables/extras/ColReorder-1.0.8/media/js/ColReorder.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/TableTools/media/js/TableTools.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/TableTools/media/js/ZeroClipboard.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}datawarehouse/js/luresults.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/js/paging.js"></script>
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/datawarehouse">Data Warehouse Browser</a><span class="divider">/</span></li>
+            <li class="active">Lookup Tables</li>
+        </ul>
+        <img src="{{STATIC_URL}}datawarehouse/img/ajax-loader.gif" id="loading-indicator" style="display:none;" />
+        <div class="tabbed_panel">
+            <ul class="nav nav-tabs" id="luTables">
+                {% for key, value in results.iteritems %}
+                {% if key == "LutInterventionIrsCoveragesAdmin1"  and user.is_authenticated == False or key == "LutInterventionItnCoveragesAdmin1" and user.is_authenticated == False %}
+                {% else %}
+                        <li onclick="getTable($(this).find('a').attr('name'))">
+                        <a href="#{{ key }}" data-toggle="tab" name={{ key }}>{{key|prettyModelName}}</a>
+                        </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                {% for key, value in results.iteritems %}
+                <div class="tab-pane" id='{{key}}'>
+                    <h1>{{key|prettyModelName}}</h1>
+                    <label><div class="toggleTitle" btn btn-link>Hide/Show Column Selection </div></label>
+                    <label> <input type="checkbox" id='{{ key|add:"checkAll" }}' class="checkAll" /> Select/Deselect All Columns</label>
+
+                    <div id='{{key|add:"toggleButtons"}}' class="toggleButtons">
+                        <hr />
+                    </div>
+
+                    <table id='{{key|add:"Table"}}' class="lookuptable table table-striped"></table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "lib/base_jumbotron.html" %}
+{% load error_reporting_body %}
+
+{% block page_title %}
+    VecNet - 403 Forbidden
+{% endblock %}
+
+{% block jumbotron_content %}
+    <h1>VecNet</h1>
+    <p class="lead">403 Forbidden</p>
+{% endblock %}
+
+{% block main_content %}
+    {% error_reporting_body '403'%}
+{% endblock %}

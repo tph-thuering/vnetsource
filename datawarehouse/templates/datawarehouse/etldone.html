@@ -1,0 +1,43 @@
+{% extends "datawarehouse/base.html" %}
+
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/css/etl.css" />
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sbtbtn').click(function(){
+                $('#content').attr('value', "{{mapping}}");
+            })
+        });
+    </script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/js/etl.js"></script>
+{% endblock %}
+
+{% block page_title %}
+    Data Warehouse: ETL
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <p>
+                    Thanks for playing!
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

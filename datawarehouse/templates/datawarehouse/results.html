@@ -1,0 +1,48 @@
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Lawrence Selvy <Lawrence.Selvy.1@nd.edu>
+#   Zachary Torstrick <Zachary.R.Torstrick.1@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+<div class="container">
+    <div class="row">
+        <div class="span9">
+                <div class="toggleTitle"><a href="#">Toggle columns </a><hr /></div>
+                <div class="toggleButtons">
+                    <table class="toggles">
+                        <tr><td>
+                        {% for key in keys %}
+                        <label><input type="checkbox" class="toggleBox" onclick="fnShowHide({{forloop.counter|add:"-1"}});" />{{ key }}</label><br />
+                        {% if forloop.counter|divisibleby:8 %}
+                            </td><td>
+                        {% endif %}
+                        {% endfor %}
+                        </td></tr>
+                    </table><hr />
+                </div>
+                <table id="resultsTable" class="display">
+                    <thead>
+                        <tr>
+                        {% for key in keys %}
+                            <th>{{ key }}</th>
+                        {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in object_list %}
+                        <tr>
+                        {% for key, value in row.iteritems %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>

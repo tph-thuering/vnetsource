@@ -1,0 +1,89 @@
+{% extends "ts_repr/base.html" %}
+
+{% block page_title %}
+    Representative Weather
+{% endblock %}
+
+{% block extra_local_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}ts_repr/css/weather.css" />
+{% endblock %}
+
+{% block extra_local_js %}
+    <script>
+        // weather.js needs this variable
+        var weather_base_url = "{{ weather_base_url }}";
+        // save_buttons.js needs these variables
+        var page_name = "{{ page_name }}";
+        var data_to_save = {};
+    </script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}lib/js/charts/weather.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/creation/weather.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/creation/save_buttons.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <form id="form" action="" method="post">{% csrf_token %}<br>
+        <input type="hidden" id="scenario_id" value="{{ scenario.id }}" />
+        <input type="hidden" name="weather_id" id="weather_id" value="{{ weather_id }}" />
+        <input type="hidden" id="form-is-valid" name="form-is-valid" value="false" />
+
+        <div class="row">
+            <div class="span6">
+                Select a climate type for your simulation:
+            </div>
+            <div class="span3">
+                <select id="weather-select">
+                    {% for weather_option in weather_options %}
+                        {% if weather_option.id == weather_id %}
+                            <option value="{{ weather_option.id }}" selected>{{ weather_option.name }}</option>
+                        {% else %}
+                            <option value="{{ weather_option.id }}">{{ weather_option.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span9">
+                <p id="weather-description">
+                </p>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            {% include "ts_repr/creation/save_buttons.html" %}
+        </div>
+
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#map-tab" style="font-size:14px;"><b>Map</b></a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#chart-tab" style="font-size:14px;"><b>Weather Charts</b></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="map-tab">
+                <div align="center">
+                    {% include "ts_repr/creation/weather/map.html" %}
+                </div>
+            </div>
+
+            {% include "lib/charts/weather_tabs.html" %}
+        </div>
+        <br>
+
+        {% include "ts_repr/creation/save_buttons.html" %}
+
+    </form>
+{% endblock %}

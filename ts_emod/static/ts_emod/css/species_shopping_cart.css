@@ -1,0 +1,90 @@
+/*######################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors: Robert Jones <Robert.Jones.428@nd.edu>
+######################################################################################################################*/
+
+/* CSS pertaining only to the Scenario Intervention Selector page */
+
+/*----- Decorate info help popover -----*/
+/* set width bigger than default */
+.popover {max-width: 800px;}
+
+/* color/style the info button to make it pop out */
+#info { color: #28605f;
+    border: 0;
+    background-color: rgba(255,255,255,0); /* make it transparent */
+}
+
+#info:hover { background-color: #e3ede9; }
+
+/*---- Styles common to both available Intervention list and Selected list ("cart") ----*/
+
+/* .clear */
+.clear:after {
+    content: " ";
+    display: table;
+}
+.clear:after { clear: both }
+
+/* Box styling for both boxes */
+
+/* move box header text closer to box */
+.header { margin: 1% 0 0 3%; }
+
+.box.active { border-color: #e3ede9; }
+
+.box {
+    background-color: #eee;
+    margin: 0px;
+    padding: 0px;
+}
+
+.box ul {
+    background-color: #fff;
+    border: 1px;
+    border-color: #e5e5e5;
+    border-radius: 4px;
+    border-style: solid;
+    padding: 5px;
+    margin: 0px;
+}
+
+.box ul li {
+    background-color: #fff;
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 4px;
+    line-height: 32px;
+    list-style-type: none;
+    overflow: hidden;
+    padding-left: 15px;
+    position: relative;
+}
+
+/* zebra striping */
+.box ul li:nth-child(even) { background-color: rgb(245, 245, 245); }
+
+.box ul li:hover { border-color: #ccc }
+
+/* don't use Bootstrap's default italic for em font */
+.box ul li em { font-style: normal; }
+
+/* remove default border-top so that line doesn't show on this page; shorten padding; */
+.form-actions { border-top-width: 0; padding-top: 0; }
+
+.box { max-width: 300px;}
+
+/*---- Styles specific to available box ----*/
+ul.source  { min-height: 70px; }
+/* .source li { line-height: 20px !important; } */
+.source span { margin: 0; }
+
+/*---- Styles specific to Interventions selected "cart" ----*/
+
+.box .cart { min-height: 250px; max-width: 300px;}  /* hold open a "droppable zone" placeholder for first drag - 106px for two lines */
+.cart.hover { border-color: #28605f; } /* highlight color for cart when dragging onto it */
+
+/* #4331 - Fix column width issue in Intervention edit accordion */
+.accordion-inner { padding-left: 0; padding-right: 0;}
+.well.page-well { padding: 20px; }

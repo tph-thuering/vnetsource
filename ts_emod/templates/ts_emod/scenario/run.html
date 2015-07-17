@@ -1,0 +1,56 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/13/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title_local %}Run Simulation{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/ts_emod.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js" type="text/javascript"></script>
+{% endblock %}
+{% block breadcrumb %}Run Simulation{% endblock %}
+{% block step_title %}Run Simulation{% endblock %}
+{% block page_content %}
+    <p>Run this simulation.
+        Once the results have been processed, you can change the parameters in the previous steps before rerunning it.
+        You will also be able to accept the simulation as approved (this will allow addition of interventions).</p>
+    <div class="well page-well scenario">
+    <form action="" method="post" name="wizard_form">{% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {% for form in wizard.form.forms %}
+                    {{ form }}
+                {% endfor %}
+            {% else %}
+                <br/>
+                <div class="row">
+                    {{ wizard.form.as_grid_div }}
+                </div>
+            {% endif %}
+        <br/>
+        You can change the name of this test run if you want to.
+        <br/><br/>
+        {% if has_runs %}If you have run this simulation and not made changes since, you may skip this step.{% endif %}
+        <div class="form-actions">
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn">
+                    <i class="icon-arrow-left"></i> Previous Step</button>
+            {% endif %}
+            <button type="submit" class="right btn btn-large">Run Simulation &nbsp;&nbsp;<i class="icon-play"></i></button>
+            {% if has_runs %}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button name="wizard_goto_step" type="submit" value="review" class="btn">
+                    Skip to Review previous Run &nbsp;&nbsp;<i class="icon-arrow-right"></i></button>
+            {% endif %}
+        </div>
+    </form>
+    </div>
+{% endblock %}

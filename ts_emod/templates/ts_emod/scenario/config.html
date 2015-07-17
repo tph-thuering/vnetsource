@@ -1,0 +1,189 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/13/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title_local %}Configure Simulation{% endblock %}
+
+{% block extra_js %}
+    <script>
+        {% comment %}
+            These are used in function in scenario_date.js which
+            builds the slider based on beginning and ending dates
+        {% endcomment %}
+        var start_date = "{{ location_start_date }}";
+        var end_date = "{{ location_end_date }}";
+    </script>
+{% endblock %}
+
+{% block breadcrumb %}Configure Simulation{% endblock %}
+{% block step_title %}Configure Simulation{% endblock %}
+{% block page_content %}
+    <p>Change name, description, and Simulation duration as needed.</p>
+    <div class="well page-well scenario">
+        <form action="" method="post" name="wizard_form" id="wizard_form">{% csrf_token %}
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {% for form in wizard.form.forms %}
+                    {{ form.as_custom }}
+                {% endfor %}
+            {% else %}
+                {% for field in form %}
+                    <div class="fieldWrapper">
+                        {% if field.errors %}
+                            <!-- {{ field.label_tag }} -->{{ field.errors }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <strong>Name </strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                {{ form.name }}
+                <br/>
+                <strong>Description</strong>
+                <br/>
+                {{ form.description }}
+                <br/>
+                <span class="helptext"></span>
+                <br/>
+            {% comment %}
+                <strong>Select Simulation Type</strong>&nbsp;
+                <span class="tooltip_link"
+                    data-original-title="Malaria simulations are more complex, with more parasite and human parameters to simulate immunity. But they take much longer than Vector simulations. Vector simulations are not yet available."
+                    data-toggle="tooltip"><i class="icon-info-sign"></i>
+                </span>
+
+                &nbsp;&nbsp;&nbsp;
+                {% endcomment %}
+                <input id="id_config-Simulation_Type_2" type="hidden" name="config-Simulation_Type" value="MALARIA_SIM"
+                    {% if form.Simulation_Type.value == 'MALARIA_SIM' %}checked{% endif %}/>
+                {% comment %}
+                &nbsp;&nbsp;Malaria&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input disabled id="id_config-Simulation_Type_1" type="radio" name="config-Simulation_Type" value="VECTOR_SIM"
+                    {% if form.Simulation_Type.value == 'VECTOR_SIM' %}checked{% endif %}/>
+                &nbsp;&nbsp;<span class="run_button" title="Not yet available.">Vector</span>&nbsp;&nbsp;&nbsp;
+                {% endcommentttt %}
+                <br/><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Select Sampling</strong>&nbsp;
+                <span class="tooltip_link"
+                    data-original-title="Individual Sampling follows individual mosquitoes and is more precise than Cohort, but takes longer to run. Cohort (not yet available) follows age groups of mosquitoes."
+                    data-toggle="tooltip"><i class="icon-info-sign"></i>
+                </span>
+                &nbsp;&nbsp;&nbsp;
+                <input type="hidden" name="config-sampling" value="individual" checked/>
+                &nbsp;&nbsp;&nbsp;Individual&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% comment %}
+                <input type="radio" name="config-sampling" value="cohort" disabled/>&nbsp;&nbsp;&nbsp;<span class="run_button" title="Not yet available.">Cohort</span>&nbsp;&nbsp;
+                {% endcommenttttt %}
+                <br/><br/><br/>
+            {% endcomment %}
+            {% comment %}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Start time</strong>&nbsp;
+                <span class="tooltip_link"
+                    data-original-title="Time noted in days when the simulation begins. This time influences the point in the temporal input data, (such as weather data) when the simulation starts. "
+                    data-toggle="tooltip"><i class="icon-info-sign"></i>
+                </span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            {% endcomment %}
+                {{ form.Start_Time }}
+            {% comment %} days or
+                <input id="Start_Time-years" name="Start_Time-years" style="width: 30px" type="text" value="0" />             years
+                into temporal data
+            {% endcomment %}
+                <br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Simulation duration</strong>&nbsp;
+                <span class="tooltip_link"
+                    data-original-title="Elapsed time from the start to the end of a simulation."
+                    data-toggle="tooltip"><i class="icon-info-sign"></i>
+                </span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                {{ form.Simulation_Duration }} days or
+                <input id="Simulation_Duration-years" name="Simulation_Duration-years" style="width: 30px" type="text" value="14600" /> years
+                <br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% comment %}
+                <strong>Burn in time</strong>&nbsp;
+                <span class="tooltip_link"
+                    data-original-title="It is recommended that the first 5 years of a simulation output be ignored, to allow for initial EMOD stabilization."
+                    data-toggle="tooltip"><i class="icon-info-sign"></i>
+                </span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input style="width: 60px" type="text" value="1825" disabled/>&nbsp;days or
+                <input style="width: 30px" type="text" value="5" disabled/>&nbsp;years&nbsp;&nbsp;
+                {% endcomment %}
+            {% endif %}
+
+            <br/>
+            <div class="form-actions">
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn"><i class="icon-arrow-left"></i> Previous Step</button>
+                {% endif %}
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <button type="submit" class="right btn">Next Step <i class="icon-arrow-right"></i></button>
+                <br/>
+                <br/>
+                <br/>
+                <strong>Short cut:</strong> If you would like to use all default parameter values, click below to skip the rest of the configuration steps and go directly to the Intervention Tool to add your interventions.
+                <br/>
+                <br/>
+                <button type="submit" class="btn tooltip_button pull-right" onclick="intervention_call()" title="Skip the rest of the steps:
+                    use default values for the rest of the simulation parameters and go directly to the Intervention Tool.">
+                    Skip to Intervention Tool &nbsp;<i class="icon-forward"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function intervention_call() {
+            var input = $("<input>")
+               .attr("type", "hidden")
+               .attr("name", "jump_to_intervention_tool").val("true");
+            $('#wizard_form').append($(input));
+        }
+
+        {% comment %} Initialize the years field to match the real form field {% endcomment %}
+        $("#Start_Time-years").val($("#id_config-Start_Time").val() / 365);
+
+        {% comment %} When years field is changed, calculate the days field (real form field) to match {% endcomment %}
+        $("#Start_Time-years").bind('input', function(){
+            var my_days = $("#Start_Time-years").val() * 365;
+            $("#id_config-Start_Time").val(my_days);
+            return false;
+        });
+        {% comment %} When days field is changed, calculate the years field (dummy field) to match {% endcomment %}
+        $("#id_config-Start_Time").bind('input', function(){
+            var my_years = $("#id_config-Start_Time").val() / 365;
+            $("#Start_Time-years").val(my_years);
+            return false;
+        });
+
+        {% comment %} Initialize the years field to match the real form field {% endcomment %}
+        $("#Simulation_Duration-years").val($("#id_config-Simulation_Duration").val() / 365);
+
+        {% comment %} When years field is changed, calculate the days field (real form field) to match {% endcomment %}
+        $("#Simulation_Duration-years").bind('input', function(){
+            var my_days = $("#Simulation_Duration-years").val() * 365;
+            $("#id_config-Simulation_Duration").val(my_days);
+            return false;
+        });
+        {% comment %} When days field is changed, calculate the years field (dummy field) to match {% endcomment %}
+        $("#id_config-Simulation_Duration").bind('input', function(){
+            var my_years = $("#id_config-Simulation_Duration").val() / 365;
+            $("#Simulation_Duration-years").val(my_years);
+            return false;
+        });
+    </script>
+{% endblock %}
+

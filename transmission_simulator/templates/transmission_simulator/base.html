@@ -1,0 +1,34 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Alexander Vyushkov <Alexander.Vyushkov@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load i18n %}
+
+{% block page_title %}
+    VecNet Transmission Simulator
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}transmission_simulator/css/ts2.css" />
+
+    {% block extra_headers_ts %}
+    {% endblock %}
+
+{% endblock %}
+
+{% block jumbotron_content %}
+    <img src="{{ STATIC_URL }}transmission_simulator/img/icon_ts.png">
+    <h1>Transmission Simulator</h1>
+    <p class="lead">Modeling malaria transmission and control</p>
+{% endblock %}
+
+{% block main_content %}
+{% endblock %}

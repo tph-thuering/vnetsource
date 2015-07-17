@@ -1,0 +1,314 @@
+{
+    "dimensions": [
+        {
+            "name": "location",
+            "label": "Location",
+            "levels": [
+                {
+                    "name":"admin0",
+                    "label": "Admin Level 0",
+                    "key":"admin0",
+                    "attributes":["admin0"]
+                },
+                {
+                    "name": "admin1",
+                    "label": "Admin level 1",
+                    "label_attribute":"admin1",
+                    "key":"admin1",
+                    "attributes":["admin1"]
+                },
+                {
+                    "name": "admin2",
+                    "label": "Admin level 2",
+                    "key": "admin2",
+                    "attributes": ["admin2"]
+                },
+                {
+                    "name": "admin3",
+                    "label": "Admin level 3",
+                    "key": "admin3",
+                    "attributes": ["admin3"]
+                }
+            ]
+        },
+        {
+            "name": "date_cubes",
+            "label": "Date",
+            "info": ["range"],
+            "levels": [
+                {
+                    "name": "year",
+                    "label": "Year",
+                    "key": "year",
+                    "attributes": ["year"]
+                },
+                {
+                    "name": "month",
+                    "label": "Month",
+                    "key": "month",
+                    "label_attribute": "month_short_name",
+                    "attributes": ["month"]
+                },
+                {
+                    "name": "day",
+                    "label": "Day",
+                    "key": "day",
+                    "attributes": ["day"]
+                }
+            ]
+        },
+        {
+            "name": "start_date",
+            "label": "Start Date",
+            "info": ["range"],
+            "levels": [
+                {
+                    "name": "year",
+                    "label": "Year",
+                    "key": "year",
+                    "attributes": ["year"]
+                },
+                {
+                    "name": "month",
+                    "label": "Month",
+                    "key": "month",
+                    "label_attribute": "month_short_name",
+                    "attributes": ["month"]
+                },
+                {
+                    "name": "day",
+                    "label": "Day",
+                    "key": "day",
+                    "attributes": ["day"]
+                }
+            ]
+        },
+        {
+            "name": "end_date",
+            "label": "End Date",
+            "info": ["range"],
+            "levels": [
+                {
+                    "name": "year",
+                    "label": "Year",
+                    "key": "year",
+                    "attributes": ["year"]
+                },
+                {
+                    "name": "month",
+                    "label": "Month",
+                    "key": "month",
+                    "label_attribute": "month_short_name",
+                    "attributes": ["month"]
+                },
+                {
+                    "name": "day",
+                    "label": "Day",
+                    "key": "day",
+                    "attributes": ["day"]
+                }
+            ]
+        },
+        {
+            "name": "source",
+            "label": "Source",
+            "attributes":["source","file_uid"]
+        },
+        {
+            "name": "subgroup",
+            "label": "Subgroup"
+        },
+        {
+            "name": "biting_rate_method",
+            "label": "Biting Rate Method"
+        },
+        {
+            "name": "land_use",
+            "label": "Land Use"
+        },
+        {
+            "name": "seasonality_meaning",
+            "label": "Seasonality Meaning"
+        },
+        {
+            "name": "sporozoite_ndx_method",
+            "label": "sporozoite Index Method"
+        },
+        {
+            "name":"citation",
+            "label": "Citation",
+            "attributes": ["citation","citation"]
+        },
+        {
+            "name": "user",
+            "key": "user_name",
+            "label": "User",
+            "attributes":["username"]
+        }
+    ],
+    "cubes": [
+        {
+            "name": "wmr_hh_surveys",
+            "label": "Household Surveys",
+            "dimensions": ["location","date_cubes", "source", "user", "subgroup"],
+            "measures": [
+                {"name": "pcnt_hh_gte1_anet", "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_hh_gte1_etn",   "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_hh_gte1_itn",    "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_total_pop_itn","aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_chldrn_lt5_anet", "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_chldrn_lt5_etn",  "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_chldrn_lt5_itn",  "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_preg_anet",   "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_preg_etn",   "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_preg_itn" ,  "aggregations": ["avg", "min", "max"] }
+            ],
+            "mappings": {
+                "subgroup":"subgroup.subgroup"
+            },
+            "joins":[
+                {"master":"fact_wmr_hh_surveys.location_key", "detail":"dim_location.id"},
+                {"master":"fact_wmr_hh_surveys.date_key", "detail":"dim_date_cubes.id"},
+                {"master":"fact_wmr_hh_surveys.subgroup_key", "detail":"dim_subgroup.id", "alias": "subgroup"},
+                {"master":"fact_wmr_hh_surveys.source_key", "detail":"dim_source.id"},
+                {"master":"fact_wmr_hh_surveys.user_key","detail":"dim_user.id"},
+                {"master":"fact_wmr_hh_surveys.user_key","detail":"dim_date_cubes.id"}
+            ]
+        },
+        {
+            "name":"wmr_itn_oprtnl_cvrg",
+            "label":"Operational Coverage (ITN)",
+            "dimensions": ["location", "date_cubes","user"],
+            "measures": [	{"name": "nmbr_llin_sold_dlvrd", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "nmbr_itn_sold_dlvrd",   "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "nmbr_itn_and_llin_sold_dlvrd",    "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "pcnt_itn_cvrg","aggregations": ["avg", "min", "max"] }
+            ],
+            "joins":[
+                {"master":"fact_wmr_itn_oprtnl_cvrg.location_key", "detail":"dim_location.id"},
+                {"master":"fact_wmr_itn_oprtnl_cvrg.user_key", "detail":"dim_user.id"},
+                {"master":"fact_wmr_itn_oprtnl_cvrg.date_key","detail":"dim_date_cubes.id"}
+            ]
+        },
+        {
+            "name":"wmr_irs_oprtnl_cvrg",
+            "label":"Operational Coverage (IRS)",
+            "dimensions": ["location", "date_cubes", "user"],
+            "measures": [
+                {"name": "nmbr_protected_irs", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "pcnt_irs_cvrg","aggregations": ["avg", "min", "max"] }
+            ],
+            "joins":[
+                {"master":"fact_wmr_irs_oprtnl_cvrg.location_key", "detail":"dim_location.id"},
+                {"master":"fact_wmr_irs_oprtnl_cvrg.user_key", "detail":"dim_user.id"},
+                {"master":"fact_wmr_irs_oprtnl_cvrg.date_key", "detail":"dim_date_cubes.id"}
+            ]
+        },
+        {
+            "name":"wmr_act_oprtnl_cvrg",
+            "label":"Operational Coverage (ACT)",
+            "dimensions": ["location", "date_cubes", "user"],
+            "measures": [
+                {"name": "any_1st_trtmnt_crses_dlvrd_incldng_act", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "act_trtmnt_crses_dlvrd","aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "pcnt_any_am_cvrg_total", "aggregations": ["avg", "min", "max"] },
+                {"name": "pcnt_act_cvrg_total","aggregations": ["avg", "min", "max"] }
+            ],
+            "joins":[
+                {"master":"fact_wmr_act_oprtnl_cvrg.location_key", "detail":"dim_location.id"},
+                {"master":"fact_wmr_act_oprtnl_cvrg.user_key", "detail":"dim_user.id"},
+                {"master":"fact_wmr_act_oprtnl_cvrg.date_key", "detail":"dim_date_cubes.id"}
+            ]
+        },
+        {
+            "name":"weather",
+            "label":"Weather",
+            "dimensions": ["location", "user", "date_cubes"],
+            "measures": [
+                {"name": "mean_temp", "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_temp_obs_cnt",   "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_dewpnt",    "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_dewpnt_obs_cnt","aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_sl_press", "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_sl_press_obs_cnt",  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_station_press",  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_station_press_obs_cnt",   "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_vis",   "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_vis_obs_cnt" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_wind_spd" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "mean_wind_spd_obs_cnt" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "max_sus_wind_spd" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "max_wind_gust" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "max_temp" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "min_temp" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "total_precip" ,  "aggregations": ["avg","sum", "min", "max"] },
+                {"name": "snow_depth" ,  "aggregations": ["avg","sum", "min", "max"] }
+            ],
+            "joins": [
+                {"master":"fact_weather.location_key", "detail":"dim_location.id"},
+                {"master":"fact_weather.user_key", "detail":"dim_user.id"},
+                {"master":"fact_weather.date_key", "detail":"dim_date_cubes.id"}
+            ]
+        },
+        {
+            "name": "demographics",
+            "label": "Demographics",
+            "dimensions": ["location", "date_cubes", "source", "user"],
+            "measures": [
+                {"name": "yrs_0_4", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_5_9", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_10_14", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_15_19", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_20_24", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_25_29", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_30_34", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_35_39", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_40_44", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_45_49", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_50_54", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_55_59", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_60_64", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_65_69", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_70_74", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_75_79", "aggregations": ["avg", "sum", "min", "max"] },
+                {"name": "yrs_80plus", "aggregations": ["avg", "sum", "min", "max"] }
+            ],
+            "joins":[
+                {"master":"fact_demographics.location_key", "detail":"dim_location.id"},
+                {"master":"fact_demographics.source_key", "detail":"dim_source.id"},
+                {"master":"fact_demographics.date_key", "detail":"dim_date_cubes.id"},
+                {"master":"fact_demographics.user_key", "detail":"dim_user.id"}
+            ]
+        },
+        {
+            "name": "gross_national_income",
+            "label": "Gross National Income",
+            "dimensions": ["location", "date_cubes", "user"],
+            "measures": [
+                {"name": "gross_national_income", "aggregations": ["avg", "sum", "min", "max"] }
+            ],
+            "joins":[
+                {"master":"fact_gross_national_income.location_key", "detail":"dim_location.id"},
+                {"master":"fact_gross_national_income.date_key", "detail":"dim_date_cubes.id"},
+                {"master":"fact_gross_national_income.user_key", "detail":"dim_user.id"}
+            ]
+        },
+        {
+            "name": "households",
+            "label": "Households",
+            "dimensions": ["location", "date_cubes", "user", "source", "subgroup"],
+            "measures": [
+                {"name": "number_of_houses", "aggregations": ["avg", "sum", "min", "max"] }
+            ],
+            "mappings": {
+                "subgroup": "subgroup.subgroup"
+            },
+            "joins":[
+                {"master":"fact_households.location_key", "detail":"dim_location.id"},
+                {"master":"fact_households.source_key", "detail":"dim_source.id"},
+                {"master":"fact_households.date_key", "detail":"dim_date_cubes.id"},
+                {"master":"fact_households.user_key", "detail":"dim_user.id"}
+            ]
+        }
+    ]
+}

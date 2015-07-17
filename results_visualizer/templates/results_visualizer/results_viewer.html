@@ -1,0 +1,49 @@
+{% extends "results_visualizer/vizbase.html" %}
+{% load i18n %}
+{% load chart_visualizer %}
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 1/15/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Caleb Reinking <Caleb.M.Reinking.2@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}lib/js/Highstock/js/highstock.js" xmlns="http://www.w3.org/1999/html"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}lib/js/Highstock/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}lib/js/HighCharts/js/highcharts-more.js"></script>
+
+{#    <script type="text/javascript" src="https://code.highcharts.com/stock/2.0.4/highstock.js"></script>#}
+{#    <script type="text/javascript" charset="utf-8" src="https://code.highcharts.com/stock/2.0.4/modules/exporting.js"></script>#}
+{#    <script type="text/javascript" src="https://code.highcharts.com/stock/2.0.4/highcharts-more.js"></script>#}
+
+    <script type="text/javascript" src="{{ STATIC_URL }}results_visualizer/js/results_visualizer.js"></script>
+{% endblock %}
+
+{% block page_title %}
+    Results Viewer: Chart Builder
+{% endblock %}
+
+{% block main_content %}
+    <style>
+        table, tr, th, td {border:0px;text-align:left;}
+    </style>
+
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="{% url 'ts.index' %}">Transmission Simulator</a><span class="divider">/</span></li>
+            <li class="active">Results Viewer</li>
+        </ul>
+    </div>
+
+    {% if visualizer_run_id %}
+        {% chart_visualizer visualizer_scenario_id visualizer_run_id %}
+    {% elif visualizer_scenario_id %}
+        {% chart_visualizer visualizer_scenario_id %}
+    {% else %}
+        {% chart_visualizer %}
+    {% endif %}
+{% endblock %}

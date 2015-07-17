@@ -1,0 +1,275 @@
+{% extends "ts_emod/scenario/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/14/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% load custom_filters %}
+
+{% block page_title_local %}{{ step_title|replace:"/_/ " }}{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block extra_local_css %}
+    <style>
+    .icon-info-sign {font-size: 12px;}
+    </style>
+{% endblock %}
+
+{% block breadcrumb %}{{ step_title|replace:"/_/ " }}{% endblock %}
+{% block step_title %}{{ step_title|replace:"/_/ " }}{% endblock %}
+{% block page_content %}
+    <p align="justify">
+        Default values for parasite parameters are provided based on the published literature for each of the prevalence
+        ranges shown (<30%, 30% to 60% or >60%). Custom values can be inserted to override the default values.
+    </p>
+    <div class="well page-well scenario">
+    <form action="" method="post" name="wizard_form">{% csrf_token %}
+        {{ wizard.management_form }}
+
+        <strong>Prevalence:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="30" type="radio" name="endemicity" value="30"/>&nbsp; < 30% &nbsp;&nbsp;&nbsp;
+        <input id="3060" type="radio" name="endemicity" value="30-60" />&nbsp; 30 - 60% &nbsp;&nbsp;&nbsp;
+        <input id="60" type="radio" name="endemicity" value="60"/>&nbsp; > 60% &nbsp;&nbsp;&nbsp;
+        <input id="custom" type="radio" name="endemicity" value="custom"/>&nbsp; custom (user specified)
+        <a class="btn btn-small tooltip_link accordion-toggle pull-right" data-toggle="collapse"
+                   data-parent="#accordion" href="#collapse"
+                   title="Click to show/hide the individual parameters used to set Prevalence.">
+            Advanced <i class="icon-chevron-down"></i>
+        </a>
+        <br/><br/>
+
+        <div class="row">
+            <div class="span1"></div>
+            <div class="span7">
+            {% comment %}
+                {% if wizard.form.forms %}
+                    {% for form in wizard.form.forms %}
+                        {{ form }}
+                    {% endfor %}
+                {% else %}
+                    {{ wizard.form }}
+                {% endif %}
+            {% endcomment %}
+                <tr>
+                    <th></th>
+                    <td>
+                    <div id="collapse" class="accordion-body collapse" style="width: 100%">
+                        <div class="accordion-inner" style="border-top: 0;">
+
+                        <div class="row">
+                            <div class="span3point5"><label><p class="pull-right tooltip_link" data-toggle="tooltip"
+                                                               data-original-title="Antigenic switching rate per infected red blood cell per asexual cycle. See the Parasite_Switch_Type parameter for different switching patterns."
+                                                               href=""><i class="icon-info-sign"></i></p>Antigen Switch
+                                Rate</label></div>
+                            <div class="span3"><input name="parasite-json_Antigen_Switch_Rate" value="2e-09" type="text"
+                                                      required="" range="0,1"/> <span class="text-error"
+                                                                                    id="parasite-json_Antigen_Switch_Rate_error"></span><span
+                                    class="help-block">Range: 0 to 1</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="span3point5"><label><p class="pull-right tooltip_link" data-toggle="tooltip"
+                                                         data-original-title="Parasite switch type for erythrocyte surface antigens."
+                                                         href=""><i class="icon-info-sign"></i></p>Parasite Switch Type</label>
+                            </div>
+
+                            <div class="span3"><select name="parasite-json_Parasite_Switch_Type" required>
+                                <option value="">Please select...</option>
+                                <option value="CONSTANT_SWITCH_RATE_2VARS">CONSTANT_SWITCH_RATE_2VARS</option>
+                                <option selected="selected" value="RATE_PER_PARASITE_7VARS">RATE_PER_PARASITE_7VARS
+                                </option>
+                                <option value="RATE_PER_PARASITE_5VARS_DECAYING">RATE_PER_PARASITE_5VARS_DECAYING
+                                </option>
+                            </select></div>
+                        </div>
+                        <div class="row">
+                            <div class="span3point5"><label><p class="pull-right tooltip_link" data-toggle="tooltip"
+                                                               data-original-title="The number of distinct MSP variants for P. falciparum malaria in the overall parasite population in the simulation, not necessarily in an individual."
+                                                               href=""><i class="icon-info-sign"></i></p>Falciparum Msp
+                                Variants</label></div>
+                            <div class="span3"><input name="parasite-json_Falciparum_MSP_Variants" value="6" type="text"
+                                                      required="" range="0,100"/> <span class="text-error"
+                                                                                      id="parasite-json_Falciparum_MSP_Variants_error"></span><span
+                                    class="help-block">Range: 0 to 100</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="span3point5"><label><p class="pull-right tooltip_link" data-toggle="tooltip"
+                                                               data-original-title="The number of distinct non-specific types of P. falciparum malaria."
+                                                               href=""><i class="icon-info-sign"></i></p>Falciparum
+                                Nonspecific Types</label></div>
+                            <div class="span3"><input name="parasite-json_Falciparum_Nonspecific_Types" value="60"
+                                                      type="text" required="" range="0,100"/> <span class="text-error"
+                                                                                                  id="parasite-json_Falciparum_Nonspecific_Types_error"></span><span
+                                    class="help-block">Range: 0 to 100</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="span3point5"><label><p class="pull-right tooltip_link" data-toggle="tooltip"
+                                                               data-original-title="The number of distinct PfEMP1 variants for P. falciparum malaria in the overall parasite population in the simulation."
+                                                               href=""><i class="icon-info-sign"></i></p>Falciparum
+                                Pfemp1 Variants</label></div>
+                            <div class="span3"><input name="parasite-json_Falciparum_PfEMP1_Variants" value="1700"
+                                                      type="text" required="" range="0,2147480000.0"/> <span
+                                    class="text-error" id="parasite-json_Falciparum_PfEMP1_Variants_error"></span><span
+                                    class="help-block">Range: 0 to 2.14748e+009</span></div>
+                        </div>
+                    </div></div>{% comment %} Close Accordion {% endcomment %}
+                        <hr/>
+                        <div class="row">
+                            <div class="span3point5"><label><p class="pull-right tooltip_link" data-toggle="tooltip"
+                                                               data-original-title="The number of microliters of blood tested to find single parasites in a new diagnostic (corresponds to inverse parasites/microliters sensitivity)."
+                                                               href=""><i class="icon-info-sign"></i></p>New Diagnostic
+                                Detection</label></div>
+                            <div class="span3"><input name="parasite-json_New_Diagnostic_Sensitivity" value="0.02"
+                                                      type="text" required="" range="0.0001,100000"/> <span
+                                    class="text-error" id="parasite-json_New_Diagnostic_Sensitivity_error"></span><span
+                                    class="help-block">Range: 0.0001 to 100000</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="span3point5"><label><p class="pull-right tooltip_link" data-toggle="tooltip"
+                                                               data-original-title="The number of microliters of blood tested to find single parasites in a traditional smear (corresponds to inverse parasites/microliters sensitivity)."
+                                                               href=""><i class="icon-info-sign"></i></p>Parasite Smear
+                                Sensitivity</label></div>
+                            <div class="span3"><input name="parasite-json_Parasite_Smear_Sensitivity" value="0.02"
+                                                      type="text" required="" range="0.0001,100"/> <span
+                                    class="text-error" id="parasite-json_Parasite_Smear_Sensitivity_error"></span><span
+                                    class="help-block">Range: 0.0001 to 100</span></div>
+                        </div>
+                        <div style="display:none;"><input type="hidden" name="orig_json_obj" id="orig_json_obj"
+                                                          value="{&quot;Falciparum_PfEMP1_Variants&quot;: {&quot;help&quot;: &quot;Range: 0 to 2.14748e+009&quot;, &quot;min&quot;: 0, &quot;default&quot;: 1000, &quot;max&quot;: 2147480000.0, &quot;value&quot;: &quot;1700&quot;, &quot;tooltip&quot;: &quot;The number of distinct PfEMP1 variants for P. falciparum malaria in the overall parasite population in the simulation.&quot;, &quot;type&quot;: 0, &quot;order&quot;: 5}, &quot;New_Diagnostic_Sensitivity&quot;: {&quot;help&quot;: &quot;Range: 0.0001 to 100000&quot;, &quot;min&quot;: 0.0001, &quot;default&quot;: 5, &quot;max&quot;: 100000, &quot;tooltip&quot;: &quot;The number of microliters of blood tested to find single parasites in a new diagnostic (corresponds to inverse parasites/microliters sensitivity).&quot;, &quot;label&quot;: &quot;New Diagnostic Detection&quot;, &quot;value&quot;: &quot;0.02&quot;, &quot;type&quot;: 0, &quot;order&quot;: 6}, &quot;Parasite_Smear_Sensitivity&quot;: {&quot;help&quot;: &quot;Range: 0.0001 to 100&quot;, &quot;min&quot;: 0.0001, &quot;default&quot;: 50, &quot;max&quot;: 100, &quot;value&quot;: &quot;0.02&quot;, &quot;tooltip&quot;: &quot;The number of microliters of blood tested to find single parasites in a traditional smear (corresponds to inverse parasites/microliters sensitivity).&quot;, &quot;type&quot;: 0, &quot;order&quot;: 7}, &quot;Falciparum_Nonspecific_Types&quot;: {&quot;help&quot;: &quot;Range: 0 to 100&quot;, &quot;min&quot;: 0, &quot;default&quot;: 20, &quot;max&quot;: 100, &quot;value&quot;: &quot;60&quot;, &quot;tooltip&quot;: &quot;The number of distinct non-specific types of P. falciparum malaria.&quot;, &quot;type&quot;: 0, &quot;order&quot;: 4}, &quot;Antigen_Switch_Rate&quot;: {&quot;help&quot;: &quot;Range: 0 to 1&quot;, &quot;min&quot;: 0, &quot;default&quot;: 2e-09, &quot;max&quot;: 1, &quot;value&quot;: &quot;2e-09&quot;, &quot;tooltip&quot;: &quot;Antigenic switching rate per infected red blood cell per asexual cycle. See the Parasite_Switch_Type parameter for different switching patterns.&quot;, &quot;type&quot;: 0, &quot;order&quot;: 1}, &quot;Falciparum_MSP_Variants&quot;: {&quot;help&quot;: &quot;Range: 0 to 100&quot;, &quot;min&quot;: 0, &quot;default&quot;: 100, &quot;max&quot;: 100, &quot;value&quot;: &quot;6&quot;, &quot;tooltip&quot;: &quot;The number of distinct MSP variants for P. falciparum malaria in the overall parasite population in the simulation, not necessarily in an individual.&quot;, &quot;type&quot;: 0, &quot;order&quot;: 3}, &quot;Parasite_Switch_Type&quot;: {&quot;default&quot;: &quot;CONSTANT_SWITCH_RATE_2VARS&quot;, &quot;tooltip&quot;: &quot;Parasite switch type for erythrocyte surface antigens.&quot;, &quot;choices&quot;: [&quot;CONSTANT_SWITCH_RATE_2VARS&quot;, &quot;RATE_PER_PARASITE_7VARS&quot;, &quot;RATE_PER_PARASITE_5VARS_DECAYING&quot;], &quot;value&quot;: &quot;RATE_PER_PARASITE_7VARS&quot;, &quot;type&quot;: &quot;choice&quot;, &quot;order&quot;: 2}}">
+                        </div>
+                        <script> $(document).ready(function () {
+                            $("form").validate({rules: {}});
+                        }); </script>
+                        <input id="id_parasite-name" name="parasite-name" type="hidden"/>
+                        <input id="id_parasite-description" name="parasite-description" type="hidden"/>
+                        <input id="id_parasite-type" name="parasite-type" type="hidden"/>
+                        <input id="id_parasite-misc" name="parasite-misc" type="hidden"/>
+                    </td>
+                </tr>
+            </div>
+        </div>
+        <div class="form-actions" style="clear:both;">
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="left btn"><i class="icon-arrow-left"></i> Previous Step</button>
+            {% endif %}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button name="wizard_goto_step" type="submit" value="parasite" class="btn"><i class="icon-undo"></i> Undo Changes</button>
+
+            <button type="submit" class="right btn">Next Step <i class="icon-arrow-right"></i></button>
+        </div>
+    </form>
+    </div>
+    <script>
+    {% comment %} When a radio button is clicked, populate the field values for the choice made {% endcomment %}
+    var endemicitySettings = new Object;
+    // Falciparum_MSP_Variants (4, 7, 10)
+    // Falciparum_Nonspecific_Types (4, 20, 60)
+    // Falciparum_PfEMP1_Variants (300, 1000, 1700)
+    endemicitySettings["30"] = {};
+    endemicitySettings["30-60"] = {};
+    endemicitySettings["60"] = {};
+
+    {% comment %} These values set 04/08/2015 - based on Benoit's email of Arif's work {% endcomment %}
+    endemicitySettings["30"].Falciparum_MSP_Variants = 4;
+    endemicitySettings["30-60"].Falciparum_MSP_Variants = 6;
+    endemicitySettings["60"].Falciparum_MSP_Variants = 9;
+
+    endemicitySettings["30"].Falciparum_Nonspecific_Types = 80;
+    endemicitySettings["30-60"].Falciparum_Nonspecific_Types = 90;
+    endemicitySettings["60"].Falciparum_Nonspecific_Types = 100;
+
+    endemicitySettings["30"].Falciparum_PfEMP1_Variants = 500;
+    endemicitySettings["30-60"].Falciparum_PfEMP1_Variants = 1000;
+    endemicitySettings["60"].Falciparum_PfEMP1_Variants = 2000;
+
+    endemicitySettings["all"] = {};
+    endemicitySettings["all"].Antigen_Switch_Rate = 1.00438363105e-09;
+    endemicitySettings["all"].Parasite_Switch_Type = 'RATE_PER_PARASITE_7VARS';
+    //endemicitySettings["all"].New_Diagnostic_Sensitivity = 0.1;
+    //endemicitySettings["all"].Parasite_Smear_Sensitivity = 0.1;
+
+    $("input[name='endemicity']").click(function(){
+        var obj = endemicitySettings[$(this).val()];
+        for (var key in obj) {
+            var temp = 'parasite-json_' + key;
+            $("input[name=" + 'parasite-json_' + key + "]").val(obj[key]);
+        }
+        // add in the values that are the same for all non-custom endemicities
+        obj = endemicitySettings['all'];
+        for (var key in obj) {
+            var temp = 'parasite-json_' + key;
+            if($("input[name=" + 'parasite-json_' + key + "]").val()) {
+                $("input[name=" + 'parasite-json_' + key + "]").val(obj[key]);
+            } else {
+                $("select[name=" + 'parasite-json_' + key + "]").val(obj[key]);
+            }
+        }
+    });
+
+    window.onload=function () {
+        var templates = '';
+        {% if template_values %}
+            templates = "{{ template_values|safe }}";
+            /* Loop through all the values for the selected template and set each field to that value: */
+            var settings = templates.replace(' ', '').replace('{', '').replace('}', '').split(',').sort();
+            for (i in settings) {
+                var item = settings[i].split("/").pop().replace(/'/g,'').replace(/ /g,'');
+                var k = item.split(':');
+                var v = k.pop();
+                var name = '{{ wizard.steps.current }}-json_'+ k.valueOf();
+
+                if (document.getElementsByName(name).length > 0) {
+                    document.getElementsByName(name)[0].value = v;
+                }
+            }
+        {% endif %}
+
+        check_values();
+    };
+
+    // check user changes for need to switch selected radio button
+    $("input").change(function(){
+        check_values();
+    });
+    $("select").change(function(){
+        check_values();
+    });
+
+    function check_values() {
+        {% comment %} Decide which radio button should be displayed as checked {% endcomment %}
+        if ($("input[name='parasite-json_Antigen_Switch_Rate']").val() != endemicitySettings["all"].Antigen_Switch_Rate
+        || $("select[name='parasite-json_Parasite_Switch_Type']").val() != endemicitySettings["all"].Parasite_Switch_Type
+        //|| $("input[name='parasite-json_New_Diagnostic_Sensitivity']").val() != 0.1
+        //|| $("input[name='parasite-json_Parasite_Smear_Sensitivity']").val() != 0.1)
+        ) {
+            $("#custom").prop("checked", true);
+        } else if ($("input[name='parasite-json_Falciparum_MSP_Variants']").val() == endemicitySettings["30"].Falciparum_MSP_Variants
+                && $("input[name='parasite-json_Falciparum_Nonspecific_Types']").val() == endemicitySettings["30"].Falciparum_Nonspecific_Types
+                && $("input[name='parasite-json_Falciparum_PfEMP1_Variants']").val() == endemicitySettings["30"].Falciparum_PfEMP1_Variants) {
+            $("#30").prop("checked", true);
+        } else if ($("input[name='parasite-json_Falciparum_MSP_Variants']").val() == endemicitySettings["30-60"].Falciparum_MSP_Variants
+                && $("input[name='parasite-json_Falciparum_Nonspecific_Types']").val() == endemicitySettings["30-60"].Falciparum_Nonspecific_Types
+                && $("input[name='parasite-json_Falciparum_PfEMP1_Variants']").val() == endemicitySettings["30-60"].Falciparum_PfEMP1_Variants) {
+            $("#3060").prop("checked", true);
+        } else if ($("input[name='parasite-json_Falciparum_MSP_Variants']").val() == endemicitySettings["60"].Falciparum_MSP_Variants
+                && $("input[name='parasite-json_Falciparum_Nonspecific_Types']").val() == endemicitySettings["60"].Falciparum_Nonspecific_Types
+                && $("input[name='parasite-json_Falciparum_PfEMP1_Variants']").val() == endemicitySettings["60"].Falciparum_PfEMP1_Variants) {
+            $("#60").prop("checked", true);
+        } else {
+            $("#custom").prop("checked", true);
+        }
+    }
+
+    </script>
+{% endblock %}
+

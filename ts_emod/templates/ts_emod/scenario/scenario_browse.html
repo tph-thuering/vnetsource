@@ -1,0 +1,455 @@
+{% extends "ts_emod/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/07/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title %}
+    VecNet Transmission Simulator / EMOD / Browse Simulations
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}ts_emod/js/browse.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}ts_emod/js/popovers_tooltips.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block main_content %}
+    <script>
+        $(document).ready(function ()
+        {
+            // Change jumbotron tagline cause it's easier than changing base to inherit/replace tagline
+            $("p.lead").replaceWith("<p>My <strong>EMOD</strong> Simulations</p>");
+
+            $('a[data-confirm]').click(function (ev)
+            {
+                var href = $(this).attr('href');
+
+                if (!$('#dataConfirmModal').length)
+                {
+                    $('body').append(
+                        '<div id="dataConfirmModal" class="modal fade" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true">' +
+                            '<div class="modal-header">' +
+                                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
+                                '<h3 id="dataConfirmLabel">' +
+                                    '<i class="icon-warning-sign"></i>&nbsp;&nbsp;&nbsp;Please Confirm' +
+                                '</h3>' +
+                            '</div>' +
+                        '<div class="modal-body"></div>' +
+
+                        '<div class="modal-footer">' +
+                            '<button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Cancel</button>' +
+                            '<a class="btn btn-danger" id="dataConfirmOK">Delete</a>' +
+                        '</div>'
+                    );
+                }
+
+                $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+                $('#dataConfirmOK').attr('href', href);
+                $('#dataConfirmModal').modal({show: true});
+
+                return false;
+            });
+        });
+    </script>
+
+    <div id="scenario_browser">
+        <style>
+            .modal-body
+            {
+                max-height: 600px;
+            }
+
+            #addNewModal
+            {
+                width: 585px;
+                margin: 0 0 0 -325px;
+            }
+
+            {% comment %} Zebra-stripe the "table body" {% endcomment %}
+            #tbody div.row:nth-child(odd)
+            {
+                background-color: #e8e8e8;
+            }
+
+            .ui-state-hover
+            {
+                border: 0;
+            }
+        </style>
+
+    <div class="container">
+    <div class="row">
+        {% include "ts_emod/left_menu.html" %}
+    <div class="span9">
+    {% block page_content %}
+        <style>
+        .fancytree-active span.fancytree-title {color: #1F5C96;}
+        </style>
+        <h3>
+        {% if current_folder %} {{ current_folder.name }} folder{% else %}My Simulations{% endif %}
+        </h3>
+        <p>This is the list of the EMOD simulations you have created, contained in your {% if current_folder %} "{{ current_folder.name }}"{% else %}"home"{% endif %} folder.</p>
+        <div class="table table-hover table-striped table-condensed" id="scenario_table">
+            <div id="thead">
+                <div class="btn-group pull-right">
+                    {% if current_folder %}
+                                    <a class="btn tooltip_link" href="{% url 'ts_emod_scenario_browse' %}{% if current_folder.parent_id %}{{ current_folder.parent_id }}{% endif %}" title="Go back to the folder that contains this folder">
+                        <span class="icon-stack">
+                              <i class="icon-folder-close-alt icon-stack-base"></i>
+                              <i class="icon-arrow-left"></i>
+                        </span>
+                        Back to Parent Folder
+                    </a>
+                    {% endif %}
+                    <a class="btn tooltip_link" href="{% url 'ts_ScenarioCreateByTemplate_step' 'location' %}{% if current_folder %}{{ current_folder.id }}{% endif %}" title="Create a new simulation in this folder">
+                        <span class="icon-stack">
+                            <i class="icon-file-alt icon-stack-base"></i>
+                            <i class="icon-plus"></i>
+                        </span> Add a New Simulation</a>
+                    <a class="btn tooltip_link" data-target="#addNewFolderModal" data-toggle="modal" href="#" title="Create a new folder in this folder">
+                        <span class="icon-stack">
+                              <i class="icon-folder-close-alt icon-stack-base"></i>
+                              <i class="icon-plus"></i>
+                        </span>
+                        Add New Folder
+                    </a>
+                {% if current_folder %}
+                    <a class="btn btn-right tooltip_link"
+                           id="{{ current_folder.id }}-delete"
+                           {% if not current_folder.is_empty %}
+                                disabled
+                                data-original-title="Only empty folders can be deleted. You cannot delete this folder while it contains folders and/or simulations."
+                           {% else %}
+                               href="{% url "ts_emod_folder_delete" current_folder.id %}"
+                               data-confirm="Are you sure you want to delete this folder?
+                               You cannot delete folders that contain simulations."
+                                    data-original-title="Delete this folder"
+                           {% endif %}>
+                        <span class="icon-stack">
+                            <i class="icon-folder-close-alt icon-stack-base"></i>
+                            <i class="icon-trash"></i>
+                         </span>
+                        Delete
+                    </a>
+                {% endif %}
+                </div>
+            {% if scenario_count > 10 %}
+                <div class="row">
+                    <div class="span6">
+                        <span>
+                            <em style="font-size:0.8em;">Showing {{ current_start }}-{{ current_stop }}
+                                of {{ scenario_count }}</em>
+                        </span>
+
+                        <div class="btn-group text-left">
+                            <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-cog"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li><input type="radio" name="limit_size" value="10"
+                                           {% if pager_size == 10 %}checked="checked"{% endif %} id="limit_10"/>
+                                    <label
+                                            for="limit_10">10 Simulations/Page</label></li>
+                                <li><input type="radio" name="limit_size" value="25"
+                                           {% if pager_size == 25 %}checked="checked"{% endif %} id="limit_25"/>
+                                    <label
+                                            for="limit_25">25 Simulations/Page</label></li>
+                                <li><input type="radio" name="limit_size" value="50"
+                                           {% if pager_size == 50 %}checked="checked"{% endif %} id="limit_50"/>
+                                    <label
+                                            for="limit_50">50 Simulations/Page</label></li>
+                            </ul>
+                        </div>
+                </div></div>
+            {% endif %}
+                <div class="row">
+                    <div class="span9">
+                        <hr style="margin:5px; margin-left:-20px; border-bottom-color:#000000;"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <strong>
+                        <div class="span4"><a class="tooltip_link">ID</a> Name<br/><em style="font-size:0.9em"> Description</em></div>
+                        <div class="span1">Location</div>
+                        <div class="span1">Model Version</div>
+                        <div class="span2">Last Modified</div>
+                    </strong>
+                </div>
+            </div>
+            <hr style="margin:5px; margin-left:-20px; border-bottom-color:#000000;"/>
+            <div id="tbody">
+            {% for scenario in scenarios %}
+                {% if scenario.is_folder %}
+                <div class="row" id="{{ scenario.id }}-row">
+                    <div class="span3 draggable droppable" id="{{ scenario.id }}">
+                        <img src="/static/ts_emod/img/generic_folder.png" width="30" height="30">
+                        {{ scenario.name }} &nbsp;&nbsp;&nbsp;&nbsp; </div>
+                    <div class="span6">
+                        <div class="btn-group pull-right">
+                            <a class="btn scenario_button tooltip_link"
+                               id="{{ scenario.id }}-delete"
+                               {% if scenario.is_empty %}
+                                   href="{% url "ts_emod_folder_delete" scenario.id %}"
+                                   data-confirm="Are you sure you want to delete this folder?
+                                   You cannot delete folders that contain simulations."
+                                        data-original-title="Delete this folder"
+                               {% else %}
+                                    disabled
+                                    data-original-title="Only empty folders can be deleted"
+                               {% endif %}>
+                                <i class="icon-trash"></i> Delete</a>
+                            <a class="btn scenario_button tooltip_link"
+                               id="{{ scenario.id }}-open"
+                               href="{% url 'ts_emod_scenario_browse' scenario.id %}"
+                               data-original-title="View contents of this folder.">
+                                <i class="icon-folder-open-alt"></i>&nbsp;Open</a>
+                        </div>
+                        <em style="font-size:0.9em">{{ scenario.description }}</em>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row" id="{{ scenario.id }}-row">
+                    <div class="span4 draggable" id="{{ scenario.id }}">
+                        {% if scenario.is_representative and not scenario.representative_is_complete %}
+                            <a class="tooltip_link" href="{% url 'ts_repr.determine_view' scenario.id %}"
+                                data-original-title="View configuration details and results and continue to work on the simulation">
+                                <img src="/static/ts_emod/img/file_emod_landscape.png" width="30" height="30">
+                                {{ scenario.id }}
+                            </a>
+                        {% else %}
+                            <a class="tooltip_link" href="{% url 'ts_emod_scenario_details' scenario.id %}"
+                                data-original-title="View configuration details and results and continue to work on the simulation">
+                                <img src="/static/ts_emod/img/file_emod_landscape.png" width="30" height="30">
+                                {{ scenario.id }}
+                            </a>
+                        {% endif %}
+
+                        {% if scenario.name != 'in_progress' %}
+                            {% if scenario.name == "" %}
+                                Unnamed simulation
+                            {% else %}
+                                {% if scenario.is_representative %}
+                                    (repr)
+                                {% endif %}
+                                {{ scenario.name }}
+                            {% endif %}
+                                <br/><em style="font-size:0.9em;">{{ scenario.description|linebreaksbr }}</em>
+                        {% else %}
+                            In Progress, continue...
+                            <a class="tooltip_link" href="{% url 'ts_scenario_step' scenario.current_step scenario.id %}"
+                               data-original-title="Continue">
+                            <div id="progressbar"
+                                 class="ui-progressbar ui-widget ui-widget-content ui-corner-all"
+                                 role="progressbar"
+                                 style="background-color: {% if scenario.my_failed %}red;{% endif %}">
+                                <div class="progress-label">
+                                    5 out of 10 steps completed.  Click here to continue.
+                                </div>
+                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                     style="width: 50%;"></div>
+                            </div>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="span1">
+                        {{ scenario.location_name }}
+                    </div>
+                    <div class="span1">
+                        {{ scenario.model_version }}&nbsp;
+                    </div>
+                    <div class="span2">
+                        {{ scenario.last_modified }}
+                    </div>
+                    <div class="span1">
+                        <div class="btn-group pull-right">
+                            <a class="btn scenario_button tooltip_link"
+                               id="{{ scenario.id }}-delete"
+                               href="{% url "ts_emod_delete_scenario" scenario.id %}"
+                               data-original-title="Delete Simulation and all related data"
+                               data-confirm="Are you sure you want to delete simulation {{ scenario.name }} and all related data?"><i
+                                    class="icon-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% empty %}
+                <div class="row">
+                    <div class="span8 error">No simulations found. To create a simulation, click the button above.</div>
+                </div>
+            {% endfor %}
+            </div>
+
+            <div id="tfoot">
+            <tr>
+                <td colspan="6">
+                    <form method="post" action="{% url "ts_emod_scenario_browse" %}" id="pager_form">
+                        <div class="pagination pagination-small pagination-centered" id="pager">
+                            {% csrf_token %}
+                            <div style="display:none;">
+                                <input type="hidden" value="{{ pager_size }}" id="pager_size" name="pager_size"/>
+                            </div>
+                            <ul id="pager_list">
+                                {% if scenario_count > 10 %}
+                                    <li {% if scenarios.has_previous %}>
+                                        <a href="?page={{ scenarios.previous_page_number }}&pager_size={{ pager_size }}"> Prev </a>{% else %}
+                                        class="disabled"><a href="#">Prev</a>{% endif %}</li>
+                                    {% for item in scenario_range %}
+                                        <li {% if scenarios.number == forloop.counter %}class="active"{% endif %}><a
+                                                href="?page={{ forloop.counter }}&pager_size={{ pager_size }}">{{ forloop.counter }}</a></li>
+                                    {% endfor %}
+                                    <li {% if scenarios.has_next %}>
+                                        <a href="?page={{ scenarios.next_page_number }}&pager_size={{ pager_size }}"> Next </a>{% else %}
+                                        class="disabled"><a href="#">Next</a>{% endif %}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </form>
+
+                </td>
+            </tr>
+            </div>
+        </div>
+    {% endblock %}
+
+    <!-- Note Modal -->
+    <form id="save" method="post" action="{% url 'ts_emod_note_save' %}">{% csrf_token %}
+        <div id="addNewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Add a new note</h3>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" name="scenario_id" id="scenario_id" value=""/>
+                <br/>
+                <textarea id="id_text" class="description-box" rows="10"
+                          placeholder="Type in a note for this simulation and click save." name="text" label=""
+                          cols="40" required></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn left" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;Cancel
+                </button>
+                <button class="btn" type="submit"><i class="icon-save"></i>&nbsp;&nbsp;Save</button>
+            </div>
+        </div>
+    </form>
+    <!-- New Folder Modal -->
+    <form action="{% url 'ts_emod_folder_save' %}" method="post" id="save-folder">{% csrf_token %}
+        <div id="addNewFolderModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myFolderModalLabel">Add a new Folder</h3>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="folder_id" id="folder_id" value="{{ folder_id }}"/>
+                <strong>
+                    Name</strong>
+                <input id="id_folder-name" type="text" required="" placeholder="Type in a short name for the folder" name="folder-name" data-original-title="" title="" />
+
+                <br>
+
+                <strong>
+                    Description
+                </strong>
+                <br>
+
+                <textarea id="id_folder-description" class="description-box" rows="10" placeholder="Type in a short description of the folder" name="folder-description" cols="40"></textarea>
+
+                <br>
+
+                <span class="helptext"></span>
+
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button class="btn left" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;Cancel
+                </button>
+                <button class="btn" type="submit"><i class="icon-save"></i>&nbsp;&nbsp;Save</button>
+            </div>
+        </div>
+    </form>
+    {% comment %} would put this js include above in extra js block, but didn't work there. {% endcomment %}
+    <script src="{{ STATIC_URL }}ts_emod/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script>
+        $(document).on("click", ".add_note", function () {
+            var my_scenario_id = $(this).data('id');
+            $(".modal-body #scenario_id").val(my_scenario_id);
+        });
+
+        $("#save").validate({
+            rules: {
+                "text": {
+                    required: true
+                }
+            }
+        });
+
+        $("#save-folder").validate({
+            rules: {
+                "name": {
+                    required: true
+                }
+            }
+        });
+
+        $(function() {
+            $( ".draggable" ).draggable({
+                cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+                revert: function () {
+                    return true;
+                },
+                    // 'invalid', NOT WORKING? // when not dropped, the item should not revert back to its initial position
+                containment: "document",
+                cursor: "move",
+                cursorAt: { top: -5, left: -5 },
+                connectToFancytree: true,   // let Fancytree accept drag events
+                start: function(event, ui) {
+                    $('.tooltip').hide();  // disabled the tooltip when dragging starts
+                }
+            });
+            var my_url = "{% url 'ts_emod_folder_move' %}";
+            $( ".droppable" ).droppable({
+                hoverClass: "ui-state-hover",
+                drop: function( event, ui ) {
+                    //{% comment %} make call to backend with id's {% endcomment %}
+                    var is_folder = 0;
+                    if (ui.draggable.hasClass("droppable")) {
+                        is_folder = 1;
+                    }
+                    var my_delete_button = $("#"+ $(this).attr("id") +"-delete");
+                    // droppable, draggable, is_folder
+                    $.ajax({
+                        type: "GET",
+                        url: my_url + $(this).attr("id") + '/' + ui.draggable.attr("id") + '/' + is_folder + '/',
+                        success: function () {
+                            my_delete_button.on('click', function(e){ e.preventDefault(); e.stopPropagation(); alert("HERE");});
+                            // just in case it isn't already disabled (first drop on empty folder)
+                            my_delete_button.attr('disabled','disabled');   // styling
+                            my_delete_button.addClass("disabled");          // styling
+                            my_delete_button.attr("style", 'pointer-events:none;'); // Prevent data-confirm modal from triggering
+                            {% comment %}// was just hiding these, but nth-child zebra striping would still be off {% endcomment %}
+                            ui.draggable.parent("div").remove();  // remove the dragged item
+                            $("#tbody div.row:nth-child(odd)").attr("style", 'background-color: #e8e8e8;');  // retripe dark
+                            $("#tbody div.row:nth-child(even)").attr("style", 'background-color: #fff;');    // retripe light
+                        }
+                    })
+                }
+            });
+        });
+    </script>
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

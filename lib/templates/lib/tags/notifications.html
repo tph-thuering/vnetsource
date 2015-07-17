@@ -1,0 +1,12 @@
+{% for notification in notifications %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="alert {{ notification.type }}">
+                    {{ notification.message|safe }}
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

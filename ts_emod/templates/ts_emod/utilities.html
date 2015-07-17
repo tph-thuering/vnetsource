@@ -1,0 +1,77 @@
+{% extends "ts_emod/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 03/07/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+{% block page_title %}
+    VecNet EMOD Web Utilities
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            <div class="span3">
+                <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked">
+                    <li><a href="{% url "ts_emod_index" %}">
+                        <i class="icon-angle-left pull-left"></i>
+                        EMOD
+                    </a></li>
+                    <li class="active"><a href="{% url "ts_emod.utilities" %}">
+                        <i class="icon-wrench"></i>
+                        EMOD Utilites
+                    </a></li>
+                    <li><a href="{% url "ts_weather.index" %}">
+                        <i class="icon-list icon-rotate-180"></i>
+                        Weather Tool
+                        <i class="icon-angle-right pull-right"></i>
+                    </a></li>
+
+                    {%  if APP_ENV == 'production' %}
+                    {% else %}
+                    <li><a href="http://129.74.247.13:9000/"><i class="icon-list icon-rotate-180"></i>
+                        EMOD Multipoint
+                        <i class="icon-angle-right pull-right"></i></a>
+                    </li>
+                    <li><a href="http://129.74.247.13:9000/calib">
+                        <i class="icon-list icon-rotate-180"></i>
+                        Calib Tool
+                        <i class="icon-angle-right pull-right"></i>
+                    </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="span9">
+                <div class="row">
+                    <div class="span9">
+                    {% comment %}
+                        <ul class="breadcrumb">
+                            <li>
+                                EMOD <span class="divider">/</span>
+                            <li class="active">
+                                Web Utilities
+                            </li>
+                        </ul>
+                    {% endcomment %}
+                        {% block page_content %}
+                        {% endblock %}
+                    </div>
+                    EMOD Web Utilities is a collection of online tools for working with EMOD simulation files.
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            // Change jumbotron tagline cause it's easier than changing base to inherit/replace tagline
+            $("p.lead").replaceWith("<p><strong>EMOD</strong> Web Utilities</p>");
+        });
+    </script>
+{% endblock %}

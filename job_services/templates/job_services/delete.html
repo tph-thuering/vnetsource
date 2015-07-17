@@ -1,0 +1,12 @@
+{% extends "lib/base_jumbotron.html" %}
+
+{% block main_content %}
+<form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete this quota?<br />
+    User: {{ object.user }}<br />
+    Cluster: {{ object.cluster }}<br />
+    Max per run: {{ object.max_per_run }}<br />
+    Max per month: {{ object.max_per_month }}</p>
+    <input type="submit" value="Confirm Deletion" />
+</form>
+{% endblock %}

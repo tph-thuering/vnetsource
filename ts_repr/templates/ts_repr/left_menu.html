@@ -1,0 +1,62 @@
+<div class="span3">
+    <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked">
+        <li>
+            <a href="{% url "ts.index" %}">
+                <i class="icon-home"></i> Transmission<Br> Simulator
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+
+        <li {% if nav_button == "index" %}class="active"{% endif %}>
+            <a href="{% url "ts_repr.index" %}">
+                <i class="icon-wrench"></i> Representative
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+
+        <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked">
+            <li {% if nav_button == "new_scenario" %}class="active"{% endif %}>
+                <a href="{% url "ts_repr.new_scenario" %}">
+                    <i class="icon-edit"></i> New Simulation
+                    <i class="icon-angle-right pull-right"></i>
+                </a>
+                {% include "ts_repr/creation/creation_menu.html" %}
+            </li>
+            <li {% if nav_button == "browse_scenario" %}class="active"{% endif %}>
+                <a href="{% url "ts_repr.browse_scenario" %}">
+                    <i class="icon-list icon-folder-close-alt"></i> My Simulations
+                    <i class="icon-angle-right pull-right"></i>
+                </a>
+            </li>
+            <li {% if nav_button == "scenario_browse_public" %}class="active"{% endif %}>
+                    <a href="{% url "ts_emod_scenario_browse_public" %}">
+                        <i class="icon-list icon-rotate-180"></i> Public Simulations
+                        <i class="icon-angle-right pull-right" style="margin: 0;"></i>
+                    </a>
+            </li>
+            <li>
+                <a href="{% url "ts_emod.utilities" %}">
+                    <i class="icon-wrench"></i> Utilites
+                    <i class="icon-angle-right pull-right"></i>
+                </a>
+            </li>
+        </ul>
+
+        <li>
+            <a href="{% url "results_viewer.index" %}">
+                <i class="icon-wrench"></i> Results Viewer
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+
+        {% if dim_user.is_staff == True %}
+            <li {% if nav_button == "managers" %}class="active"{% endif %}>
+                <a href="{% url "ts_repr.manage_weather" %}">
+                    <i class="icon-wrench"></i> Managers
+                    <i class="icon-angle-right pull-right"></i>
+                </a>
+                {% include "ts_repr/managers/managers_menu.html" %}
+            </li>
+        {% endif %}
+    </ul>
+</div>

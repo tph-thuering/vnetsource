@@ -1,0 +1,286 @@
+{% extends "ts_weather/base.html" %}
+{% load staticfiles %}
+
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_get_started/style.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_index' %}">Get Started</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_modeling1' %}">Modeling Transmission at one site</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_modeling2' %}">Modeling Representative Scenario</a></li>
+    >
+    <li class="active"><a href="{% url 'ts_get_started_modeling2' %}">Model Overview</a></li>
+    > Weather Generator
+</ul>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+           Rainfall
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span5">
+            <form id="rainfallForm">
+                <div class="boxText">Abundancy</div>
+                <input onclick='fillRainfallChart()' type="radio" name='averageRainfall' value="lowest">Lowest&nbsp&nbsp&nbsp
+                <input onclick='fillRainfallChart()' type="radio" name='averageRainfall' value="low">Low&nbsp&nbsp&nbsp
+                <input onclick='fillRainfallChart()' type="radio" name='averageRainfall' value="medium" checked>Medium&nbsp&nbsp&nbsp
+                <input onclick='fillRainfallChart()' type="radio" name='averageRainfall' value="high">High&nbsp&nbsp&nbsp
+                <input onclick='fillRainfallChart()' type="radio" name='averageRainfall' value="highest">Highest&nbsp&nbsp&nbsp
+                <br><br>
+                <div class="boxText">Rainfall Distribution Curve Type</div>
+                <input onclick='fillRainfallChart()' type="radio" name='rainfallCurveType' value="softPeak">Soft August Peak&nbsp&nbsp&nbsp
+                <input onclick='fillRainfallChart()' type="radio" name='rainfallCurveType' value="hardPeak" checked>Hard August Peak&nbsp&nbsp&nbsp<br>
+                <input onclick='fillRainfallChart()' type="radio" name='rainfallCurveType' value="softValley">Soft January Peak&nbsp&nbsp&nbsp
+                <input onclick='fillRainfallChart()' type="radio" name='rainfallCurveType' value="hardValley">Hard January Peak&nbsp&nbsp&nbsp<br>
+                <input onclick='fillRainfallChart()' type="radio" name='rainfallCurveType' value="flat">Flat&nbsp&nbsp&nbsp
+            </form>
+        </div>
+        <div class="span1" id="rainfallChart" style="height: 281px; min-width: 500px"></div>
+    </div>
+</div>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            Humidity
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span5">
+            <form id="humidityForm">
+                <div class="boxText">Abundancy</div>
+                <input onclick='fillHumidityChart()' type="radio" name='averageHumidity' value="lowest">Lowest&nbsp&nbsp&nbsp
+                <input onclick='fillHumidityChart()' type="radio" name='averageHumidity' value="low">Low&nbsp&nbsp&nbsp
+                <input onclick='fillHumidityChart()' type="radio" name='averageHumidity' value="medium" checked>Medium&nbsp&nbsp&nbsp
+                <input onclick='fillHumidityChart()' type="radio" name='averageHumidity' value="high">High&nbsp&nbsp&nbsp
+                <input onclick='fillHumidityChart()' type="radio" name='averageHumidity' value="highest">Highest&nbsp&nbsp&nbsp
+                <br><br>
+            </form>
+        </div>
+        <div class="span1" id="humidityChart" style="height: 281px; min-width: 500px"></div>
+    </div>
+</div>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            Temperature
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span5">
+            <form id="temperatureForm">
+                <div class="boxText">Unit</div>
+                <input onclick='fillTemperatureChart()' type="radio" name='unitType' value="C" id='temperatureUnit' checked>C°&nbsp&nbsp&nbsp
+                <input onclick='fillTemperatureChart()' type="radio" name='unitType' value="F">F°&nbsp&nbsp&nbsp
+                <br><br>
+                <div class="boxText">Average Temperature</div>
+                <input onclick='fillTemperatureChart()' type="radio" name='averageTemperature' value="low">Low&nbsp&nbsp&nbsp
+                <input onclick='fillTemperatureChart()' type="radio" name='averageTemperature' value="medium" checked>Medium&nbsp&nbsp&nbsp
+                <input onclick='fillTemperatureChart()' type="radio" name='averageTemperature' value="high">High&nbsp&nbsp&nbsp
+                <br><br>
+                <div class="boxText">Temperature Distribution Curve Type</div>
+                <input onclick='fillTemperatureChart()' type="radio" name='temperatureCurveType' value="softPeak">Soft August Peak&nbsp&nbsp&nbsp
+                <input onclick='fillTemperatureChart()' type="radio" name='temperatureCurveType' value="hardPeak" checked>Hard August Peak&nbsp&nbsp&nbsp<br>
+                <input onclick='fillTemperatureChart()' type="radio" name='temperatureCurveType' value="softValley">Soft January Peak&nbsp&nbsp&nbsp
+                <input onclick='fillTemperatureChart()' type="radio" name='temperatureCurveType' value="hardValley">Hard January Peak&nbsp&nbsp&nbsp<br>
+                <input onclick='fillTemperatureChart()' type="radio" name='temperatureCurveType' value="flat">Flat&nbsp&nbsp&nbsp
+            </form>
+        </div>
+        <div class="span1" id="temperatureChart" style="height: 281px; min-width: 500px"></div>
+    </div>
+</div>
+
+<script>
+    var fillChartDelay = 500;
+    var fillChartCount = 0;
+
+    function fillRainfallChart()
+    {
+        var unit = 'mm';
+        var theData = $('#rainfallForm').serialize();
+
+        $.ajax
+        ({
+            data: theData,
+            type: "POST",
+            url: "/ts_get_started/rainfallData/",
+
+            success: function (generatedData)
+            {
+                // Create the chart
+                $('#rainfallChart').highcharts('StockChart',
+                {
+                    rangeSelector:
+                    {
+                        selected: -1,
+                        inputEnabled: false
+                    },
+
+                    yAxis:
+                    {
+                        tickInterval: 10,
+                        min: 0.0,
+                        max: 80,
+                        startOnTick: false,
+                        endOnTick: false
+                    },
+
+                    series:
+                    [{
+                        name: 'Rainfall',
+                        data: generatedData,
+                        tooltip:
+                        {
+                            valueDecimals: 2,
+                            valueSuffix: unit
+                        }
+                    }]
+                });
+             }
+         });
+    }
+
+    function fillHumidityChart()
+    {
+        var unit = '';
+        var theData = $('#humidityForm').serialize();
+
+        $.ajax
+        ({
+            data: theData,
+            type: "POST",
+            url: "/ts_get_started/humidityData/",
+
+            success: function (generatedData)
+            {
+                // Create the chart
+                $('#humidityChart').highcharts('StockChart',
+                {
+                    rangeSelector:
+                    {
+                        selected: -1,
+                        inputEnabled: false
+                    },
+
+                    yAxis:
+                    {
+                        tickInterval: 0.2,
+                        min: 0.0,
+                        max: 1.1,
+                        startOnTick: false,
+                        endOnTick: false
+                    },
+
+                    series:
+                    [{
+                        name: 'Humidity',
+                        data: generatedData,
+                        tooltip:
+                        {
+                            valueDecimals: 2,
+                            valueSuffix: unit
+                        }
+                    }]
+                });
+             }
+         });
+    }
+
+    function fillTemperatureChart()
+    {
+        var unit;
+        var theData = $('#temperatureForm').serialize();
+        var theTickInterval;
+        var theMin;
+        var theMax;
+
+        if ($('#temperatureUnit')[0].checked)
+        {
+            unit = 'C';
+            theTickInterval = 10;
+            theMin = -15.0;
+            theMax = 70.0;
+        }
+        else
+        {
+            unit = 'F';
+            theTickInterval = 20;
+            theMin = -15.0;
+            theMax = 120.0;
+        }
+
+        $.ajax
+        ({
+            data: theData,
+            type: "POST",
+            url: "/ts_get_started/temperatureData/",
+
+            success: function (generatedData)
+            {
+                // Create the chart
+                $('#temperatureChart').highcharts('StockChart',
+                {
+                    rangeSelector:
+                    {
+                        selected: -1,
+                        inputEnabled: false
+                    },
+
+                    yAxis:
+                    {
+                        tickInterval: theTickInterval,
+                        min: theMin,
+                        max: theMax,
+                        startOnTick: false,
+                        endOnTick: false
+                    },
+
+                    series:
+                    [{
+                        name: 'Temperature',
+                        data: generatedData,
+                        tooltip:
+                        {
+                            valueDecimals: 2,
+                            valueSuffix: unit
+                        }
+                    }]
+                });
+             }
+         });
+    }
+
+    function doNextFillChart()
+    {
+        fillChartCount++;
+        if (fillChartCount == 1)
+        {
+            $(fillHumidityChart()).done(setTimeout(doNextFillChart, fillChartDelay));
+        }
+        else
+        {
+            fillTemperatureChart();
+        }
+    }
+
+
+    $(document).ready(function()
+	{
+        $(fillRainfallChart()).done(setTimeout(doNextFillChart, fillChartDelay));
+	});
+
+</script>
+{%  endblock %}

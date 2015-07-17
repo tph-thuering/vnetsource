@@ -1,0 +1,38 @@
+{% extends "ts_emod2/base.html" %}
+
+{% block page_title %}
+    EMOD
+{% endblock %}
+
+{% block extra_local_css %}
+{% endblock %}
+
+{% block extra_local_js %}
+    <script>
+    </script>
+{% endblock %}
+
+{% block page_content %}
+    {% comment %}<h3>Basic Workflow – EMOD</h3>{% endcomment %}
+        The <strong>Basic Workflow</strong> using the <span style="white-space: nowrap;"> <strong>EMOD</strong> {% include "transmission_simulator/more_on_emod.html" %} model
+        enables</span> the user to build a baseline scenario for their chosen study location.
+    Users can then add interventions to the baseline including vector control, anti-malarial drugs or vaccines to study the impacts on transmission.
+    <br/>
+    <br/>
+    <p align="justify">
+        To start a new simulation using the <strong>EMOD Basic Workflow</strong>,
+        select “New Simulation” from the left menu.
+    </p>
+    <p align="justify">
+        To see all your <strong>EMOD</strong> simulation created using either the <strong>Basic</strong>
+        or <strong>Representative workflows</strong>, select “My Simulations” from the left menu.
+    </p>
+    <p align="justify">
+        To see simulations that you or others have made public, select “Public Simulations” from the left menu.
+    </p>
+    <p align="justify">
+        Select “Utilities” from the left menu for additional tools for working with the <strong>EMOD</strong> model.
+    </p>
+    <br/>
+    <br/>
+{% endblock %}

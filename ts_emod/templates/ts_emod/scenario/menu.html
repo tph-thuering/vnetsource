@@ -1,0 +1,71 @@
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 3/10/2014
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Robert Jones <Robert.Jones.428@nd.edu>
+########################################################################################################################
+{% endcomment %}
+    <ul class="nav nav-tabs nav-list" style="margin-top:0; margin-left:30px; padding-right:0;">
+        {% if wizard.steps.current == 'location' %}
+        <li class="{% if wizard.steps.current == 'location' %}active{% endif %}">
+            <a href="{% url "ts_scenario_step" 'location' %}"><i class="icon-globe"></i> Select Location</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'config' %}
+        <li class="{% if wizard.steps.current == 'config' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'config' %}"
+                onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+               {% endif %}><i class="icon-wrench"></i> Configure Simulation</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'climate' %}
+        <li class="{% if wizard.steps.current == 'climate' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'climate' %}"
+                onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+               {% endif %}><i class="icon-umbrella"></i> Weather Data</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'demographic' %}
+        <li class="{% if wizard.steps.current == 'demographic' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'demographic' %}"
+                onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+               {% endif %}><i class="icon-user"></i> Demographic Data</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'species' %}
+            <li class="{% if wizard.steps.current == 'species' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'species' %}"
+               onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+            {% endif %}><i class="icon-location-arrow"></i> Vector Selection</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'parasite' %}
+            <li class="{% if wizard.steps.current == 'parasite' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'parasite' %}"
+               onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+            {% endif %}><i class="icon-dashboard"></i> Parasite Parameters</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'scaling_factors' %}
+            <li class="{% if wizard.steps.current == 'scaling_factors' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'scaling_factors' %}"
+               onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+            {% endif %}><i class="icon-signal"></i> Scaling Factors</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'calibration' %}
+            <li class="{% if wizard.steps.current == 'calibration' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'calibration' %}"
+               onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+            {% endif %}><i class="icon-gears"></i> Calibration</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'run' %}
+            <li class="{% if wizard.steps.current == 'run' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'run' %}"
+                onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+               {% endif %}><i class="icon-play"></i> Run Simulation</a></li>
+        {% endif %}
+        {% if wizard.steps.current == 'review' %}
+            <li class="{% if wizard.steps.current == 'review' %}active{% endif %}">
+            <a {% if wizard.steps.current != 'location' %}href="{% url "ts_scenario_step" 'review' %}"
+                onclick="if (check_validation()) { document.wizard_form.submit(); } else {return false;}"
+               {% endif %}><i class="icon-bar-chart"></i> Review Results</a></li>
+        {% endif %}
+
+
+    </ul>

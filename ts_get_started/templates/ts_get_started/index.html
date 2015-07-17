@@ -1,0 +1,63 @@
+{% extends "ts_get_started/base.html" %}
+{% load staticfiles %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_get_started/style.css' %}" />
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+    > Get Started
+</ul>
+
+<br>
+
+<div style="font-size: 35px">
+    Selecting a site to model:<br>
+</div>
+<br>
+<br>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            Modeling Transmission at one site
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText">
+            Exploring transmission and control in different epidemiological and ecological settings for either a
+            geographically specific location using data for that specific location or to create a scenario that is
+            representative of a class of epidemiological or ecological settings.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='{% url "ts_get_started_modeling1" %}'>
+                <button class="btn">Modeling a single site</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            Modeling Transmission at Multiple Sites
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText">
+            Multi-node/spatial Simulations with map outputs.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='http://129.74.247.13:9000/'>
+                <button class="btn">Multiple Site Modeling</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{%  endblock %}

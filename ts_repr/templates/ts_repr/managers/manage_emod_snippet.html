@@ -1,0 +1,73 @@
+{% extends "ts_repr/base.html" %}
+
+{% block extra_local_js %}
+    <script>
+        // manage_species.js needs this variable
+        var emod_snippet_data_url = "{{ emod_snippet_data_url }}";
+    </script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/managers/manage_emod_snippet.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <form id="form" action="" method="post">{% csrf_token %}<br>
+        <input type="hidden" name="emod_snippet_id" id="emod_snippet_id" value="0" />
+        <input type="hidden" id="form-is-valid" name="form-is-valid" value="false" />
+
+        <div class="row">
+            <div class="span2">
+                EMOD Snippet:
+            </div>
+
+            <div class="span4">
+                <select id="emod-snippet-select">
+                    <option value="0">New Snippet</option>
+                    {% for snippet in snippets %}
+                        <option value="{{ snippet.id }}">{{ snippet.id }} {{ snippet.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span9">
+                NOTE: The species name is as it is used in config.json. Example: farauti
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                Species Name:
+            </div>
+
+            <div class="span3">
+                <input type="text" id="name" name="name" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                Description:
+            </div>
+
+            <div class="span7">
+                <textarea id="description" name="description" rows="10"></textarea>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span2">
+                Snippet:
+            </div>
+
+            <div class="span7">
+                <textarea rows="20" id="emod_snippet" name="emod_snippet">
+                </textarea>
+            </div>
+        </div>
+        <br>
+
+        <input type="submit" class="btn" value="Save EMOD Snippet" />
+    </form>
+{% endblock %}

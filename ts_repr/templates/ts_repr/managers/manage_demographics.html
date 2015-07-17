@@ -1,0 +1,134 @@
+{% extends "ts_repr/base.html" %}
+
+{% block extra_local_js %}
+    <script>
+        // manage_demographics.js needs this variable
+        var demographics_data_url = "{{ demographics_data_url }}";
+    </script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/managers/manage_demographics.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <form id="form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}<br>
+        <input type="hidden" name="demographics_id" id="demographics_id" value="0" />
+        <input type="hidden" id="form-is-valid" name="form-is-valid" value="false" />
+
+        <div class="row">
+            <div class="span2">
+                Demographics:
+            </div>
+
+            <div class="span4">
+                <select id="demographics-select">
+                    <option value="0">New Demographics</option>
+
+                    <optgroup label="Active">
+                        {% for demographics in active_demographics %}
+                            <option value="{{ demographics.id }}">{{ demographics.id }} {{ demographics.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+
+                    <optgroup label="Inactive">
+                        {% for demographics in inactive_demographics %}
+                            <option value="{{ demographics.id }}">{{ demographics.id }} {{ demographics.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                Demographics Name:
+            </div>
+
+            <div class="span3">
+                <input type="text" id="name" name="name" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                Description:
+            </div>
+
+            <div class="span6">
+                <textarea id="description" name="description" rows="10"></textarea>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            This is currently broken
+            <div class="span2">
+                Type:
+            </div>
+
+            <div class="span4">
+                <select id="type" name="type">
+                    <option value="Non-Exponential">Non-Exponential</option>
+                    <option value="Exponential" selected>Exponential</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                <input type="checkbox" id="is_active" name="is_active" checked> is_active
+            </div>
+        </div>
+        <br>
+
+        There are 3 things to note here. Files may already exist for this demographics entry
+        (assuming this is one already in the database), but will state as "No file selected".
+        Secondly, if you upload a new file, it will not populate the charts until the demographics is
+        saved. Lastly, the bin location on the cluster should be something like
+        "repr\demographics\Non-Exponential\demographics.compiled.json" without the quotes.
+        <br>
+        <br>
+        <b>NOTE TO ALEX:</b> When you go to add more demographics you will realize that this folder
+        structure doesn't make sense and you will have to create a sub folder in Non-Exponential since
+        they will all be named demographics.compiled.json. I would make these folders myself, but I
+        don't know what you want them to be called, so I will leave this up to you.
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="span9">
+                Uncompiled Demographics:
+                <input type="file" id="uncompiled_demographics" name="uncompiled_demographics" accept=".json" />
+                Currently this is required for charts.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span9">
+                Compiled Demographics:
+                <input type="file" id="compiled_demographics" name="compiled_demographics" accept=".compiled.json" />
+                Currently this is required for simulations.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span5">
+                Compiled Demographics File Location On Cluster:
+            </div>
+
+            <div class="span9">
+                <input type="text" id="demographics_file_location" name="demographics_file_location" style="width:425px;" />
+                Currently this is required for simulations.
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span9" id="demographics-chart" style="height: 400px; min-width: 500px"></div>
+        </div>
+        <br>
+
+        <input type="submit" class="btn" value="Save Demographics" />
+    </form>
+{% endblock %}

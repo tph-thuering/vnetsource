@@ -1,0 +1,34 @@
+.tab-content {
+    overflow: visible;
+}
+
+.toggles td{
+    text-align: left;
+    width: auto;
+}
+
+.toggleTitle{
+    color: #C05700;
+}
+
+.unCheckAll{
+    color: #C05700;
+}
+
+.checkAll{
+    color: #C05700;
+}
+
+thead .header {
+    background: url('../DataTables/media/images/sort_both.png') no-repeat center right;
+}
+
+thead .headerSortDown {
+    background: url('../DataTables/media/images/sort_desc.png') no-repeat center right;
+}
+
+thead .headerSortUp {
+    background: url('../DataTables/media/images/sort_asc.png') no-repeat center right;
+}
+
+tr { height: 50px; }

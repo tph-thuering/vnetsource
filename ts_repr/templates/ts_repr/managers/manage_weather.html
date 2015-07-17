@@ -1,0 +1,159 @@
+{% extends "ts_repr/base.html" %}
+
+{% block extra_local_js %}
+    <script>
+        // manage_weather.js needs this variable
+        var weather_data_url = "{{ weather_data_url }}";
+    </script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/managers/manage_weather.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <form id="form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}<br>
+        <input type="hidden" name="weather_id" id="weather_id" value="0" />
+        <input type="hidden" id="form-is-valid" name="form-is-valid" value="false" />
+
+        <div class="row">
+            <div class="span2">
+                Weather:
+            </div>
+
+            <div class="span4">
+                <select id="weather-select">
+                    <option value="0">New Weather</option>
+
+                    <optgroup label="Active">
+                        {% for weather in active_weather %}
+                            <option value="{{ weather.id }}">{{ weather.id }} {{ weather.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+
+                    <optgroup label="Inactive">
+                        {% for weather in inactive_weather %}
+                            <option value="{{ weather.id }}">{{ weather.id }} {{ weather.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                Weather Name:
+            </div>
+
+            <div class="span3">
+                <input type="text" id="name" name="name" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span2">
+                Description:
+            </div>
+
+            <div class="span6">
+                <textarea id="description" name="description" rows="10"></textarea>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span2">
+                <input type="checkbox" id="is_active" name="is_active" checked> is_active
+            </div>
+        </div>
+        <br>
+
+        There are 3 things to note here. Files may already exist for this weather entry
+        (assuming this is one already in the database), but will state as "No file selected".
+        Secondly, if you upload a new file, it will not populate the charts until the weather is saved.
+        Lastly, the bin location on the cluster should be something like
+        "repr\weather\af\temperature.bin" without the quotes.
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="span9">
+                Rainfall Json:
+                <input type="file" id="rainfall_json" name="rainfall_json" accept=".json" />
+
+                Rainfall Bin:
+                <input type="file" id="rainfall_bin" name="rainfall_bin" accept=".bin" />
+            </div>
+
+            <div class="span4">
+                Rainfall Bin Location On Cluster:
+            </div>
+
+            <div class="span3">
+                <input type="text" id="rainfall_file_location" name="rainfall_file_location" />
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span9">
+                Humidity Json:
+                <input type="file" id="humidity_json" name="humidity_json" accept=".json" />
+
+                Humidity Bin:
+                <input type="file" id="humidity_bin" name="humidity_bin" accept=".bin" />
+            </div>
+
+            <div class="span4">
+                Humidity Bin Location On Cluster:
+            </div>
+
+            <div class="span3">
+                <input type="text" id="humidity_file_location" name="humidity_file_location" />
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span9">
+                Temperature Json:
+                <input type="file" id="temperature_json" name="temperature_json" accept=".json" />
+
+                Temperature Bin:
+                <input type="file" id="temperature_bin" name="temperature_bin" accept=".bin" />
+            </div>
+
+            <div class="span4">
+                Temperature Bin Location On Cluster:
+            </div>
+
+            <div class="span3">
+                <input type="text" id="temperature_file_location" name="temperature_file_location" />
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="span9" id="rainfall-chart" style="height: 200px; min-width: 500px"></div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span9" id="humidity-chart" style="height: 200px; min-width: 500px"></div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="span9" id="temperature-chart" style="height: 200px; min-width: 500px"></div>
+        </div>
+        <br>
+
+        <br>
+        OM Seasonality Stuff HERE
+
+        <br>
+        <br>
+        <input type="submit" class="btn" value="Save Weather" />
+    </form>
+{% endblock %}

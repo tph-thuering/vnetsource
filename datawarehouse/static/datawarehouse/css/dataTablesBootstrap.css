@@ -1,0 +1,55 @@
+div.dataTables_length label {
+    float: left;
+    text-align: left;
+    width: auto;
+}
+
+div.dataTables_length, div.dataTables_filter{
+    width: 100%;
+}
+ 
+div.dataTables_filter label {
+    float: left;
+    width: auto;
+}
+
+div.dataTables_info {
+    padding-top: 8px;
+}
+ 
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
+}
+ 
+table {
+    margin-bottom: 6px !important;
+    clear: both;
+}
+
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+}
+
+/*---------- Stylings as per Kristina ----------------*/
+tr.even .sorting_1, tr.even td.sorting_1 {
+    background-color: #ffecd7 !important;
+    border: #e9d5c1;
+}
+
+tr.odd .sorting_1, tr.odd td.sorting_1{
+    background-color: #f5e1cd !important;
+    border: #e9d5c1;
+}
+ 
+table.table thead .sorting { background: url('images/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('images/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('images/sort_desc.png') no-repeat center right; }
+ 
+table.table thead .sorting_asc_disabled { background: url('images/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('images/sort_desc_disabled.png') no-repeat center right; }

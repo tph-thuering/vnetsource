@@ -1,0 +1,110 @@
+{
+    "Changes": [
+        {
+            "parameters/Run_Number": 5
+        },
+        {
+            "parameters/x_Air_Migration": 5
+        },
+        {
+            "parameters/Vector_Species_Params/minor/Anthropophily": 2001
+        },
+        "malariaSuperDrug",
+        ["mosquito1 + mosquito2", "-mosquito1", "+mosquito2"],
+        ["sweep1"]
+    ],
+    "mosquito1": {
+        "Changes": [
+            {
+                "parameters/Vector_Species_Params": {
+                    "fluffy": {
+                        "Acquire_Modifier": 0.9,
+                        "Adult_Life_Expectancy": 7999,
+                        "Anthropophily": -9000,
+                        "Aquatic_Arrhenius_1": 84200000000,
+                        "Aquatic_Arrhenius_2": 8250,
+                        "Aquatic_Mortality_Rate": 0.1,
+                        "Days_Between_Feeds": 2,
+                        "Egg_Batch_Size": 120,
+                        "Habitat_Type": ["CONSTANT", "TEMPORARY_RAINFALL", "WATER_VACATION"],
+                        "Immature_Duration": 2,
+                        "Indoor_Feeding_Fraction": 0.1,
+                        "Infected_Arrhenius_1": 117000000000,
+                        "Infected_Arrhenius_2": 8336,
+                        "Infected_Egg_Batch_Factor": 0.8,
+                        "Infectious_Human_Feed_Mortality_Factor": 1.1,
+                        "Required_Habitat_Factor": [37500000.0, 37500000.0, 37500000.0],
+                        "Transmission_Rate": 0.8
+                    }
+                },
+                "mode": "TRUNCATE"
+            },
+            {
+                "parameters/Vector_Species_Names": ["fluffy"],
+                "mode": "TRUNCATE"
+            }
+        ]
+    },
+    "mosquito2": {
+        "Changes": [
+            {
+                "parameters/Vector_Species_Params": {
+                    "fluffy": {
+                        "Acquire_Modifier": 0.8,
+                        "Adult_Life_Expectancy": 7999,
+                        "Anthropophily": -9000,
+                        "Aquatic_Arrhenius_1": 84200000000,
+                        "Aquatic_Arrhenius_2": 7250,
+                        "Aquatic_Mortality_Rate": 0.1,
+                        "Days_Between_Feeds": 3,
+                        "Egg_Batch_Size": 100,
+                        "Habitat_Type": ["CONSTANT", "TEMPORARY_RAINFALL", "WATER_VACATION"],
+                        "Immature_Duration": 2,
+                        "Indoor_Feeding_Fraction": 0.1,
+                        "Infected_Arrhenius_1": 117000000000,
+                        "Infected_Arrhenius_2": 8336,
+                        "Infected_Egg_Batch_Factor": 0.8,
+                        "Infectious_Human_Feed_Mortality_Factor": 1.1,
+                        "Required_Habitat_Factor": [37500000.0, 37500000.0, 37500000.0],
+                        "Transmission_Rate": 0.8
+                    }
+                },
+                "mode": "TRUNCATE"
+            },
+            {
+                "parameters/Vector_Species_Names": ["fluffy"],
+                "mode": "TRUNCATE"
+            }
+        ]
+    },
+    "malariaSuperDrug":{
+        "Changes": [
+            {
+                "parameters/Malaria_Drug_Params": {
+                    "Artemether_Lumefantrine":{
+                        "Drug_Cmax": 1000,
+                        "Drug_Decay_T1": 1,
+                        "Drug_Decay_T2": 1,
+                        "Drug_Dose_Interval": 1,
+                        "Drug_Fulltreatment_Doses": 3,
+                        "Drug_Gametocyte02_Killrate": 2.3,
+                        "Drug_Gametocyte34_Killrate": 2.3,
+                        "Drug_GametocyteM_Killrate": 2.3,
+                        "Drug_Hepatocyte_Killrate": 0,
+                        "Drug_PKPD_C50": 100,
+                        "Drug_Vd": 10,
+                        "Max_Drug_IRBC_Kill": 4.61
+                    }
+                }
+            }
+        ]
+    },
+    "sweep1": {
+        "Changes": [
+        {
+            "parameters/Base_Air_Temperature": "20:50:5"
+        }
+        ],
+        "is_sweep": true
+    }
+}

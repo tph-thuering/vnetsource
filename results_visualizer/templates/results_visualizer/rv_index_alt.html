@@ -1,0 +1,44 @@
+{% extends "results_visualizer/vizbase.html" %}
+{% load i18n %}
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 1/14/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Caleb Reinking <Caleb.M.Reinking.2@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+
+{% block page_title %}
+    VecNet Results Viewer
+{% endblock %}
+
+{% block main_content %}
+    <div class="container" >
+        <div class="span12">
+                <div class="span10" style="margin-bottom: 20px">
+                    <h3>Welcome to Results Viewer</h3>
+                    <p align="justify">The results viewer is provided as a portal to the results of Transmission Simulator executions. All
+                    of your private executions as well as public executions are available for visualization.
+                    Get started by reading and choosing one of the options below!
+                    </p>
+                    <p align="justify">
+                    The scenario-based visualization interface allows the graphing and download of data series from a specific Transmission Simulator
+                        run. The Scenario-based interface is useful for viewing and comparing data from within the same Transmission Simulator scenario
+                        or run. Use the links below to browse either EMOD or OpenMalaria results data:
+                        <br/>
+                        <strong><a style="margin-left:10px" href="{% url 'results_vis_model' 'EMOD' %}" >EMOD Results</a></strong>
+                        <br/>
+                        <strong><a style="margin-left:10px" href="{% url 'results_vis_model' 'OM' %}">OpenMalaria Results</a></strong>
+                    </p>
+                    <p align="justify">
+                    The <strong><a href="{% url 'custom_results_viewer' %}" >custom visualization interface</a></strong> is provided to visualize data from multiple Transmission Simulator runs on the same chart. This
+                        method opens up the output data to create custom charts that are not bound by simulation model, scenario, or homogenous
+                        output types.
+                    </p>
+                </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "ts_get_started/base.html" %}
+{% load staticfiles %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+{% block inner_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'ts_get_started/style.css' %}" />
+
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'ts.index' %}">Transmission Simulator</a></li>
+    > Get Started
+</ul>
+
+<br>
+
+<div style="font-size: 35px">
+    Selecting a prototype:<br>
+</div>
+<br>
+<br>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            Prototype 1
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText">
+            Only contains weather file generation. In the future it could contain demographics generation, vector
+            species generation, and transmission intensity selection. Data for weather is randomly generated based
+            on predefined numbers to attempt to form semi-realistic data.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='{% url "ts_get_started_weatherGenerator" %}'>
+                <button class="btn">Prototype 1</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="well well-large">
+    <div class="boxHeaderDiv">
+        <span class="boxHeaderSpan">
+            Prototype 2
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="span9 boxText">
+            Contains weather file generation as well the vector species and their feeding behaviours. This component
+            was designed as a calibration tool and not as a representative workflow, but has the potential
+            to satisfy those requirements. Data for weather is completely predefined and thus has less chance of
+            creating weather data that is unrealistic.
+        </div>
+
+        <div class="span2" style="float: right">
+            <form action='http://129.74.247.13:9000/calib/'>
+                <button class="btn">Prototype 2</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{%  endblock %}

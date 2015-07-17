@@ -1,0 +1,48 @@
+{% if nav_button == 'new_scenario' and scenario_steps_complete > 0 %}
+    <ul class="nav nav-tabs nav-list" style="margin-top:0; margin-left:5px; padding-right:0;">
+        {# at least past name #}
+        {% if scenario_is_editable %}
+            <li class="{% if current_step == 'weather' %}active{% endif %}">
+                <a href="{% url "ts_repr.weather" scenario.id %}">
+                    <i class="icon-umbrella"></i> Weather
+                </a>
+            </li>
+        {% endif %}
+
+        {# at least past weather #}
+        {% if scenario_steps_complete >= 2 and scenario_is_editable %}
+            <li class="{% if current_step == 'demographics' %}active{% endif %}">
+                <a href="{% url "ts_repr.demographics" scenario.id %}">
+                    <i class="icon-user"></i> Demographics
+                </a>
+            </li>
+        {% endif %}
+
+        {# at least past demographics #}
+        {% if scenario_steps_complete >= 3 and scenario_is_editable %}
+            <li class="{% if current_step == 'species' %}active{% endif %}">
+                <a href="{% url "ts_repr.species" scenario.id %}">
+                    <i class="icon-bug"></i> Species
+                </a>
+            </li>
+        {% endif %}
+
+        {# at least past demographics #}
+        {% if scenario_steps_complete >= 4 and scenario_is_editable %}
+            <li class="{% if current_step == 'parasite' %}active{% endif %}">
+                <a href="{% url "ts_repr.parasite" scenario.id %}">
+                    <i class="icon-bug"></i> Parasite
+                </a>
+            </li>
+        {% endif %}
+
+        {# completed #}
+        {% if scenario_steps_complete >= 5 %}
+            <li class="{% if current_step == 'details' %}active{% endif %}">
+                <a href="{% url "ts_repr.details" scenario.id %}">
+                    <i class="icon-list-ul"></i> Review
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}

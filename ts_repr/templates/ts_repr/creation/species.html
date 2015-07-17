@@ -1,0 +1,77 @@
+{% extends "ts_repr/base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}
+    Representative Species
+{% endblock %}
+
+{% block extra_local_js %}
+    <script>
+        // species.js needs these variables
+        var species_data_url = "{{ species_data_url }}";
+        var previously_selected_species_ids = {{ previously_selected_species_ids }};
+        // This complicated mess is here because "minor vector" has quotes in the name
+        var species_options_string = '{{ species_options }}';
+        var species_options = JSON.parse(species_options_string.replace(/&quot;/ig, '\\"').replace(/&#39;/ig, '"'));
+
+        // save_buttons.js needs these variables
+        var page_name = "{{ page_name }}";
+        var data_to_save = {};
+    </script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/creation/species.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}ts_repr/js/creation/save_buttons.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <form id="form" action="" method="post">{% csrf_token %}<br>
+        <input type="hidden" id="scenario_id" value="{{ scenario.id }}" />
+        <input type="hidden" id="form-is-valid" name="form-is-valid" value="false" />
+
+        {# Add Button #}
+        <div class="row">
+            <div class="span3">
+                <input class="btn" onclick="add_species()" value="Add Species" style="width:auto"/>
+            </div>
+
+            <div class="span5">
+{#                                You can add up to 4 species, but at least 1 is required.#}
+            </div>
+        </div>
+
+        {% include "ts_repr/creation/save_buttons.html" %}
+        <br>
+
+        <div id="species-section">
+            <div id="species-template" style="display:none">
+                <div class="row species-wrapper">
+                    <div class="span9">
+                        <div class="well well-large">
+                            <select class="species-select" style="width:auto">
+                            </select>
+
+                            <button class="btn pull-right species-remove-button" type="button">
+                                Remove Species
+                            </button>
+
+                            <div style="height: 1px; border-top: 1px solid black; text-align: center; position: relative">
+                            </div>
+                            <br>
+
+                            <div class="species-description">
+                            </div>
+
+                            <div class="species-parameters">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="save_buttons_2" style="display:none">
+            {% include "ts_repr/creation/save_buttons.html" %}
+        </div>
+
+    </form>
+{% endblock %}

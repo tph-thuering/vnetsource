@@ -1,0 +1,70 @@
+<h4>Input Files:</h4>
+
+{% for input_file in input_files %}
+    <div class="row {% if forloop.counter0|divisibleby:2 %}gray-row{% endif %}">
+        <div class="span6">
+            <a class="tooltip_link accordion-toggle" data-toggle="collapse"
+                data-target="#{{ input_file.file_type }}-accordion"
+                title="Click to show/hide contents of the file">
+                <strong>{{ input_file.printed_name }}</strong>
+            </a>
+        </div>
+
+        <div class="span3">
+            <div class="btn-group pull-right">
+                <a class="btn btn-small tooltip_button accordion-toggle" data-toggle="collapse"
+                    data-target="#{{ input_file.file_type }}-accordion"
+                    title="Click to show/hide contents of the file">
+                    <i class="icon-eye-open"></i>&nbsp;&nbsp;View
+                </a>
+
+                <a class="btn btn-small tooltip_link" href="{% url 'ts_emod2.download' input_file.file_type scenario.id %}"
+                    title="Download a copy of the file to your computer.">
+                    <i class="icon-arrow-down"></i>&nbsp;&nbsp;Download
+                </a>
+
+                <a class="btn btn-small tooltip_link" href="#" data-original-title="Upload file"
+                    data-toggle="modal" data-target="#{{ input_file.file_type }}-upload-modal">
+                    <i class="icon-arrow-up"></i> Upload
+                </a>
+
+                {% if input_file.file_type != 'rainfall-bin' and input_file.file_type != 'humidity-bin' and input_file.file_type != 'temperature-bin' %}
+                    <a class="btn btn-small btn-warn"
+                        href="{% url 'ts_emod2.json_editor' input_file.file_type scenario.id %}"
+                        data-title="Manually edit the JSON content of this file."
+                        onClick="return window.confirm('Are you sure you want to manually edit this file? ' +
+                        'Doing so may make the file invalid and cause EMOD to fail to run correctly. ' +
+                        'Use at your own risk.')">
+                        <i class="icon-edit"></i> Edit
+                    </a>
+                {% else %}
+                    <a class="btn btn-small btn-warn" disabled>
+                        <i class="icon-edit"></i> Edit
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span9">
+            <div class="accordion-body collapse" id="{{ input_file.file_type }}-accordion">
+                <div class="accordion-inner">
+                    {% if input_file.file_type == 'demographics' %}
+{#                                        <div class="row">#}
+{#                                            <div class="well well-large span8" id="demographics-chart" style="height: 400px; width: 100%"></div>#}
+{#                                        </div>#}
+                    {% endif %}
+
+                    {% if input_file.file_type == 'rainfall-bin' or input_file.file_type == 'humidity-bin' or input_file.file_type == 'temperature-bin' %}
+                        {% include "lib/charts/single_weather_tab.html" with type=input_file.short_file_type no_total_or_average=true %}
+                    {% else %}
+                        <pre class="">{{ input_file.json }}</pre>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "ts_emod2/upload_modal.html" with type=input_file.file_type %}
+{% endfor %}

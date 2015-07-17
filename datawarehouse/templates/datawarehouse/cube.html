@@ -1,0 +1,290 @@
+{% extends "datawarehouse/base.html" %}
+
+{% comment %}
+########################################################################################################################
+# VECNet CI - Prototype
+# Date: 4/5/2013
+# Institution: University of Notre Dame
+# Primary Authors:
+#   Lawrence Selvy <Lawrence.Selvy.1@nd.edu>
+#   Zachary Torstrick <Zachary.R.Torstrick.1@nd.edu>
+########################################################################################################################
+{% endcomment %}
+
+{% block page_title %}
+    {% if test %}
+        Data Warehouse: Test
+    {% else %}
+        Data Warehouse: Cube Browser
+    {% endif %}
+{% endblock %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/DataTables/media/css/demo_table.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/TableTools/media/css/TableTools.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/css/loading.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/css/HighCharts_toolbar.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}datawarehouse/css/cube.css" />
+    {%  if test %}
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/css/qunit-1.11.0.css"
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/DataTables/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/TableTools/media/js/TableTools.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/TableTools/media/js/ZeroClipboard.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/js/beautify.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/js/warehouseBrowserUI.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/js/HighCharts_toolbar.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/jQuery-File-Upload-jquery-ui/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/jQuery-File-Upload-jquery-ui/js/jquery.fileupload.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/HighCharts/js/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}datawarehouse/js/charts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}lib/js/HighCharts/js/modules/exporting.js"></script>
+    {% if test %}
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}lib/js/qunit-1.11.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}datawarehouse/js/functional_test.js"></script>
+    {% endif %}
+
+    <script type="text/javascript">
+    csrf_token = "{{ csrf_token }}";
+    csrf_tag = "{% csrf_token %}";
+    $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip({
+                delay: 500
+            })
+    });
+    </script>
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/datawarehouse">Data Warehouse Browser</a><span class="divider">/</span></li>
+            <li class="active">Dimensional Data</li>
+        </ul>
+        <div id="help_box"></div>
+        <div id="topper">
+            <div id="dataset_holder">
+                <p><strong>Dataset</strong>
+                    <a data-toggle="tooltip" title="A data cube (also known as a hypercube), is an n-dimensional
+                    representation of the data in the data warehouse."><icon class="icon-info-sign"></icon></a>
+                </p>
+                <select class="" id="cube" autocomplete="off">
+                        <option value="Default" selected="selected">"Please Select a Cube"</option>
+                    {% for cube_val,cube_name in cube_dict.items %}
+                        <option value={{cube_val}}>{{cube_name}}</option>
+                    {% endfor %}
+                </select>
+                <p><strong>Dimensions </strong>
+                    <a data-toggle="tooltip" title="A dimension is an independent entity that serves as an
+                    entry point or as a mechanism for slicing and dicing the additive measures (facts) located in the
+                    data warehouse. It is a descriptive attribute that describes the 'who, what, when, where, why,
+                    and how' about the measures.
+                    After choosing a data cube, drag and drop a dimension, or click the plus sign next to it, to add
+                    that as an x-Axis to your graphs">
+                        <icon class="icon-info-sign"></icon>
+                    </a>
+                    <a class="pull-right" href="javascript:void(0)" onclick="$('#dimensions .dim').each(function(){selectDrop(ev = {target:$('#xdiv')},ui = {draggable:$(this)})})">Add All <i class="icon-plus"></i></a>
+                </p>
+                <div class="inputs" id="dimensions">
+                </div>
+                <p><strong>Measures </strong>
+                    <a data-toggle="tooltip" title="A measure, or fact, usually represents a numeric performance measurement.
+                    It is taken at the intersection of all the associated dimensions.
+                    After choosing a data cube, drag and drop a measure, or click
+                    the plus sign next to it, to add this as a y-Axis to your graphs">
+                        <icon class="icon-info-sign"></icon>
+                    </a>
+                    <a class="pull-right" href="javascript:void(0)" onclick="$('#measures .meas').each(function(){selectDrop(ev = {target:$('#ydiv')},ui = {draggable:$(this)})})">Add All <i class="icon-plus"></i></a>
+                </p>
+                <div class="inputs" id="measures"></div>
+            </div>
+            <div id="info_holder">
+                <div class="well" id="infobar">
+                    <div id="selectionHeader">
+                        <p><strong>Selection Summary</strong>
+                            <a data-toggle="tooltip" title="After you make selections, they will appear here, where you can reference them for the future">
+                                <icon class="icon-info-sign"></icon>
+                            </a>
+                        </p>
+                    </div>
+                    <p>Dimensions: <a class="pull-right" href="javascript:void(0)" onclick="$('#infobar #xdiv .dataset').remove()">Remove All <i class="icon-remove"></i></a></p>
+                    <div class='inputs' id='xdiv'>
+                    </div>
+                    <p>Measures: <a class="pull-right" href="javascript:void(0)" onclick="$('#infobar #ydiv .dataset').remove()">Remove All <i class="icon-remove"></i></a></p>
+                    <div class='inputs' id='ydiv'>
+                    </div>
+                    <p>Slices: <a class="pull-right" href="javascript:void(0)" onclick="$('#Slice_list .slice').remove()">Remove All <i class="icon-remove"></i></a></p>
+                    <div class="inputs" id="Slice_list">
+                    </div>
+                </div>
+                <div class="well" id="graph_controls">
+                    <a class='btn' href="javascript:void(0)" id="create_graph" onclick="create_output('graph')">Create Graph <i class='icon-bar-chart'></i></a>
+                    <a class='btn' href="javascript:void(0)" id="create_table" onclick="create_output('table')">Create Table <i class='icon-list-alt'></i></a>
+                    <a class='btn' href="javascript:void(0)" id="reset_page" onclick="clearAll()">Reset Page <i class='icon-repeat'></i></a>
+                    <a class='btn' href="javascript:void(0)" id="upload_json" onclick="$('#file_upload').show()">Import Json <i class='icon-upload-alt'></i></a>
+                    <input hidden type='file' id='file_upload' name='file' data-url='upload' />
+                    <div id="load_box">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="" id="data_error_box"></div>
+
+        <div id="graph_tools">
+            <div class="" id="HighChart_tabbar">
+                <ul class="pull-left nav nav-tabs" id="HC_tabs">
+                    <li class="active"><a href="#graph_opts" data-toggle="tab">Graph</a></li>
+                    <li><a href="#title_opts" data-toggle="tab">Titles</a></li>
+                    <li><a href="#legend_opts" data-toggle="tab">Legend</a></li>
+                </ul>
+            </div>
+            <div class="tab-content" id="HighChart_toolbar">
+                <div class="tab-pane active" id="graph_opts">
+                    <select id='window_graph_chooser'>
+                        <option value='default'>Please choose a graph</option>
+                    </select>
+                    <p>Graph Appearance <hr></p>
+                    <div class="">
+                        <div class="full_width btn-group">
+                            <button class="btn dropdown-toggle" id="chart_type" data-toggle="dropdown" type="button">Graph Options<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0)" onclick="changeOption('chart','type','line')">Line</a></li>
+                                <li><a href="javascript:void(0)" onclick="changeOption('chart','type','bar')">Bar</a></li>
+                                <li><a href="javascript:void(0)" onclick="changeOption('chart','type','scatter')">Scatter</a></li>
+                                <li><a href="javascript:void(0)" onclick="changeOption('chart','type','area')">Area</a></li>
+                                <li><a href="javascript:void(0)" onclick="changeOption('chart','type','column')">Column</a></li>
+                            </ul>
+                        </div>
+
+                        <br>
+                        Window:
+                        <a class="btn" id="windowbg-cp" data-color-format="hex" data-color="rgb(255,255,255)" data-toggle="tooltip" title="Window Background Color"><i class="icon-circle"></i></a>
+                        <a class="btn" id="windowbrdr-cp" data-color-format="hex" data-color="rgb(255,255,255)" data-toggle="tooltip" title="Window Border Color"><i class="icon-circle-blank"></i></a>
+                        <br>
+                        Plot Area:
+                        <a class="btn" id="plotbg-cp" data-color-format="hex" data-color="rgb(255,255,255)" data-toggle="tooltip" title="Plot Background Color"><i class="icon-circle"></i></a>
+                        <a class="btn" id="plotbrdr-cp" data-color-format="hex" data-color="rgb(255,255,255)" data-toggle="tooltip" title="Plot Border Color"><i class="icon-circle-blank"></i></a>
+
+                        <br>
+                        <p>Axis Properties <hr></p>
+                        Y Type:<select class="type-sel" id="y-type" data-axis="yAxis">
+                            <option value="linear">Linear</option>
+                            <option value="logarithmic">Log</option>
+                        </select>
+                        <br>
+                        X Type:<select class="type-sel" id="x-type" data-axis="xAxis">
+                            <option value="linear">Linear</option>
+                            <option value="logarithmic">Log</option>
+                        </select>
+                        <a class="btn" id="invert" data-toggle="tooltip" title="Invert Axes" onclick="changeOption('chart','inverted','toggle')">Invert Axis <i class=" pull-right icon-retweet"></i></a>
+                        <br>
+                        <p>Series Properties <hr></p>
+                        <select class="span2" id="series-colors">
+                        </select>
+                        <a class="full-width btn" id="series-cp" data-toggle="tooltip" title="Change sereis color" data-color-format="hex" data-color="rgb(255,255,255)"><i class="icon-circle"></i></a>
+                    </div>
+                </div>
+                <div class="tab-pane" id="title_opts">
+                    <form class="" id="text_change_form">
+                        <select id="text_graph_chooser">
+                            <option value="Default">Please select a graph</option>
+                        </select>
+                        </br>
+                        <div class="input-prepend">
+                            <span class="add-on">Title</span>
+                            <input class="" id="graph_title" type="text" placeholder="Title">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on">SubTitle</span>
+                            <input class="" id="graph_subtitle" type="text" placeholder="SubTitle">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on">X Title</span>
+                            <input class="" id="graph_xtitle" type="text" placeholder="X Axis Title">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on">Y Title</span>
+                            <input class="" id="graph_ytitle" type="text" placeholder="Y Axis Title">
+                        </div>
+                        </br>
+                        <input type="submit" class="btn" value="Change Text">
+                    </form>
+                </div>
+                <div class="tab-pane" id="legend_opts">
+                    <div class="">
+                        <select id="legend_graph_chooser">
+                            <option value='Default'>Please choose a graph</option>
+                        </select>
+                        <p>Position <hr></p>
+                        <div id="horizontal_legend_container">
+                            Horizontal:
+                            <a class="btn legend-opt pull-right" id="legend_left" data-toggle="tooltip" title="Align Legend Left" onclick="changeOption('legend','align','left')"><i class="icon-align-left"></i></a>
+                            <a class="btn legend-opt pull-right" id="legend_center" data-toggle="tooltip" title="Align Legend Center" onclick="changeOption('legend','align','center')"><i class="icon-align-center"></i></a>
+                            <a class="btn legend-opt pull-right" id="legend_right" data-toggle="tooltip" title="Align Legend Right" onclick="changeOption('legend','align','right')"><i class="icon-align-right"></i></a>
+                        </div>
+                        <div id="vertical_legend_container">
+                            Vertical:
+                            <a class="btn legend-opt pull-right" id="legend_top" data-toggle="tooltip" title="Align Legend Top" onclick="changeOption('legend','verticalAlign','top')"><icon class="icon-chevron-up"></icon></a>
+                            <a class="btn legend-opt pull-right" id="legend_middle" data-toggle="tooltip" title="Align Legend Middle" onclick="changeOption('legend','verticalAlign','middle')"><icon class="icon-ellipsis-horizontal"></icon></a>
+                            <a class="btn legend-opt pull-right" id="legend_bottom" data-toggle="tooltip" title="Align Legend Bottom" onclick="changeOption('legend','verticalAlign','bottom')"><icon class="icon-chevron-down"></icon></a>
+                        </div>
+                        <br>
+                        <a class="btn legend-opt" id="legend_float" data-toggle="tooltip" title="Legend float, whether the legend is on top of the graph or the graph is around the legend" onclick="changeOption('legend','floating','toggle')">
+                            Float <i class='pull-right icon-beer'></i>
+                        </a>
+                        <p>Layout <hr></p>
+                        <a class="btn legend-opt" id="legend_horiz_layout" data-toggle="tooltip" title="Horizontal Legend Layout" onclick="changeOption('legend','layout','horizontal')">
+                            <i class="icon-resize-horizontal"></i>
+                        </a>
+                        <a class="btn legend-opt" id="legend_vert_layout" data-toggle="tooltip" title="Vertical Legend Layout" onclick="changeOption('legend','layout','vertical')">
+                            <i class="icon-resize-vertical"></i>
+                        </a>
+                        <a class="btn legend-opt" id="legend_rtl" data-toggle="tooltip" title="Reverse symbol and text in legend" onclick="changeOption('legend','rtl','toggle')">
+                            <i class="icon-retweet"></i>
+                        </a>
+                        <p>Style <hr></p>
+                        <a class="btn" id="legendbg-cp" data-color-format="hex" data-color="rgb(255,255,255)" data-toggle="tooltip" title="Legend Background Color"><i class="icon-circle"></i></a>
+                        <a class="btn" id="legendbrdr-cp" data-color-format="hex" data-color="rgb(255,255,255)" data-toggle="tooltip" title="Legend Border Color"><i class="icon-circle-blank"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tabbable tabs" id="visualizer">
+            <ul class="nav nav-tabs" id="tabList">
+                <li><a href="#default" data-toggle="tab">Default</a></li>
+            </ul>
+            <div id='vis_tab_controls'>
+                <a class="pull-right" href="javascript:void(0)" onclick="addPane()" id="paneAdd"><i class="icon-plus-sign"></i></a>
+                <a class="pull-right" href="javascript:void(0)" onclick="removePane()" id="paneRemove"><i class="icon-minus-sign"></i></a>
+            </div>
+            <div class="row">
+                </br>
+                <div class="tab-content" id="graph_holder">
+                    <div class="tab-pane graph-pane" id="default"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal hide fade" id="sliceModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Data Slicer</h3>
+        </div>
+        <div class="modal-body" id="RCT">
+            <div id="RCTDirections"></div>
+            <div id="RCTCut"></div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </div>
+    </div>
+        
+{% endblock %}
+

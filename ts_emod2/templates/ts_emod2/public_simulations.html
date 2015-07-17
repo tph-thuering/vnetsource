@@ -1,0 +1,221 @@
+{% extends "ts_emod2/base.html" %}
+
+{% block page_title %}
+    EMOD - Public Simulations
+{% endblock %}
+
+{% block extra_local_css %}
+    <style>
+        .modal.scrollable { position: absolute; }
+    </style>
+{% endblock %}
+
+{% block extra_local_js %}
+    <script>
+        // pagination.js needs these variables
+        var previous_page_number;
+        var next_page_number;
+        var type_currently_shown = "{{ type_currently_shown }}";
+
+        {% if scenarios.has_previous %}
+            previous_page_number = {{ scenarios.previous_page_number }};
+        {% else %}
+            previous_page_number = -1;
+        {% endif %}
+
+        {% if scenarios.has_next %}
+            next_page_number = {{ scenarios.next_page_number }};
+        {% else %}
+            next_page_number = -1;
+        {% endif %}
+    </script>
+
+    <script src="{{ STATIC_URL }}ts_emod2/js/public_simulations.js"></script>
+    <script src="{{ STATIC_URL }}ts_emod2/js/pagination.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <h3>Public Simulations</h3>
+
+    <div class="row">
+        <div class="span9">
+            <p>
+                This is the list of the EMOD simulations that have been shared with everyone.
+            </p>
+        </div>
+    </div>
+
+    {% if number_of_scenarios > 10 %}
+        <div class="row">
+            <div class="span6">
+                <i>
+                    Showing {{ current_start }}-{{ current_stop }}
+                    of {{ number_of_scenarios }}&nbsp;&nbsp;
+                </i>
+
+                <div class="btn-group text-left">
+                    <button class="btn btn-md dropdown-toggle" data-toggle="dropdown">
+                        {{ pager_size }} Simulations/Page
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu pull-right">
+                        <li {% if pager_size == 10 %}class="active"{% endif %}>
+                            <a href="?page={{ page }}&pager_size=10&type={{ type_currently_shown }}">
+                                10 Simulations/Page
+                            </a>
+                        </li>
+
+                        <li {% if pager_size == 25 %}class="active"{% endif %}>
+                            <a href="?page={{ page }}&pager_size=25&type={{ type_currently_shown }}">
+                                25 Simulations/Page
+                            </a>
+                        </li>
+
+                        <li {% if pager_size == 50 %}class="active"{% endif %}>
+                            <a href="?page={{ page }}&pager_size=50&type={{ type_currently_shown }}">
+                                50 Simulations/Page
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endif %}
+
+    <div class="row">
+        <div class="span9">
+            <hr style="margin:5px; margin-left:-20px; border-bottom-color:#000000;" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span3">
+            <a class="tooltip_link">
+                <b>ID</b>
+            </a>
+
+            <b>Name</b>
+            <br>
+
+            <em style="font-size:0.9em">
+                <b>Description</b>
+            </em>
+        </div>
+
+        <div class="span2">
+            <b>Location</b>
+        </div>
+
+        <div class="span1">
+            <b>Model Version</b>
+        </div>
+
+        <div class="span1">
+            <b>Last <br> Modified</b>
+        </div>
+
+        <div class="span2">
+            <b>Created By</b>
+        </div>
+    </div>
+
+    <hr style="margin:5px; margin-left:-20px; border-bottom-color:#000000;"/>
+
+    {% for scenario in scenarios %}
+        <div class="row {% if forloop.counter0|divisibleby:2 %}gray-row{% endif %}" id="{{ scenario.id }}-row">
+            <div class="span3" id="{{ scenario.id }}">
+                {% if scenario.is_representative and not scenario.representative_is_complete %}
+                    <a class="tooltip_link" href="{% url 'ts_repr.determine_view' scenario.id %}"
+                        data-original-title="View configuration details and results and continue to work on the simulation">
+                        {{ scenario.id }}
+                    </a>
+                {% else %}
+                    <a class="tooltip_link" href="{% url 'ts_emod2.details' scenario.id %}"
+                        data-original-title="View configuration details and results and continue to work on the simulation">
+                        {{ scenario.id }}
+                    </a>
+                {% endif %}
+
+                {% if scenario.name == "" %}
+                    Unnamed simulation
+                {% else %}
+                    {% if scenario.is_representative %}
+                        (repr)
+                    {% endif %}
+                    {{ scenario.name }}
+                {% endif %}
+
+                <br>
+                <em style="font-size:0.9em;">
+                    {{ scenario.description|linebreaksbr }}
+                </em>
+            </div>
+
+            <div class="span2">
+                {% if scenario.location %}
+                    {{ scenario.location.name }}
+                {% else %}
+                    None
+                {% endif %}
+            </div>
+
+            <div class="span1">
+                {% if scenario.is_emod %}
+                    EMOD
+                {% elif scenario.is_om %}
+                    OM
+                {% endif %}
+
+                <br>
+                {{ scenario.simulation.version }}
+            </div>
+
+            <div class="span1">
+                {{ scenario.last_modified }}
+            </div>
+
+            <div class="span2">
+                {{ scenario.user.username }}
+            </div>
+        </div>
+    {% empty %}
+        <div class="row">
+            <div class="span8 error">No simulations found. To create a simulation, click the button above.</div>
+        </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="span9">
+            <div class="pagination pagination-large pagination-centered" id="pager">
+                {% csrf_token %}
+                <input type="hidden" id="pager_size" name="pager_size" value="{{ pager_size }}" />
+
+                <ul id="pager-list">
+                    {% if number_of_scenarios > 10 %}
+                        <li id="previous-button-li">
+                            <a id="previous-button" href="">
+                                <
+                            </a>
+                        </li>
+
+                        {% for item in scenario_range %}
+                            <li {% if scenarios.number == forloop.counter %}class="active"{% endif %}>
+                                <a href="?page={{ forloop.counter }}&pager_size={{ pager_size }}&type={{ type_currently_shown }}">
+                                    {{ forloop.counter }}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                        <li id="next-button-li">
+                            <a id="next-button" href="">
+                                >
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

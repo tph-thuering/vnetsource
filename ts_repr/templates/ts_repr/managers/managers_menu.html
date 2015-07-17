@@ -1,0 +1,39 @@
+{% if nav_button == 'managers' %}
+    <ul class="nav nav-tabs nav-list" style="margin-top:0; margin-left:30px; padding-right:0;">
+        <li class="{% if current_manager == 'weather' %}active{% endif %}">
+            <a href="{% url "ts_repr.manage_weather" %}">
+                <i class="icon-umbrella"></i> Weather
+            </a>
+        </li>
+
+        <li class="{% if current_manager == 'demographics' %}active{% endif %}">
+            <a href="{% url "ts_repr.manage_demographics" %}">
+                <i class="icon-user"></i> Demographics
+            </a>
+        </li>
+
+        <li class="{% if current_manager == 'species' %}active{% endif %}">
+            <a href="{% url "ts_repr.manage_species" %}">
+                <i class="icon-bug"></i> Species
+            </a>
+        </li>
+
+        <li class="{% if current_manager == 'species_parameter' %}active{% endif %}">
+            <a href="{% url "ts_repr.manage_species_parameter" %}">
+                <i class="icon-bug"></i> Species Parameter
+            </a>
+        </li>
+
+        <li class="{% if current_manager == 'emod_snippet' %}active{% endif %}">
+            <a href="{% url "ts_repr.manage_emod_snippet" %}">
+                <i class="icon-list-ul"></i> EMOD Snippet
+            </a>
+        </li>
+
+        <li class="{% if current_manager == 'om_snippet' %}active{% endif %}">
+            <a href="{% url "ts_repr.manage_om_snippet" %}">
+                <i class="icon-list-ul"></i> OM Snippet
+            </a>
+        </li>
+    </ul>
+{% endif %}

@@ -1,0 +1,74 @@
+<div class="span3">
+    <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked">
+        <li>
+            <a href="{% url "ts.index" %}">
+                <i class="icon-home"></i> Transmission<Br> Simulator
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+
+        <li {% if nav_button == "index" %}class="active"{% endif %}>
+            <a href="{% url "ts_emod_index" %}">
+                <i class="icon-wrench"></i> EMOD
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+
+        {% if dim_user.is_staff %}
+            <li {% if nav_button == "index" %}class="active"{% endif %}>
+                <a href="{% url "ts_emod2.index" %}">
+                    <i class="icon-wrench"></i> EMOD2
+                    <i class="icon-angle-right pull-right"></i>
+                </a>
+            </li>
+        {% endif %}
+
+        <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked">
+            <li {% if nav_button == "ts_ScenarioCreateByTemplate_step" %}class="active"{% endif %}>
+                <a href="{% url 'ts_ScenarioCreateByTemplate_step' 'location' %}">
+                    <i class="icon-edit"></i> New Simulation
+                    <i class="icon-angle-right pull-right"></i>
+                </a>
+            </li>
+
+            <li {% if nav_button == "scenario_browse" %}class="active"{% endif %}>
+                {% if nav_button == "scenario_browse" %}
+                    {% include "ts_emod/folder_tree.html" %}
+                    <em style="font-size:0.6em;">To rename a folder, click it and press F2.</em>
+                {% else %}
+                    <a href="{% url "ts_emod_scenario_browse" %}">
+                    <i class="icon-folder-close-alt"></i> My Simulations
+                    <i class="icon-angle-right pull-right"></i>
+                    </a>
+                {% endif %}
+            </li>
+
+            <li {% if nav_button == "scenario_browse_public" %}class="active"{% endif %}>
+                    <a href="{% url "ts_emod_scenario_browse_public" %}">
+                        <i class="icon-list icon-rotate-180"></i> Public Simulations
+                        <i class="icon-angle-right pull-right" style="margin: 0;"></i>
+                    </a>
+            </li>
+
+            <li>
+                <a href="{% url "ts_emod.utilities" %}">
+                    <i class="icon-wrench"></i> Utilites
+                    <i class="icon-angle-right pull-right"></i>
+                </a>
+            </li>
+        </ul>
+        <li>
+            <a href="{% url "results_viewer.index" %}">
+                <i class="icon-wrench"></i> Results Viewer
+                <i class="icon-angle-right pull-right"></i>
+            </a>
+        </li>
+    </ul>
+    {% comment %}<br/>
+        <ul class="nav mainnav sidebar-nav nav-list nav-tabs nav-stacked" >
+            <li class="disabled"><a>Baseline Scenario Options</a></li>
+            <li {% if wizard.steps.current = 'start' %}class="active"{% endif %}><a href="{% url "ts_scenario_step" 'start' %}"><i class="icon-edit"></i> Build a Baseline Scenario<i class="icon-angle-right pull-right"></i></a></li>
+            <li {% if nav_button == "browse_scenario" %}class="active"{% endif %}><a href="{% url "ts_emod_scenario_browse" %}"><i class="icon-book"></i> Browse Baseline Scenarios<i class="icon-angle-right pull-right"></i></a></li>
+            <li {% if wizard.steps.step1 = 'location' %}class="active"{% endif %}><a href="{% url "intervention_step" 'location' %}"><i class="icon-beaker"></i> New Intervention<i class="icon-angle-right pull-right"></i></a></li>
+        {% endcomment %}
+</div>

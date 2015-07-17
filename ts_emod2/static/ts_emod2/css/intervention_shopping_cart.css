@@ -1,0 +1,87 @@
+.popover
+{
+    max-width: 800px;
+}
+
+/* Color/style the info button to make it pop out */
+.info
+{
+    border: 0;
+    background-color: rgba(255,255,255,0); /* make it transparent */
+}
+
+/* Fixing weird looking layout of dragged intervention, as well as better fitting layout in the cart well. */
+.well.page-well
+{
+    padding: 20px;
+}
+
+.box ul
+{
+    background-color: #fff;
+    border: 1px;
+    border-color: #e5e5e5;
+    border-radius: 4px;
+    border-style: solid;
+    padding: 5px;
+    margin: 0px;
+}
+
+/* zebra striping */
+.box ul li:nth-of-type(even)
+{
+    background-color: #e8e8e8;
+}
+
+.box ul li
+{
+    background-color: #fff;
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 4px;
+    line-height: 32px;
+    list-style-type: none;
+    overflow: hidden;
+    padding-left: 15px;
+    position: relative;
+}
+
+.box ul li:hover
+{
+    border-color: #ccc;
+}
+
+/*.box ul li button.add, button.view, button.edit, button.delete {*/
+    /*position: absolute;*/
+    /*top: 5px;*/
+    /*text-align: center;*/
+    /*font-size: 14px;*/
+    /*border: 0;*/
+    /*color: #1F5C96;*/
+    /*background-color: rgba(255,255,255,0); *//* make it transparent */
+    /*cursor: pointer;*/
+/*}*/
+
+
+/*---- Styles specific to available Interventions  box ----*/
+.source li
+{
+    line-height: 20px !important;
+}
+
+/*---- Styles specific to Interventions selected "cart" ----*/
+
+/* Hold open a "droppable zone" placeholder for first drag - 106px for two lines */
+.box .cart
+{
+    min-height: 70px;
+}
+
+/* Highlight color for cart when dragging onto it */
+.cart.hover
+{
+    border-color: #1F5C96;
+}
+
+/* #4331 - Fix column width issue in Intervention edit accordion */
+/*.accordion-inner { padding-left: 0px; padding-right: 0px;}*/
+/*.well.page-well { padding: 20px; }*/

@@ -1,0 +1,24 @@
+/*######################################################################################################################
+ * # VECNet CI - Prototype
+ * # Date: 4/5/2013
+ * # Institution: University of Notre Dame
+ * # Primary Authors:
+ * #   Lawrence Selvy <Lawrence.Selvy.1@nd.edu>
+ * #   Zachary Torstrick <Zachary.R.Torstrick.1@nd.edu>
+ * ######################################################################################################################*/
+
+/* This file contains the styling for the loading animation on the cube.html page.
+ * This is current the "cubes" page on the datawarehouse browser.*/
+
+#load_box.loading {
+    overflow:hidden;
+    z-index: 1000;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../img/ajax-loader.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+#load_box.loading .modal {
+    display: block;
+}

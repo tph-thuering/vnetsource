@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8000/" />
+<title>new_workflow_initial_creation</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">new_workflow_initial_creation</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Transmission Simulator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=EMOD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//input[@name='location-template_id'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_config-Simulation_Duration</td>
+	<td>109</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_config-name</td>
+	<td>Selenium test - initial Simulation</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td></td>
+	<td>Demographic Data</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>BRACKISH SWAMP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>BRACKISH SWAMP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Acquire Modifier</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=farauti__json_Acquire_Modifier</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=farauti__json_Adult_Life_Expectancy</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='speciesForm']/div/div/div[3]/div/ul/li/em/span/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a value between 0 and 1.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a value between 0 and 1.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=farauti__json_Acquire_Modifier</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=30</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Parasite Parameters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=parasite-json_Falciparum_MSP_Variants</td>
+	<td>400</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a value between 0 and 100.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=parasite-json_Falciparum_MSP_Variants</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.wizard_form.wizard_goto_step[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<!--ToDo: Check for "Custom radio button upon changed value"-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Scaling Factors</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_scaling_factors-x_Temporary_Larval_Habitat</td>
+	<td>3.40283e+038</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a value between 0 and 10000.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_scaling_factors-x_Temporary_Larval_Habitat</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.right.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Run Simulation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The simulation was saved.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_run-name</td>
+	<td>My test run</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Skip to Review previous Run</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//button[@type='submit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Review Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This simulation run is still running. Please check back later</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=wizard_goto_step</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Skip to Review previous Run</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.wizard_form.wizard_goto_step[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Review Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

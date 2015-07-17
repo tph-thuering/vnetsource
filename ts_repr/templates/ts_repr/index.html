@@ -1,0 +1,24 @@
+{% extends "ts_repr/base.html" %}
+{% load staticfiles %}
+
+{% block page_content %}
+    <p>The <strong>Representative Workflow</strong> using the <strong>EMOD</strong> model builds a
+        baseline simulation for a generic location.</p>
+    <p>To start a new simulation using the <strong>EMOD Representative Workflow</strong>,
+        select <strong>“New Simulation”</strong> from the left menu.</p>
+    <p>To see all your simulations created using either the <strong>Basic</strong> or
+        <strong>Representative</strong> workflows, select <strong>“My Simulations”</strong> from the
+        left menu.</p>
+    <p>To see simulations that you or others have made public, select
+        <strong>“Public Simulations”</strong> from the left menu.</p>
+    <p>Additional tools can be found by selecting <strong>“Utilities”</strong> from the left menu.</p>
+    <p>Select <strong>“Results Viewer”</strong> to request plotted results of simulation outputs.</p>
+    <br>
+    {% comment %}
+    <p style="text-align:center">
+        <a class="btn" href="{% url 'ts_repr.new_scenario' %}">
+            <i class="icon-plus"></i> Add a New Simulation
+        </a>
+    </p>
+    {% endcomment %}
+{% endblock %}

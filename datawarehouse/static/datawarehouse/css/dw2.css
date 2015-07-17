@@ -1,0 +1,179 @@
+/*######################################################################################################################
+ * # VECNet CI - Prototype
+ * # Date: 4/5/2013
+ * # Institution: University of Notre Dame
+ * # Primary Authors:
+ * #   Lawrence Selvy <Lawrence.Selvy.1@nd.edu>
+ * #   Zachary Torstrick <Zachary.R.Torstrick.1@nd.edu>
+ * ######################################################################################################################*/
+
+/* This file contains the styling for the loading animation on the cube.html page.
+ * This is current the "cubes" page on the datawarehouse browser.*/
+
+.jumbotron {
+    background: #f59029; /* Solid color */
+    /*background: -moz-linear-gradient(top,  #c05700 0%, #ff9f39 100%); *//* FF3.6+ */
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c05700), color-stop(100%,#ff9f39)); *//* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top,  #c05700 0%,#ff9f39 100%); *//* Chrome10+,Safari5.1+ */
+    /*background: -o-linear-gradient(top,  #c05700 0%,#ff9f39 100%); *//* Opera 11.10+ */
+    /*background: -ms-linear-gradient(top,  #c05700 0%,#ff9f39 100%); *//* IE10+ */
+    /*background: linear-gradient(to bottom,  #c05700 0%,#ff9f39 100%); *//* W3C */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c05700', endColorstr='#ff9f39',GradientType=0 ); *//* IE6-9 */
+}
+
+/* Don't customize top nav bar with tool colors - ked */
+/* .dropdown-menu li > a:hover, .dropdown-menu li > a.focus, .dropdown-submenu:hover > a {
+    background-image: none;
+    background-color: rgb(146,66,0);
+} */
+
+/* Original sidebar-nav style disabled by ked 
+.sidebar-nav > li > a, .breadcrumb > li > a { color:#c05700; }
+.sidebar-nav > li > a.active { background-color:#eeeeee; }
+.sidebar-nav > li > a:hover { color:#c05700; }
+.sidebar-nav > li.disabled > a:hover {color:#999999;}
+*/
+
+/* Left Menu Bootstrap style overrides -ked  */
+/* Set base border style for all menu items */
+.nav-tabs > li > a {
+    border:none;
+    border-right: 2px solid transparent
+}
+.nav-tabs.nav-stacked > li > a {
+    border:none;
+    border-right: 2px solid transparent
+}
+/* Set border style for active menu item */
+.nav-tabs > .active > a {
+    color:#924200;
+    background-color:#ffe4c8;
+    border-right:2px solid #e9b881
+}
+.nav-tabs.nav-stacked > .active > a { border-color:#e9b881 }
+/* Maintain same active menu item style when hover over inactive and active menu items */
+.nav > li > a:hover, .nav > li > a:focus { background-color:#ffe4c8; }
+.nav-tabs.nav-stacked > li > a:hover,
+.nav-tabs.nav-stacked > li > a:focus {
+    border-color:  #e9b881
+}
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+    color:#924200;
+    background-color:#ffe4c8;
+    border:none;
+    border-right:2px solid #e9b881
+}
+/* Eliminate text shadow on active menu item */
+.nav-list > .active > a,
+.nav-list > .active > a:hover,
+.nav-list > .active > a:focus {
+    text-shadow: none
+}
+/* Eliminate rounded corners on first/last children */
+.nav-tabs.nav-stacked > li:first-child > a,
+.nav-tabs.nav-stacked > li:last-child > a {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+/* Style disabled menu items */
+.nav-tabs > .disabled > a {text-transform: uppercase; font-size: 0.9em;}
+.sidebar-nav > li.disabled > a:hover {color:#999999; border-color: transparent }
+
+/* Tabs - added to prevent left menu stle from affecting tabs -ked */
+#luTables > li > a, 
+#infoTabs > li > a,
+#tabs > li > a {
+    outline: none;
+    border: 1px solid transparent;
+    border-bottom: none
+}   
+#luTables > .active >  a,
+#luTables > .active > a:hover,
+#infoTabs > .active >  a,
+#infoTabs > .active > a:hover,
+#tabs > .active >  a,
+#tabs > .active > a:hover {
+    border-color: #ddd;
+    background: #f5f5f5;
+}
+
+
+/* Link colors - according to VECNet style guide */
+a:link, a:visited {color: #c05700;} 
+a:hover, a:active, a:focus {color: #924200;}
+/* this keeps a href buttons from getting link colors above */
+a.btn:link, a.btn:visited { color:#333; }
+
+/* .btn { color: black !important; } I think this is no longer necessary - ked */
+
+/* breadcrumb - according to VECNet style guide */
+.breadcrumb { border: none; background:transparent; margin-left:0; padding-left:0;}
+/* .breadcrumb > li > a { color:#28605f; }  let breadcrumb links be normal page link colors */
+.breadcrumb { color: #999; padding: 0px; white-space: nowrap;}
+
+.infopill .active a,
+.infopill .active a:hover,
+.infopill .active a:focus,
+/*.infopill .active a:active {
+    background-color: rgb(146,66,0);
+}*/
+
+table{
+    border-collapse:collapse;
+}
+/*
+table, tr, th, td{
+    border: 1px solid rgb(227,227,227);
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+*/
+/*thead{
+    background-color: rgb(255,255,255);
+}*/
+
+.dataTables_length {
+    float: left;
+    width: 50%;
+}
+
+.button_holder{
+    vertical-align:middle;
+}
+
+.toggles, .toggles tr, .toggles td{
+    border: 0px;
+    padding: 5px;
+    width: 100%;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+#query_box{
+    display:none;
+}
+
+.data-box {
+    background: none repeat scroll 0 0 white;
+    box-shadow: 1px 1px 5px 0 #CCCCCC;
+    float: left;
+    font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Verdana,Tahoma,sans-serif;
+    height: 250px;
+    margin: 0 20px 20px 0;
+    padding: 10px 15px;
+    position: relative;
+    width: 270px;
+}
+
+.data-box:hover{
+    cursor: hand;
+    cursor: pointer;
+}
+
+.icon-info-sign {
+    color: #c05700;
+}

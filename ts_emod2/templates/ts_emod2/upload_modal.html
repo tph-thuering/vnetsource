@@ -1,0 +1,21 @@
+<div id="{{ type }}-upload-modal" class="modal hide fade" tabindex="-1" role="dialog"
+    aria-labelledby="{{ type }}-upload-modal-label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="{{ type }}-upload-modal-label">Upload</h3>
+    </div>
+
+    <div class="modal-body">
+        <form enctype="multipart/form-data" method="post" action="{% url 'ts_emod2.upload' type scenario.id %}">
+            {% csrf_token %}
+            <input type="file" name="{{ type }}" /> {# accept=""> #}
+            <input type="submit" class="btn" value="Upload" />
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn pull-right" data-dismiss="modal" aria-hidden="true">
+            <i class="icon-remove"></i>&nbsp;&nbsp;Cancel
+        </button>
+    </div>
+</div>

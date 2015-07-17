@@ -1,0 +1,92 @@
+/*General page settings */
+.clear{
+    clear:both;
+}
+
+/* Basic settings for upper half of page */
+.leftinput, .rightinput{
+    border: 1px solid #ddd;
+    padding: 5px;
+    width: 433px;
+    float: left;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.leftinput{
+    margin-right: 5px;
+}
+
+.rightinput{
+    margin-left: 5px;
+}
+
+/* Advanced settings for upper half of page */
+#inputcolumns, #dbcolumns{
+    background-color: white;
+    height:150px;
+    margin-bottom: 10px;
+}
+
+.inputdrop{
+    background-color: white;
+    height:50px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.inputdrop p{
+    color: #999;
+}
+
+/* Basic settings for bottom of page */
+#addToMap{
+    width: 874px;
+    margin-bottom: 10px;
+}
+
+.leftoutput, .rightoutput{
+    padding: 5px;
+    width: 438px;
+    float: left;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    border: 1px solid #ddd;
+}
+
+#fulloutput{
+    width: 897px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    border: 1px solid #ddd;
+    background-color: white;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.mapped{
+    padding: 5px;
+    width: 45%;
+    float: left;
+}
+
+.rmvbtn{
+    padding: 5px;
+    width: 5%;
+}
+
+.icon-remove{
+    color: red;
+}
+
+#uploadTable, #uploadTable td, #uploadTable tr{
+    margin-left: 0;
+    margin-right: 0;
+    border: 0px;
+    text-align: left;
+}
+
+#uploadTable td, #uploadTable tr{
+    padding: 5px;
+}
