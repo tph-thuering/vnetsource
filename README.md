@@ -65,7 +65,7 @@ pip  install -r requirements.txt
 ```bash
 sudo apt-get install build-essential
 sudo apt-get install binutils libproj-dev gdal-bin
-sudo apt-get install libxml2-dev libxslt-dev
+sudo apt-get install libxml2-dev libxslt-dev python-pip
 pip install -r requirements.txt
    ```
 
